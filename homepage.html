@@ -23,8 +23,8 @@
     --font-display: "Charter", Georgia, serif;
     --font-body:    "Avenir Next", system-ui, sans-serif;
     /* Layout */
-    --nav-h:        68px;
-    --topbar-h:     30px;
+    --nav-h:        92px;
+    --topbar-h:     40px;
     --max-w:        1160px;
     --r:            4px;
     --r-lg:         10px;
@@ -449,19 +449,26 @@
       <span class="hamburger__bar"></span>
       <span class="hamburger__bar"></span>
     </button>
-
+ 
   </div>
 </header>
 
+
+  <nav class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation">
+  <!-- Same menu categories as V2 desktop menu -->
+  </nav>
+  
+
+<!-- ════════ MOBILE DRAWER ════════ -->
 
 <!-- ════════ MOBILE DRAWER ════════ -->
 <nav class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation">
 
   <div class="mob-section" id="mob-who">
-    <button class="mob-section__toggle" onclick="toggleMobSection('mob-who')">
+    <button class="mob-section__toggle" aria-expanded="false" aria-controls="mob-who-content" onclick="toggleMobSection('mob-who')">
       Who we are <span class="nav__chevron" aria-hidden="true"></span>
     </button>
-    <div class="mob-section__content">
+    <div class="mob-section__content" id="mob-who-content">
       <a class="mob-link" href="who-we-are/our-story.html">Our story</a>
       <a class="mob-link" href="who-we-are/team.html">Team &amp; board</a>
       <a class="mob-link" href="who-we-are/governance.html">Governance &amp; statutes</a>
@@ -471,10 +478,11 @@
   </div>
 
   <div class="mob-section" id="mob-proj">
-    <button class="mob-section__toggle" onclick="toggleMobSection('mob-proj')">
+    <button class="mob-section__toggle" aria-expanded="false" aria-controls="mob-proj-content" onclick="toggleMobSection('mob-proj')">
       Our projects <span class="nav__chevron" aria-hidden="true"></span>
     </button>
-    <div class="mob-section__content">
+    <div class="mob-section__content" id="mob-proj-content">
+      <a class="mob-link mob-link--strong" href="projects/index.html">All projects →</a>
       <div class="mob-subheading">Education</div>
       <a class="mob-link" href="projects/education/akka.html">AKKA Montessori <span class="badge badge--age">3–6</span></a>
       <a class="mob-link" href="projects/education/kanto.html">KANTO Culture <span class="badge badge--age">7–12</span></a>
@@ -496,10 +504,10 @@
   </div>
 
   <div class="mob-section" id="mob-inv">
-    <button class="mob-section__toggle" onclick="toggleMobSection('mob-inv')">
+    <button class="mob-section__toggle" aria-expanded="false" aria-controls="mob-inv-content" onclick="toggleMobSection('mob-inv')">
       Get involved <span class="nav__chevron" aria-hidden="true"></span>
     </button>
-    <div class="mob-section__content">
+    <div class="mob-section__content" id="mob-inv-content">
       <a class="mob-link" href="get-involved/volunteer.html">Volunteer (VIM)</a>
       <a class="mob-link" href="get-involved/donate.html">Donate</a>
       <a class="mob-link" href="get-involved/partner.html">Become a partner</a>
@@ -507,10 +515,10 @@
   </div>
 
   <div class="mob-section" id="mob-media">
-    <button class="mob-section__toggle" onclick="toggleMobSection('mob-media')">
+    <button class="mob-section__toggle" aria-expanded="false" aria-controls="mob-media-content" onclick="toggleMobSection('mob-media')">
       Media <span class="nav__chevron" aria-hidden="true"></span>
     </button>
-    <div class="mob-section__content">
+    <div class="mob-section__content" id="mob-media-content">
       <a class="mob-link" href="media/blog.html">Blog</a>
       <a class="mob-link" href="media/newsletters.html">Newsletters</a>
       <a class="mob-link" href="who-we-are/annual-reports.html">Annual reports</a>
@@ -518,14 +526,13 @@
   </div>
 
   <div class="mob-actions">
-    <a href="#shop"                    class="btn-shop">The Shop ↗</a>
+    <a href="#shop" class="btn-shop">The Shop ↗</a>
     <a href="get-involved/donate.html" class="btn-donate">Donate</a>
   </div>
 
-</nav>
-
-
-<!-- ════════ HERO ════════ -->
+</nav>  
+<!-- ════════= HERO ═══════ -->
+  
 <section class="hero">
   <div class="container">
     <div class="hero-content fade-up">
@@ -839,10 +846,16 @@
     hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     document.body.style.overflow = open ? 'hidden' : '';
   }
-  function toggleMobSection(id) {
-    document.getElementById(id).classList.toggle('is-open');
-  }
 
+ function toggleMobSection(id) {
+  const section = document.getElementById(id);
+  const button = section.querySelector('.mob-section__toggle');
+
+  const isOpen = section.classList.toggle('is-open');
+
+  button.setAttribute('aria-expanded', String(isOpen));
+}
+  
   /* Donate amount selector */
   function selectAmount(btn, amount) {
     document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('is-active'));
