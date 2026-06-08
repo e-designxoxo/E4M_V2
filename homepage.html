@@ -78,15 +78,17 @@
   /* Logo */
   .navbar__logo { display: flex; align-items: center; gap: .6rem; margin-right: 2rem; flex-shrink: 0; }
   .logo-circle {
-    width: 44px; height: 44px; border-radius: 50%; background: var(--green);
+    width: 60px; height: 60px; border-radius: 50%; background: var(--white);
     display: flex; align-items: center; justify-content: center;
     color: var(--cream); font-size: .7rem; font-weight: 600; letter-spacing: .06em;
     flex-shrink: 0; overflow: hidden;
+    background-image: url('images/logo_mini.jpeg'); background-size: cover;
+
     /* To use real logo image:
        background-image: url('images/logo_mini.jpeg'); background-size: cover;
        then remove the "E4M" text node inside below. */
   }
-  .logo-text { font-family: var(--font-display); font-size: .85rem; font-weight: 700; color: var(--green); line-height: 1.2; text-transform: uppercase; letter-spacing: .04em; }
+  .logo-text { font-family: var(--font-display); font-size: 1.20rem; font-weight: 700; color: var(--green); line-height: 1.2; text-transform: uppercase; letter-spacing: .04em; }
 
   /* Desktop nav list */
   .nav__list { display: flex; align-items: center; height: 100%; flex: 1; }
@@ -332,9 +334,12 @@
   <div class="container">
 
     <a href="index.html" class="navbar__logo" aria-label="Education for Madagascar — home">
-      <div class="logo-circle" aria-hidden="true">E4M</div>
-      <span class="logo-text">Education<br>for Madagascar</span>
-    </a>
+  <img src="logo_mini.jpeg"
+       alt="Education for Madagascar logo"
+       class="logo-image">
+
+  <span class="logo-text">Education<br>for Madagascar</span>
+</a>
 
     <ul class="nav__list" role="list">
 
