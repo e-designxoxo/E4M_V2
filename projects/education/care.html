@@ -12,21 +12,21 @@
 
   <style>
   /* ═══════════════════════════════════════════════════════════════
-     BRAND TOKENS — Education for Madagascar Charte Graphique V1.0
-     Sources: Charte_Graphique_Edu4Mada_11Nov2025_NR.pdf
+     BRAND TOKENS — Graphic Charter V1.0 compliant  
+     Source: Charte_Graphique_Edu4Mada_11Nov2025_NR
      ═══════════════════════════════════════════════════════════════ */
   :root {
-    /* ── Palette principale ──────────────────────────────────── */
+    /* ── Main Color Palette  ────────────────────────────────────── */
     --green:      #195301;   /* Primary brand green              */
     --cream:      #EEEBD9;   /* Primary brand cream              */
 
-    /* ── Palette complémentaire ──────────────────────────────── */
+    /* ── Complementary Palette  ──────────────────────────────── */
     --teal:       #006C65;
     --charcoal:   #535353;
     --silver:     #D5D5D5;
     --white:      #ffffff;
 
-    /* ── Couleur secondaire CARE (charte officielle p.9) ─────── */
+    /* ── Secondary Colors  CARE (charter palette p.9) ─────── */
     --care:       #5E5E5E;   /* CARE project grey                */
     --care-lt:    #f2f2f2;   /* Very light grey tint             */
     --care-mid:   #8a8a8a;   /* Mid grey for secondary text      */
@@ -532,29 +532,129 @@
 
 
   /* ═══════════════════════════════════════════════════════════════
-     MISSION — "What we do" — two column, formal
+     MISSION — V3: EDITORIAL MANIFESTO + GIT-DIFF STATEMENT
+     One huge statement, then the mission expressed as a code diff:
+     the red "deleted" line vs the green "added" line.
+     The poster's own tagline, in the language of the programme.
      ═══════════════════════════════════════════════════════════════ */
   .mission {
-    padding: 6rem 0;
+    padding: 6.5rem 0 6rem;
     background: var(--surface-bg);
   }
-  .mission__grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: start;
+  .mission__intro {
+    max-width: 880px;
+    margin: 0 auto;
+    text-align: center;
   }
-  .mission__body {
-    font-size: 1.02rem;
-    line-height: 1.8;
-    color: var(--charcoal);
-    margin-top: 1.4rem;
+  .mission__statement {
+    font-family: var(--font-display);
+    font-size: clamp(2.1rem, 4.2vw, 3.4rem);
+    color: var(--green);
+    line-height: 1.16;
+    letter-spacing: -.012em;
+    margin-top: .4rem;
   }
-  .mission__body p + p { margin-top: 1.1em; }
-  .mission__body strong { color: var(--green); }
+  .mission__statement em {
+    font-style: italic;
+    color: var(--teal);
+  }
 
-  /* Right: "About the mentor" card + programme facts */
-  .info-stack { display: flex; flex-direction: column; gap: 1.2rem; }
+  /* ── The git-diff mission centerpiece ───────────────────────── */
+  .diff-block {
+    max-width: 620px;
+    margin: 3rem auto 2.8rem;
+    background: #1e1e1e;
+    border-radius: var(--r-lg);
+    border: 1px solid var(--dark-border);
+    overflow: hidden;
+    box-shadow: 0 14px 48px rgba(0,0,0,.16);
+    text-align: left;
+  }
+  .diff-block__bar {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .55rem 1.1rem;
+    background: #252525;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    font-family: var(--font-mono);
+    font-size: .7rem;
+    color: rgba(255,255,255,.4);
+  }
+  .diff-block__file { color: rgba(255,255,255,.7); }
+  .diff-block__stats { margin-left: auto; display: flex; gap: .7rem; }
+  .diff-block__stat--del { color: #ffa198; }
+  .diff-block__stat--add { color: #7ee787; }
+  .diff-line {
+    font-family: var(--font-mono);
+    font-size: clamp(.78rem, 1.6vw, .92rem);
+    line-height: 1.6;
+    padding: .5rem 1.2rem;
+    display: flex;
+    gap: .9rem;
+    white-space: nowrap;
+    overflow-x: auto;
+  }
+  .diff-line--ctx { color: rgba(255,255,255,.35); }
+  .diff-line--del { background: rgba(248,81,73,.13); color: #ffa198; }
+  .diff-line--add { background: rgba(63,185,80,.13); color: #7ee787; }
+  .diff-line__sign { user-select: none; opacity: .65; flex-shrink: 0; width: .8ch; }
+  .diff-line .kw { color: inherit; font-weight: 600; }
+
+  .mission__lede {
+    font-size: 1.05rem;
+    color: var(--charcoal);
+    line-height: 1.85;
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .mission__lede strong { color: var(--green); }
+
+  /* ── Numbered principles — editorial rows ───────────────────── */
+  .principles {
+    max-width: 880px;
+    margin: 4.5rem auto 0;
+  }
+  .principle {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 2rem;
+    padding: 2.1rem 0;
+    border-top: 1px solid var(--silver);
+    align-items: baseline;
+  }
+  .principle:last-child { border-bottom: 1px solid var(--silver); }
+  .principle__num {
+    font-family: var(--font-mono);
+    font-size: .78rem;
+    font-weight: 500;
+    color: var(--care-mid);
+    letter-spacing: .08em;
+  }
+  .principle__title {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    color: var(--green);
+    margin-bottom: .45rem;
+    line-height: 1.25;
+  }
+  .principle__text {
+    font-size: .95rem;
+    color: var(--charcoal);
+    line-height: 1.75;
+    max-width: 580px;
+  }
+  .principle__text strong { color: var(--green); }
+
+  /* ── Mentor + details cards, horizontal row ─────────────────── */
+  .info-row {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 1.2rem;
+    max-width: 880px;
+    margin: 3.5rem auto 0;
+  }
 
   .info-card {
     background: var(--surface-card);
@@ -922,7 +1022,9 @@
     .hamburger { display: flex; }
     .hero-grid { grid-template-columns: 1fr; }
     .xcode-window { margin-top: 3rem; border-radius: var(--r-lg) var(--r-lg) 0 0; }
-    .mission__grid { grid-template-columns: 1fr; gap: 3rem; }
+    .principle { grid-template-columns: 1fr; gap: .5rem; }
+    .info-row { grid-template-columns: 1fr; }
+    .mission__statement br { display: none; }
     .metrics-grid { grid-template-columns: repeat(2, 1fr); }
     .tracks-grid { grid-template-columns: 1fr; }
     .photo-strip { grid-template-columns: repeat(2, 1fr); }
@@ -1121,63 +1223,99 @@
 </section>
 
 
-<!-- ════ MISSION ════ -->
+<!-- ════ MISSION — V3 MANIFESTO ════
+     One statement. One diff. Three principles.
+     The diff block IS the mission: the poster's tagline
+     ("creators, not consumers") expressed as a code change. -->
 <section class="mission" aria-labelledby="mission-heading">
   <div class="container">
-    <div class="mission__grid">
 
-      <!-- Left: narrative -->
-      <div class="reveal">
-        <span class="eyebrow">The mission</span>
-        <h2 class="section-title" id="mission-heading">
-          The digital profession<br>is not a privilege.<br>It is a right.
-        </h2>
-        <div class="mission__body">
-          <p>In a country where fewer than one in three children completes primary school, access to digital skills is not a luxury — it is the most direct route to economic independence for an entire generation.</p>
-          <p>CARE does not teach children to use apps. It teaches them to <strong>build</strong> apps. The distinction is everything: a consumer depends on technology; a creator shapes it. Under the mentorship of <strong>Michel Sutter</strong>, students use professional tools — <strong>Swift Playground</strong>, <strong>Swift</strong>, and <strong>Xcode</strong> — the same ecosystem used by Apple's own engineers.</p>
-          <p>The goal is not to produce digital consumers fluent in someone else's platform. It is to equip Malagasy youth with the computational thinking, problem-solving rigour, and creative confidence to build <strong>solutions for their own country</strong> — in their own language, on their own terms.</p>
+    <!-- Opening statement -->
+    <div class="mission__intro reveal">
+      <span class="eyebrow">The mission</span>
+      <h2 class="mission__statement" id="mission-heading">
+        We don't teach children<br>to <em>use</em> technology.
+      </h2>
+    </div>
+
+    <!-- The diff — mission as a code change -->
+    <div class="diff-block reveal d1" role="img" aria-label="Code diff: the word 'consumers' is replaced by the word 'creators'">
+      <div class="diff-block__bar">
+        <span class="diff-block__file">mission.swift</span>
+        <span class="diff-block__stats">
+          <span class="diff-block__stat--del">−1</span>
+          <span class="diff-block__stat--add">+1</span>
+        </span>
+      </div>
+      <div class="diff-line diff-line--ctx"><span class="diff-line__sign">&nbsp;</span>// Madagascar's youth, redefined:</div>
+      <div class="diff-line diff-line--del"><span class="diff-line__sign">−</span><span><span class="kw">let</span> youth = <span class="kw">"consumers</span> of technology"</span></div>
+      <div class="diff-line diff-line--add"><span class="diff-line__sign">+</span><span><span class="kw">let</span> youth = <span class="kw">"creators</span> of technology"</span></div>
+    </div>
+
+    <!-- Lede paragraph -->
+    <p class="mission__lede reveal d2">
+      A consumer depends on technology. A creator shapes it. Under the mentorship of <strong>Michel Sutter</strong>, CARE students learn with professional Apple developer tools — and turn that single changed word into a changed life.
+    </p>
+
+    <!-- Three principles -->
+    <div class="principles">
+      <div class="principle reveal">
+        <span class="principle__num">/01</span>
+        <div>
+          <h3 class="principle__title">Build, don't browse.</h3>
+          <p class="principle__text">Students write real code from week one — variables, functions, structs. Not tutorials about technology, but technology itself, made by their own hands. The shift from passive screen-time to active creation changes how a child sees every device they'll ever touch.</p>
         </div>
       </div>
-
-      <!-- Right: info cards -->
-      <div class="info-stack reveal d1">
-
-        <!-- Mentor card -->
-        <div class="info-card">
-          <div class="info-card__label">Programme mentor</div>
-          <div class="info-card__title">Michel Sutter</div>
-          <p class="info-card__body">
-            Michel leads CARE with professional software development expertise, adapting industry-grade tools and methods to the specific context of Malagasy children aged 12 and above.
-          </p>
+      <div class="principle reveal">
+        <span class="principle__num">/02</span>
+        <div>
+          <h3 class="principle__title">Professional tools, real stakes.</h3>
+          <p class="principle__text"><strong>Swift Playground</strong>, <strong>Swift</strong> and <strong>Xcode</strong> — the same ecosystem used by Apple's own engineers. Children sense immediately when they're given toys instead of tools. CARE gives them the real thing, and they rise to it.</p>
         </div>
-
-        <!-- Programme facts table -->
-        <div class="info-card">
-          <div class="info-card__label">Programme details</div>
-          <div class="detail-row">
-            <span class="detail-row__key">Community</span>
-            <span class="detail-row__val">12 years and above</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-row__key">Students enrolled</span>
-            <span class="detail-row__val">17 (capacity: 30)</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-row__key">Groups</span>
-            <span class="detail-row__val">2 — beginner & advanced</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-row__key">Standard</span>
-            <span class="detail-row__val">DBS Disclosure & Barring</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-row__key">Status</span>
-            <span class="detail-row__val detail-row__val--green"><span class="status-dot">Accepting students</span></span>
-          </div>
+      </div>
+      <div class="principle reveal">
+        <span class="principle__num">/03</span>
+        <div>
+          <h3 class="principle__title">Solutions for Madagascar, by Madagascar.</h3>
+          <p class="principle__text">The goal is not to export talent to Silicon Valley. It is to equip Malagasy youth with the computational thinking and creative confidence to build solutions for <strong>their own country's</strong> challenges — in their own language, on their own terms.</p>
         </div>
-
       </div>
     </div>
+
+    <!-- Mentor + programme details, side by side -->
+    <div class="info-row">
+      <div class="info-card reveal">
+        <div class="info-card__label">Programme mentor</div>
+        <div class="info-card__title">Michel Sutter</div>
+        <p class="info-card__body">
+          Michel leads CARE with professional software development expertise, adapting industry-grade tools and methods to the specific context of Malagasy children aged 12 and above.
+        </p>
+      </div>
+      <div class="info-card reveal d1">
+        <div class="info-card__label">Programme details</div>
+        <div class="detail-row">
+          <span class="detail-row__key">Community</span>
+          <span class="detail-row__val">12 years and above</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-row__key">Students enrolled</span>
+          <span class="detail-row__val">17 (capacity: 30)</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-row__key">Groups</span>
+          <span class="detail-row__val">2 — beginner & advanced</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-row__key">Standard</span>
+          <span class="detail-row__val">DBS Disclosure & Barring</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-row__key">Status</span>
+          <span class="detail-row__val detail-row__val--green"><span class="status-dot">Accepting students</span></span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
