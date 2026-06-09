@@ -1,1 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CARE — Coding · Application · Robotics Education | Education for Madagascar</title>
+  <meta name="description" content="CARE teaches children in Madagascar to code, build apps and think computationally using Swift, Xcode and Swift Playground — preparing them for the digital economy." />
 
+  <!-- JetBrains Mono for code snippets only -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+  /* ═══════════════════════════════════════════════════════════════
+     BRAND TOKENS — Education for Madagascar Charte Graphique V1.0
+     Sources: Charte_Graphique_Edu4Mada_11Nov2025_NR.pdf
+     ═══════════════════════════════════════════════════════════════ */
+  :root {
+    /* ── Palette principale ──────────────────────────────────── */
+    --green:      #195301;   /* Primary brand green              */
+    --cream:      #EEEBD9;   /* Primary brand cream              */
+
+    /* ── Palette complémentaire ──────────────────────────────── */
+    --teal:       #006C65;
+    --charcoal:   #535353;
+    --silver:     #D5D5D5;
+    --white:      #ffffff;
+
+    /* ── Couleur secondaire CARE (charte officielle p.9) ─────── */
+    --care:       #5E5E5E;   /* CARE project grey                */
+    --care-lt:    #f2f2f2;   /* Very light grey tint             */
+    --care-mid:   #8a8a8a;   /* Mid grey for secondary text      */
+
+    /* ── Gold (Donate button hover) ─────────────────────────── */
+    --gold-bg:    #EFBF04;
+    --gold-text:  #856A00;
+
+    /* ── iOS-inspired surface system ────────────────────────── */
+    /* The page background is a very light warm grey —
+       iOS "systemGroupedBackground" equivalent, but in E4M cream */
+    --surface-bg:    #f5f4ee;   /* Page canvas — warm off-white */
+    --surface-card:  #ffffff;   /* Card surfaces                */
+    --surface-raised:#fafaf7;   /* Slightly elevated            */
+
+    /* ── Dark hero surface ───────────────────────────────────── */
+    --dark-bg:    #0f1a0a;   /* Very dark forest green-black    */
+    --dark-mid:   #1a2e12;
+    --dark-card:  #1e3015;
+    --dark-border:#2d4820;
+    --dark-text:  #d8e8d0;
+    --dark-muted: #7a9a72;
+
+    /* ── Code syntax (green-tinted, not generic blue) ────────── */
+    --syn-keyword: #4ade80;   /* Keywords — bright green         */
+    --syn-type:    #86efac;   /* Types — light green             */
+    --syn-func:    #a3e635;   /* Functions — lime                */
+    --syn-string:  #fde68a;   /* Strings — warm amber            */
+    --syn-comment: #52694a;   /* Comments — muted forest         */
+    --syn-number:  #6ee7b7;   /* Numbers — mint                  */
+    --syn-symbol:  #93c5fd;   /* Operators — light blue          */
+
+    /* ── Typography — from the brand charter ─────────────────── */
+    --font-display: "Charter", Georgia, serif;         /* Titres */
+    --font-body:    "Avenir Next", system-ui, sans-serif; /* Corps */
+    --font-mono:    "JetBrains Mono", "SF Mono", monospace; /* Code */
+
+    /* ── Layout ─────────────────────────────────────────────── */
+    --nav-h:    92px;
+    --topbar-h: 40px;
+    --max-w:    1160px;
+    --r:        10px;      /* iOS-style larger radii            */
+    --r-sm:     6px;
+    --r-lg:     16px;
+    --r-xl:     24px;
+    --r-pill:   100px;
+    --ease:     0.22s ease;
+    --ease2:    0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    --ease3:    0.6s cubic-bezier(0.34, 1.56, 0.64, 1); /* Spring */
+  }
+
+  /* ─── RESET ─────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html  { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body  { font-family: var(--font-body); background: var(--surface-bg); color: var(--charcoal); line-height: 1.65; }
+  img   { display: block; max-width: 100%; }
+  a     { text-decoration: none; color: inherit; }
+  ul    { list-style: none; }
+  button { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
+
+  /* ─── UTILITIES ─────────────────────────────────────────────── */
+  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+
+  /* Buttons */
+  .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .75rem 1.75rem; border-radius: var(--r-pill); font-weight: 500; font-size: .95rem; cursor: pointer; transition: background var(--ease), color var(--ease), transform var(--ease), box-shadow var(--ease); }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-green { background: var(--green); color: var(--cream); }
+  .btn-green:hover { background: #1e6301; box-shadow: 0 4px 16px rgba(25,83,1,.25); }
+  .btn-outline-green { border: 1.5px solid var(--green); color: var(--green); }
+  .btn-outline-green:hover { background: var(--green); color: var(--cream); }
+  .btn-care { background: var(--care); color: var(--white); }
+  .btn-care:hover { background: #4a4a4a; box-shadow: 0 4px 16px rgba(94,94,94,.3); }
+  .btn-outline-light { border: 1.5px solid rgba(255,255,255,.3); color: var(--cream); }
+  .btn-outline-light:hover { border-color: rgba(255,255,255,.65); background: rgba(255,255,255,.07); }
+  .btn-cream-dark { background: var(--cream); color: var(--dark-bg); font-weight: 600; }
+  .btn-cream-dark:hover { background: var(--white); transform: translateY(-1px); }
+
+  /* Scroll reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .55s var(--ease2), transform .55s var(--ease2); }
+  .reveal.is-visible { opacity: 1; transform: none; }
+  .reveal-up-sm { opacity: 0; transform: translateY(12px); transition: opacity .45s var(--ease2), transform .45s var(--ease2); }
+  .reveal-up-sm.is-visible { opacity: 1; transform: none; }
+  .d1 { transition-delay: .08s; } .d2 { transition-delay: .16s; } .d3 { transition-delay: .24s; } .d4 { transition-delay: .32s; }
+
+  /* Section labels */
+  .eyebrow { display: block; font-size: .72rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: .8rem; }
+  .eyebrow--care { color: var(--care-mid); }
+  .eyebrow--light { color: rgba(238,235,217,.5); }
+  .section-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--green); line-height: 1.2; }
+  .section-title--white { color: var(--cream); }
+
+
+  /* ═══════════════════════════════════════════════════════════════
+     TOP BAR
+     ═══════════════════════════════════════════════════════════════ */
+  .top-bar { background: var(--green); color: var(--cream); height: var(--topbar-h); font-size: .72rem; }
+  .top-bar .container { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .top-bar__info { display: flex; align-items: center; gap: 1.25rem; opacity: .8; flex-wrap: wrap; }
+  .top-bar__info span { white-space: nowrap; }
+  .top-bar__dot { opacity: .3; }
+  .lang-switch { display: flex; align-items: center; gap: .2rem; flex-shrink: 0; }
+  .lang-switch__btn { padding: .22rem .6rem; border-radius: var(--r-pill); color: var(--cream); font-size: .72rem; font-weight: 500; opacity: .65; transition: opacity var(--ease), background var(--ease); }
+  .lang-switch__btn:hover { opacity: 1; }
+  .lang-switch__btn.is-active { background: rgba(255,255,255,.18); opacity: 1; }
+
+
+  /* ═══════════════════════════════════════════════════════════════
+     NAVBAR
+     ═══════════════════════════════════════════════════════════════ */
+  .navbar { position: sticky; top: 0; z-index: 200; background: rgba(255,255,255,.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(213,213,213,.6); height: var(--nav-h); transition: box-shadow var(--ease); }
+  .navbar.is-scrolled { box-shadow: 0 1px 24px rgba(0,0,0,.07); }
+  .navbar .container  { height: 100%; display: flex; align-items: center; }
+  .navbar__logo { display: flex; align-items: center; gap: .65rem; margin-right: 2rem; flex-shrink: 0; }
+  .logo-circle { width: 44px; height: 44px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; color: var(--cream); font-size: .68rem; font-weight: 600; letter-spacing: .06em; flex-shrink: 0; overflow: hidden; }
+  .logo-text { font-family: var(--font-display); font-size: .85rem; font-weight: 700; color: var(--green); line-height: 1.2; text-transform: uppercase; letter-spacing: .04em; }
+  .nav__list { display: flex; align-items: center; height: 100%; flex: 1; }
+  .nav__item { position: relative; height: 100%; display: flex; align-items: center; }
+  .nav__link { display: flex; align-items: center; gap: .3rem; padding: 0 .9rem; height: 100%; font-size: .875rem; font-weight: 500; color: var(--charcoal); white-space: nowrap; border-bottom: 2px solid transparent; transition: color var(--ease), border-color var(--ease); user-select: none; }
+  .nav__link:hover, .nav__item.is-open .nav__link { color: var(--green); }
+  .nav__link.is-active { color: var(--green); border-bottom-color: var(--green); }
+  .nav__chevron { width: 8px; height: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-1px); transition: transform var(--ease); flex-shrink: 0; }
+  .nav__item.is-open .nav__chevron { transform: rotate(-135deg) translateY(2px); }
+  .dropdown { visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(6px); transition: opacity var(--ease), transform var(--ease), visibility 0s var(--ease); position: absolute; top: calc(var(--nav-h) - 1px); left: 0; min-width: 240px; background: rgba(255,255,255,.96); backdrop-filter: blur(20px); border: 1px solid var(--silver); border-top: none; border-radius: 0 0 var(--r) var(--r); box-shadow: 0 10px 32px rgba(0,0,0,.09); padding: .5rem 0; }
+  .nav__item.is-open .dropdown { visibility: visible; opacity: 1; pointer-events: auto; transform: translateY(0); }
+  .dropdown__link { display: block; padding: .6rem 1.2rem; font-size: .875rem; color: var(--charcoal); transition: background var(--ease), color var(--ease); }
+  .dropdown__link:hover { background: var(--cream); color: var(--green); }
+  .dropdown__sub { display: block; font-size: .75rem; color: var(--charcoal); opacity: .55; margin-top: .1rem; }
+  .dropdown__separator { height: 1px; background: var(--silver); margin: .4rem 1.2rem; opacity: .5; }
+  .dropdown--mega { visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(6px); transition: opacity var(--ease), transform var(--ease), visibility 0s var(--ease); position: absolute; top: calc(var(--nav-h) - 1px); left: -60px; width: 620px; background: rgba(255,255,255,.96); backdrop-filter: blur(20px); border: 1px solid var(--silver); border-top: none; border-radius: 0 0 var(--r) var(--r); box-shadow: 0 10px 32px rgba(0,0,0,.09); display: grid; grid-template-columns: 1fr 1fr 180px; }
+  .nav__item.is-open .dropdown--mega { visibility: visible; opacity: 1; pointer-events: auto; transform: translateY(0); }
+  .mega__col { padding: 1.2rem 1.1rem; border-right: 1px solid rgba(213,213,213,.5); }
+  .mega__col:last-child { border-right: none; background: #f8f7f2; border-radius: 0 0 var(--r) 0; }
+  .mega__heading { font-size: .67rem; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; margin-bottom: .6rem; padding-bottom: .5rem; border-bottom: 1px solid var(--silver); }
+  .mega__heading--edu { color: var(--green); } .mega__heading--health { color: #b83030; } .mega__heading--env { color: var(--teal); }
+  .mega__link { display: flex; align-items: center; gap: .5rem; padding: .4rem 0; font-size: .83rem; color: var(--charcoal); transition: color var(--ease); }
+  .mega__link:hover { color: var(--green); }
+  .badge { font-size: .6rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: .1rem .4rem; border-radius: var(--r-pill); flex-shrink: 0; }
+  .badge--age { background: #efefef; color: var(--charcoal); } .badge--new { background: #edf7e8; color: var(--green); } .badge--int { background: #e6f4f3; color: var(--teal); }
+  .mega__summary { font-size: .8rem; line-height: 1.6; color: var(--charcoal); margin-bottom: 1rem; }
+  .mega__all-link { display: inline-flex; align-items: center; gap: .3rem; font-size: .82rem; font-weight: 600; color: var(--green); transition: gap var(--ease); }
+  .mega__all-link:hover { gap: .55rem; }
+  .mega__col-gap { margin-top: .9rem; }
+  .nav__actions { display: flex; align-items: center; gap: .5rem; margin-left: auto; padding-left: 1rem; flex-shrink: 0; }
+  .btn-shop { padding: .42rem 1rem; font-size: .82rem; font-weight: 500; color: var(--teal); border: 1.5px solid var(--teal); border-radius: var(--r-pill); transition: background var(--ease), color var(--ease); }
+  .btn-shop:hover { background: var(--teal); color: var(--white); }
+  .btn-donate { padding: .42rem 1.1rem; font-size: .82rem; font-weight: 600; background: var(--green); color: var(--cream); border-radius: var(--r-pill); transition: background var(--ease), color var(--ease), transform var(--ease); }
+  .btn-donate:hover { background: var(--gold-bg); color: var(--gold-text); transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; padding: .4rem; margin-left: auto; border-radius: var(--r-sm); }
+  .hamburger__bar { width: 100%; height: 2px; background: var(--green); border-radius: 2px; transition: transform var(--ease), opacity var(--ease); }
+  .hamburger.is-open .hamburger__bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.is-open .hamburger__bar:nth-child(2) { opacity: 0; }
+  .hamburger.is-open .hamburger__bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-drawer { display: none; position: fixed; top: calc(var(--topbar-h) + var(--nav-h)); left: 0; right: 0; bottom: 0; background: var(--white); overflow-y: auto; z-index: 190; padding: 1rem 0 2rem; }
+  .mobile-drawer.is-open { display: block; }
+  .mob-section__toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: .85rem 1.5rem; font-size: .95rem; font-weight: 500; color: var(--charcoal); border-bottom: 1px solid var(--silver); background: none; text-align: left; }
+  .mob-section__toggle:hover { background: var(--cream); }
+  .mob-section__content { display: none; padding: .5rem 0; background: #fafaf7; border-bottom: 1px solid var(--silver); }
+  .mob-section.is-open .mob-section__content { display: block; }
+  .mob-subheading { font-size: .67rem; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; color: var(--green); padding: .6rem 1.8rem .3rem; }
+  .mob-subheading--health { color: #b83030; } .mob-subheading--env { color: var(--teal); }
+  .mob-link { display: flex; align-items: center; justify-content: space-between; padding: .55rem 1.8rem; font-size: .875rem; color: var(--charcoal); transition: background var(--ease), color var(--ease); }
+  .mob-link:hover { background: var(--cream); color: var(--green); }
+  .mob-actions { display: flex; gap: .75rem; padding: 1.2rem 1.5rem 0; }
+  .mob-actions .btn-shop, .mob-actions .btn-donate { flex: 1; text-align: center; font-size: .9rem; padding: .65rem 1rem; }
+
+  /* ── BREADCRUMB ── */
+  .breadcrumb { background: var(--cream); border-bottom: 1px solid rgba(25,83,1,.08); padding: .7rem 0; }
+  .breadcrumb__list { display: flex; align-items: center; gap: .5rem; font-size: .78rem; color: var(--charcoal); flex-wrap: wrap; }
+  .breadcrumb__list a { color: var(--teal); transition: color var(--ease); }
+  .breadcrumb__list a:hover { color: var(--green); }
+  .breadcrumb__sep { opacity: .35; }
+  .breadcrumb__current { color: var(--green); font-weight: 500; }
+
+
+  /* ═══════════════════════════════════════════════════════════════
+     HERO — FULL-BLEED DARK, iOS-INSPIRED LAYOUT
+     
+     Left: large type hierarchy with monospace acronym breakdown
+     Right: realist iOS-like Xcode window — dark mode, green syntax
+     
+     Design principle: the green syntax highlighting IS the brand.
+     No foreign blue — every colour on this page is from the charter.
+     The Xcode window uses E4M green palette for syntax colouring,
+     making it feel like the children are literally coding with
+     the organisation's identity.
+     ═══════════════════════════════════════════════════════════════ */
+  .page-hero {
+    background: var(--dark-bg);
+    padding: 5.5rem 0 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle noise/grain texture — printed on all Apple hardware */
+  .page-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Green glow from the bottom — like a screen on a desk */
+  .page-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -20%; left: 50%;
+    transform: translateX(-50%);
+    width: 700px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(25,83,1,.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 3.5rem;
+    align-items: end;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Hero left ── */
+  .hero-left { padding-bottom: 5.5rem; }
+
+  /* iOS-style app icon placeholder */
+  .hero-app-icon {
+    width: 72px; height: 72px;
+    border-radius: 16px;
+    background: linear-gradient(145deg, var(--care), #4a4a4a);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.1);
+    position: relative;
+  }
+  .hero-app-icon__inner {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: -.02em;
+  }
+
+  /* The acronym breakdown — the hero's signature element */
+  .acronym {
+    margin-bottom: 2rem;
+  }
+  .acronym-line {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: .55rem 0;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    transition: border-color var(--ease);
+  }
+  .acronym-line:last-child { border-bottom: none; }
+  .acronym-line:hover { border-color: rgba(255,255,255,.12); }
+  .acronym-letter {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1;
+    width: 3rem;
+    flex-shrink: 0;
+    opacity: .95;
+  }
+  .acronym-word {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    color: var(--dark-muted);
+    font-style: italic;
+    line-height: 1.2;
+    transition: color var(--ease);
+  }
+  .acronym-line:hover .acronym-word { color: var(--dark-text); }
+
+  /* Tagline below acronym */
+  .hero-tagline {
+    font-size: 1.05rem;
+    color: var(--dark-muted);
+    line-height: 1.7;
+    max-width: 460px;
+    margin-bottom: 2.2rem;
+  }
+  .hero-tagline strong { color: var(--dark-text); }
+
+  /* Tags row */
+  .hero-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2.5rem; }
+  .hero-tag {
+    font-family: var(--font-body);
+    font-size: .72rem;
+    font-weight: 500;
+    padding: .3rem .85rem;
+    border-radius: var(--r-pill);
+    border: 1px solid rgba(255,255,255,.12);
+    color: var(--dark-text);
+    background: rgba(255,255,255,.05);
+    letter-spacing: .04em;
+  }
+  .hero-tag--green { background: rgba(25,83,1,.35); border-color: rgba(78,222,128,.2); color: #86efac; }
+
+  .hero-ctas { display: flex; gap: .75rem; flex-wrap: wrap; }
+
+  /* ── Hero right: Xcode window ── */
+  .xcode-window {
+    /* Sits flush to the bottom of the hero, partially cut off */
+    border-radius: var(--r-lg) var(--r-lg) 0 0;
+    overflow: hidden;
+    border: 1px solid var(--dark-border);
+    border-bottom: none;
+    box-shadow:
+      0 -8px 40px rgba(0,0,0,.4),
+      0 0 0 1px rgba(255,255,255,.03) inset,
+      0 1px 0 rgba(255,255,255,.06) inset;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Xcode title bar — faithful to the real IDE */
+  .xcode-titlebar {
+    background: #1e1e1e;
+    padding: 0 1rem;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .xcode-dot { width: 11px; height: 11px; border-radius: 50%; }
+  .xcode-dot--red    { background: #ff5f56; }
+  .xcode-dot--yellow { background: #ffbd2e; }
+  .xcode-dot--green  { background: #27c93f; }
+
+  /* Breadcrumb path in Xcode titlebar */
+  .xcode-path {
+    margin-left: .75rem;
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+    font-family: var(--font-body);
+    font-size: .75rem;
+    color: rgba(255,255,255,.3);
+  }
+  .xcode-path__item { color: rgba(255,255,255,.55); }
+  .xcode-path__sep  { color: rgba(255,255,255,.2); }
+  .xcode-path__active { color: rgba(255,255,255,.82); font-weight: 500; }
+
+  /* Xcode tab bar */
+  .xcode-tabs {
+    background: #252525;
+    display: flex;
+    padding: 0 1rem;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    overflow-x: auto;
+  }
+  .xcode-tab {
+    padding: .55rem 1.1rem;
+    font-family: var(--font-body);
+    font-size: .75rem;
+    color: rgba(255,255,255,.4);
+    border-right: 1px solid rgba(255,255,255,.06);
+    white-space: nowrap;
+    cursor: default;
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+  }
+  .xcode-tab.is-active {
+    background: #1e1e1e;
+    color: rgba(255,255,255,.85);
+    border-bottom: 1px solid #1e1e1e;
+    margin-bottom: -1px;
+  }
+  .xcode-tab__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--syn-keyword); opacity: .7; }
+
+  /* Code editor area */
+  .xcode-editor {
+    background: #1e1e1e;
+    display: flex;
+    overflow: hidden;
+  }
+
+  /* Line numbers gutter */
+  .xcode-gutter {
+    padding: 1.2rem .7rem 1.2rem .9rem;
+    background: #1e1e1e;
+    border-right: 1px solid rgba(255,255,255,.04);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .xcode-ln {
+    font-family: var(--font-mono);
+    font-size: .78rem;
+    line-height: 1.85;
+    color: rgba(255,255,255,.18);
+    text-align: right;
+    user-select: none;
+    min-width: 1.8rem;
+  }
+  /* Highlight line 15 (the print line) */
+  .xcode-ln.hl { color: rgba(255,255,255,.45); background: rgba(255,255,255,.04); border-radius: 2px; }
+
+  /* Code block */
+  .xcode-code {
+    padding: 1.2rem 1.4rem;
+    font-family: var(--font-mono);
+    font-size: .78rem;
+    line-height: 1.85;
+    color: var(--dark-text);
+    flex: 1;
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  /* Syntax colours — ALL from E4M green palette, no foreign blue */
+  .kw  { color: var(--syn-keyword); }   /* let, var, func, struct  */
+  .tp  { color: var(--syn-type); }      /* String, Int, Student    */
+  .fn  { color: var(--syn-func); }      /* function names          */
+  .str { color: var(--syn-string); }    /* "string literals"       */
+  .cm  { color: var(--syn-comment); font-style: italic; }
+  .num { color: var(--syn-number); }
+  .sy  { color: var(--syn-symbol); }    /* operators               */
+
+  /* Blinking cursor */
+  .cursor { display: inline-block; width: 2px; height: .85em; background: var(--syn-keyword); margin-left: 1px; vertical-align: text-bottom; animation: blink 1.1s step-end infinite; }
+  @keyframes blink { 0%,100%{ opacity:1; } 50%{ opacity:0; } }
+
+  /* Console output bar below the editor */
+  .xcode-console {
+    background: #161616;
+    border-top: 1px solid rgba(255,255,255,.06);
+    padding: .6rem 1.2rem .7rem;
+    font-family: var(--font-mono);
+    font-size: .73rem;
+    color: rgba(255,255,255,.4);
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  .xcode-console__output { color: var(--syn-keyword); opacity: .8; }
+  .xcode-console__label { opacity: .3; }
+
+
+  /* ═══════════════════════════════════════════════════════════════
+     METRICS ROW — iOS-style frosted cards on cream background
+     ═══════════════════════════════════════════════════════════════ */
+  .metrics-row {
+    background: var(--surface-bg);
+    padding: 3.5rem 0;
+  }
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  .metric-card {
+    background: var(--surface-card);
+    border-radius: var(--r-lg);
+    padding: 1.8rem 1.6rem;
+    border: 1px solid rgba(213,213,213,.5);
+    transition: transform var(--ease3), box-shadow var(--ease);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 1.2rem; right: 1.2rem;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--green), transparent);
+    border-radius: 0 0 var(--r) var(--r);
+    opacity: .7;
+  }
+  .metric-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(0,0,0,.07); }
+  .metric-card__val {
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: var(--green);
+    line-height: 1;
+    margin-bottom: .35rem;
+  }
+  .metric-card__label {
+    font-size: .78rem;
+    color: var(--charcoal);
+    opacity: .65;
+    line-height: 1.4;
+  }
+  /* Small monospace subtitle under the big number */
+  .metric-card__sub {
+    font-family: var(--font-mono);
+    font-size: .62rem;
+    color: var(--care-mid);
+    letter-spacing: .06em;
+    margin-top: .4rem;
+    text-transform: uppercase;
+  }
+
+
+  /* ═══════════════════════════════════════════════════════════════
+     MISSION — "What we do" — two column, formal
+     ═══════════════════════════════════════════════════════════════ */
+  .mission {
+    padding: 6rem 0;
+    background: var(--surface-bg);
+  }
+  .mission__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .mission__body {
+    font-size: 1.02rem;
+    line-height: 1.8;
+    color: var(--charcoal);
+    margin-top: 1.4rem;
+  }
+  .mission__body p + p { margin-top: 1.1em; }
+  .mission__body strong { color: var(--green); }
+
+  /* Right: "About the mentor" card + programme facts */
+  .info-stack { display: flex; flex-direction: column; gap: 1.2rem; }
+
+  .info-card {
+    background: var(--surface-card);
+    border-radius: var(--r-lg);
+    padding: 1.8rem 2rem;
+    border: 1px solid rgba(213,213,213,.5);
+    transition: box-shadow var(--ease);
+  }
+  .info-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.06); }
+
+  .info-card__label {
+    font-size: .68rem;
+    font-weight: 500;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: .9rem;
+  }
+  .info-card__title {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    color: var(--green);
+    margin-bottom: .5rem;
+  }
+  .info-card__body { font-size: .9rem; color: var(--charcoal); line-height: 1.65; }
+
+  /* Detail rows in info card */
+  .detail-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .55rem 0;
+    border-bottom: 1px solid var(--silver);
+    font-size: .875rem;
+  }
+  .detail-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .detail-row__key { color: var(--care-mid); font-weight: 500; }
+  .detail-row__val { color: var(--charcoal); font-family: var(--font-mono); font-size: .8rem; }
+  .detail-row__val--green { color: var(--green); font-family: var(--font-body); font-size: .875rem; font-weight: 500; }
+
+  /* Status indicator dot */
+  .status-dot {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+  }
+  .status-dot::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #27c93f;
+    display: inline-block;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:.6; transform:scale(.85); } }
+
+
+  /* ═══════════════════════════════════════════════════════════════
+     CURRICULUM — iOS settings-style list
+     Three tools, presented as an iOS grouped list view.
+     Extremely clean, professional, instantly legible.
+     ═══════════════════════════════════════════════════════════════ */
+  .curriculum {
+    padding: 6rem 0;
+    background: var(--surface-bg);
+  }
+  .curriculum__header { margin-bottom: 3rem; }
+  .curriculum__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  /* Left: iOS-style grouped list */
+  .ios-list {
+    background: var(--surface-card);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    border: 1px solid rgba(213,213,213,.5);
+  }
+  .ios-list__section-header {
+    padding: .65rem 1.3rem .3rem;
+    font-size: .68rem;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--care-mid);
+    background: var(--surface-raised);
+    border-bottom: 1px solid rgba(213,213,213,.4);
+  }
+  .ios-row {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.3rem;
+    border-bottom: 1px solid rgba(213,213,213,.4);
+    gap: 1rem;
+    transition: background var(--ease);
+    cursor: default;
+  }
+  .ios-row:last-child { border-bottom: none; }
+  .ios-row:hover { background: var(--surface-raised); }
+  .ios-row__icon {
+    width: 38px; height: 38px; border-radius: var(--r-sm);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .ios-row__icon--grey   { background: var(--care); }
+  .ios-row__icon--green  { background: var(--green); }
+  .ios-row__icon--teal   { background: var(--teal); }
+  .ios-row__content { flex: 1; }
+  .ios-row__title { font-size: .92rem; font-weight: 500; color: var(--charcoal); }
+  .ios-row__sub   { font-size: .78rem; color: var(--care-mid); margin-top: .1rem; }
+  .ios-row__chevron {
+    width: 6px; height: 6px;
+    border-right: 1.5px solid var(--silver);
+    border-top: 1.5px solid var(--silver);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+  /* Level badge */
+  .ios-badge {
+    font-size: .65rem;
+    font-weight: 600;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    padding: .2rem .6rem;
+    border-radius: var(--r-pill);
+    flex-shrink: 0;
+  }
+  .ios-badge--grey  { background: var(--care-lt); color: var(--care); }
+  .ios-badge--green { background: rgba(25,83,1,.1); color: var(--green); }
+
+  /* Right: curriculum copy */
+  .curriculum__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .curriculum__tool-card {
+    background: var(--surface-card);
+    border-radius: var(--r-lg);
+    padding: 1.6rem 1.8rem;
+    border: 1px solid rgba(213,213,213,.5);
+    border-left: 3px solid var(--green);
+    transition: transform var(--ease), box-shadow var(--ease);
+  }
+  .curriculum__tool-card:hover { transform: translateX(3px); box-shadow: 0 4px 18px rgba(0,0,0,.05); }
+  .curriculum__tool-name {
+    font-family: var(--font-mono);
+    font-size: .92rem;
+    font-weight: 600;
+    color: var(--green);
+    margin-bottom: .5rem;
+    letter-spacing: .02em;
+  }
+  .curriculum__tool-desc { font-size: .88rem; color: var(--charcoal); line-height: 1.65; }
+  .curriculum__tool-level {
+    display: inline-block;
+    margin-top: .7rem;
+    font-size: .65rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    padding: .18rem .6rem;
+    border-radius: var(--r-pill);
+    background: rgba(0,108,101,.08);
+  }
+
+
+  /* ═══════════════════════════════════════════════════════════════
+     PHOTO STRIP
+     ═══════════════════════════════════════════════════════════════ */
+  .photo-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+  .photo-strip__item { aspect-ratio: 3/4; overflow: hidden; position: relative; border-radius: 0; }
+  .photo-strip__item:first-child { border-radius: 0 0 0 var(--r-xl); }
+  .photo-strip__item:last-child  { border-radius: 0 0 var(--r-xl) 0; }
+  .photo-strip__item:nth-child(1) { background: linear-gradient(145deg, var(--dark-bg), #1a2e12); }
+  .photo-strip__item:nth-child(2) { background: linear-gradient(145deg, var(--care), #3a3a3a); }
+  .photo-strip__item:nth-child(3) { background: linear-gradient(145deg, var(--dark-mid), var(--dark-bg)); }
+  .photo-strip__item:nth-child(4) { background: linear-gradient(145deg, var(--green), #0f3600); }
+  .photo-strip__item img { width: 100%; height: 100%; object-fit: cover; transition: transform .65s var(--ease2); }
+  .photo-strip__item:hover img { transform: scale(1.04); }
+  .photo-strip__overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 1rem; background: linear-gradient(to top, rgba(0,0,0,.72), transparent); color: rgba(255,255,255,.9); font-size: .75rem; transform: translateY(100%); transition: transform .3s var(--ease2); }
+  .photo-strip__item:hover .photo-strip__overlay { transform: translateY(0); }
+  .photo-cell-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .5rem; color: rgba(255,255,255,.18); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; text-align: center; padding: 1rem; }
+
+
+  /* ═══════════════════════════════════════════════════════════════
+     TWO TRACKS — "Programmes" in iOS grouped table style
+     ═══════════════════════════════════════════════════════════════ */
+  .two-tracks {
+    padding: 6rem 0;
+    background: var(--surface-bg);
+  }
+  .two-tracks__header { text-align: center; margin-bottom: 3rem; }
+  .tracks-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+  .track {
+    background: var(--surface-card);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    border: 1px solid rgba(213,213,213,.5);
+    transition: transform var(--ease3), box-shadow var(--ease);
+  }
+  .track:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.08); }
+
+  .track__header {
+    padding: 2rem 2rem 1.5rem;
+  }
+  .track--beginner .track__header { background: var(--surface-raised); }
+  .track--advanced .track__header { background: var(--dark-bg); }
+
+  .track__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: .25rem .8rem;
+    border-radius: var(--r-pill);
+    margin-bottom: 1rem;
+  }
+  .track--beginner .track__badge { background: rgba(0,108,101,.1); color: var(--teal); }
+  .track--advanced .track__badge { background: rgba(78,222,128,.12); color: var(--syn-keyword); }
+
+  .track__count {
+    font-family: var(--font-display);
+    font-size: 3.2rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: .3rem;
+  }
+  .track--beginner .track__count { color: var(--green); }
+  .track--advanced .track__count { color: var(--syn-keyword); text-shadow: 0 0 24px rgba(78,222,128,.2); }
+
+  .track__title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    margin-bottom: .5rem;
+  }
+  .track--beginner .track__title { color: var(--green); }
+  .track--advanced .track__title { color: var(--cream); }
+
+  .track__desc { font-size: .88rem; line-height: 1.65; }
+  .track--beginner .track__desc { color: var(--charcoal); }
+  .track--advanced .track__desc { color: var(--dark-muted); }
+
+  /* Detail list */
+  .track__list { padding: 0 2rem 1.5rem; background: var(--surface-card); }
+  .track--advanced .track__list { background: #131f0e; }
+  .track__detail {
+    display: flex;
+    align-items: flex-start;
+    gap: .7rem;
+    padding: .55rem 0;
+    border-bottom: 1px solid;
+    font-size: .875rem;
+  }
+  .track--beginner .track__detail { border-color: rgba(213,213,213,.4); color: var(--charcoal); }
+  .track--advanced .track__detail { border-color: rgba(255,255,255,.04); color: var(--dark-text); }
+  .track__detail:last-child { border-bottom: none; }
+  .track__detail-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); flex-shrink: 0; margin-top: 7px; }
+  .track--advanced .track__detail-dot { background: var(--syn-keyword); }
+
+
+  /* ═══════════════════════════════════════════════════════════════
+     CTA — Dark green, E4M brand, architectural
+     ═══════════════════════════════════════════════════════════════ */
+  .project-cta {
+    background: var(--green);
+    padding: 6rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  /* Repeating tree-leaf motif — brand pattern echo */
+  .project-cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 15% 50%, rgba(238,235,217,.04) 0%, transparent 50%),
+      radial-gradient(circle at 85% 20%, rgba(0,108,101,.12) 0%, transparent 40%);
+    pointer-events: none;
+  }
+  .project-cta__inner {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4rem;
+    align-items: center;
+  }
+  .project-cta__label {
+    font-size: .72rem;
+    font-weight: 500;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(238,235,217,.45);
+    margin-bottom: .8rem;
+    font-family: var(--font-mono);
+  }
+  .project-cta h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .project-cta p {
+    font-size: .95rem;
+    color: rgba(238,235,217,.7);
+    line-height: 1.75;
+    max-width: 540px;
+  }
+  .project-cta__actions {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+    flex-shrink: 0;
+  }
+  .project-cta__actions .btn { justify-content: center; min-width: 220px; }
+
+
+  /* ── OTHER PROJECTS ── */
+  .other-projects { padding: 5.5rem 0; background: var(--surface-bg); }
+  .other-projects__header { margin-bottom: 2.5rem; }
+  .other-projects__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .proj-card { background: var(--surface-card); border-radius: var(--r-lg); overflow: hidden; transition: transform var(--ease3), box-shadow var(--ease); display: flex; flex-direction: column; border: 1px solid rgba(213,213,213,.5); }
+  .proj-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,.08); }
+  .proj-card__thumb { height: 140px; position: relative; }
+  .proj-card:nth-child(1) .proj-card__thumb { background: linear-gradient(135deg, #b5681f 0%, var(--green) 100%); }
+  .proj-card:nth-child(2) .proj-card__thumb { background: linear-gradient(135deg, var(--teal), #004d48); }
+  .proj-card:nth-child(3) .proj-card__thumb { background: linear-gradient(135deg, #2c7a01, var(--teal)); }
+  .proj-card__tag { position: absolute; top: .75rem; left: .75rem; background: rgba(255,255,255,.92); color: var(--green); font-size: .62rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: .2rem .6rem; border-radius: var(--r-pill); }
+  .proj-card__body { padding: 1.3rem; flex: 1; display: flex; flex-direction: column; }
+  .proj-card__title { font-family: var(--font-display); font-size: 1rem; color: var(--green); margin-bottom: .4rem; }
+  .proj-card__desc { font-size: .82rem; color: var(--charcoal); line-height: 1.55; flex: 1; margin-bottom: .9rem; }
+  .proj-card__link { font-size: .78rem; font-weight: 600; color: var(--teal); display: inline-flex; align-items: center; gap: .3rem; transition: gap var(--ease); }
+  .proj-card:hover .proj-card__link { gap: .6rem; }
+
+  /* ── FOOTER ── */
+  footer { background: #0d1a0a; color: var(--silver); padding: 4rem 0 2rem; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-brand h3 { font-family: var(--font-display); color: var(--cream); font-size: 1.1rem; margin-bottom: .75rem; }
+  .footer-brand p { font-size: .85rem; line-height: 1.65; margin-bottom: 1.2rem; max-width: 280px; }
+  .footer-socials { display: flex; gap: .75rem; }
+  .social-btn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,.12); display: flex; align-items: center; justify-content: center; font-size: .8rem; color: var(--silver); transition: background var(--ease), border-color var(--ease); }
+  .social-btn:hover { background: var(--teal); border-color: var(--teal); color: #fff; }
+  .footer-col h4 { color: var(--cream); font-size: .8rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1.1rem; }
+  .footer-col li { margin-bottom: .5rem; }
+  .footer-col a { font-size: .87rem; color: var(--silver); transition: color var(--ease); }
+  .footer-col a:hover { color: var(--cream); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,.07); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: .78rem; }
+  .footer-legal { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .footer-legal a { color: var(--silver); transition: color var(--ease); }
+  .footer-legal a:hover { color: var(--cream); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1020px) {
+    .curriculum__grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 900px) {
+    .nav__list, .nav__actions { display: none; }
+    .hamburger { display: flex; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .xcode-window { margin-top: 3rem; border-radius: var(--r-lg) var(--r-lg) 0 0; }
+    .mission__grid { grid-template-columns: 1fr; gap: 3rem; }
+    .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+    .tracks-grid { grid-template-columns: 1fr; }
+    .photo-strip { grid-template-columns: repeat(2, 1fr); }
+    .photo-strip__item:nth-child(1) { border-radius: 0; }
+    .project-cta__inner { grid-template-columns: 1fr; }
+    .project-cta__actions { flex-direction: row; flex-wrap: wrap; }
+    .project-cta__actions .btn { min-width: 0; flex: 1; }
+    .other-projects__grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    .hero-left { padding-bottom: 3rem; }
+    .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+    .other-projects__grid, .footer-grid { grid-template-columns: 1fr; }
+    .top-bar__info { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal-up-sm { opacity: 1; transform: none; transition: none; }
+    .cursor { animation: none; opacity: 1; }
+    .status-dot::before { animation: none; }
+  }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar"><div class="container"><div class="top-bar__info"><span>UK Charity #1167115</span><span class="top-bar__dot">·</span><span>Malagasy NGO</span><span class="top-bar__dot">·</span><span>Association France SIREN 85242793900016</span><span class="top-bar__dot">·</span><span>Association Suisse</span></div><nav class="lang-switch" aria-label="Language switcher"><a href="index.html" class="lang-switch__btn is-active" lang="en">EN</a><a href="index-fr.html" class="lang-switch__btn" lang="fr">FR</a></nav></div></div>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar" role="banner"><div class="container"><a href="../../index.html" class="navbar__logo"><div class="logo-circle" aria-hidden="true">E4M</div><span class="logo-text">Education<br>for Madagascar</span></a><ul class="nav__list" role="list"><li class="nav__item" id="ni-who"><button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-who')">Who we are <span class="nav__chevron"></span></button><div class="dropdown"><a class="dropdown__link" href="../../who-we-are/our-story.html">Our story<span class="dropdown__sub">History &amp; founding vision</span></a><a class="dropdown__link" href="../../who-we-are/team.html">Team &amp; board</a><a class="dropdown__link" href="../../who-we-are/governance.html">Governance</a><div class="dropdown__separator"></div><a class="dropdown__link" href="../../who-we-are/annual-reports.html">Annual reports</a><a class="dropdown__link" href="../../who-we-are/partners.html">Our partners</a></div></li><li class="nav__item" id="ni-proj"><button class="nav__link is-active" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-proj')">Our projects <span class="nav__chevron"></span></button><div class="dropdown--mega"><div class="mega__col"><p class="mega__heading mega__heading--edu">Education</p><a class="mega__link" href="akka.html">AKKA Montessori <span class="badge badge--age">3–6 yrs</span></a><a class="mega__link" href="kanto.html">KANTO Culture <span class="badge badge--age">7–12 yrs</span></a><a class="mega__link" href="care.html" style="color:var(--green);font-weight:600;">CARE Coding &amp; Robotics</a><a class="mega__link" href="scola.html">SCOLA Scholarship <span class="badge badge--age">18+</span></a><a class="mega__link" href="tuto.html">TUTO</a><a class="mega__link" href="vim.html">VIM <span class="badge badge--int">Intl.</span></a><a class="mega__link" href="cad.html">Career Day Awareness</a><a class="mega__link" href="unesco.html">UNESCO <span class="badge badge--new">New</span></a></div><div class="mega__col"><p class="mega__heading mega__heading--health">Health</p><a class="mega__link" href="../health/women.html">School for Women</a><a class="mega__link" href="../health/fody.html">FODY</a><a class="mega__link" href="../health/tomady.html">TOMADY</a><div class="mega__col-gap"></div><p class="mega__heading mega__heading--env">Environment</p><a class="mega__link" href="../environment/silva.html">SILVA</a><a class="mega__link" href="../environment/wash.html">WASH</a><a class="mega__link" href="../environment/permada.html">PERMADA</a></div><div class="mega__col"><p class="mega__heading mega__heading--edu">Overview</p><p class="mega__summary">13 active projects across education, health, and the environment.</p><a class="mega__all-link" href="../index.html">All projects →</a></div></div></li><li class="nav__item" id="ni-inv"><button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-inv')">Get involved <span class="nav__chevron"></span></button><div class="dropdown"><a class="dropdown__link" href="../../get-involved/volunteer.html">Volunteer (VIM)</a><a class="dropdown__link" href="../../get-involved/donate.html">Donate</a><div class="dropdown__separator"></div><a class="dropdown__link" href="../../get-involved/partner.html">Become a partner</a></div></li><li class="nav__item" id="ni-media"><button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-media')">Media <span class="nav__chevron"></span></button><div class="dropdown"><a class="dropdown__link" href="../../media/blog.html">Blog</a><a class="dropdown__link" href="../../media/newsletters.html">Newsletters</a><div class="dropdown__separator"></div><a class="dropdown__link" href="../../who-we-are/annual-reports.html">Annual reports</a></div></li></ul><div class="nav__actions"><a href="#shop" class="btn-shop">The Shop ↗</a><a href="../../get-involved/donate.html" class="btn-donate">Donate</a></div><button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMobile()"><span class="hamburger__bar"></span><span class="hamburger__bar"></span><span class="hamburger__bar"></span></button></div></header>
+
+<!-- MOBILE DRAWER -->
+<nav class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation"><div class="mob-section" id="mob-who"><button class="mob-section__toggle" onclick="toggleMobSection('mob-who')">Who we are <span class="nav__chevron"></span></button><div class="mob-section__content"><a class="mob-link" href="../../who-we-are/our-story.html">Our story</a><a class="mob-link" href="../../who-we-are/team.html">Team &amp; board</a><a class="mob-link" href="../../who-we-are/governance.html">Governance</a><a class="mob-link" href="../../who-we-are/annual-reports.html">Annual reports</a><a class="mob-link" href="../../who-we-are/partners.html">Our partners</a></div></div><div class="mob-section" id="mob-proj"><button class="mob-section__toggle" onclick="toggleMobSection('mob-proj')">Our projects <span class="nav__chevron"></span></button><div class="mob-section__content"><div class="mob-subheading">Education</div><a class="mob-link" href="akka.html">AKKA</a><a class="mob-link" href="kanto.html">KANTO</a><a class="mob-link" href="care.html" style="color:var(--green);font-weight:600;">CARE Coding</a><a class="mob-link" href="scola.html">SCOLA</a><a class="mob-link" href="tuto.html">TUTO</a><a class="mob-link" href="vim.html">VIM</a><a class="mob-link" href="cad.html">Career Day</a><div class="mob-subheading mob-subheading--health">Health</div><a class="mob-link" href="../health/women.html">School for Women</a><a class="mob-link" href="../health/fody.html">FODY</a><a class="mob-link" href="../health/tomady.html">TOMADY</a><div class="mob-subheading mob-subheading--env">Environment</div><a class="mob-link" href="../environment/silva.html">SILVA</a><a class="mob-link" href="../environment/wash.html">WASH</a><a class="mob-link" href="../environment/permada.html">PERMADA</a></div></div><div class="mob-section" id="mob-inv"><button class="mob-section__toggle" onclick="toggleMobSection('mob-inv')">Get involved <span class="nav__chevron"></span></button><div class="mob-section__content"><a class="mob-link" href="../../get-involved/volunteer.html">Volunteer</a><a class="mob-link" href="../../get-involved/donate.html">Donate</a><a class="mob-link" href="../../get-involved/partner.html">Become a partner</a></div></div><div class="mob-section" id="mob-media"><button class="mob-section__toggle" onclick="toggleMobSection('mob-media')">Media <span class="nav__chevron"></span></button><div class="mob-section__content"><a class="mob-link" href="../../media/blog.html">Blog</a><a class="mob-link" href="../../media/newsletters.html">Newsletters</a><a class="mob-link" href="../../who-we-are/annual-reports.html">Annual reports</a></div></div><div class="mob-actions"><a href="#shop" class="btn-shop">The Shop ↗</a><a href="../../get-involved/donate.html" class="btn-donate">Donate</a></div></nav>
+
+<!-- BREADCRUMB -->
+<nav class="breadcrumb" aria-label="Breadcrumb"><div class="container"><ol class="breadcrumb__list"><li><a href="../../index.html">Home</a></li><li class="breadcrumb__sep">›</li><li><a href="../index.html">Our Projects</a></li><li class="breadcrumb__sep">›</li><li><span class="breadcrumb__current">Education</span></li><li class="breadcrumb__sep">›</li><li><span class="breadcrumb__current">CARE</span></li></ol></div></nav>
+
+
+<!-- ════════════════════════════════════════════════════════════
+     HERO
+     
+     THE CONCEPT: The hero is a "found object" — you arrive on
+     this page and you are looking at a real CARE student's
+     Xcode editor. The code is in front of you before you've
+     read a word. Left side: the programme name broken into its
+     acronym, with each letter large and each expansion in italic
+     Charter below it. This visual device is the page's identity.
+     
+     Colour logic: all syntax highlighting uses the E4M green
+     palette — #4ade80 (bright lime-green) for keywords,
+     #fde68a (warm amber/cream) for strings. No arbitrary blue.
+     The code looks like it belongs to this organisation.
+     ════════════════════════════════════════════════════════════ -->
+<section class="page-hero" aria-label="CARE project hero">
+  <div class="container">
+    <div class="hero-grid">
+
+      <!-- LEFT: Programme identity -->
+      <div class="hero-left reveal">
+        <!-- iOS app icon with CARE grey -->
+        <div class="hero-app-icon" aria-hidden="true">
+          <div class="hero-app-icon__inner">C</div>
+        </div>
+
+        <!-- The acronym breakdown — the hero's signature visual -->
+        <div class="acronym" role="presentation">
+          <div class="acronym-line">
+            <span class="acronym-letter">C</span>
+            <span class="acronym-word">Coding</span>
+          </div>
+          <div class="acronym-line">
+            <span class="acronym-letter">A</span>
+            <span class="acronym-word">Application</span>
+          </div>
+          <div class="acronym-line">
+            <span class="acronym-letter">R</span>
+            <span class="acronym-word">Robotics</span>
+          </div>
+          <div class="acronym-line">
+            <span class="acronym-letter">E</span>
+            <span class="acronym-word">Education</span>
+          </div>
+        </div>
+
+        <p class="hero-tagline">
+          Empowering youth to become <strong>creators</strong>, not just consumers of technology. Mentored by Michel Sutter, using professional Apple developer tools.
+        </p>
+
+        <div class="hero-tags">
+          <span class="hero-tag hero-tag--green">Education</span>
+          <span class="hero-tag">Ages 12+</span>
+          <span class="hero-tag">Swift · Xcode</span>
+          <span class="hero-tag">DBS Certified</span>
+        </div>
+
+        <div class="hero-ctas">
+          <a href="../../get-involved/donate.html" class="btn btn-green">Fund the programme</a>
+          <a href="../../get-involved/volunteer.html" class="btn btn-outline-light">Mentor a student</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: Faithful Xcode dark editor -->
+      <div class="xcode-window reveal d1" aria-label="Swift code written by a CARE student named Ravo, age 14">
+
+        <!-- Title bar -->
+        <div class="xcode-titlebar">
+          <div class="xcode-dot xcode-dot--red"></div>
+          <div class="xcode-dot xcode-dot--yellow"></div>
+          <div class="xcode-dot xcode-dot--green"></div>
+          <div class="xcode-path">
+            <span class="xcode-path__item">CARE</span>
+            <span class="xcode-path__sep">›</span>
+            <span class="xcode-path__item">Sources</span>
+            <span class="xcode-path__sep">›</span>
+            <span class="xcode-path__active">MyFuture.swift</span>
+          </div>
+        </div>
+
+        <!-- Tab bar -->
+        <div class="xcode-tabs">
+          <div class="xcode-tab">ContentView.swift</div>
+          <div class="xcode-tab is-active"><span class="xcode-tab__dot"></span>MyFuture.swift</div>
+          <div class="xcode-tab">App.swift</div>
+        </div>
+
+        <!-- Editor -->
+        <div class="xcode-editor">
+          <!-- Line number gutter -->
+          <div class="xcode-gutter" aria-hidden="true">
+            <div class="xcode-ln"> 1</div><div class="xcode-ln"> 2</div><div class="xcode-ln"> 3</div>
+            <div class="xcode-ln"> 4</div><div class="xcode-ln"> 5</div><div class="xcode-ln"> 6</div>
+            <div class="xcode-ln"> 7</div><div class="xcode-ln"> 8</div><div class="xcode-ln"> 9</div>
+            <div class="xcode-ln">10</div><div class="xcode-ln">11</div><div class="xcode-ln">12</div>
+            <div class="xcode-ln">13</div><div class="xcode-ln">14</div><div class="xcode-ln hl">15</div>
+            <div class="xcode-ln">16</div><div class="xcode-ln">17</div>
+          </div>
+
+          <!-- Code -->
+          <div class="xcode-code"><span class="cm">// Written by Ravo — CARE student, Antananarivo</span>
+<span class="kw">import</span> <span class="tp">Foundation</span>
+
+<span class="kw">struct</span> <span class="tp">Student</span> {
+    <span class="kw">let</span> name<span class="sy">:</span> <span class="tp">String</span>
+    <span class="kw">let</span> age<span class="sy">:</span>  <span class="tp">Int</span>
+    <span class="kw">var</span> dream<span class="sy">:</span> <span class="tp">String</span>
+
+    <span class="kw">func</span> <span class="fn">buildFuture</span>() <span class="sy">-></span> <span class="tp">String</span> {
+        <span class="kw">return</span> <span class="str">"\(</span>name<span class="str">) will become a \(</span>dream<span class="str">)."</span>
+    }
+}
+
+<span class="kw">let</span> me <span class="sy">=</span> <span class="tp">Student</span>(name<span class="sy">:</span> <span class="str">"Ravo"</span>, age<span class="sy">:</span> <span class="num">14</span>, dream<span class="sy">:</span> <span class="str">"engineer"</span>)
+<span class="fn">print</span>(me.<span class="fn">buildFuture</span>())<span class="cursor"></span>
+
+<span class="cm">// Output: "Ravo will become an engineer."</span></div>
+        </div>
+
+        <!-- Console -->
+        <div class="xcode-console">
+          <span class="xcode-console__label">Build succeeded ·</span>
+          <span class="xcode-console__output">▶ "Ravo will become an engineer."</span>
+        </div>
+
+      </div><!-- end xcode-window -->
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ METRICS ════ -->
+<section class="metrics-row" aria-label="CARE key figures">
+  <div class="container">
+    <div class="metrics-grid">
+      <div class="metric-card reveal">
+        <div class="metric-card__val">17</div>
+        <div class="metric-card__label">students currently enrolled</div>
+        <div class="metric-card__sub">// students.count</div>
+      </div>
+      <div class="metric-card reveal d1">
+        <div class="metric-card__val">2</div>
+        <div class="metric-card__label">skill-level groups</div>
+        <div class="metric-card__sub">// groups.count</div>
+      </div>
+      <div class="metric-card reveal d2">
+        <div class="metric-card__val">30</div>
+        <div class="metric-card__label">maximum capacity</div>
+        <div class="metric-card__sub">// maxCapacity</div>
+      </div>
+      <div class="metric-card reveal d3">
+        <div class="metric-card__val">12+</div>
+        <div class="metric-card__label">minimum age to join</div>
+        <div class="metric-card__sub">// minimumAge</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ MISSION ════ -->
+<section class="mission" aria-labelledby="mission-heading">
+  <div class="container">
+    <div class="mission__grid">
+
+      <!-- Left: narrative -->
+      <div class="reveal">
+        <span class="eyebrow">The mission</span>
+        <h2 class="section-title" id="mission-heading">
+          The digital profession<br>is not a privilege.<br>It is a right.
+        </h2>
+        <div class="mission__body">
+          <p>In a country where fewer than one in three children completes primary school, access to digital skills is not a luxury — it is the most direct route to economic independence for an entire generation.</p>
+          <p>CARE does not teach children to use apps. It teaches them to <strong>build</strong> apps. The distinction is everything: a consumer depends on technology; a creator shapes it. Under the mentorship of <strong>Michel Sutter</strong>, students use professional tools — <strong>Swift Playground</strong>, <strong>Swift</strong>, and <strong>Xcode</strong> — the same ecosystem used by Apple's own engineers.</p>
+          <p>The goal is not to produce digital consumers fluent in someone else's platform. It is to equip Malagasy youth with the computational thinking, problem-solving rigour, and creative confidence to build <strong>solutions for their own country</strong> — in their own language, on their own terms.</p>
+        </div>
+      </div>
+
+      <!-- Right: info cards -->
+      <div class="info-stack reveal d1">
+
+        <!-- Mentor card -->
+        <div class="info-card">
+          <div class="info-card__label">Programme mentor</div>
+          <div class="info-card__title">Michel Sutter</div>
+          <p class="info-card__body">
+            Michel leads CARE with professional software development expertise, adapting industry-grade tools and methods to the specific context of Malagasy children aged 12 and above.
+          </p>
+        </div>
+
+        <!-- Programme facts table -->
+        <div class="info-card">
+          <div class="info-card__label">Programme details</div>
+          <div class="detail-row">
+            <span class="detail-row__key">Community</span>
+            <span class="detail-row__val">12 years and above</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-row__key">Students enrolled</span>
+            <span class="detail-row__val">17 (capacity: 30)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-row__key">Groups</span>
+            <span class="detail-row__val">2 — beginner & advanced</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-row__key">Standard</span>
+            <span class="detail-row__val">DBS Disclosure & Barring</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-row__key">Status</span>
+            <span class="detail-row__val detail-row__val--green"><span class="status-dot">Accepting students</span></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ CURRICULUM ════ -->
+<section class="curriculum" aria-labelledby="curriculum-heading">
+  <div class="container">
+    <div class="curriculum__header reveal">
+      <span class="eyebrow">The curriculum</span>
+      <h2 class="section-title" id="curriculum-heading">What we teach — and why</h2>
+    </div>
+    <div class="curriculum__grid">
+
+      <!-- iOS settings-style list -->
+      <div class="ios-list reveal">
+        <div class="ios-list__section-header">Technology stack</div>
+        <div class="ios-row">
+          <div class="ios-row__icon ios-row__icon--grey"><span style="font-size:1.2rem;">🎮</span></div>
+          <div class="ios-row__content">
+            <div class="ios-row__title">Swift Playground</div>
+            <div class="ios-row__sub">Apple's visual, interactive coding environment</div>
+          </div>
+          <span class="ios-badge ios-badge--grey">Beginner</span>
+          <div class="ios-row__chevron"></div>
+        </div>
+        <div class="ios-row">
+          <div class="ios-row__icon ios-row__icon--green"><span style="font-size:1.2rem;">🔷</span></div>
+          <div class="ios-row__content">
+            <div class="ios-row__title">Swift</div>
+            <div class="ios-row__sub">Apple's professional programming language</div>
+          </div>
+          <span class="ios-badge ios-badge--green">Advanced</span>
+          <div class="ios-row__chevron"></div>
+        </div>
+        <div class="ios-row">
+          <div class="ios-row__icon ios-row__icon--teal"><span style="font-size:1.2rem;">🛠</span></div>
+          <div class="ios-row__content">
+            <div class="ios-row__title">Xcode</div>
+            <div class="ios-row__sub">Full IDE for app development — same as Apple</div>
+          </div>
+          <span class="ios-badge ios-badge--green">Advanced</span>
+          <div class="ios-row__chevron"></div>
+        </div>
+        <div class="ios-list__section-header" style="margin-top:0;">Learning outcomes</div>
+        <div class="ios-row">
+          <div class="ios-row__icon" style="background:rgba(25,83,1,.1);"><span style="font-size:1.2rem;">🧠</span></div>
+          <div class="ios-row__content">
+            <div class="ios-row__title">Computational thinking</div>
+            <div class="ios-row__sub">Breaking problems into logical, solvable steps</div>
+          </div>
+          <div class="ios-row__chevron"></div>
+        </div>
+        <div class="ios-row">
+          <div class="ios-row__icon" style="background:rgba(0,108,101,.1);"><span style="font-size:1.2rem;">🏗</span></div>
+          <div class="ios-row__content">
+            <div class="ios-row__title">App development</div>
+            <div class="ios-row__sub">Design, build and ship a real application</div>
+          </div>
+          <div class="ios-row__chevron"></div>
+        </div>
+        <div class="ios-row" style="border-bottom:none;">
+          <div class="ios-row__icon" style="background:rgba(94,94,94,.1);"><span style="font-size:1.2rem;">🤝</span></div>
+          <div class="ios-row__content">
+            <div class="ios-row__title">Professional readiness</div>
+            <div class="ios-row__sub">Skills aligned to the digital economy</div>
+          </div>
+          <div class="ios-row__chevron"></div>
+        </div>
+      </div>
+
+      <!-- Curriculum detail cards -->
+      <div class="curriculum__copy">
+        <div class="curriculum__tool-card reveal d1">
+          <div class="curriculum__tool-name">Swift Playground</div>
+          <p class="curriculum__tool-desc">Apple's visual, gamified coding environment. Students engage with interactive challenges, moving from pattern-matching to writing real Swift code — with zero prior experience needed. The intuitive interface removes the barrier of entry while teaching genuine programming concepts: loops, conditionals, functions, objects.</p>
+          <span class="curriculum__tool-level">Beginner group — 12 students</span>
+        </div>
+        <div class="curriculum__tool-card reveal d2">
+          <div class="curriculum__tool-name">Swift + Xcode</div>
+          <p class="curriculum__tool-desc">The same tools used at Apple, Spotify and Airbnb. Advanced students design interfaces, write production-quality code, and compile working applications. Projects are personal — students build apps that solve problems they see in their own community.</p>
+          <span class="curriculum__tool-level">Advanced group — 5 students</span>
+        </div>
+        <div class="curriculum__tool-card reveal d3" style="border-left-color:var(--teal);">
+          <div class="curriculum__tool-name" style="color:var(--teal);">Why this stack?</div>
+          <p class="curriculum__tool-desc">Apple's ecosystem was chosen deliberately: it is cohesive, progressively structured from Playground to Xcode, and produces genuinely employable skills. The same progression is used in Apple's own education programmes worldwide — from primary school to university.</p>
+          <span class="curriculum__tool-level" style="color:var(--teal);background:rgba(0,108,101,.08);">Programme philosophy</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ PHOTO STRIP ════ -->
+<div class="photo-strip" role="list" aria-label="CARE programme photos">
+  <div class="photo-strip__item" role="listitem">
+    <!-- <img src="../../images/care-group.jpg" alt="CARE students — group photo" loading="lazy"> -->
+    <div class="photo-cell-placeholder"><svg width="22" height="22" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 9h18M9 21V9" stroke="currentColor" stroke-width="1.5"/></svg>care-group.jpg</div>
+    <div class="photo-strip__overlay">The CARE cohort — blue lanyards, focused minds</div>
+  </div>
+  <div class="photo-strip__item" role="listitem">
+    <!-- <img src="../../images/care-coding.jpg" alt="Student coding on a tablet" loading="lazy"> -->
+    <div class="photo-cell-placeholder"><svg width="22" height="22" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 9h18M9 21V9" stroke="currentColor" stroke-width="1.5"/></svg>care-coding.jpg</div>
+    <div class="photo-strip__overlay">Deep in Swift Playground — the moment it clicks</div>
+  </div>
+  <div class="photo-strip__item" role="listitem">
+    <!-- <img src="../../images/care-mentor.jpg" alt="Michel Sutter mentoring a student" loading="lazy"> -->
+    <div class="photo-cell-placeholder"><svg width="22" height="22" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 9h18M9 21V9" stroke="currentColor" stroke-width="1.5"/></svg>care-mentor.jpg</div>
+    <div class="photo-strip__overlay">Michel Sutter — one-to-one, side by side</div>
+  </div>
+  <div class="photo-strip__item" role="listitem">
+    <!-- <img src="../../images/care-tablets.jpg" alt="Students working on iPads" loading="lazy"> -->
+    <div class="photo-cell-placeholder"><svg width="22" height="22" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 9h18M9 21V9" stroke="currentColor" stroke-width="1.5"/></svg>care-tablets.jpg</div>
+    <div class="photo-strip__overlay">Professional tools — the same ones Apple engineers use</div>
+  </div>
+</div>
+
+
+<!-- ════ TWO TRACKS ════ -->
+<section class="two-tracks" aria-labelledby="tracks-heading">
+  <div class="container">
+    <div class="two-tracks__header reveal">
+      <span class="eyebrow">Two learning paths</span>
+      <h2 class="section-title" id="tracks-heading">Where every student begins</h2>
+    </div>
+    <div class="tracks-grid">
+
+      <!-- Beginner -->
+      <div class="track track--beginner reveal">
+        <div class="track__header">
+          <span class="track__badge">Beginner group</span>
+          <div class="track__count">12</div>
+          <h3 class="track__title">Swift Playground</h3>
+          <p class="track__desc">No experience needed. Students discover programming through visual, interactive challenges — and write their first real code within weeks.</p>
+        </div>
+        <div class="track__list">
+          <div class="track__detail"><span class="track__detail-dot"></span>Visual puzzle-based introduction</div>
+          <div class="track__detail"><span class="track__detail-dot"></span>Logic, loops and functions — made tangible</div>
+          <div class="track__detail"><span class="track__detail-dot"></span>iPad-based, tactile learning environment</div>
+          <div class="track__detail"><span class="track__detail-dot"></span>Progression to Swift on completion</div>
+        </div>
+      </div>
+
+      <!-- Advanced -->
+      <div class="track track--advanced reveal d1">
+        <div class="track__header">
+          <span class="track__badge">Advanced group</span>
+          <div class="track__count">5</div>
+          <h3 class="track__title">Swift + Xcode</h3>
+          <p class="track__desc">Real IDE, real code, real applications. Students who have mastered the fundamentals move into full professional development.</p>
+        </div>
+        <div class="track__list">
+          <div class="track__detail"><span class="track__detail-dot"></span>Professional Xcode IDE environment</div>
+          <div class="track__detail"><span class="track__detail-dot"></span>Structs, protocols, UI architecture</div>
+          <div class="track__detail"><span class="track__detail-dot"></span>SwiftUI interface design</div>
+          <div class="track__detail"><span class="track__detail-dot"></span>End-to-end application development</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ PROJECT CTA ════ -->
+<section class="project-cta" aria-labelledby="cta-heading">
+  <div class="container">
+    <div class="project-cta__inner reveal">
+      <div>
+        <span class="project-cta__label">// support_care()</span>
+        <h2 id="cta-heading">
+          A laptop changes<br>a life. Fund one.
+        </h2>
+        <p>£150 provides a reconditioned laptop for a CARE student. £30/month covers full programme costs — materials, connectivity, and mentorship for one child. Every line of code they write begins with your support.</p>
+      </div>
+      <div class="project-cta__actions">
+        <a href="https://buy.stripe.com/cN2eWi7dYdnK9XifZ6" class="btn btn-cream-dark" target="_blank" rel="noopener">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" fill="currentColor"/></svg>
+          Donate now
+        </a>
+        <a href="../../get-involved/volunteer.html" class="btn btn-outline-light">
+          Mentor a student
+        </a>
+        <a href="../../get-involved/partner.html" class="btn btn-outline-light">
+          Tech partnership
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- OTHER PROJECTS -->
+<section class="other-projects" aria-labelledby="other-heading">
+  <div class="container">
+    <div class="other-projects__header reveal">
+      <span class="eyebrow">Keep exploring</span>
+      <h2 class="section-title" id="other-heading">Other Education projects</h2>
+    </div>
+    <div class="other-projects__grid">
+      <a class="proj-card reveal" href="akka.html"><div class="proj-card__thumb"><span class="proj-card__tag">Ages 3–6</span></div><div class="proj-card__body"><h3 class="proj-card__title">AKKA Montessori</h3><p class="proj-card__desc">Bilingual Montessori education for 30 children, grounded in Malagasy culture and AMI standards.</p><span class="proj-card__link">Learn more →</span></div></a>
+      <a class="proj-card reveal d1" href="scola.html"><div class="proj-card__thumb"><span class="proj-card__tag">Ages 17–25</span></div><div class="proj-card__body"><h3 class="proj-card__title">SCOLA Scholarship</h3><p class="proj-card__desc">109 children sponsored. 11 post-bac scholars on the path from classroom to career.</p><span class="proj-card__link">Learn more →</span></div></a>
+      <a class="proj-card reveal d2" href="kanto.html"><div class="proj-card__thumb"><span class="proj-card__tag">Ages 9–22</span></div><div class="proj-card__body"><h3 class="proj-card__title">KANTO Culture</h3><p class="proj-card__desc">Piano, guitar, violin, chess, civic education — art, mind and empowerment every Saturday.</p><span class="proj-card__link">Learn more →</span></div></a>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;" class="reveal"><a href="../index.html" class="btn btn-outline-green">See all 13 projects</a></div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer><div class="container"><div class="footer-grid"><div class="footer-brand"><h3>Education for Madagascar</h3><p>Committed to UN SDG 4 — Quality Education for all children, from early childhood to economic independence.</p><div class="footer-socials"><a href="https://www.facebook.com/educationformadagascar" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener">f</a><a href="https://www.instagram.com/educationformadagascar/" class="social-btn" aria-label="Instagram" target="_blank" rel="noopener">ig</a><a href="https://www.linkedin.com/company/educationformadagascar/" class="social-btn" aria-label="LinkedIn" target="_blank" rel="noopener">in</a></div></div><div class="footer-col"><h4>Education</h4><ul><li><a href="akka.html">AKKA Montessori</a></li><li><a href="kanto.html">KANTO</a></li><li><a href="scola.html">SCOLA</a></li><li><a href="care.html">CARE Coding</a></li><li><a href="vim.html">VIM</a></li><li><a href="cad.html">Career Day</a></li></ul></div><div class="footer-col"><h4>Explore</h4><ul><li><a href="../../media/blog.html">Blog</a></li><li><a href="#">Artisan Shop</a></li><li><a href="../../who-we-are/annual-reports.html">Annual Reports</a></li><li><a href="../../media/newsletters.html">Newsletter</a></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:contact@educationformadagascar.org">contact@educationformadagascar.org</a></li><li style="font-size:.85rem;margin-top:.3rem;">23 Milner Drive, Cobham KT11 2EZ, UK</li><li style="margin-top:.8rem;font-size:.75rem;opacity:.5;line-height:1.8;">UK Charity #1167115<br>FR SIREN 85242793900016<br>MG NIF 4002796057</li></ul></div></div><div class="footer-bottom"><span>© 2026 Education for Madagascar. All rights reserved.</span><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Legal Notice</a><a href="#">Safeguarding</a></div></div></div></footer>
+
+<script>
+  /* Navbar scroll shadow */
+  const navbar=document.getElementById('navbar');
+  window.addEventListener('scroll',()=>navbar.classList.toggle('is-scrolled',window.scrollY>10),{passive:true});
+
+  /* Desktop dropdowns */
+  function toggleNav(id){
+    const el=document.getElementById(id),w=el.classList.contains('is-open');
+    document.querySelectorAll('.nav__item.is-open').forEach(n=>{n.classList.remove('is-open');n.querySelector('[aria-expanded]').setAttribute('aria-expanded','false');});
+    if(!w){el.classList.add('is-open');el.querySelector('[aria-expanded]').setAttribute('aria-expanded','true');}
+  }
+  document.addEventListener('click',e=>{if(!e.target.closest('.nav__item'))document.querySelectorAll('.nav__item.is-open').forEach(n=>{n.classList.remove('is-open');n.querySelector('[aria-expanded]').setAttribute('aria-expanded','false');});});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.nav__item.is-open').forEach(n=>{n.classList.remove('is-open');n.querySelector('[aria-expanded]').setAttribute('aria-expanded','false');n.querySelector('.nav__link').focus();});});
+
+  /* Mobile hamburger */
+  const hamburger=document.getElementById('hamburger'),drawer=document.getElementById('mobile-drawer');
+  function toggleMobile(){const o=drawer.classList.toggle('is-open');hamburger.classList.toggle('is-open',o);hamburger.setAttribute('aria-expanded',String(o));hamburger.setAttribute('aria-label',o?'Close menu':'Open menu');document.body.style.overflow=o?'hidden':'';}
+  function toggleMobSection(id){document.getElementById(id).classList.toggle('is-open');}
+
+  /* Scroll reveal — supports both .reveal and .reveal-up-sm */
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target);}});
+  },{threshold:0.08});
+  document.querySelectorAll('.reveal,.reveal-up-sm').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
