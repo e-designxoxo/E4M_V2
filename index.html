@@ -10,7 +10,6 @@
     
     :root {
       --green: #0B6623;
-      /* NEW ELEMENT: A luxurious, ultra-deep midnight forest green for the backdrop */
       --dark-forest-ink: #0d2b01; 
       --white: #ffffff;
       --red:   #ED2939;
@@ -25,7 +24,6 @@
       width: 100%; 
       height: 100%; 
       overflow: hidden; 
-      /* Changed from pure black to our new deep elegant brand ink */
       background: var(--dark-forest-ink); 
       font-family: var(--sans); 
       -webkit-font-smoothing: antialiased; 
@@ -95,7 +93,7 @@
     #logo img { width: 100%; height: 100%; display: block; object-fit: cover; }
     @keyframes logoReveal { to { opacity: 1; transform: scale(1); } }
 
-    /* ─── NEW TEXT HIERARCHY ENGINE ─── */
+    /* ─── TEXT HIERARCHY ENGINE ─── */
     .brand-statement-wrapper {
       margin-top: 3.5rem;
       display: flex;
@@ -104,20 +102,18 @@
       max-width: 750px;
     }
 
-    /* Option B: The High-Dynamic Value Devise (Charter Serif) */
     #manifesto {
       font-family: var(--serif);
       font-size: 2.2rem;
       font-style: italic;
       font-weight: 300;
       letter-spacing: 0.04em;
-      color: var(--sand); /* High contrast warm sand finish */
+      color: var(--sand);
       line-height: 1.2;
       opacity: 0;
       animation: riseIn 0.9s 2.3s cubic-bezier(0.16,1,0.3,1) forwards;
     }
 
-    /* Minimalist separation metric */
     .splash-divider {
       width: 40px;
       height: 1px;
@@ -127,7 +123,6 @@
       animation: riseIn 0.9s 2.5s cubic-bezier(0.16,1,0.3,1) forwards;
     }
 
-    /* Preserved descriptive mandate line */
     #tagline {
       font-size: 0.68rem; font-weight: 400; letter-spacing: 0.35em; text-transform: uppercase;
       color: rgba(255,255,255,0.5);
@@ -156,6 +151,7 @@
     #enter-btn:hover::before { transform: scaleX(1); }
     #enter-btn > span { position: relative; z-index: 1; }
 
+    /* ✨ SKIP BUTTON — Show after 2 seconds ✨ */
     #skip-btn {
       position: fixed; bottom: 2rem; right: 2.5rem;
       background: none; border: none; font-family: var(--sans);
@@ -171,7 +167,6 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* Outro slide background remains your warm brand sand color (#eeebd9) */
     #destination {
       position: fixed; inset: 0; z-index: 1; background: var(--sand);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -181,7 +176,6 @@
     }
     #destination.visible { opacity: 1; }
 
-    /* Mobile Protection Rules */
     @media (max-width: 768px) {
       #manifesto { font-size: 1.6rem; }
       #tagline { font-size: 0.58rem; letter-spacing: 0.2em; }
@@ -202,17 +196,17 @@
     </div>
   </div>
 
-  <!-- Unified Branding Content Area -->
   <div class="brand-statement-wrapper">
     <h1 id="manifesto">Elevate. Empower. Educate.</h1>
     <div class="splash-divider"></div>
     <div id="tagline"> &nbsp;·&nbsp; To relieve poverty in Madagascar &nbsp;·&nbsp;</div>
   </div>
 
-  <button id="enter-btn" onclick="enter()"><span>Enter the site &nbsp;→</span></button>
+  <button id="enter-btn" onclick="enterSite()"><span>Enter the site &nbsp;→</span></button>
 </div>
 
-<button id="skip-btn" onclick="enter()">Skip</button>
+<!-- ✨ SKIP BUTTON ✨ -->
+<button id="skip-btn" onclick="enterSite()">Skip</button>
 
 <div id="destination">
   <div><em>Tonga soa.</em></div>
@@ -220,15 +214,48 @@
 </div>
 
 <script>
-  function enter() {
+  /* ═══════════════════════════════════════════════════════════════
+     SPLASH SCREEN WITH localStorage
+     Shows ONLY on first visit. Remembers via browser storage.
+     ═══════════════════════════════════════════════════════════════ */
+
+  const SPLASH_SEEN_KEY = 'e4m_splash_seen';
+
+  // Check if user has already seen the splash
+  function shouldShowSplash() {
+    return !localStorage.getItem(SPLASH_SEEN_KEY);
+  }
+
+  // Mark splash as seen (store in browser memory)
+  function markSplashAsSeen() {
+    localStorage.setItem(SPLASH_SEEN_KEY, 'true');
+  }
+
+  // Enter the site (triggered by "Enter" button or "Skip" button)
+  function enterSite() {
+    // Mark splash as seen
+    markSplashAsSeen();
+
+    // Fade out splash
     document.getElementById("stage").classList.add("out");
     document.getElementById("fr-line").classList.add("out");
     document.getElementById("destination").classList.add("visible");
     
+    // Redirect to homepage after animation
     setTimeout(() => {
       window.location.href = "homepage.html";
     }, 1200);
   }
+
+  // Check on page load: if splash already seen, skip directly to homepage
+  window.addEventListener('load', () => {
+    if (!shouldShowSplash()) {
+      // Splash already seen → go straight to homepage
+      window.location.href = "homepage.html";
+    }
+    // Otherwise: show the animated splash (animations are already running via CSS)
+  });
 </script>
+
 </body>
 </html>
