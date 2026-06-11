@@ -218,6 +218,13 @@ button { font-family:var(--font-body); cursor:pointer; border:none; background:n
   font-weight: 300;
 }
 
+.breadcrumb__list li:not(:last-child)::after {
+  content: ">";
+  margin: 0 1 .5rem;
+  opacity: 0.8;
+  font-weight: 600;
+}
+
 /* ═══════════════════════════════════════════════════════════════
    CATEGORY MODIFIERS — SOFT PASTEL BACKGROUNDS
    ═══════════════════════════════════════════════════════════════ */
