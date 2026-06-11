@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   E4M GLOBAL JAVASCRIPT — SHARED ACROSS ALL PROJECT PAGES
+   E4M GLOBAL JAVASCRIPT — SHARED ACROSS ALL PAGES
    
    This file contains:
    - Navbar scroll shadow
@@ -7,70 +7,126 @@
    - Mobile hamburger + drawer toggle
    - Keyboard escape handling
    - Scroll reveal intersection observer
+   - Donate amount selector (homepage only)
    
-   DO NOT EDIT per-project. This is the single source of truth.
-   Link this file at the bottom of every project page, before </body>:
+   Link this file at the bottom of every page, before </body>:
+   
+   HOMEPAGE (root level):
+   <script src="js/global.js"></script>
+   
+   PROJECT PAGES (nested 2 levels):
    <script src="../../js/global.js"></script>
+   
    ═══════════════════════════════════════════════════════════════ */
 
-// Navbar scroll shadow
-const navbar=document.getElementById('navbar');
-window.addEventListener('scroll',()=>navbar.classList.toggle('is-scrolled',window.scrollY>10),{passive:true});
+/* ─────────────────────────────────────────────────────────────
+   NAVBAR SCROLL SHADOW
+   ───────────────────────────────────────────────────────────── */
+const navbar = document.getElementById('navbar');
+if (navbar) {
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('is-scrolled', window.scrollY > 10);
+  }, { passive: true });
+}
 
-// Desktop dropdown toggles
-function toggleNav(id){
-  const el=document.getElementById(id),w=el.classList.contains('is-open');
-  document.querySelectorAll('.nav__item.is-open').forEach(n=>{
+/* ─────────────────────────────────────────────────────────────
+   DESKTOP DROPDOWNS — Open/close nav items
+   ───────────────────────────────────────────────────────────── */
+function toggleNav(id) {
+  const el = document.getElementById(id);
+  const wasOpen = el.classList.contains('is-open');
+  
+  // Close all other open items
+  document.querySelectorAll('.nav__item.is-open').forEach(n => {
     n.classList.remove('is-open');
-    n.querySelector('[aria-expanded]').setAttribute('aria-expanded','false');
+    n.querySelector('[aria-expanded]').setAttribute('aria-expanded', 'false');
   });
-  if(!w){
+  
+  // Toggle this item
+  if (!wasOpen) {
     el.classList.add('is-open');
-    el.querySelector('[aria-expanded]').setAttribute('aria-expanded','true');
+    el.querySelector('[aria-expanded]').setAttribute('aria-expanded', 'true');
   }
 }
 
-// Close dropdowns when clicking outside
-document.addEventListener('click',e=>{
-  if(!e.target.closest('.nav__item'))
-    document.querySelectorAll('.nav__item.is-open').forEach(n=>{
+/* Close dropdowns when clicking outside */
+document.addEventListener('click', e => {
+  if (!e.target.closest('.nav__item')) {
+    document.querySelectorAll('.nav__item.is-open').forEach(n => {
       n.classList.remove('is-open');
-      n.querySelector('[aria-expanded]').setAttribute('aria-expanded','false');
+      n.querySelector('[aria-expanded]').setAttribute('aria-expanded', 'false');
     });
+  }
 });
 
-// Close dropdowns on Escape key
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape')
-    document.querySelectorAll('.nav__item.is-open').forEach(n=>{
+/* Close dropdowns on Escape key */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.nav__item.is-open').forEach(n => {
       n.classList.remove('is-open');
-      n.querySelector('[aria-expanded]').setAttribute('aria-expanded','false');
+      n.querySelector('[aria-expanded]').setAttribute('aria-expanded', 'false');
       n.querySelector('.nav__link').focus();
     });
+  }
 });
 
-// Mobile hamburger + drawer toggle
-const hamburger=document.getElementById('hamburger'),drawer=document.getElementById('mobile-drawer');
-function toggleMobile(){
-  const o=drawer.classList.toggle('is-open');
-  hamburger.classList.toggle('is-open',o);
-  hamburger.setAttribute('aria-expanded',String(o));
-  hamburger.setAttribute('aria-label',o?'Close menu':'Open menu');
-  document.body.style.overflow=o?'hidden':'';
+/* ─────────────────────────────────────────────────────────────
+   MOBILE HAMBURGER + DRAWER
+   ───────────────────────────────────────────────────────────── */
+const hamburger = document.getElementById('hamburger');
+const drawer = document.getElementById('mobile-drawer');
+
+function toggleMobile() {
+  const isOpen = drawer.classList.toggle('is-open');
+  hamburger.classList.toggle('is-open', isOpen);
+  hamburger.setAttribute('aria-expanded', String(isOpen));
+  hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+  document.body.style.overflow = isOpen ? 'hidden' : '';
 }
 
-// Mobile drawer section toggle
-function toggleMobSection(id){
-  document.getElementById(id).classList.toggle('is-open');
+/* ─────────────────────────────────────────────────────────────
+   MOBILE DRAWER SECTIONS — Accordion toggles
+   ───────────────────────────────────────────────────────────── */
+function toggleMobSection(id) {
+  const section = document.getElementById(id);
+  const button = section.querySelector('.mob-section__toggle');
+  const isOpen = section.classList.toggle('is-open');
+  
+  button.setAttribute('aria-expanded', String(isOpen));
 }
 
-// Scroll reveal intersection observer
-const io=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add('is-visible');
-      io.unobserve(e.target);
+/* ─────────────────────────────────────────────────────────────
+   SCROLL REVEAL — Fade-up on intersection
+   ───────────────────────────────────────────────────────────── */
+const scrollRevealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+      scrollRevealObserver.unobserve(entry.target);
     }
   });
-},{threshold:0.08});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+}, { threshold: 0.08 });
+
+// Observe all elements with .reveal class
+document.querySelectorAll('.reveal').forEach(el => {
+  scrollRevealObserver.observe(el);
+});
+
+/* ─────────────────────────────────────────────────────────────
+   DONATE AMOUNT SELECTOR (homepage only)
+   ───────────────────────────────────────────────────────────── */
+function selectAmount(btn, amount) {
+  // Remove active from all buttons
+  document.querySelectorAll('.amount-btn').forEach(b => {
+    b.classList.remove('is-active');
+  });
+  
+  // Add active to clicked button
+  btn.classList.add('is-active');
+  
+  // Update CTA button text
+  const donateBtn = document.getElementById('donate-cta');
+  if (donateBtn) {
+    donateBtn.textContent = amount ? 'Donate ' + amount + ' now' : 'Donate now';
+  }
+}
