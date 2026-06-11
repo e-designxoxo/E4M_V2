@@ -220,9 +220,9 @@ button { font-family:var(--font-body); cursor:pointer; border:none; background:n
 
 .breadcrumb__list li:not(:last-child)::after {
   content: ">";
-  margin: 0 1 .5rem;
-  opacity: 0.8;
-  font-weight: 600;
+  margin: 0 .5 .5rem;
+  opacity: 0.6;
+  font-weight: 500;
 }
 
 /* ═══════════════════════════════════════════════════════════════
