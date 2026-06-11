@@ -6,9 +6,6 @@
   <title>AKKA Montessori — Education for Madagascar</title>
   <meta name="description" content="AKKA Montessori School in Madagascar — Akanin'ny Kilonga, the House of Children. Bilingual Montessori education for 30 children aged 3 to 6, rooted in Malagasy culture." />
 
-
-
-  
   <!-- ─── FONTS ───────────────────────────────────────────────── -->
   <!-- Charter & Avenir Next are system fonts — no CDN needed.    -->
   <!-- If unavailable the fallbacks (Georgia / system-ui) apply.  -->
@@ -327,7 +324,7 @@
     .footer-grid   { grid-template-columns: 1fr; }
   }
   /* ═══════════════════════════════════════════════════════════════
-     BREADCRUMB
+     BREADCRUMB – !!! TO MODIFY !!!!
      ═══════════════════════════════════════════════════════════════ */
   .breadcrumb {
     background: var(--cream);
@@ -1079,10 +1076,14 @@
 <!-- ════ NAVBAR ════ -->
 <header class="navbar" id="navbar" role="banner">
   <div class="container">
-    <a href="../../index.html" class="navbar__logo" aria-label="Education for Madagascar — home">
-      <div class="logo-circle" aria-hidden="true">E4M</div>
-      <span class="logo-text">Education<br>for Madagascar</span>
-    </a>
+<a href="../../index.html" class="navbar__logo" aria-label="Education for Madagascar — home">
+  <img src="../../images/logo_mini.jpeg"
+       alt="Education for Madagascar logo"
+       class="logo-image">
+  <span class="logo-text">
+    Education<br>for Madagascar
+  </span>
+</a>
     <ul class="nav__list" role="list">
       <li class="nav__item" id="ni-who">
         <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-who')">
