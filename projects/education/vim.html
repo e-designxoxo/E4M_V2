@@ -1,1 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VIM — Volunteering in Madagascar | Education for Madagascar</title>
+<meta name="description" content="VIM: Volunteer in Madagascar. Cultural exchange, language immersion and meaningful humanitarian work. Plant mangroves, teach children, explore a unique island — Quality, Ethics, Sharing." />
+<link rel="stylesheet" href="../../css/global.css">
+<style>
+:root{
+  --green:#195301; --cream:#eeebd9; --teal:#006C65; --charcoal:#535353; --silver:#D5D5D5; --white:#fff;
+  --gold-bg:#EFBF04; --gold-text:#856A00;
+  --vim:#E05C2B; --vim-deep:#a83d18; --vim-wash:#fbf0ea;
+  --font-display:"Charter",Georgia,serif; --font-body:"Avenir Next",system-ui,sans-serif;
+  --nav-h:92px; --topbar-h:40px; --max-w:1160px; --r:4px; --r-lg:10px; --ease:0.22s ease;
+}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--white); color: var(--charcoal); line-height: 1.65; }
+  img  { display: block; max-width: 100%; }
+  a    { text-decoration: none; color: inherit; }
+  ul   { list-style: none; }
+  button { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
+  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+  .btn { display: inline-block; padding: .75rem 1.75rem; border-radius: var(--r); font-weight: 500; font-size: .95rem; cursor: pointer; transition: background var(--ease), color var(--ease), transform var(--ease); }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: var(--green); color: var(--cream); }
+  .btn-primary:hover { background: #1f6701; }
+  .btn-outline { border: 2px solid var(--green); color: var(--green); }
+  .btn-outline:hover { background: var(--green); color: var(--cream); }
+  .top-bar { background: var(--green); color: var(--cream); height: var(--topbar-h); font-size: .72rem; }
+  .top-bar .container { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .top-bar__info { display: flex; align-items: center; gap: 1.25rem; opacity: .85; flex-wrap: wrap; }
+  .top-bar__info span { white-space: nowrap; }
+  .top-bar__dot { opacity: .35; }
+  .lang-switch { display: flex; align-items: center; gap: .25rem; flex-shrink: 0; }
+  .lang-switch__btn { padding: .2rem .55rem; border-radius: var(--r); color: var(--cream); font-size: .72rem; font-weight: 500; opacity: .7; transition: opacity var(--ease), background var(--ease); }
+  .lang-switch__btn:hover { opacity: 1; }
+  .lang-switch__btn.is-active { background: rgba(255,255,255,.15); opacity: 1; }
+  .navbar { position: sticky; top: 0; z-index: 200; background: var(--white); border-bottom: 1px solid var(--silver); height: var(--nav-h); transition: box-shadow var(--ease); }
+  .navbar.is-scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.08); }
+  .navbar .container { height: 100%; display: flex; align-items: center; }
+  .navbar__logo { display: flex; align-items: center; gap: .6rem; margin-right: 2rem; flex-shrink: 0; }
+  .logo-image { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+  .logo-text { font-family: var(--font-display); font-size: 1.20rem; font-weight: 700; color: var(--green); line-height: 1.2; text-transform: uppercase; letter-spacing: .04em; }
+  .nav__list { display: flex; align-items: center; height: 100%; flex: 1; }
+  .nav__item { position: relative; height: 100%; display: flex; align-items: center; }
+  .nav__link { display: flex; align-items: center; gap: .3rem; padding: 0 .9rem; height: 100%; font-size: .875rem; font-weight: 500; color: var(--charcoal); white-space: nowrap; border-bottom: 2px solid transparent; transition: color var(--ease), border-color var(--ease); user-select: none; }
+  .nav__link:hover { color: var(--green); }
+  .nav__link.is-active { color: var(--green); border-bottom-color: var(--green); }
+  .nav__item.is-open .nav__link { color: var(--green); }
+  .nav__chevron { width: 8px; height: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-1px); transition: transform var(--ease); flex-shrink: 0; }
+  .nav__item.is-open .nav__chevron { transform: rotate(-135deg) translateY(2px); }
+  .dropdown { visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(6px); transition: opacity var(--ease), transform var(--ease), visibility 0s var(--ease); position: absolute; top: calc(var(--nav-h) - 1px); left: 0; min-width: 240px; background: var(--white); border: 1px solid var(--silver); border-top: none; border-radius: 0 0 var(--r-lg) var(--r-lg); box-shadow: 0 10px 32px rgba(0,0,0,.09); padding: .5rem 0; }
+  .nav__item.is-open .dropdown { visibility: visible; opacity: 1; pointer-events: auto; transform: translateY(0); transition: opacity var(--ease), transform var(--ease); }
+  .dropdown__link { display: block; padding: .6rem 1.2rem; font-size: .875rem; color: var(--charcoal); transition: background var(--ease), color var(--ease); }
+  .dropdown__link:hover { background: var(--cream); color: var(--green); }
+  .dropdown__sub { display: block; font-size: .75rem; color: var(--charcoal); opacity: .6; margin-top: .1rem; font-weight: 400; }
+  .dropdown__separator { height: 1px; background: var(--silver); margin: .4rem 1.2rem; opacity: .5; }
+  .dropdown--mega { visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(6px); transition: opacity var(--ease), transform var(--ease), visibility 0s var(--ease); position: absolute; top: calc(var(--nav-h) - 1px); left: -60px; width: 620px; background: var(--white); border: 1px solid var(--silver); border-top: none; border-radius: 0 0 var(--r-lg) var(--r-lg); box-shadow: 0 10px 32px rgba(0,0,0,.09); display: grid; grid-template-columns: 1fr 1fr 180px; }
+  .nav__item.is-open .dropdown--mega { visibility: visible; opacity: 1; pointer-events: auto; transform: translateY(0); transition: opacity var(--ease), transform var(--ease); }
+  .mega__col { padding: 1.2rem 1.1rem; border-right: 1px solid rgba(213,213,213,.5); }
+  .mega__col:last-child { border-right: none; background: #f8f7f2; border-radius: 0 0 var(--r-lg) 0; }
+  .mega__heading { font-size: .67rem; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; margin-bottom: .6rem; padding-bottom: .5rem; border-bottom: 1px solid var(--silver); }
+  .mega__heading--edu { color: var(--green); }
+  .mega__heading--health { color: #b83030; }
+  .mega__heading--env { color: var(--teal); }
+  .mega__link { display: flex; align-items: center; gap: .5rem; padding: .4rem 0; font-size: .83rem; color: var(--charcoal); transition: color var(--ease); }
+  .mega__link:hover { color: var(--green); }
+  .badge { font-size: .62rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: .12rem .45rem; border-radius: 20px; flex-shrink: 0; }
+  .badge--age { background: #efefef; color: var(--charcoal); }
+  .badge--new { background: #edf7e8; color: var(--green); }
+  .mega__summary { font-size: .8rem; line-height: 1.6; color: var(--charcoal); margin-bottom: 1rem; }
+  .mega__all-link { display: inline-flex; align-items: center; gap: .3rem; font-size: .82rem; font-weight: 600; color: var(--green); transition: gap var(--ease); }
+  .mega__all-link:hover { gap: .55rem; }
+  .mega__col-gap { margin-top: .9rem; }
+  .nav__actions { display: flex; align-items: center; gap: .5rem; margin-left: auto; padding-left: 1rem; flex-shrink: 0; }
+  .btn-shop { padding: .42rem 1rem; font-size: .82rem; font-weight: 500; color: var(--teal); border: 1.5px solid var(--teal); border-radius: var(--r); transition: background var(--ease), color var(--ease); }
+  .btn-shop:hover { background: var(--teal); color: var(--white); }
+  .btn-donate { padding: .42rem 1.1rem; font-size: .82rem; font-weight: 600; background: var(--green); color: var(--cream); border-radius: var(--r); transition: background var(--ease), color var(--ease), transform var(--ease); }
+  .btn-donate:hover { background: var(--gold-bg); color: var(--gold-text); transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; padding: .4rem; margin-left: auto; border-radius: var(--r); transition: background var(--ease); }
+  .hamburger:hover { background: var(--cream); }
+  .hamburger__bar { width: 100%; height: 2px; background: var(--green); border-radius: 2px; transition: transform var(--ease), opacity var(--ease); }
+  .hamburger.is-open .hamburger__bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.is-open .hamburger__bar:nth-child(2) { opacity: 0; }
+  .hamburger.is-open .hamburger__bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-drawer { display: none; position: fixed; top: calc(var(--topbar-h) + var(--nav-h)); left: 0; right: 0; bottom: 0; background: var(--white); overflow-y: auto; z-index: 190; padding: 1rem 0 2rem; border-top: 1px solid var(--silver); }
+  .mobile-drawer.is-open { display: block; }
+  .mob-section__toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: .85rem 1.5rem; font-size: .95rem; font-weight: 500; color: var(--charcoal); border-bottom: 1px solid var(--silver); background: none; text-align: left; transition: background var(--ease); }
+  .mob-section__toggle:hover { background: var(--cream); }
+  .mob-section__content { display: none; padding: .5rem 0; background: #fafaf7; border-bottom: 1px solid var(--silver); }
+  .mob-section.is-open .mob-section__content { display: block; }
+  .mob-subheading { font-size: .67rem; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; color: var(--green); padding: .6rem 1.8rem .3rem; }
+  .mob-link { display: flex; align-items: center; justify-content: space-between; padding: .55rem 1.8rem; font-size: .875rem; color: var(--charcoal); transition: background var(--ease), color var(--ease); }
+  .mob-link:hover { background: var(--cream); color: var(--green); }
+  .mob-actions { display: flex; gap: .75rem; padding: 1.2rem 1.5rem 0; }
+  .mob-actions .btn-shop, .mob-actions .btn-donate { flex: 1; text-align: center; font-size: .9rem; padding: .65rem 1rem; }
+  .breadcrumb { padding: 0.85rem 0; }
+  .breadcrumb .container { width: fit-content; margin-left: 0; }
+  .section-eyebrow { display: block; font-size: .72rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); margin-bottom: .75rem; }
+  .section-heading { font-family: var(--font-display); font-size: clamp(1.8rem,3vw,2.4rem); color: var(--green); line-height: 1.2; }
+  .other-projects { padding: 5.5rem 0; background: var(--cream); }
+  .other-projects__header { margin-bottom: 2.5rem; }
+  .other-projects__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .proj-card { background: var(--white); border-radius: var(--r-lg); overflow: hidden; transition: transform var(--ease), box-shadow var(--ease); display: flex; flex-direction: column; }
+  .proj-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,.09); }
+  .proj-card__thumb { height: 140px; position: relative; }
+  .proj-card__tag { position: absolute; top: .75rem; left: .75rem; background: rgba(255,255,255,.9); color: var(--green); font-size: .65rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: .2rem .6rem; border-radius: 20px; }
+  .proj-card__body { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; }
+  .proj-card__title { font-family: var(--font-display); font-size: 1rem; color: var(--green); margin-bottom: .4rem; }
+  .proj-card__desc { font-size: .82rem; color: var(--charcoal); line-height: 1.55; flex: 1; margin-bottom: .9rem; }
+  .proj-card__link { font-size: .78rem; font-weight: 600; color: var(--teal); display: inline-flex; align-items: center; gap: .3rem; transition: gap var(--ease); }
+  .proj-card:hover .proj-card__link { gap: .6rem; }
+  footer { background: #111; color: var(--silver); padding: 4rem 0 2rem; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-brand h3 { font-family: var(--font-display); color: var(--cream); font-size: 1.15rem; margin-bottom: .75rem; }
+  .footer-brand p { font-size: .85rem; line-height: 1.65; margin-bottom: 1.2rem; max-width: 280px; }
+  .footer-socials { display: flex; gap: .75rem; }
+  .social-btn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; font-size: .8rem; color: var(--silver); transition: background var(--ease), border-color var(--ease); }
+  .social-btn:hover { background: var(--teal); border-color: var(--teal); color: #fff; }
+  .footer-col h4 { color: var(--cream); font-size: .82rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1.1rem; }
+  .footer-col li { margin-bottom: .5rem; }
+  .footer-col a { font-size: .87rem; color: var(--silver); transition: color var(--ease); }
+  .footer-col a:hover { color: var(--cream); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: .8rem; }
+  .footer-legal { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .footer-legal a { color: var(--silver); transition: color var(--ease); }
+  .footer-legal a:hover { color: var(--cream); }
+/* VIM hero — warm terracotta sunset, adventurous */
+.page-hero{position:relative;min-height:80vh;display:flex;align-items:flex-end;overflow:hidden;background:var(--vim-deep);}
+.page-hero__bg{position:absolute;inset:0;background:linear-gradient(to top,rgba(40,15,5,.88)0%,rgba(120,50,20,.4)45%,rgba(224,92,43,.2)100%),linear-gradient(135deg,#E05C2B 0%,#a83d18 50%,#5e2410 100%);background-size:cover;background-position:center;}
+.page-hero__bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 75% 25%,rgba(255,200,120,.25),transparent);pointer-events:none;}
+.page-hero__content{position:relative;z-index:2;padding:4rem 0 4.5rem;width:100%;}
+.page-hero__kicker{display:inline-flex;align-items:center;gap:.6rem;font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#ffd9c0;margin-bottom:1rem;}
+.page-hero__kicker::before{content:'';width:28px;height:1px;background:#ffd9c0;}
+.page-hero__title{font-family:var(--font-display);font-size:clamp(3rem,7vw,5.8rem);color:var(--cream);line-height:1.0;letter-spacing:-.01em;margin-bottom:.5rem;}
+.page-hero__sub{font-family:var(--font-display);font-style:italic;font-size:clamp(1.2rem,2.4vw,1.7rem);color:rgba(255,235,220,.92);margin-bottom:2rem;max-width:600px;}
+.page-hero__tags{display:flex;flex-wrap:wrap;gap:.6rem;}
+.hero-tag{padding:.35rem .9rem;border-radius:20px;font-size:.72rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;border:1px solid rgba(255,235,220,.35);color:var(--cream);background:rgba(255,255,255,.1);}
+.hero-tag--accent{background:var(--cream);color:var(--vim-deep);border-color:var(--cream);}
+/* intro split */
+.intro{padding:5.5rem 0;background:var(--white);}
+.intro__grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.intro__eyebrow{display:block;font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--vim);margin-bottom:.9rem;}
+.intro__heading{font-family:var(--font-display);font-size:clamp(1.9rem,3.2vw,2.6rem);color:var(--green);line-height:1.2;margin-bottom:1.4rem;}
+.intro__body{font-size:1.05rem;line-height:1.8;color:var(--charcoal);}
+.intro__body p+p{margin-top:1.1em;}
+.intro__body strong{color:var(--vim-deep);}
+.intro__photo{aspect-ratio:4/5;border-radius:var(--r-lg);overflow:hidden;background:linear-gradient(150deg,#E05C2B,#a83d18);position:relative;display:flex;align-items:center;justify-content:center;}
+.photo-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:rgba(255,255,255,.45);font-size:.74rem;letter-spacing:.08em;text-align:center;padding:1rem;font-family:var(--font-body);}
+.intro__photo-cap{position:absolute;bottom:0;left:0;right:0;padding:1.2rem;background:linear-gradient(to top,rgba(0,0,0,.7),transparent);color:rgba(255,255,255,.92);font-size:.82rem;}
+/* pillars Q E S */
+.pillars{padding:4.5rem 0;background:var(--vim-wash);}
+.pillars__inner{display:grid;grid-template-columns:repeat(3,1fr);gap:0;max-width:900px;margin:0 auto;border-radius:var(--r-lg);overflow:hidden;border:1px solid #f0d5c8;}
+.pillar{background:var(--white);padding:2.4rem 1.8rem;text-align:center;border-right:1px solid #f0d5c8;}
+.pillar:last-child{border-right:none;}
+.pillar__icon{font-size:1.8rem;margin-bottom:.7rem;}
+.pillar__name{font-family:var(--font-display);font-size:1.3rem;color:var(--vim-deep);font-weight:700;margin-bottom:.4rem;}
+.pillar__text{font-size:.85rem;color:var(--charcoal);line-height:1.6;}
+/* reasons grid */
+.reasons{padding:5.5rem 0;background:var(--white);}
+.reasons__header{text-align:center;max-width:620px;margin:0 auto 3.5rem;}
+.reasons__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;}
+.reason{display:flex;gap:1.1rem;padding:1.6rem;background:var(--cream);border-radius:var(--r-lg);transition:transform var(--ease),box-shadow var(--ease);}
+.reason:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.07);}
+.reason__num{font-family:var(--font-display);font-size:1.6rem;font-weight:700;color:var(--vim);line-height:1;flex-shrink:0;width:2.2rem;}
+.reason__body h3{font-family:var(--font-display);font-size:1.08rem;color:var(--green);margin-bottom:.35rem;}
+.reason__body p{font-size:.86rem;line-height:1.6;color:var(--charcoal);}
+/* big photo showcase — parallax-feel scroll strip */
+.showcase{background:#1a0f08;padding:5.5rem 0;overflow:hidden;}
+.showcase__header{text-align:center;max-width:600px;margin:0 auto 3rem;}
+.showcase__header .section-eyebrow{color:#ff9966;}
+.showcase__header h2{font-family:var(--font-display);font-size:clamp(1.9rem,3.4vw,2.6rem);color:var(--cream);line-height:1.2;}
+.showcase__grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem;grid-auto-rows:160px;}
+.scene{position:relative;border-radius:var(--r-lg);overflow:hidden;background:linear-gradient(145deg,#3a2418,#1a0f08);}
+.scene img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+.scene:hover img{transform:scale(1.05);}
+.scene--baobab{grid-column:span 3;grid-row:span 2;}
+.scene--mangrove{grid-column:span 3;grid-row:span 1;}
+.scene--taxi{grid-column:span 2;grid-row:span 1;}
+.scene--eco{grid-column:span 1;grid-row:span 1;}
+.scene--team{grid-column:span 3;grid-row:span 1;}
+.scene--village{grid-column:span 3;grid-row:span 1;}
+.scene__ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;color:rgba(255,255,255,.4);font-size:.72rem;letter-spacing:.06em;text-align:center;padding:1rem;}
+.scene__cap{position:absolute;bottom:0;left:0;right:0;padding:1rem;background:linear-gradient(to top,rgba(0,0,0,.82),transparent);color:rgba(255,255,255,.95);font-size:.82rem;line-height:1.4;transform:translateY(101%);transition:transform .35s ease;}
+.scene:hover .scene__cap{transform:translateY(0);}
+.scene__cap strong{display:block;font-family:var(--font-display);font-size:.95rem;margin-bottom:.15rem;}
+/* practical info band */
+.practical{padding:5.5rem 0;background:var(--vim-wash);}
+.practical__grid{display:grid;grid-template-columns:.9fr 1fr;gap:4rem;align-items:center;}
+.practical__head h2{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.4rem);color:var(--green);line-height:1.2;margin-bottom:1rem;}
+.practical__head p{font-size:.95rem;color:var(--charcoal);line-height:1.7;margin-bottom:1.6rem;}
+.practical__docs{display:flex;flex-direction:column;gap:.7rem;}
+.doc-link{display:flex;align-items:center;gap:.8rem;padding:.9rem 1.2rem;background:var(--white);border-radius:var(--r);border:1px solid #f0d5c8;font-size:.88rem;font-weight:500;color:var(--green);transition:border-color var(--ease),transform var(--ease);}
+.doc-link:hover{border-color:var(--vim);transform:translateX(4px);}
+.doc-link__icon{font-size:1.1rem;}
+.facts-mini{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#f0d5c8;border:1px solid #f0d5c8;border-radius:var(--r-lg);overflow:hidden;}
+.fact-mini{background:var(--white);padding:1.6rem 1.4rem;}
+.fact-mini__val{font-family:var(--font-display);font-size:1.7rem;font-weight:700;color:var(--vim-deep);line-height:1;margin-bottom:.3rem;}
+.fact-mini__label{font-size:.8rem;color:var(--charcoal);line-height:1.45;}
+/* CTA */
+.project-cta{background:var(--vim);padding:5rem 0;text-align:center;position:relative;overflow:hidden;}
+.project-cta::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.1)0%,transparent 60%);pointer-events:none;}
+.project-cta__inner{position:relative;z-index:1;}
+.project-cta__label{display:block;font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:.75rem;}
+.project-cta h2{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);color:var(--white);line-height:1.15;margin-bottom:1rem;max-width:700px;margin-left:auto;margin-right:auto;}
+.project-cta p{font-size:1rem;color:rgba(255,255,255,.85);max-width:520px;margin:0 auto 2.5rem;line-height:1.75;}
+.project-cta__buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-white{background:var(--white);color:var(--vim-deep);font-weight:600;}
+.btn-white:hover{background:var(--cream);transform:translateY(-2px);}
+.btn-outline-white{border:2px solid rgba(255,255,255,.6);color:var(--white);}
+.btn-outline-white:hover{border-color:var(--white);background:rgba(255,255,255,.12);}
+.proj-card:nth-child(1) .proj-card__thumb{background:linear-gradient(135deg,#2a5c08,#195301);}
+.proj-card:nth-child(2) .proj-card__thumb{background:linear-gradient(135deg,#153B50,#0d2735);}
+.proj-card:nth-child(3) .proj-card__thumb{background:linear-gradient(135deg,#010279,#000040);}
+@media(max-width:900px){
+  .nav__list,.nav__actions{display:none;}.hamburger{display:flex;}
+  .intro__grid{grid-template-columns:1fr;gap:2.5rem;}.intro__photo{max-width:440px;}
+  .pillars__inner{grid-template-columns:1fr;}.pillar{border-right:none;border-bottom:1px solid #f0d5c8;}
+  .reasons__grid{grid-template-columns:1fr;}
+  .showcase__grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px;}
+  .scene--baobab,.scene--mangrove,.scene--taxi,.scene--team,.scene--village{grid-column:span 2;}
+  .scene--eco{grid-column:span 2;}
+  .practical__grid{grid-template-columns:1fr;gap:2rem;}
+  .other-projects__grid{grid-template-columns:repeat(2,1fr);}.footer-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:640px){
+  .top-bar__info{display:none;}.showcase__grid{grid-template-columns:1fr;}
+  .scene--baobab,.scene--mangrove,.scene--taxi,.scene--team,.scene--village,.scene--eco{grid-column:span 1;}
+  .facts-mini{grid-template-columns:1fr;}.other-projects__grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}.project-cta__buttons{flex-direction:column;align-items:center;}
+}
 
+/* ═══ VIM V2 ADDITIONS ═══ */
+/* meaning-of-life two-photo cluster */
+.meaning__photos{position:relative;height:520px;}
+.meaning__photo{position:absolute;border-radius:var(--r-lg);overflow:hidden;box-shadow:0 18px 50px rgba(40,15,5,.22);background:linear-gradient(150deg,#E05C2B,#a83d18);}
+.meaning__photo img{width:100%;height:100%;object-fit:cover;}
+.meaning__photo--big{width:74%;height:78%;top:0;left:0;z-index:1;}
+.meaning__photo--small{width:52%;height:50%;bottom:0;right:0;z-index:2;border:5px solid var(--white);}
+.meaning__photo .photo-ph{position:absolute;inset:0;}
+.meaning__cap{position:absolute;bottom:0;left:0;right:0;padding:1.1rem;background:linear-gradient(to top,rgba(0,0,0,.7),transparent);color:rgba(255,255,255,.92);font-size:.8rem;z-index:3;}
+/* Q.E.S triangle */
+.qes{padding:5rem 0;background:var(--vim-wash);}
+.qes__header{text-align:center;max-width:560px;margin:0 auto 3rem;}
+.qes__tri{position:relative;max-width:760px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:1.4rem;}
+.qes-card{position:relative;border-radius:var(--r-lg);overflow:hidden;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;padding:1.8rem;color:var(--white);isolation:isolate;transition:transform .4s cubic-bezier(.16,1,.3,1);}
+.qes-card:hover{transform:scale(1.03);}
+.qes-card__bg{position:absolute;inset:0;z-index:-2;background:linear-gradient(150deg,#E05C2B,#a83d18);transition:transform .6s cubic-bezier(.16,1,.3,1);}
+.qes-card:hover .qes-card__bg{transform:scale(1.08);}
+.qes-card__bg img{width:100%;height:100%;object-fit:cover;}
+.qes-card::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,rgba(30,10,2,.82),rgba(30,10,2,.25));}
+.qes-card__bg .photo-ph{position:absolute;inset:0;color:rgba(255,255,255,.4);}
+.qes-card--q{grid-column:1;grid-row:1;}
+.qes-card--e{grid-column:2;grid-row:1;}
+.qes-card--s{grid-column:1 / span 2;grid-row:2;max-width:60%;margin:0 auto;width:100%;}
+.qes-card__icon{font-size:1.6rem;margin-bottom:.5rem;}
+.qes-card__name{font-family:var(--font-display);font-size:1.5rem;font-weight:700;margin-bottom:.3rem;}
+.qes-card__text{font-size:.86rem;line-height:1.55;color:rgba(255,255,255,.9);max-width:300px;}
+/* flip cards */
+.flips{padding:5.5rem 0;background:var(--white);}
+.flips__header{text-align:center;max-width:620px;margin:0 auto 3.5rem;}
+.flips__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
+.flip{perspective:1200px;height:340px;cursor:pointer;}
+.flip__inner{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d;}
+.flip.is-flipped .flip__inner,.flip:hover .flip__inner{transform:rotateY(180deg);}
+.flip__face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--r-lg);overflow:hidden;}
+.flip__front{background:linear-gradient(150deg,#E05C2B,#a83d18);}
+.flip__front img{width:100%;height:100%;object-fit:cover;}
+.flip__front .photo-ph{position:absolute;inset:0;color:rgba(255,255,255,.45);}
+.flip__front-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,10,2,.8),rgba(30,10,2,.05) 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:1.5rem;}
+.flip__num{position:absolute;top:1.1rem;left:1.3rem;font-family:var(--font-display);font-size:2.4rem;font-weight:700;color:rgba(255,255,255,.92);line-height:1;}
+.flip__front-title{font-family:var(--font-display);font-size:1.35rem;color:var(--white);line-height:1.2;}
+.flip__hintico{position:absolute;top:1.2rem;right:1.3rem;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:.8rem;color:#fff;}
+.flip__back{background:var(--cream);transform:rotateY(180deg);display:flex;flex-direction:column;justify-content:center;padding:2rem 1.8rem;border:1px solid #f0d5c8;}
+.flip__back-title{font-family:var(--font-display);font-size:1.25rem;color:var(--vim-deep);margin-bottom:.8rem;}
+.flip__back-text{font-size:.92rem;line-height:1.7;color:var(--charcoal);}
+.flip__back-accent{width:36px;height:3px;background:var(--vim);border-radius:3px;margin-bottom:1rem;}
+/* resource cards */
+.rescards{display:flex;flex-direction:column;gap:.9rem;}
+.rescard{display:flex;align-items:center;gap:1.2rem;padding:1.3rem 1.5rem;background:var(--white);border-radius:var(--r-lg);border:1px solid #f0d5c8;transition:transform var(--ease),box-shadow var(--ease),border-color var(--ease);}
+.rescard:hover{transform:translateX(5px);border-color:var(--vim);box-shadow:0 10px 28px rgba(224,92,43,.12);}
+.rescard__icon{width:48px;height:48px;border-radius:12px;background:var(--vim-wash);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
+.rescard__body{flex:1;}
+.rescard__title{font-family:var(--font-display);font-size:1.05rem;color:var(--green);margin-bottom:.2rem;}
+.rescard__sub{font-size:.8rem;color:var(--charcoal);opacity:.75;}
+.rescard__arrow{font-size:1.1rem;color:var(--vim);transition:transform var(--ease);}
+.rescard:hover .rescard__arrow{transform:translateX(4px);}
+@media(max-width:900px){
+  .flips__grid{grid-template-columns:1fr 1fr;}
+  .meaning__photos{height:440px;}
+}
+@media(max-width:640px){
+  .qes__tri{grid-template-columns:1fr;}
+  .qes-card--q,.qes-card--e,.qes-card--s{grid-column:1;max-width:100%;}
+  .qes-card--e{grid-row:2;}.qes-card--s{grid-row:3;}
+  .flips__grid{grid-template-columns:1fr;}
+  .flip{height:300px;}
+  .meaning__photos{height:380px;}
+}
+
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <div class="container">
+    <div class="top-bar__info">
+      <span>UK Charity #1167115</span><span class="top-bar__dot">·</span>
+      <span>Malagasy NGO</span><span class="top-bar__dot">·</span>
+      <span>Association France SIREN 85242793900016</span><span class="top-bar__dot">·</span>
+      <span>Association Suisse</span>
+    </div>
+    <nav class="lang-switch" aria-label="Language switcher">
+      <a href="index.html" class="lang-switch__btn is-active" lang="en">EN</a>
+      <a href="index-fr.html" class="lang-switch__btn" lang="fr">FR</a>
+    </nav>
+  </div>
+</div>
+<header class="navbar" id="navbar" role="banner">
+  <div class="container">
+    <a href="../../index.html" class="navbar__logo" aria-label="Education for Madagascar — home">
+      <img src="../../images/logo_mini.jpeg" alt="Education for Madagascar logo" class="logo-image">
+      <span class="logo-text">Education<br>for Madagascar</span>
+    </a>
+    <ul class="nav__list" role="list">
+      <li class="nav__item" id="ni-who">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-who')">Who we are <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="../../who-we-are/our-story.html">Our story<span class="dropdown__sub">History &amp; founding vision</span></a>
+          <a class="dropdown__link" href="../../who-we-are/team.html">Team &amp; board<span class="dropdown__sub">The people behind E4M</span></a>
+          <a class="dropdown__link" href="../../who-we-are/governance.html">Governance &amp; statutes</a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="../../who-we-are/annual-reports.html">Annual reports</a>
+          <a class="dropdown__link" href="../../who-we-are/partners.html">Our partners</a>
+        </div>
+      </li>
+      <li class="nav__item" id="ni-proj">
+        <button class="nav__link is-active" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-proj')">Our projects <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown--mega">
+          <div class="mega__col">
+            <p class="mega__heading mega__heading--edu">Education</p>
+            <a class="mega__link" href="akka.html">AKKA Montessori <span class="badge badge--age">3–6 yrs</span></a>
+            <a class="mega__link" href="kanto.html">KANTO Culture <span class="badge badge--age">9–22 yrs</span></a>
+            <a class="mega__link" href="care.html">CARE Coding &amp; Robotics</a>
+            <a class="mega__link" href="scola.html" data-scola>SCOLA Scholarship <span class="badge badge--age">17–25</span></a>
+            <a class="mega__link" href="tuto.html">TUTO</a>
+            <a class="mega__link" href="vim.html" style="color:var(--green);font-weight:600;" data-vim>VIM — Volunteering</a>
+            <a class="mega__link" href="cad.html" data-cad>Career Day Awareness</a>
+            <a class="mega__link" href="unesco.html">UNESCO Partnership <span class="badge badge--new">New</span></a>
+          </div>
+          <div class="mega__col">
+            <p class="mega__heading mega__heading--health">Health</p>
+            <a class="mega__link" href="../health/women.html">School for Women</a>
+            <a class="mega__link" href="../health/fody.html">FODY</a>
+            <a class="mega__link" href="../health/tomady.html">TOMADY</a>
+            <div class="mega__col-gap"></div>
+            <p class="mega__heading mega__heading--env">Environment</p>
+            <a class="mega__link" href="../environment/silva.html">SILVA</a>
+            <a class="mega__link" href="../environment/wash.html">WASH</a>
+            <a class="mega__link" href="../environment/permada.html">PERMADA</a>
+          </div>
+          <div class="mega__col">
+            <p class="mega__heading mega__heading--edu">Overview</p>
+            <p class="mega__summary">13 active projects across education, health, and the environment — serving children aged 3 to 18 and women in rural Madagascar.</p>
+            <a class="mega__all-link" href="../index.html">All projects →</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav__item" id="ni-inv">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-inv')">Get involved <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="../../get-involved/volunteer.html">Volunteer (VIM)<span class="dropdown__sub">Live &amp; work in Madagascar</span></a>
+          <a class="dropdown__link" href="../../get-involved/donate.html">Donate<span class="dropdown__sub">Fund our programmes directly</span></a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="../../get-involved/partner.html">Become a partner</a>
+        </div>
+      </li>
+      <li class="nav__item" id="ni-media">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-media')">Media <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="../../media/blog.html">Blog</a>
+          <a class="dropdown__link" href="../../media/newsletters.html">Newsletters</a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="../../who-we-are/annual-reports.html">Annual reports</a>
+        </div>
+      </li>
+    </ul>
+    <div class="nav__actions">
+      <a href="#shop" class="btn-shop">The Shop ↗</a>
+      <a href="../../get-involved/donate.html" class="btn-donate">Donate</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMobile()">
+      <span class="hamburger__bar"></span><span class="hamburger__bar"></span><span class="hamburger__bar"></span>
+    </button>
+  </div>
+</header>
+<nav class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation">
+  <div class="mob-section" id="mob-who">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-who')">Who we are <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="../../who-we-are/our-story.html">Our story</a>
+      <a class="mob-link" href="../../who-we-are/team.html">Team &amp; board</a>
+      <a class="mob-link" href="../../who-we-are/governance.html">Governance &amp; statutes</a>
+      <a class="mob-link" href="../../who-we-are/annual-reports.html">Annual reports</a>
+      <a class="mob-link" href="../../who-we-are/partners.html">Our partners</a>
+    </div>
+  </div>
+  <div class="mob-section" id="mob-proj">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-proj')">Our projects <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <div class="mob-subheading">Education</div>
+      <a class="mob-link" href="akka.html">AKKA Montessori</a>
+      <a class="mob-link" href="kanto.html">KANTO Culture</a>
+      <a class="mob-link" href="care.html">CARE Coding &amp; Robotics</a>
+      <a class="mob-link" href="scola.html" data-scola>SCOLA Scholarship</a>
+      <a class="mob-link" href="tuto.html">TUTO</a>
+      <a class="mob-link" href="vim.html" style="color:var(--green);font-weight:600;" data-vim>VIM — Volunteering</a>
+      <a class="mob-link" href="cad.html" data-cad>Career Day Awareness</a>
+      <a class="mob-link" href="unesco.html">UNESCO Partnership</a>
+      <div class="mob-subheading">Health</div>
+      <a class="mob-link" href="../health/women.html">School for Women</a>
+      <a class="mob-link" href="../health/fody.html">FODY</a>
+      <a class="mob-link" href="../health/tomady.html">TOMADY</a>
+      <div class="mob-subheading">Environment</div>
+      <a class="mob-link" href="../environment/silva.html">SILVA</a>
+      <a class="mob-link" href="../environment/wash.html">WASH</a>
+      <a class="mob-link" href="../environment/permada.html">PERMADA</a>
+    </div>
+  </div>
+  <div class="mob-section" id="mob-inv">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-inv')">Get involved <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="../../get-involved/volunteer.html">Volunteer (VIM)</a>
+      <a class="mob-link" href="../../get-involved/donate.html">Donate</a>
+      <a class="mob-link" href="../../get-involved/partner.html">Become a partner</a>
+    </div>
+  </div>
+  <div class="mob-section" id="mob-media">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-media')">Media <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="../../media/blog.html">Blog</a>
+      <a class="mob-link" href="../../media/newsletters.html">Newsletters</a>
+      <a class="mob-link" href="../../who-we-are/annual-reports.html">Annual reports</a>
+    </div>
+  </div>
+  <div class="mob-actions">
+    <a href="#shop" class="btn-shop">The Shop ↗</a>
+    <a href="../../get-involved/donate.html" class="btn-donate">Donate</a>
+  </div>
+</nav>
+HEADEOF
+echo "VIM head+nav done: $(wc -l < vim.html) lines"
+<nav class="breadcrumb breadcrumb--education" aria-label="Breadcrumb">
+  <div class="container">
+    <ul class="breadcrumb__list">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../index.html">Our Projects</a></li>
+      <li><span class="breadcrumb__current">Education</span></li>
+      <li><span class="breadcrumb__current">VIM — Volunteering</span></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="page-hero" aria-label="VIM project hero">
+  <div class="page-hero__bg" role="img" aria-label="Volunteers and Malagasy landscapes — the Baobab Alley at sunset"></div>
+  <div class="page-hero__content">
+    <div class="container">
+      <span class="page-hero__kicker">Volunteering in Madagascar</span>
+      <h1 class="page-hero__title">VIM</h1>
+      <p class="page-hero__sub">Give your time. Change the world. Discover an island unlike any other.</p>
+      <div class="page-hero__tags">
+        <span class="hero-tag hero-tag--accent">Education</span>
+        <span class="hero-tag">Ages 18+</span>
+        <span class="hero-tag">Cultural exchange</span>
+        <span class="hero-tag">Language immersion</span>
+        <span class="hero-tag">Quality · Ethics · Sharing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="intro" aria-labelledby="intro-heading">
+  <div class="container">
+    <div class="intro__grid">
+      <div>
+        <span class="intro__eyebrow">Giving meaning to life</span>
+        <h2 class="intro__heading" id="intro-heading">A humanitarian mission with real impact</h2>
+        <div class="intro__body">
+          <p>Madagascar lacks infrastructure but is rich in its land, its people and its landscapes. Carrying out a project here — and seeing its impact on children with your own eyes — is a trigger to give more meaning to your life.</p>
+          <p>No specific degree or experience is required. What matters is preparation: months of exchange with our on-site teams, a good grasp of the volunteer guide, and an open heart. <strong>Volunteering is about sharing</strong> — everyone gives and receives in turn before leaving the island.</p>
+        </div>
+      </div>
+      <div class="meaning__photos">
+        <div class="meaning__photo meaning__photo--big">
+          <div class="photo-ph"><svg width="34" height="34" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M3 15l5-4 4 3 4-5 5 6" stroke="currentColor" stroke-width="1.4"/></svg>VIM_volunteer-children.jpg</div>
+          <div class="meaning__cap">A volunteer with children at the Ambohibe campus</div>
+        </div>
+        <div class="meaning__photo meaning__photo--small">
+          <div class="photo-ph"><svg width="28" height="28" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M3 15l5-4 4 3 4-5 5 6" stroke="currentColor" stroke-width="1.4"/></svg>VIM_volunteer-teaching.jpg</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="qes" aria-labelledby="qes-heading">
+  <div class="container">
+    <div class="qes__header">
+      <span class="section-eyebrow">What guides us</span>
+      <h2 class="section-heading" id="qes-heading">Quality · Ethics · Sharing</h2>
+    </div>
+    <div class="qes__tri">
+      <div class="qes-card qes-card--q">
+        <div class="qes-card__bg"><div class="photo-ph">VIM_quality.jpg</div></div>
+        <div class="qes-card__icon">✦</div>
+        <div class="qes-card__name">Quality</div>
+        <p class="qes-card__text">Meaningful work, carefully prepared, with real outcomes for children.</p>
+      </div>
+      <div class="qes-card qes-card--e">
+        <div class="qes-card__bg"><div class="photo-ph">VIM_ethics.jpg</div></div>
+        <div class="qes-card__icon">⚖</div>
+        <div class="qes-card__name">Ethics</div>
+        <p class="qes-card__text">Child safety first — written rules and codes of conduct protect everyone.</p>
+      </div>
+      <div class="qes-card qes-card--s">
+        <div class="qes-card__bg"><div class="photo-ph">VIM_sharing.jpg</div></div>
+        <div class="qes-card__icon">♡</div>
+        <div class="qes-card__name">Sharing</div>
+        <p class="qes-card__text">Give and receive in turn. Without sharing, there is no community life.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="flips" aria-labelledby="flips-heading">
+  <div class="container">
+    <div class="flips__header">
+      <span class="section-eyebrow">Why volunteer here</span>
+      <h2 class="section-heading" id="flips-heading">Six reasons to choose VIM Madagascar</h2>
+    </div>
+    <div class="flips__grid">
+      <div class="flip" tabindex="0" role="button" aria-label="A meaningful life">
+        <div class="flip__inner">
+          <div class="flip__face flip__front">
+            <div class="photo-ph"><svg width="30" height="30" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M3 15l5-4 4 3 4-5 5 6" stroke="currentColor" stroke-width="1.4"/></svg>VIM_reason-1.jpg</div>
+            <div class="flip__front-overlay">
+              <span class="flip__num">1</span>
+              <span class="flip__hintico">↻</span>
+              <h3 class="flip__front-title">A meaningful life</h3>
+            </div>
+          </div>
+          <div class="flip__face flip__back">
+            <div class="flip__back-accent"></div>
+            <h3 class="flip__back-title">A meaningful life</h3>
+            <p class="flip__back-text">Combine purpose with adventure — feel the direct impact of your work on children and young people, every single day.</p>
+          </div>
+        </div>
+      </div>
+      <div class="flip" tabindex="0" role="button" aria-label="Save the planet">
+        <div class="flip__inner">
+          <div class="flip__face flip__front">
+            <div class="photo-ph"><svg width="30" height="30" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M3 15l5-4 4 3 4-5 5 6" stroke="currentColor" stroke-width="1.4"/></svg>VIM_reason-2.jpg</div>
+            <div class="flip__front-overlay">
+              <span class="flip__num">2</span>
+              <span class="flip__hintico">↻</span>
+              <h3 class="flip__front-title">Save the planet</h3>
+            </div>
+          </div>
+          <div class="flip__face flip__back">
+            <div class="flip__back-accent"></div>
+            <h3 class="flip__back-title">Save the planet</h3>
+            <p class="flip__back-text">Plant mangroves, build edible forests, preserve water — tangible action in one of the world's most climate-vulnerable nations.</p>
+          </div>
+        </div>
+      </div>
+      <div class="flip" tabindex="0" role="button" aria-label="Unlock languages">
+        <div class="flip__inner">
+          <div class="flip__face flip__front">
+            <div class="photo-ph"><svg width="30" height="30" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M3 15l5-4 4 3 4-5 5 6" stroke="currentColor" stroke-width="1.4"/></svg>VIM_reason-3.jpg</div>
+            <div class="flip__front-overlay">
+              <span class="flip__num">3</span>
+              <span class="flip__hintico">↻</span>
+              <h3 class="flip__front-title">Unlock languages</h3>
+            </div>
+          </div>
+          <div class="flip__face flip__back">
+            <div class="flip__back-accent"></div>
+            <h3 class="flip__back-title">Unlock languages</h3>
+            <p class="flip__back-text">The best age to learn a language is before six. Native-speaking volunteers open doors monolingual children would never otherwise have.</p>
+          </div>
+        </div>
+      </div>
+      <div class="flip" tabindex="0" role="button" aria-label="Champion children's rights">
+        <div class="flip__inner">
+          <div class="flip__face flip__front">
+            <div class="photo-ph"><svg width="30" height="30" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M3 15l5-4 4 3 4-5 5 6" stroke="currentColor" stroke-width="1.4"/></svg>VIM_reason-4.jpg</div>
+            <div class="flip__front-overlay">
+              <span class="flip__num">4</span>
+              <span class="flip__hintico">↻</span>
+              <h3 class="flip__front-title">Champion children's rights</h3>
+            </div>
+          </div>
+          <div class="flip__face flip__back">
+            <div class="flip__back-accent"></div>
+            <h3 class="flip__back-title">Champion children's rights</h3>
+            <p class="flip__back-text">The programme promotes the Convention on the Rights of the Child and the elimination of discrimination against women.</p>
+          </div>
+        </div>
+      </div>
+      <div class="flip" tabindex="0" role="button" aria-label="Explore a unique culture">
+        <div class="flip__inner">
+          <div class="flip__face flip__front">
+            <div class="photo-ph"><svg width="30" height="30" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M3 15l5-4 4 3 4-5 5 6" stroke="currentColor" stroke-width="1.4"/></svg>VIM_reason-5.jpg</div>
+            <div class="flip__front-overlay">
+              <span class="flip__num">5</span>
+              <span class="flip__hintico">↻</span>
+              <h3 class="flip__front-title">Explore a unique culture</h3>
+            </div>
+          </div>
+          <div class="flip__face flip__back">
+            <div class="flip__back-accent"></div>
+            <h3 class="flip__back-title">Explore a unique culture</h3>
+            <p class="flip__back-text">Rice culture, zebu, famadihana feasts, music, dance, crafts and gastronomy — a multicultural society to discover without hesitation.</p>
+          </div>
+        </div>
+      </div>
+      <div class="flip" tabindex="0" role="button" aria-label="Adventure, safely">
+        <div class="flip__inner">
+          <div class="flip__face flip__front">
+            <div class="photo-ph"><svg width="30" height="30" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M3 15l5-4 4 3 4-5 5 6" stroke="currentColor" stroke-width="1.4"/></svg>VIM_reason-6.jpg</div>
+            <div class="flip__front-overlay">
+              <span class="flip__num">6</span>
+              <span class="flip__hintico">↻</span>
+              <h3 class="flip__front-title">Adventure, safely</h3>
+            </div>
+          </div>
+          <div class="flip__face flip__back">
+            <div class="flip__back-accent"></div>
+            <h3 class="flip__back-title">Adventure, safely</h3>
+            <p class="flip__back-text">Pristine landscapes and remote villages for the adventurous spirit — with written safety rules keeping children and guests protected.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="showcase" aria-labelledby="showcase-heading">
+  <div class="container">
+    <div class="showcase__header">
+      <span class="section-eyebrow">A five-star landscape</span>
+      <h2 id="showcase-heading">What you'll experience</h2>
+    </div>
+    <div class="showcase__grid">
+      <div class="scene scene--baobab">
+        <div class="scene__ph">VIM_baobab-alley.jpg</div>
+        <div class="scene__cap"><strong>The Baobab Alley</strong>Morondava, West Coast — after three days of hard work.</div>
+      </div>
+      <div class="scene scene--mangrove">
+        <div class="scene__ph">VIM_mangrove.jpg</div>
+        <div class="scene__cap"><strong>10 ha of mangroves planted</strong>Small propagules grow into giant mangroves — like well-educated kids.</div>
+      </div>
+      <div class="scene scene--taxi">
+        <div class="scene__ph">VIM_4L-taxi.jpg</div>
+        <div class="scene__cap"><strong>The Renault 4L "Quatrelle"</strong>Built in 1968, still a taxi in Tana today.</div>
+      </div>
+      <div class="scene scene--eco">
+        <div class="scene__ph">VIM_eco.jpg</div>
+        <div class="scene__cap"><strong>Ecovillage</strong>Sustainable living.</div>
+      </div>
+      <div class="scene scene--team">
+        <div class="scene__ph">VIM_team-2022.jpg</div>
+        <div class="scene__cap"><strong>The 2022 volunteer team</strong>Organising the School for Women project in Morondava.</div>
+      </div>
+      <div class="scene scene--village">
+        <div class="scene__ph">VIM_tsaratanana.jpg</div>
+        <div class="scene__cap"><strong>Ecovillage Tsaratanana</strong>Built 2010 — dry toilets, rainwater harvesting, Montessori classrooms.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="practical" aria-labelledby="practical-heading">
+  <div class="container">
+    <div class="practical__grid">
+      <div class="practical__head">
+        <span class="section-eyebrow">Before you go</span>
+        <h2 id="practical-heading">Everything you need to prepare</h2>
+        <p>A successful journey takes preparation — months of exchange with our teams, and a clear understanding of how we keep children safe.</p>
+        <div class="rescards">
+          <a class="rescard" href="https://www.educationformadagascar.com/education/ewExternalFiles/E4M_Volunteers%20Handbook%202024.pdf" target="_blank" rel="noopener">
+            <div class="rescard__icon">📘</div>
+            <div class="rescard__body"><div class="rescard__title">Volunteer's Handbook 2024</div><div class="rescard__sub">Everything to know before and during your stay</div></div>
+            <div class="rescard__arrow">→</div>
+          </a>
+          <a class="rescard" href="https://www.educationformadagascar.com/education/ewExternalFiles/Convention%20on%20the%20Rights%20of%20the%20Child_%20The%20Childrens%20version.pdf" target="_blank" rel="noopener">
+            <div class="rescard__icon">📗</div>
+            <div class="rescard__body"><div class="rescard__title">Children's Rights — child-friendly version</div><div class="rescard__sub">The Convention, made simple for everyone</div></div>
+            <div class="rescard__arrow">→</div>
+          </a>
+        </div>
+      </div>
+      <div class="facts-mini">
+        <div class="fact-mini"><div class="fact-mini__val">100h</div><div class="fact-mini__label">where it began — IB community service hours</div></div>
+        <div class="fact-mini"><div class="fact-mini__val">18+</div><div class="fact-mini__label">open to adventurous, motivated volunteers</div></div>
+        <div class="fact-mini"><div class="fact-mini__val">Ambohibe</div><div class="fact-mini__label">campus accommodation available on site</div></div>
+        <div class="fact-mini"><div class="fact-mini__val">No degree</div><div class="fact-mini__label">required — only commitment &amp; care</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="project-cta" aria-labelledby="cta-heading">
+  <div class="container">
+    <div class="project-cta__inner">
+      <span class="project-cta__label">Volunteering in Madagascar</span>
+      <h2 id="cta-heading">Change the world.<br>Start with one island.</h2>
+      <p>Bring your skills, your language, your energy. Live and work alongside our teams — and leave Madagascar having given, and received, something lasting.</p>
+      <div class="project-cta__buttons">
+        <a href="../../get-involved/volunteer.html" class="btn btn-white">Apply to volunteer</a>
+        <a href="https://www.educationformadagascar.com/education/ewExternalFiles/E4M_Volunteers%20Handbook%202024.pdf" class="btn btn-outline-white" target="_blank" rel="noopener">Read the handbook</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="other-projects" aria-labelledby="other-heading">
+  <div class="container">
+    <div class="other-projects__header">
+      <span class="section-eyebrow">Keep exploring</span>
+      <h2 class="section-heading" id="other-heading">Other Education projects</h2>
+    </div>
+    <div class="other-projects__grid">
+      <a class="proj-card" href="scola.html"><div class="proj-card__thumb"><span class="proj-card__tag">Ages 17–25</span></div><div class="proj-card__body"><h3 class="proj-card__title">SCOLA Scholarship</h3><p class="proj-card__desc">Sponsorship and scholarships opening pathways to higher education and independence.</p><span class="proj-card__link">Learn more →</span></div></a>
+      <a class="proj-card" href="kanto.html"><div class="proj-card__thumb"><span class="proj-card__tag">Ages 9–22</span></div><div class="proj-card__body"><h3 class="proj-card__title">KANTO Culture Programme</h3><p class="proj-card__desc">Music, chess, languages and arts — Art · Mind · Empowerment with Club UNESCO.</p><span class="proj-card__link">Learn more →</span></div></a>
+      <a class="proj-card" href="cad.html"><div class="proj-card__thumb"><span class="proj-card__tag">Ages 12–22</span></div><div class="proj-card__body"><h3 class="proj-card__title">Career Day Awareness</h3><p class="proj-card__desc">Helping young people discover the professions of the future — and find their ikigai.</p><span class="proj-card__link">Learn more →</span></div></a>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;"><a href="../index.html" class="btn btn-outline">See all 13 projects</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Education for Madagascar</h3>
+        <p>Committed to UN SDG 4 — Quality Education for all children, from early childhood to economic independence.</p>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/educationformadagascar" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener">f</a>
+          <a href="https://www.instagram.com/educationformadagascar/" class="social-btn" aria-label="Instagram" target="_blank" rel="noopener">ig</a>
+          <a href="https://www.linkedin.com/company/educationformadagascar/" class="social-btn" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Education</h4>
+        <ul>
+          <li><a href="akka.html">AKKA Montessori</a></li>
+          <li><a href="kanto.html">KANTO</a></li>
+          <li><a href="scola.html">SCOLA</a></li>
+          <li><a href="care.html">CARE Coding</a></li>
+          <li><a href="vim.html">VIM</a></li>
+          <li><a href="cad.html">Career Day</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="../../media/blog.html">Blog</a></li>
+          <li><a href="#">Artisan Shop</a></li>
+          <li><a href="../../who-we-are/annual-reports.html">Annual Reports</a></li>
+          <li><a href="../../media/newsletters.html">Newsletter</a></li>
+          <li><a href="../health/tomady.html">TOMADY Health</a></li>
+          <li><a href="../environment/silva.html">SILVA Environment</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@educationformadagascar.org">contact@educationformadagascar.org</a></li>
+          <li style="font-size:.85rem;margin-top:.3rem;">23 Milner Drive, Cobham<br>KT11 2EZ, United Kingdom</li>
+          <li style="margin-top:.8rem;font-size:.75rem;opacity:.55;line-height:1.8;">UK Charity #1167115<br>FR SIREN 85242793900016<br>MG NIF 4002796057</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Education for Madagascar. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a><a href="#">Legal Notice</a><a href="#">Safeguarding</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../js/global.js"></script>
+<script>
+/* VIM flip cards — tap/keyboard support (hover handles desktop) */
+document.querySelectorAll('.flip').forEach(function(card){
+  card.addEventListener('click',function(){card.classList.toggle('is-flipped');});
+  card.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();card.classList.toggle('is-flipped');}});
+});
+</script>
+</body></html>
