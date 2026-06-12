@@ -1,1 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KANTO Culture Programme — Education for Madagascar</title>
+  <meta name="description" content="KANTO: Art, Mind, Empowerment. In partnership with Club UNESCO — Music Hub, Chess Academy, plastic arts, civic education and sport for young people aged 9 to 22 in Madagascar." />
 
+  <link rel="stylesheet" href="../../css/global.css">
+
+  <style>
+  /* ═══════════════════════════════════════════════════════════════
+     KANTO — design tokens
+     Brand greens stay constant; --kanto is the project's OFFICIAL
+     secondary colour from the Charte Graphique (p.9): #153B50.
+     Every project-specific accent on this page derives from it.
+     ═══════════════════════════════════════════════════════════════ */
+  :root {
+    --green:        #195301;
+    --cream:        #eeebd9;
+    --teal:         #006C65;
+    --charcoal:     #535353;
+    --silver:       #D5D5D5;
+    --white:        #ffffff;
+    --gold-bg:      #EFBF04;
+    --gold-text:    #856A00;
+
+    /* KANTO official identity colour + tints */
+    --kanto:        #153B50;
+    --kanto-deep:   #0d2735;
+    --kanto-lt:     #2d5a74;
+    --kanto-wash:   #eaf0f4;
+    --kanto-glow:   #4a89ab;
+
+    --font-display: "Charter", Georgia, serif;
+    --font-body:    "Avenir Next", system-ui, sans-serif;
+    --nav-h:        92px;
+    --topbar-h:     40px;
+    --max-w:        1160px;
+    --r:            4px;
+    --r-lg:         10px;
+    --ease:         0.22s ease;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--white); color: var(--charcoal); line-height: 1.65; }
+  img  { display: block; max-width: 100%; }
+  a    { text-decoration: none; color: inherit; }
+  ul   { list-style: none; }
+  button { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
+
+  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+  .btn { display: inline-block; padding: .75rem 1.75rem; border-radius: var(--r); font-weight: 500; font-size: .95rem; cursor: pointer; transition: background var(--ease), color var(--ease), transform var(--ease); }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: var(--green); color: var(--cream); }
+  .btn-primary:hover { background: #1f6701; }
+  .btn-outline { border: 2px solid var(--green); color: var(--green); }
+  .btn-outline:hover { background: var(--green); color: var(--cream); }
+  /* KANTO-toned button for in-section CTAs */
+  .btn-kanto { background: var(--kanto); color: var(--white); }
+  .btn-kanto:hover { background: var(--kanto-lt); }
+  .btn-kanto-outline { border: 2px solid var(--kanto); color: var(--kanto); }
+  .btn-kanto-outline:hover { background: var(--kanto); color: var(--white); }
+
+  /* ───── TOP BAR ───── */
+  .top-bar { background: var(--green); color: var(--cream); height: var(--topbar-h); font-size: .72rem; }
+  .top-bar .container { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .top-bar__info { display: flex; align-items: center; gap: 1.25rem; opacity: .85; flex-wrap: wrap; }
+  .top-bar__info span { white-space: nowrap; }
+  .top-bar__dot { opacity: .35; }
+  .lang-switch { display: flex; align-items: center; gap: .25rem; flex-shrink: 0; }
+  .lang-switch__btn { padding: .2rem .55rem; border-radius: var(--r); color: var(--cream); font-size: .72rem; font-weight: 500; opacity: .7; transition: opacity var(--ease), background var(--ease); }
+  .lang-switch__btn:hover { opacity: 1; }
+  .lang-switch__btn.is-active { background: rgba(255,255,255,.15); opacity: 1; }
+
+  /* ───── NAVBAR ───── */
+  .navbar { position: sticky; top: 0; z-index: 200; background: var(--white); border-bottom: 1px solid var(--silver); height: var(--nav-h); transition: box-shadow var(--ease); }
+  .navbar.is-scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.08); }
+  .navbar .container { height: 100%; display: flex; align-items: center; }
+  .navbar__logo { display: flex; align-items: center; gap: .6rem; margin-right: 2rem; flex-shrink: 0; }
+  .logo-image { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+  .logo-text { font-family: var(--font-display); font-size: 1.20rem; font-weight: 700; color: var(--green); line-height: 1.2; text-transform: uppercase; letter-spacing: .04em; }
+
+  .nav__list { display: flex; align-items: center; height: 100%; flex: 1; }
+  .nav__item { position: relative; height: 100%; display: flex; align-items: center; }
+  .nav__link { display: flex; align-items: center; gap: .3rem; padding: 0 .9rem; height: 100%; font-size: .875rem; font-weight: 500; color: var(--charcoal); white-space: nowrap; border-bottom: 2px solid transparent; transition: color var(--ease), border-color var(--ease); user-select: none; }
+  .nav__link:hover { color: var(--green); }
+  .nav__link.is-active { color: var(--green); border-bottom-color: var(--green); }
+  .nav__item.is-open .nav__link { color: var(--green); }
+  .nav__chevron { width: 8px; height: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-1px); transition: transform var(--ease); flex-shrink: 0; }
+  .nav__item.is-open .nav__chevron { transform: rotate(-135deg) translateY(2px); }
+
+  .dropdown { visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(6px); transition: opacity var(--ease), transform var(--ease), visibility 0s var(--ease); position: absolute; top: calc(var(--nav-h) - 1px); left: 0; min-width: 240px; background: var(--white); border: 1px solid var(--silver); border-top: none; border-radius: 0 0 var(--r-lg) var(--r-lg); box-shadow: 0 10px 32px rgba(0,0,0,.09); padding: .5rem 0; }
+  .nav__item.is-open .dropdown { visibility: visible; opacity: 1; pointer-events: auto; transform: translateY(0); transition: opacity var(--ease), transform var(--ease); }
+  .dropdown__link { display: block; padding: .6rem 1.2rem; font-size: .875rem; color: var(--charcoal); transition: background var(--ease), color var(--ease); }
+  .dropdown__link:hover { background: var(--cream); color: var(--green); }
+  .dropdown__sub { display: block; font-size: .75rem; color: var(--charcoal); opacity: .6; margin-top: .1rem; font-weight: 400; }
+  .dropdown__separator { height: 1px; background: var(--silver); margin: .4rem 1.2rem; opacity: .5; }
+
+  .dropdown--mega { visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(6px); transition: opacity var(--ease), transform var(--ease), visibility 0s var(--ease); position: absolute; top: calc(var(--nav-h) - 1px); left: -60px; width: 620px; background: var(--white); border: 1px solid var(--silver); border-top: none; border-radius: 0 0 var(--r-lg) var(--r-lg); box-shadow: 0 10px 32px rgba(0,0,0,.09); display: grid; grid-template-columns: 1fr 1fr 180px; }
+  .nav__item.is-open .dropdown--mega { visibility: visible; opacity: 1; pointer-events: auto; transform: translateY(0); transition: opacity var(--ease), transform var(--ease); }
+  .mega__col { padding: 1.2rem 1.1rem; border-right: 1px solid rgba(213,213,213,.5); }
+  .mega__col:last-child { border-right: none; background: #f8f7f2; border-radius: 0 0 var(--r-lg) 0; }
+  .mega__heading { font-size: .67rem; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; margin-bottom: .6rem; padding-bottom: .5rem; border-bottom: 1px solid var(--silver); }
+  .mega__heading--edu { color: var(--green); }
+  .mega__heading--health { color: #b83030; }
+  .mega__heading--env { color: var(--teal); }
+  .mega__link { display: flex; align-items: center; gap: .5rem; padding: .4rem 0; font-size: .83rem; color: var(--charcoal); transition: color var(--ease); }
+  .mega__link:hover { color: var(--green); }
+  .badge { font-size: .62rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: .12rem .45rem; border-radius: 20px; flex-shrink: 0; }
+  .badge--age { background: #efefef; color: var(--charcoal); }
+  .badge--new { background: #edf7e8; color: var(--green); }
+  .mega__summary { font-size: .8rem; line-height: 1.6; color: var(--charcoal); margin-bottom: 1rem; }
+  .mega__all-link { display: inline-flex; align-items: center; gap: .3rem; font-size: .82rem; font-weight: 600; color: var(--green); transition: gap var(--ease); }
+  .mega__all-link:hover { gap: .55rem; }
+  .mega__col-gap { margin-top: .9rem; }
+
+  .nav__actions { display: flex; align-items: center; gap: .5rem; margin-left: auto; padding-left: 1rem; flex-shrink: 0; }
+  .btn-shop { padding: .42rem 1rem; font-size: .82rem; font-weight: 500; color: var(--teal); border: 1.5px solid var(--teal); border-radius: var(--r); transition: background var(--ease), color var(--ease); }
+  .btn-shop:hover { background: var(--teal); color: var(--white); }
+  .btn-donate { padding: .42rem 1.1rem; font-size: .82rem; font-weight: 600; background: var(--green); color: var(--cream); border-radius: var(--r); transition: background var(--ease), color var(--ease), transform var(--ease); }
+  .btn-donate:hover { background: var(--gold-bg); color: var(--gold-text); transform: translateY(-1px); }
+
+  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; padding: .4rem; margin-left: auto; border-radius: var(--r); transition: background var(--ease); }
+  .hamburger:hover { background: var(--cream); }
+  .hamburger__bar { width: 100%; height: 2px; background: var(--green); border-radius: 2px; transition: transform var(--ease), opacity var(--ease); }
+  .hamburger.is-open .hamburger__bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.is-open .hamburger__bar:nth-child(2) { opacity: 0; }
+  .hamburger.is-open .hamburger__bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-drawer { display: none; position: fixed; top: calc(var(--topbar-h) + var(--nav-h)); left: 0; right: 0; bottom: 0; background: var(--white); overflow-y: auto; z-index: 190; padding: 1rem 0 2rem; border-top: 1px solid var(--silver); }
+  .mobile-drawer.is-open { display: block; }
+  .mob-section__toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: .85rem 1.5rem; font-size: .95rem; font-weight: 500; color: var(--charcoal); border-bottom: 1px solid var(--silver); background: none; text-align: left; transition: background var(--ease); }
+  .mob-section__toggle:hover { background: var(--cream); }
+  .mob-section__content { display: none; padding: .5rem 0; background: #fafaf7; border-bottom: 1px solid var(--silver); }
+  .mob-section.is-open .mob-section__content { display: block; }
+  .mob-subheading { font-size: .67rem; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; color: var(--green); padding: .6rem 1.8rem .3rem; }
+  .mob-link { display: flex; align-items: center; justify-content: space-between; padding: .55rem 1.8rem; font-size: .875rem; color: var(--charcoal); transition: background var(--ease), color var(--ease); }
+  .mob-link:hover { background: var(--cream); color: var(--green); }
+  .mob-actions { display: flex; gap: .75rem; padding: 1.2rem 1.5rem 0; }
+  .mob-actions .btn-shop, .mob-actions .btn-donate { flex: 1; text-align: center; font-size: .9rem; padding: .65rem 1rem; }
+
+  .breadcrumb { padding: 0.85rem 0; }
+  .breadcrumb .container { width: fit-content; margin-left: 0; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     PAGE HERO — KANTO uses its OWN deep slate-blue, not the
+     generic green→teal. The treble-clef + chess motif lives in the
+     hero corner as a subtle SVG, signalling "art + strategy" instantly.
+     ═══════════════════════════════════════════════════════════════ */
+  .page-hero { position: relative; min-height: 76vh; display: flex; align-items: flex-end; overflow: hidden; background: var(--kanto-deep); }
+  .page-hero__bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to top, rgba(8,22,30,.92) 0%, rgba(13,39,53,.55) 45%, rgba(21,59,80,.25) 100%),
+      linear-gradient(135deg, #153B50 0%, #2d5a74 55%, #0d2735 100%);
+    background-size: cover; background-position: center;
+  }
+  /* Faint oversized chessboard pattern, lower-left */
+  .page-hero__pattern {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: .5;
+    background-image:
+      linear-gradient(45deg, rgba(255,255,255,.025) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.025) 75%),
+      linear-gradient(45deg, rgba(255,255,255,.025) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.025) 75%);
+    background-size: 64px 64px;
+    background-position: 0 0, 32px 32px;
+    -webkit-mask-image: linear-gradient(to top right, black, transparent 55%);
+    mask-image: linear-gradient(to top right, black, transparent 55%);
+  }
+  .page-hero__content { position: relative; z-index: 2; padding: 4rem 0 4.5rem; width: 100%; }
+  .page-hero__kicker {
+    display: inline-flex; align-items: center; gap: .6rem;
+    font-size: .72rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--kanto-glow); margin-bottom: 1.1rem;
+  }
+  .page-hero__kicker::before { content: ''; width: 28px; height: 1px; background: var(--kanto-glow); }
+  .page-hero__malagasy { display: inline-block; font-family: var(--font-display); font-size: clamp(1rem,2vw,1.2rem); font-style: italic; color: rgba(238,235,217,.55); letter-spacing: .06em; margin-bottom: .5rem; }
+  .page-hero__title { font-family: var(--font-display); font-size: clamp(3rem,6.5vw,5.6rem); color: var(--cream); line-height: 1.0; letter-spacing: -.01em; margin-bottom: 1rem; }
+  /* The signature line — Art · Mind · Empowerment, each word weighted */
+  .page-hero__triad { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem; font-family: var(--font-display); font-size: clamp(1.2rem,2.4vw,1.8rem); color: var(--cream); margin-bottom: 2rem; }
+  .page-hero__triad span { opacity: .95; }
+  .page-hero__triad .sep { color: var(--kanto-glow); opacity: .8; font-size: 1.1em; }
+  .page-hero__tags { display: flex; flex-wrap: wrap; gap: .6rem; }
+  .hero-tag { padding: .35rem .9rem; border-radius: 20px; font-size: .75rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; border: 1px solid rgba(238,235,217,.3); color: var(--cream); backdrop-filter: blur(4px); background: rgba(255,255,255,.08); }
+
+  .scroll-hint { position: absolute; bottom: 2rem; right: 2rem; display: flex; flex-direction: column; align-items: center; gap: .4rem; font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(238,235,217,.45); z-index: 3; }
+  .scroll-hint__line { width: 1px; height: 40px; background: linear-gradient(to bottom, transparent, rgba(238,235,217,.4)); animation: scrollline 1.6s ease-in-out infinite; }
+  @keyframes scrollline { 0%,100%{transform:scaleY(0);transform-origin:top;opacity:0;} 40%{transform:scaleY(1);transform-origin:top;opacity:1;} 70%{transform:scaleY(1);transform-origin:bottom;opacity:1;} 100%{transform:scaleY(0);transform-origin:bottom;opacity:0;} }
+
+  /* ═══════════════════════════════════════════════════════════════
+     INTRO — narrative + UNESCO partnership flag
+     ═══════════════════════════════════════════════════════════════ */
+  .intro { padding: 5.5rem 0; background: var(--white); }
+  .intro__grid { display: grid; grid-template-columns: 260px 1fr; gap: 5rem; align-items: start; }
+  .intro__stat-block { position: sticky; top: calc(var(--nav-h) + 2rem); }
+  .intro__big-number { font-family: var(--font-display); font-size: clamp(4rem,7vw,6rem); color: var(--kanto); line-height: 1; margin-bottom: .3rem; }
+  .intro__stat-label { font-size: .82rem; color: var(--charcoal); line-height: 1.5; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--silver); }
+  .intro__pill-list { display: flex; flex-direction: column; gap: .7rem; }
+  .intro__pill { display: flex; align-items: center; gap: .7rem; font-size: .82rem; color: var(--charcoal); }
+  .intro__pill-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--kanto); flex-shrink: 0; }
+  .intro__pill strong { color: var(--kanto); font-weight: 600; }
+  .intro__eyebrow { display: block; font-size: .72rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); margin-bottom: .9rem; }
+  .intro__heading { font-family: var(--font-display); font-size: clamp(1.8rem,3vw,2.4rem); color: var(--kanto); line-height: 1.2; margin-bottom: 1.4rem; }
+  .intro__body { font-size: 1.05rem; line-height: 1.8; color: var(--charcoal); max-width: 640px; }
+  .intro__body p + p { margin-top: 1.2em; }
+  .intro__body strong { color: var(--kanto); }
+  /* UNESCO partnership flag — inline credibility marker */
+  .unesco-flag { display: inline-flex; align-items: center; gap: .7rem; margin-top: 1.8rem; padding: .7rem 1.1rem; background: var(--kanto-wash); border-left: 3px solid var(--kanto); border-radius: 0 var(--r) var(--r) 0; font-size: .85rem; color: var(--kanto-deep); }
+  .unesco-flag strong { color: var(--kanto); }
+
+  /* ═══════════════════════════════════════════════════════════════
+     THE TWO HUBS — the heart of KANTO.
+     A split, asymmetric layout: Music Hub (left, warm) vs
+     Chess Academy (right, cool). Visually embodies art-vs-strategy.
+     ═══════════════════════════════════════════════════════════════ */
+  .hubs { padding: 5.5rem 0 0; background: var(--cream); }
+  .hubs__header { text-align: center; max-width: 640px; margin: 0 auto 3.5rem; }
+  .hubs__eyebrow { display: block; font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--kanto); margin-bottom: .8rem; }
+  .hubs__title { font-family: var(--font-display); font-size: clamp(1.9rem,3.4vw,2.6rem); color: var(--kanto); line-height: 1.2; margin-bottom: 1rem; }
+  .hubs__intro { font-size: 1rem; color: var(--charcoal); line-height: 1.7; }
+  .hubs__split { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .hub { position: relative; padding: 3.5rem 3rem 4rem; color: var(--cream); overflow: hidden; min-height: 420px; display: flex; flex-direction: column; }
+  .hub--music { background: linear-gradient(160deg, var(--green) 0%, #0f3600 100%); }
+  .hub--chess { background: linear-gradient(160deg, var(--kanto) 0%, var(--kanto-deep) 100%); }
+  .hub__ghost { position: absolute; font-size: 13rem; line-height: 1; top: -1.5rem; right: 1rem; opacity: .07; pointer-events: none; user-select: none; }
+  .hub__count { font-family: var(--font-display); font-size: 3.4rem; font-weight: 700; line-height: 1; margin-bottom: .2rem; }
+  .hub__count-label { font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; opacity: .7; margin-bottom: 1.6rem; }
+  .hub__name { font-family: var(--font-display); font-size: 1.7rem; margin-bottom: .9rem; }
+  .hub__desc { font-size: .95rem; line-height: 1.7; opacity: .85; margin-bottom: 1.8rem; max-width: 380px; }
+  .hub__list { display: flex; flex-direction: column; gap: .6rem; margin-top: auto; }
+  .hub__list-item { display: flex; align-items: center; gap: .65rem; font-size: .88rem; opacity: .92; }
+  .hub__list-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: .7; flex-shrink: 0; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     THIRD STREAM — Plastic arts, civic ed & sport
+     A horizontal band under the two hubs, so all of KANTO's work
+     is represented without forcing a fake 3-column symmetry.
+     ═══════════════════════════════════════════════════════════════ */
+  .stream { background: var(--cream); padding: 0 0 5.5rem; }
+  .stream__inner { background: var(--white); border-radius: var(--r-lg); padding: 2.8rem 3rem; box-shadow: 0 4px 24px rgba(21,59,80,.06); display: grid; grid-template-columns: auto 1fr; gap: 2.5rem; align-items: center; }
+  .stream__badge { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--white); background: var(--kanto); padding: 1.4rem 1.6rem; border-radius: var(--r-lg); text-align: center; line-height: 1.3; white-space: nowrap; }
+  .stream__items { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; }
+  .stream__item h4 { font-family: var(--font-display); font-size: 1.05rem; color: var(--kanto); margin-bottom: .35rem; }
+  .stream__item p { font-size: .85rem; color: var(--charcoal); line-height: 1.6; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     MISSION QUOTE — leaders of tomorrow, in KANTO blue
+     ═══════════════════════════════════════════════════════════════ */
+  .pullquote { padding: 6rem 0; background: var(--kanto); overflow: hidden; position: relative; }
+  .pullquote::before { content: 'KANTO'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: var(--font-display); font-size: clamp(8rem,20vw,18rem); font-weight: 700; color: rgba(255,255,255,.04); letter-spacing: .1em; pointer-events: none; white-space: nowrap; user-select: none; }
+  .pullquote__inner { position: relative; z-index: 1; text-align: center; max-width: 820px; margin: 0 auto; }
+  .pullquote__malagasy { font-family: var(--font-display); font-style: italic; font-size: clamp(2.2rem,4.5vw,3.6rem); color: var(--cream); line-height: 1.1; margin-bottom: .5rem; opacity: .95; }
+  .pullquote__translation { font-size: .88rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(238,235,217,.5); margin-bottom: 2.8rem; }
+  .pullquote__quote { font-family: var(--font-display); font-style: italic; font-size: clamp(1.3rem,2.6vw,1.9rem); color: var(--cream); line-height: 1.5; margin-bottom: 1.2rem; }
+  .pullquote__attribution { font-size: .82rem; color: rgba(238,235,217,.5); letter-spacing: .08em; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     FAST FACTS — KANTO numbers
+     ═══════════════════════════════════════════════════════════════ */
+  .fast-facts { background: var(--white); border-bottom: 1px solid var(--silver); }
+  .fast-facts__grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .fact { padding: 2.5rem 1.5rem; border-right: 1px solid var(--silver); text-align: center; transition: background var(--ease); }
+  .fact:hover { background: var(--kanto-wash); }
+  .fact:last-child { border-right: none; }
+  .fact__icon { font-size: 1.6rem; margin-bottom: .5rem; }
+  .fact__val { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; color: var(--kanto); line-height: 1; margin-bottom: .35rem; }
+  .fact__label { font-size: .8rem; color: var(--charcoal); line-height: 1.4; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     IMPACT STORY
+     ═══════════════════════════════════════════════════════════════ */
+  .impact-story { padding: 6rem 0; background: var(--white); }
+  .impact-story__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .impact-story__photo { aspect-ratio: 4/5; background: linear-gradient(150deg, var(--kanto-lt) 0%, var(--kanto) 50%, var(--kanto-deep) 100%); border-radius: 12px; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; }
+  .impact-story__photo img { width: 100%; height: 100%; object-fit: cover; }
+  .photo-placeholder-label { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .5rem; color: rgba(255,255,255,.4); font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; text-align: center; padding: 1rem; }
+  .impact-story__float { position: absolute; bottom: -1.5rem; right: -2rem; background: var(--white); border-radius: var(--r-lg); padding: 1.4rem 1.6rem; box-shadow: 0 8px 32px rgba(0,0,0,.12); max-width: 250px; border-top: 3px solid var(--kanto); }
+  .impact-story__float-quote { font-family: var(--font-display); font-style: italic; font-size: 1rem; color: var(--kanto); line-height: 1.5; margin-bottom: .5rem; }
+  .impact-story__float-name { font-size: .75rem; font-weight: 600; color: var(--teal); letter-spacing: .06em; text-transform: uppercase; }
+  .impact-story__eyebrow { display: block; font-size: .72rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--kanto); margin-bottom: .9rem; }
+  .impact-story__heading { font-family: var(--font-display); font-size: clamp(1.8rem,2.8vw,2.3rem); color: var(--green); line-height: 1.2; margin-bottom: 1.2rem; }
+  .impact-story__body { font-size: 1rem; line-height: 1.8; color: var(--charcoal); margin-bottom: 2rem; }
+  .impact-story__body p + p { margin-top: 1em; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     CTA — KANTO blue band (distinct from green-CTA pages)
+     ═══════════════════════════════════════════════════════════════ */
+  .project-cta { background: var(--kanto); padding: 5rem 0; text-align: center; position: relative; overflow: hidden; }
+  .project-cta::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,.06) 0%, transparent 60%); pointer-events: none; }
+  .project-cta__inner { position: relative; z-index: 1; }
+  .project-cta__label { display: block; font-size: .72rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: .75rem; }
+  .project-cta h2 { font-family: var(--font-display); font-size: clamp(2rem,4vw,3rem); color: var(--white); line-height: 1.15; margin-bottom: 1rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+  .project-cta p { font-size: 1rem; color: rgba(255,255,255,.8); max-width: 520px; margin: 0 auto 2.5rem; line-height: 1.75; }
+  .project-cta__buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-white { background: var(--white); color: var(--kanto); font-weight: 600; }
+  .btn-white:hover { background: var(--cream); transform: translateY(-2px); }
+  .btn-outline-white { border: 2px solid rgba(255,255,255,.5); color: var(--white); }
+  .btn-outline-white:hover { border-color: var(--white); background: rgba(255,255,255,.1); }
+
+  /* ───── OTHER PROJECTS ───── */
+  .other-projects { padding: 5.5rem 0; background: var(--cream); }
+  .other-projects__header { margin-bottom: 2.5rem; }
+  .section-eyebrow { display: block; font-size: .72rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); margin-bottom: .75rem; }
+  .section-heading { font-family: var(--font-display); font-size: clamp(1.8rem,3vw,2.4rem); color: var(--green); line-height: 1.2; }
+  .other-projects__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .proj-card { background: var(--white); border-radius: var(--r-lg); overflow: hidden; transition: transform var(--ease), box-shadow var(--ease); text-decoration: none; display: flex; flex-direction: column; }
+  .proj-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,.09); }
+  .proj-card__thumb { height: 140px; position: relative; }
+  .proj-card:nth-child(1) .proj-card__thumb { background: linear-gradient(135deg, var(--teal), #004d48); }
+  .proj-card:nth-child(2) .proj-card__thumb { background: linear-gradient(135deg, #2c7a01, var(--teal)); }
+  .proj-card:nth-child(3) .proj-card__thumb { background: linear-gradient(135deg, #b5681f, var(--green)); }
+  .proj-card__tag { position: absolute; top: .75rem; left: .75rem; background: rgba(255,255,255,.9); color: var(--green); font-size: .65rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: .2rem .6rem; border-radius: 20px; }
+  .proj-card__body { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; }
+  .proj-card__title { font-family: var(--font-display); font-size: 1rem; color: var(--green); margin-bottom: .4rem; }
+  .proj-card__desc { font-size: .82rem; color: var(--charcoal); line-height: 1.55; flex: 1; margin-bottom: .9rem; }
+  .proj-card__link { font-size: .78rem; font-weight: 600; color: var(--teal); display: inline-flex; align-items: center; gap: .3rem; transition: gap var(--ease); }
+  .proj-card:hover .proj-card__link { gap: .6rem; }
+
+  /* ───── FOOTER ───── */
+  footer { background: #111; color: var(--silver); padding: 4rem 0 2rem; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-brand h3 { font-family: var(--font-display); color: var(--cream); font-size: 1.15rem; margin-bottom: .75rem; }
+  .footer-brand p { font-size: .85rem; line-height: 1.65; margin-bottom: 1.2rem; max-width: 280px; }
+  .footer-socials { display: flex; gap: .75rem; }
+  .social-btn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; font-size: .8rem; color: var(--silver); transition: background var(--ease), border-color var(--ease); }
+  .social-btn:hover { background: var(--kanto); border-color: var(--kanto); color: #fff; }
+  .footer-col h4 { color: var(--cream); font-size: .82rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1.1rem; }
+  .footer-col li { margin-bottom: .5rem; }
+  .footer-col a { font-size: .87rem; color: var(--silver); transition: color var(--ease); }
+  .footer-col a:hover { color: var(--cream); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: .8rem; }
+  .footer-legal { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .footer-legal a { color: var(--silver); transition: color var(--ease); }
+  .footer-legal a:hover { color: var(--cream); }
+
+  /* ═══════════════════════════════════════════════════════════════
+     WORKSHOPS — the 8 activities, grouped the flyer's way:
+     two flagship hubs (Music, Chess) + the wider culture stream.
+     This grid sits UNDER the hubs as a compact "everything we offer"
+     so languages, dance & arts are visible without flattening
+     the page into a plain list.
+     ═══════════════════════════════════════════════════════════════ */
+  .workshops { padding: 5rem 0; background: var(--white); }
+  .workshops__header { text-align: center; max-width: 620px; margin: 0 auto 3rem; }
+  .workshops__eyebrow { display: block; font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--kanto); margin-bottom: .8rem; }
+  .workshops__title { font-family: var(--font-display); font-size: clamp(1.8rem,3.2vw,2.4rem); color: var(--kanto); line-height: 1.2; margin-bottom: 1rem; }
+  .workshops__intro { font-size: 1rem; color: var(--charcoal); line-height: 1.7; }
+  .workshops__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .workshop {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: .7rem; text-align: center;
+    padding: 1.8rem 1rem; border-radius: var(--r-lg);
+    background: var(--kanto-wash); border: 1px solid transparent;
+    transition: transform var(--ease), border-color var(--ease), box-shadow var(--ease);
+  }
+  .workshop:hover { transform: translateY(-4px); border-color: var(--kanto); box-shadow: 0 10px 28px rgba(21,59,80,.12); }
+  .workshop__icon { font-size: 1.9rem; line-height: 1; }
+  .workshop__name { font-family: var(--font-display); font-size: 1rem; color: var(--kanto-deep); font-weight: 700; }
+  .workshop__tag { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--kanto-lt); font-weight: 600; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     PHILOSOPHY — the child-led approach (from the live site).
+     A calm, editorial two-column band that sets KANTO apart:
+     the children run the workshops; freedom of choice is the method.
+     ═══════════════════════════════════════════════════════════════ */
+  .philosophy { padding: 5.5rem 0; background: var(--kanto-deep); color: var(--cream); position: relative; overflow: hidden; }
+  .philosophy::before {
+    content: '♟'; position: absolute; bottom: -3rem; right: 2rem;
+    font-size: 18rem; line-height: 1; color: rgba(255,255,255,.03);
+    pointer-events: none; user-select: none;
+  }
+  .philosophy__grid { display: grid; grid-template-columns: .8fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 1; }
+  .philosophy__eyebrow { display: block; font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--kanto-glow); margin-bottom: 1rem; }
+  .philosophy__heading { font-family: var(--font-display); font-size: clamp(1.9rem,3.2vw,2.6rem); line-height: 1.2; color: var(--cream); }
+  .philosophy__body { font-size: 1.05rem; line-height: 1.85; color: rgba(238,235,217,.85); }
+  .philosophy__body p + p { margin-top: 1.1em; }
+  .philosophy__body strong { color: var(--white); }
+
+  /* ───── RESPONSIVE ───── */
+  @media (max-width: 900px) {
+    .nav__list, .nav__actions { display: none; }
+    .hamburger { display: flex; }
+    .intro__grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .intro__stat-block { position: static; }
+    .hubs__split { grid-template-columns: 1fr; }
+    .workshops__grid { grid-template-columns: repeat(2, 1fr); }
+    .philosophy__grid { grid-template-columns: 1fr; gap: 1.8rem; }
+    .stream__inner { grid-template-columns: 1fr; gap: 1.8rem; text-align: center; }
+    .stream__badge { white-space: normal; }
+    .stream__items { grid-template-columns: 1fr; gap: 1.2rem; text-align: left; }
+    .fast-facts__grid { grid-template-columns: repeat(2, 1fr); }
+    .fact:nth-child(2) { border-right: none; }
+    .fact:nth-child(3), .fact:nth-child(4) { border-top: 1px solid var(--silver); }
+    .impact-story__grid { grid-template-columns: 1fr; }
+    .impact-story__photo { max-width: 460px; }
+    .impact-story__float { right: 0; }
+    .other-projects__grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    .page-hero { min-height: 64vh; }
+    .fast-facts__grid { grid-template-columns: repeat(2, 1fr); }
+    .workshops__grid { grid-template-columns: repeat(2, 1fr); }
+    .other-projects__grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .top-bar__info { display: none; }
+    .project-cta__buttons { flex-direction: column; align-items: center; }
+    .hub { padding: 2.5rem 2rem 3rem; min-height: auto; }
+  }
+  </style>
+</head>
+
+<body>
+
+<div class="top-bar">
+  <div class="container">
+    <div class="top-bar__info">
+      <span>UK Charity #1167115</span>
+      <span class="top-bar__dot">·</span>
+      <span>Malagasy NGO</span>
+      <span class="top-bar__dot">·</span>
+      <span>Association France SIREN 85242793900016</span>
+      <span class="top-bar__dot">·</span>
+      <span>Association Suisse</span>
+    </div>
+    <nav class="lang-switch" aria-label="Language switcher">
+      <a href="index.html" class="lang-switch__btn is-active" lang="en">EN</a>
+      <a href="index-fr.html" class="lang-switch__btn" lang="fr">FR</a>
+    </nav>
+  </div>
+</div>
+
+<header class="navbar" id="navbar" role="banner">
+  <div class="container">
+    <a href="../../index.html" class="navbar__logo" aria-label="Education for Madagascar — home">
+      <img src="../../images/logo_mini.jpeg" alt="Education for Madagascar logo" class="logo-image">
+      <span class="logo-text">Education<br>for Madagascar</span>
+    </a>
+    <ul class="nav__list" role="list">
+      <li class="nav__item" id="ni-who">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-who')">
+          Who we are <span class="nav__chevron" aria-hidden="true"></span>
+        </button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="../../who-we-are/our-story.html">Our story<span class="dropdown__sub">History &amp; founding vision</span></a>
+          <a class="dropdown__link" href="../../who-we-are/team.html">Team &amp; board<span class="dropdown__sub">The people behind E4M</span></a>
+          <a class="dropdown__link" href="../../who-we-are/governance.html">Governance &amp; statutes</a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="../../who-we-are/annual-reports.html">Annual reports</a>
+          <a class="dropdown__link" href="../../who-we-are/partners.html">Our partners</a>
+        </div>
+      </li>
+      <li class="nav__item" id="ni-proj">
+        <button class="nav__link is-active" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-proj')">
+          Our projects <span class="nav__chevron" aria-hidden="true"></span>
+        </button>
+        <div class="dropdown--mega">
+          <div class="mega__col">
+            <p class="mega__heading mega__heading--edu">Education</p>
+            <a class="mega__link" href="akka.html">AKKA Montessori <span class="badge badge--age">3–6 yrs</span></a>
+            <a class="mega__link" href="kanto.html" style="color:var(--green);font-weight:600;">KANTO Culture <span class="badge badge--age">9–22 yrs</span></a>
+            <a class="mega__link" href="care.html">CARE Coding &amp; Robotics</a>
+            <a class="mega__link" href="scola.html">SCOLA Scholarship <span class="badge badge--age">18+</span></a>
+            <a class="mega__link" href="tuto.html">TUTO</a>
+            <a class="mega__link" href="vim.html">VIM — Volunteering</a>
+            <a class="mega__link" href="cad.html">Career Day Awareness</a>
+            <a class="mega__link" href="unesco.html">UNESCO Partnership <span class="badge badge--new">New</span></a>
+          </div>
+          <div class="mega__col">
+            <p class="mega__heading mega__heading--health">Health</p>
+            <a class="mega__link" href="../health/women.html">School for Women</a>
+            <a class="mega__link" href="../health/fody.html">FODY</a>
+            <a class="mega__link" href="../health/tomady.html">TOMADY</a>
+            <div class="mega__col-gap"></div>
+            <p class="mega__heading mega__heading--env">Environment</p>
+            <a class="mega__link" href="../environment/silva.html">SILVA</a>
+            <a class="mega__link" href="../environment/wash.html">WASH</a>
+            <a class="mega__link" href="../environment/permada.html">PERMADA</a>
+          </div>
+          <div class="mega__col">
+            <p class="mega__heading mega__heading--edu">Overview</p>
+            <p class="mega__summary">13 active projects across education, health, and the environment — serving children aged 3 to 18 and women in rural Madagascar.</p>
+            <a class="mega__all-link" href="../index.html">All projects →</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav__item" id="ni-inv">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-inv')">
+          Get involved <span class="nav__chevron" aria-hidden="true"></span>
+        </button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="../../get-involved/volunteer.html">Volunteer (VIM)<span class="dropdown__sub">Live &amp; work in Madagascar</span></a>
+          <a class="dropdown__link" href="../../get-involved/donate.html">Donate<span class="dropdown__sub">Fund our programmes directly</span></a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="../../get-involved/partner.html">Become a partner</a>
+        </div>
+      </li>
+      <li class="nav__item" id="ni-media">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-media')">
+          Media <span class="nav__chevron" aria-hidden="true"></span>
+        </button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="../../media/blog.html">Blog</a>
+          <a class="dropdown__link" href="../../media/newsletters.html">Newsletters</a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="../../who-we-are/annual-reports.html">Annual reports</a>
+        </div>
+      </li>
+    </ul>
+    <div class="nav__actions">
+      <a href="#shop" class="btn-shop">The Shop ↗</a>
+      <a href="../../get-involved/donate.html" class="btn-donate">Donate</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMobile()">
+      <span class="hamburger__bar"></span><span class="hamburger__bar"></span><span class="hamburger__bar"></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation">
+  <div class="mob-section" id="mob-who">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-who')">Who we are <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="../../who-we-are/our-story.html">Our story</a>
+      <a class="mob-link" href="../../who-we-are/team.html">Team &amp; board</a>
+      <a class="mob-link" href="../../who-we-are/governance.html">Governance &amp; statutes</a>
+      <a class="mob-link" href="../../who-we-are/annual-reports.html">Annual reports</a>
+      <a class="mob-link" href="../../who-we-are/partners.html">Our partners</a>
+    </div>
+  </div>
+  <div class="mob-section" id="mob-proj">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-proj')">Our projects <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <div class="mob-subheading">Education</div>
+      <a class="mob-link" href="akka.html">AKKA Montessori</a>
+      <a class="mob-link" href="kanto.html" style="color:var(--green);font-weight:600;">KANTO Culture</a>
+      <a class="mob-link" href="care.html">CARE Coding &amp; Robotics</a>
+      <a class="mob-link" href="scola.html">SCOLA Scholarship</a>
+      <a class="mob-link" href="tuto.html">TUTO</a>
+      <a class="mob-link" href="vim.html">VIM — Volunteering</a>
+      <a class="mob-link" href="cad.html">Career Day Awareness</a>
+      <a class="mob-link" href="unesco.html">UNESCO Partnership</a>
+      <div class="mob-subheading">Health</div>
+      <a class="mob-link" href="../health/women.html">School for Women</a>
+      <a class="mob-link" href="../health/fody.html">FODY</a>
+      <a class="mob-link" href="../health/tomady.html">TOMADY</a>
+      <div class="mob-subheading">Environment</div>
+      <a class="mob-link" href="../environment/silva.html">SILVA</a>
+      <a class="mob-link" href="../environment/wash.html">WASH</a>
+      <a class="mob-link" href="../environment/permada.html">PERMADA</a>
+    </div>
+  </div>
+  <div class="mob-section" id="mob-inv">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-inv')">Get involved <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="../../get-involved/volunteer.html">Volunteer (VIM)</a>
+      <a class="mob-link" href="../../get-involved/donate.html">Donate</a>
+      <a class="mob-link" href="../../get-involved/partner.html">Become a partner</a>
+    </div>
+  </div>
+  <div class="mob-section" id="mob-media">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-media')">Media <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="../../media/blog.html">Blog</a>
+      <a class="mob-link" href="../../media/newsletters.html">Newsletters</a>
+      <a class="mob-link" href="../../who-we-are/annual-reports.html">Annual reports</a>
+    </div>
+  </div>
+  <div class="mob-actions">
+    <a href="#shop" class="btn-shop">The Shop ↗</a>
+    <a href="../../get-involved/donate.html" class="btn-donate">Donate</a>
+  </div>
+</nav>
+
+<nav class="breadcrumb breadcrumb--education" aria-label="Breadcrumb"> 
+  <div class="container">
+    <ul class="breadcrumb__list">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../index.html">Our Projects</a></li>
+      <li><span class="breadcrumb__current">Education</span></li>
+      <li><span class="breadcrumb__current">KANTO Culture</span></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ════ PAGE HERO ════ -->
+<section class="page-hero" aria-label="KANTO project hero">
+  <div class="page-hero__bg" role="img" aria-label="Young people making music and playing chess at KANTO, Madagascar"></div>
+  <div class="page-hero__pattern" aria-hidden="true"></div>
+  <div class="page-hero__content">
+    <div class="container">
+      <span class="page-hero__kicker">In partnership with Club UNESCO</span>
+      <span class="page-hero__malagasy"> </span>
+      <h1 class="page-hero__title">KANTO Culture</h1>
+      <div class="page-hero__triad">
+        <span>Art</span><span class="sep">·</span><span>Mind</span><span class="sep">·</span><span>Empowerment</span>
+      </div>
+      <div class="page-hero__tags">
+        <span class="hero-tag">Education</span>
+        <span class="hero-tag">Ages 9–22</span>
+        <span class="hero-tag">45 young people</span>
+        <span class="hero-tag">Music · Chess · Arts</span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true">
+    <span>Discover</span>
+    <div class="scroll-hint__line"></div>
+  </div>
+</section>
+
+<!-- ════ INTRO ════ -->
+<section class="intro" aria-labelledby="intro-heading">
+  <div class="container">
+    <div class="intro__grid">
+      <div class="intro__stat-block">
+        <div class="intro__big-number">45</div>
+        <p class="intro__stat-label">young people growing through<br>art and strategy every week</p>
+        <ul class="intro__pill-list">
+          <li class="intro__pill"><span class="intro__pill-dot"></span><span><strong>Ages : </strong> 9 to 22 years old</span></li>
+          <li class="intro__pill"><span class="intro__pill-dot"></span><span><strong>Music Hub : </strong> 22 students</span></li>
+          <li class="intro__pill"><span class="intro__pill-dot"></span><span><strong>Chess Academy : </strong> 23 players</span></li>
+          <li class="intro__pill"><span class="intro__pill-dot"></span><span><strong>In partnership with </strong> Club UNESCO</span></li>
+          <li class="intro__pill"><span class="intro__pill-dot"></span><span><strong>Mentor : </strong> Rajaona Raharijaona</span></li>
+        </ul>
+      </div>
+
+      <div>
+        <span class="intro__eyebrow">About the programme</span>
+        <h2 class="intro__heading" id="intro-heading">Where creativity and strategy<br>build confident young leaders</h2>
+        <!-- NOTE TO TEAM: age range set to 9–22 per latest flyer.
+             The live site currently says 7–12 — please confirm which
+             is correct and update the hero tag + pill accordingly. -->
+        <div class="intro__body">
+          <p>
+            <strong>Kanto</strong> means "culture" in Malagasy — and at KANTO, culture is taken in its broadest sense. Across eight weekly workshops, young people improve their languages, learn an instrument, play chess, dance, and create art. The programme runs every Saturday — and every day through the holidays — at the Ambohibe centre in Antananarivo.
+          </p>
+          <p>
+            Language opens the door to the world: French and Malagasy so every child becomes fluent in Madagascar's two official languages, plus English for a wider horizon. Music nurtures creativity and self-discipline. Chess sharpens reasoning and patience. Together, through practice, tournaments and rehearsals, KANTO grows a spirit of community, organisation, and quiet excellence.
+          </p>
+        </div>
+        <div class="unesco-flag">
+          🌍&nbsp;<span>An <strong>UNESCO Club</strong> partnership — uniting art, education and civic values.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ THE TWO HUBS ════ -->
+<section class="hubs" aria-labelledby="hubs-heading">
+  <div class="container">
+    <div class="hubs__header">
+      <span class="hubs__eyebrow">Two hubs, one mission</span>
+      <h2 class="hubs__title" id="hubs-heading">The heart of KANTO</h2>
+      <p class="hubs__intro">Music opens the heart; chess sharpens the mind. Together they teach the same lesson — that practice, patience and courage turn potential into mastery.</p>
+    </div>
+  </div>
+
+  <div class="hubs__split">
+    <!-- MUSIC HUB -->
+    <div class="hub hub--music">
+      <span class="hub__ghost" aria-hidden="true">♪</span>
+      <div class="hub__count">22</div>
+      <div class="hub__count-label">students</div>
+      <h3 class="hub__name">Music Hub</h3>
+      <p class="hub__desc">Before the first piano, the children kept the beat on old cans. Today, with violins, guitars and voices, every birthday is celebrated in song — piano, violin, guitar and voice nurturing creativity and self-discipline.</p>
+      <div class="hub__list">
+        <div class="hub__list-item">Piano</div>
+        <div class="hub__list-item">Violin</div>
+        <div class="hub__list-item">Guitar</div>
+        <div class="hub__list-item">Voice &amp; ensemble</div>
+      </div>
+    </div>
+
+    <!-- CHESS ACADEMY -->
+    <div class="hub hub--chess">
+      <span class="hub__ghost" aria-hidden="true">♞</span>
+      <div class="hub__count">23</div>
+      <div class="hub__count-label">players</div>
+      <h3 class="hub__name">Chess Academy</h3>
+      <p class="hub__desc">It began with three donated boards. With no electronic games or costly entertainment, the children of Ambohibe took to chess — building patient, strategic battles across barriers of age, language and status.</p>
+      <div class="hub__list">
+        <div class="hub__list-item">Strategy &amp; analytical thinking</div>
+        <div class="hub__list-item">In-house tournaments</div>
+        <div class="hub__list-item">Fairness, inclusion &amp; respect</div>
+        <div class="hub__list-item">Mentored by Rajaona Raharijaona</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ THE 8 WORKSHOPS ════ -->
+<section class="workshops" aria-labelledby="workshops-heading">
+  <div class="container">
+    <div class="workshops__header">
+      <span class="workshops__eyebrow">Eight weekly workshops</span>
+      <h2 class="workshops__title" id="workshops-heading">A full cultural education</h2>
+      <p class="workshops__intro">Beyond the two flagship hubs, KANTO offers a complete cultural programme — from languages that open the world to dance, art and strategy.</p>
+    </div>
+    <div class="workshops__grid">
+      <div class="workshop">
+        <span class="workshop__icon" aria-hidden="true">🇫🇷</span>
+        <span class="workshop__name">French Club</span>
+        <span class="workshop__tag">Language</span>
+      </div>
+      <div class="workshop">
+        <span class="workshop__icon" aria-hidden="true">🌐</span>
+        <span class="workshop__name">English Club</span>
+        <span class="workshop__tag">Language</span>
+      </div>
+      <div class="workshop">
+        <span class="workshop__icon" aria-hidden="true">🎹</span>
+        <span class="workshop__name">Piano</span>
+        <span class="workshop__tag">Music</span>
+      </div>
+      <div class="workshop">
+        <span class="workshop__icon" aria-hidden="true">🎻</span>
+        <span class="workshop__name">Violin</span>
+        <span class="workshop__tag">Music</span>
+      </div>
+      <div class="workshop">
+        <span class="workshop__icon" aria-hidden="true">🎸</span>
+        <span class="workshop__name">Guitar</span>
+        <span class="workshop__tag">Music</span>
+      </div>
+      <div class="workshop">
+        <span class="workshop__icon" aria-hidden="true">💃</span>
+        <span class="workshop__name">Dance</span>
+        <span class="workshop__tag">Movement</span>
+      </div>
+      <div class="workshop">
+        <span class="workshop__icon" aria-hidden="true">♟️</span>
+        <span class="workshop__name">Chess</span>
+        <span class="workshop__tag">Strategy</span>
+      </div>
+      <div class="workshop">
+        <span class="workshop__icon" aria-hidden="true">🎨</span>
+        <span class="workshop__name">Plastic Arts</span>
+        <span class="workshop__tag">Creativity</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CHILD-LED PHILOSOPHY ════ -->
+<section class="philosophy" aria-labelledby="philosophy-heading">
+  <div class="container">
+    <div class="philosophy__grid">
+      <div>
+        <span class="philosophy__eyebrow">Our approach</span>
+        <h2 class="philosophy__heading" id="philosophy-heading">The children lead<br>their own learning</h2>
+      </div>
+      <div class="philosophy__body">
+        <p>
+          KANTO gives young people instruments, board games, art materials and tablets — then trusts them with the freedom to choose. Over time, each child takes charge of the workshops with only minimal guidance from a staff member.
+        </p>
+        <p>
+          That freedom of choice is the method, not an afterthought. When a child decides what to practise, motivation follows — and with it the <strong>self-discipline, organisation and spirit of excellence</strong> that KANTO exists to nurture. There is no competition in art; progress is simply made as one strives.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ MISSION QUOTE ════ -->
+<section class="pullquote" aria-label="Project mission">
+  <div class="container">
+    <div class="pullquote__inner">
+      <p class="pullquote__malagasy">Teny sy Sining</p>
+      <p class="pullquote__translation">Words and Arts</p>
+      <blockquote class="pullquote__quote">
+        In every child there is an artist — the problem is how to remain an artist once we grow up.
+      </blockquote>
+      <p class="pullquote__attribution">— Pablo Picasso</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FAST FACTS ════ -->
+<div class="fast-facts" aria-label="KANTO key facts">
+  <div class="container">
+    <div class="fast-facts__grid">
+      <div class="fact">
+        <div class="fact__icon">🎵</div>
+        <div class="fact__val">22</div>
+        <div class="fact__label">music students<br>piano · guitar · violin</div>
+      </div>
+      <div class="fact">
+        <div class="fact__icon">♞</div>
+        <div class="fact__val">23</div>
+        <div class="fact__label">chess players<br>strategy &amp; analysis</div>
+      </div>
+      <div class="fact">
+        <div class="fact__icon">🎭</div>
+        <div class="fact__val">8</div>
+        <div class="fact__label">weekly workshops<br>languages to the arts</div>
+      </div>
+      <div class="fact">
+        <div class="fact__icon">📍</div>
+        <div class="fact__val">Ilafy</div>
+        <div class="fact__label">Ambohibe centre<br>Antananarivo</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ IMPACT STORY ════ -->
+<section class="impact-story" aria-labelledby="story-heading">
+  <div class="container">
+    <div class="impact-story__grid">
+      <div>
+        <div class="impact-story__photo">
+          <div class="photo-placeholder-label">
+            <svg width="40" height="40" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Student portrait photo
+          </div>
+          <div class="impact-story__float">
+            <p class="impact-story__float-quote">"Every birthday is now celebrated in song."</p>
+            <span class="impact-story__float-name">KANTO, Ambohibe</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <span class="impact-story__eyebrow">How it began</span>
+        <h2 class="impact-story__heading" id="story-heading">From old cans to a chorus of violins</h2>
+        <div class="impact-story__body">
+          <p>
+            In the beginning there were no instruments — only old cans the children drummed to keep the beat, a sound like the music of Brazil's favelas. Then came a piano. Later, four violins and two guitars.
+          </p>
+          <p>
+            Chess arrived the same way: three boards, donated. In a village with no electronic games or costly entertainment, the children of Ambohibe learned to wage patient, peaceful battles on the board — and their humble club, full of potential, held its first tournament.
+          </p>
+          <p>
+            Today every birthday at KANTO is celebrated in song, with two guitars and three different voices. That is the heart of it: not what the children are given, but what they build with it.
+          </p>
+        </div>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <a href="../../get-involved/donate.html" class="btn btn-kanto">Support KANTO</a>
+          <a href="../../get-involved/volunteer.html" class="btn btn-kanto-outline">Teach at KANTO</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CTA ════ -->
+<section class="project-cta" aria-labelledby="cta-heading">
+  <div class="container">
+    <div class="project-cta__inner">
+      <span class="project-cta__label">Invest in a young person's potential</span>
+      <h2 id="cta-heading">Fund a year of music, chess and creativity</h2>
+      <p>
+        Your support keeps instruments in young hands, chess clocks ticking, and the doors open every week. Every gift helps shape a confident, creative, conscious young leader.
+      </p>
+      <div class="project-cta__buttons">
+        <a href="https://buy.stripe.com/cN2eWi7dYdnK9XifZ6" class="btn btn-white" target="_blank" rel="noopener">Donate now</a>
+        <a href="../../get-involved/volunteer.html" class="btn btn-outline-white">Volunteer with KANTO</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ OTHER PROJECTS ════ -->
+<section class="other-projects" aria-labelledby="other-heading">
+  <div class="container">
+    <div class="other-projects__header">
+      <span class="section-eyebrow">Keep exploring</span>
+      <h2 class="section-heading" id="other-heading">Other Education projects</h2>
+    </div>
+    <div class="other-projects__grid">
+      <a class="proj-card" href="akka.html">
+        <div class="proj-card__thumb"><span class="proj-card__tag">Ages 3–6</span></div>
+        <div class="proj-card__body">
+          <h3 class="proj-card__title">AKKA Montessori School</h3>
+          <p class="proj-card__desc">Bilingual Montessori education for early childhood, grounded in Malagasy culture and international pedagogy.</p>
+          <span class="proj-card__link">Learn more →</span>
+        </div>
+      </a>
+      <a class="proj-card" href="scola.html">
+        <div class="proj-card__thumb"><span class="proj-card__tag">Ages 17–25</span></div>
+        <div class="proj-card__body">
+          <h3 class="proj-card__title">SCOLA Scholarship</h3>
+          <p class="proj-card__desc">Post-baccalaureate scholarships empowering youth toward economic independence and leadership.</p>
+          <span class="proj-card__link">Learn more →</span>
+        </div>
+      </a>
+      <a class="proj-card" href="care.html">
+        <div class="proj-card__thumb"><span class="proj-card__tag">Ages 12+</span></div>
+        <div class="proj-card__body">
+          <h3 class="proj-card__title">CARE Coding &amp; Robotics</h3>
+          <p class="proj-card__desc">Digital skills training preparing the next generation of tech innovators and creators.</p>
+          <span class="proj-card__link">Learn more →</span>
+        </div>
+      </a>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;">
+      <a href="../index.html" class="btn btn-outline">See all 13 projects</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Education for Madagascar</h3>
+        <p>Committed to UN SDG 4 — Quality Education for all children, from early childhood to economic independence.</p>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/educationformadagascar" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener">f</a>
+          <a href="https://www.instagram.com/educationformadagascar/" class="social-btn" aria-label="Instagram" target="_blank" rel="noopener">ig</a>
+          <a href="https://www.linkedin.com/company/educationformadagascar/" class="social-btn" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Education</h4>
+        <ul>
+          <li><a href="akka.html">AKKA Montessori</a></li>
+          <li><a href="kanto.html">KANTO</a></li>
+          <li><a href="scola.html">SCOLA</a></li>
+          <li><a href="care.html">CARE Coding</a></li>
+          <li><a href="vim.html">VIM</a></li>
+          <li><a href="cad.html">Career Day</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="../../media/blog.html">Blog</a></li>
+          <li><a href="#">Artisan Shop</a></li>
+          <li><a href="../../who-we-are/annual-reports.html">Annual Reports</a></li>
+          <li><a href="../../media/newsletters.html">Newsletter</a></li>
+          <li><a href="../health/tomady.html">TOMADY Health</a></li>
+          <li><a href="../environment/silva.html">SILVA Environment</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@educationformadagascar.org">contact@educationformadagascar.org</a></li>
+          <li style="font-size:.85rem;margin-top:.3rem;">23 Milner Drive, Cobham<br>KT11 2EZ, United Kingdom</li>
+          <li style="margin-top:.8rem;font-size:.75rem;opacity:.55;line-height:1.8;">
+            UK Charity #1167115<br>FR SIREN 85242793900016<br>MG NIF 4002796057
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Education for Madagascar. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Legal Notice</a>
+        <a href="#">Safeguarding</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../../js/global.js"></script>
+</body>
+</html>
