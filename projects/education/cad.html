@@ -1,1 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CAD — Career Day Awareness | Education for Madagascar</title>
+<meta name="description" content="CAD: Career Day Awareness. Helping young Malagasies discover the professions of the future and find their ikigai — in partnership with SESAME. Guided by real professionals each year." />
+<link rel="stylesheet" href="../../css/global.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#195301; --cream:#eeebd9; --teal:#006C65; --charcoal:#535353; --silver:#D5D5D5; --white:#fff;
+  --gold-bg:#EFBF04; --gold-text:#856A00;
+  --cad:#010279; --cad-deep:#000040; --cad-lt:#3a3ba8; --cad-wash:#eeeef7;
+  --ik-love:#e0566b; --ik-good:#3a8fc4; --ik-world:#5cb85c; --ik-paid:#e0a93a;
+  --font-display:"Charter",Georgia,serif; --font-body:"Avenir Next",system-ui,sans-serif;
+  --nav-h:92px; --topbar-h:40px; --max-w:1160px; --r:4px; --r-lg:10px; --ease:0.22s ease;
+}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--white); color: var(--charcoal); line-height: 1.65; }
+  img  { display: block; max-width: 100%; }
+  a    { text-decoration: none; color: inherit; }
+  ul   { list-style: none; }
+  button { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
+  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+  .btn { display: inline-block; padding: .75rem 1.75rem; border-radius: var(--r); font-weight: 500; font-size: .95rem; cursor: pointer; transition: background var(--ease), color var(--ease), transform var(--ease); }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: var(--green); color: var(--cream); }
+  .btn-primary:hover { background: #1f6701; }
+  .btn-outline { border: 2px solid var(--green); color: var(--green); }
+  .btn-outline:hover { background: var(--green); color: var(--cream); }
+  .top-bar { background: var(--green); color: var(--cream); height: var(--topbar-h); font-size: .72rem; }
+  .top-bar .container { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .top-bar__info { display: flex; align-items: center; gap: 1.25rem; opacity: .85; flex-wrap: wrap; }
+  .top-bar__info span { white-space: nowrap; }
+  .top-bar__dot { opacity: .35; }
+  .lang-switch { display: flex; align-items: center; gap: .25rem; flex-shrink: 0; }
+  .lang-switch__btn { padding: .2rem .55rem; border-radius: var(--r); color: var(--cream); font-size: .72rem; font-weight: 500; opacity: .7; transition: opacity var(--ease), background var(--ease); }
+  .lang-switch__btn:hover { opacity: 1; }
+  .lang-switch__btn.is-active { background: rgba(255,255,255,.15); opacity: 1; }
+  .navbar { position: sticky; top: 0; z-index: 200; background: var(--white); border-bottom: 1px solid var(--silver); height: var(--nav-h); transition: box-shadow var(--ease); }
+  .navbar.is-scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.08); }
+  .navbar .container { height: 100%; display: flex; align-items: center; }
+  .navbar__logo { display: flex; align-items: center; gap: .6rem; margin-right: 2rem; flex-shrink: 0; }
+  .logo-image { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+  .logo-text { font-family: var(--font-display); font-size: 1.20rem; font-weight: 700; color: var(--green); line-height: 1.2; text-transform: uppercase; letter-spacing: .04em; }
+  .nav__list { display: flex; align-items: center; height: 100%; flex: 1; }
+  .nav__item { position: relative; height: 100%; display: flex; align-items: center; }
+  .nav__link { display: flex; align-items: center; gap: .3rem; padding: 0 .9rem; height: 100%; font-size: .875rem; font-weight: 500; color: var(--charcoal); white-space: nowrap; border-bottom: 2px solid transparent; transition: color var(--ease), border-color var(--ease); user-select: none; }
+  .nav__link:hover { color: var(--green); }
+  .nav__link.is-active { color: var(--green); border-bottom-color: var(--green); }
+  .nav__item.is-open .nav__link { color: var(--green); }
+  .nav__chevron { width: 8px; height: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-1px); transition: transform var(--ease); flex-shrink: 0; }
+  .nav__item.is-open .nav__chevron { transform: rotate(-135deg) translateY(2px); }
+  .dropdown { visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(6px); transition: opacity var(--ease), transform var(--ease), visibility 0s var(--ease); position: absolute; top: calc(var(--nav-h) - 1px); left: 0; min-width: 240px; background: var(--white); border: 1px solid var(--silver); border-top: none; border-radius: 0 0 var(--r-lg) var(--r-lg); box-shadow: 0 10px 32px rgba(0,0,0,.09); padding: .5rem 0; }
+  .nav__item.is-open .dropdown { visibility: visible; opacity: 1; pointer-events: auto; transform: translateY(0); transition: opacity var(--ease), transform var(--ease); }
+  .dropdown__link { display: block; padding: .6rem 1.2rem; font-size: .875rem; color: var(--charcoal); transition: background var(--ease), color var(--ease); }
+  .dropdown__link:hover { background: var(--cream); color: var(--green); }
+  .dropdown__sub { display: block; font-size: .75rem; color: var(--charcoal); opacity: .6; margin-top: .1rem; font-weight: 400; }
+  .dropdown__separator { height: 1px; background: var(--silver); margin: .4rem 1.2rem; opacity: .5; }
+  .dropdown--mega { visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(6px); transition: opacity var(--ease), transform var(--ease), visibility 0s var(--ease); position: absolute; top: calc(var(--nav-h) - 1px); left: -60px; width: 620px; background: var(--white); border: 1px solid var(--silver); border-top: none; border-radius: 0 0 var(--r-lg) var(--r-lg); box-shadow: 0 10px 32px rgba(0,0,0,.09); display: grid; grid-template-columns: 1fr 1fr 180px; }
+  .nav__item.is-open .dropdown--mega { visibility: visible; opacity: 1; pointer-events: auto; transform: translateY(0); transition: opacity var(--ease), transform var(--ease); }
+  .mega__col { padding: 1.2rem 1.1rem; border-right: 1px solid rgba(213,213,213,.5); }
+  .mega__col:last-child { border-right: none; background: #f8f7f2; border-radius: 0 0 var(--r-lg) 0; }
+  .mega__heading { font-size: .67rem; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; margin-bottom: .6rem; padding-bottom: .5rem; border-bottom: 1px solid var(--silver); }
+  .mega__heading--edu { color: var(--green); }
+  .mega__heading--health { color: #b83030; }
+  .mega__heading--env { color: var(--teal); }
+  .mega__link { display: flex; align-items: center; gap: .5rem; padding: .4rem 0; font-size: .83rem; color: var(--charcoal); transition: color var(--ease); }
+  .mega__link:hover { color: var(--green); }
+  .badge { font-size: .62rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: .12rem .45rem; border-radius: 20px; flex-shrink: 0; }
+  .badge--age { background: #efefef; color: var(--charcoal); }
+  .badge--new { background: #edf7e8; color: var(--green); }
+  .mega__summary { font-size: .8rem; line-height: 1.6; color: var(--charcoal); margin-bottom: 1rem; }
+  .mega__all-link { display: inline-flex; align-items: center; gap: .3rem; font-size: .82rem; font-weight: 600; color: var(--green); transition: gap var(--ease); }
+  .mega__all-link:hover { gap: .55rem; }
+  .mega__col-gap { margin-top: .9rem; }
+  .nav__actions { display: flex; align-items: center; gap: .5rem; margin-left: auto; padding-left: 1rem; flex-shrink: 0; }
+  .btn-shop { padding: .42rem 1rem; font-size: .82rem; font-weight: 500; color: var(--teal); border: 1.5px solid var(--teal); border-radius: var(--r); transition: background var(--ease), color var(--ease); }
+  .btn-shop:hover { background: var(--teal); color: var(--white); }
+  .btn-donate { padding: .42rem 1.1rem; font-size: .82rem; font-weight: 600; background: var(--green); color: var(--cream); border-radius: var(--r); transition: background var(--ease), color var(--ease), transform var(--ease); }
+  .btn-donate:hover { background: var(--gold-bg); color: var(--gold-text); transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; padding: .4rem; margin-left: auto; border-radius: var(--r); transition: background var(--ease); }
+  .hamburger:hover { background: var(--cream); }
+  .hamburger__bar { width: 100%; height: 2px; background: var(--green); border-radius: 2px; transition: transform var(--ease), opacity var(--ease); }
+  .hamburger.is-open .hamburger__bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.is-open .hamburger__bar:nth-child(2) { opacity: 0; }
+  .hamburger.is-open .hamburger__bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-drawer { display: none; position: fixed; top: calc(var(--topbar-h) + var(--nav-h)); left: 0; right: 0; bottom: 0; background: var(--white); overflow-y: auto; z-index: 190; padding: 1rem 0 2rem; border-top: 1px solid var(--silver); }
+  .mobile-drawer.is-open { display: block; }
+  .mob-section__toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: .85rem 1.5rem; font-size: .95rem; font-weight: 500; color: var(--charcoal); border-bottom: 1px solid var(--silver); background: none; text-align: left; transition: background var(--ease); }
+  .mob-section__toggle:hover { background: var(--cream); }
+  .mob-section__content { display: none; padding: .5rem 0; background: #fafaf7; border-bottom: 1px solid var(--silver); }
+  .mob-section.is-open .mob-section__content { display: block; }
+  .mob-subheading { font-size: .67rem; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; color: var(--green); padding: .6rem 1.8rem .3rem; }
+  .mob-link { display: flex; align-items: center; justify-content: space-between; padding: .55rem 1.8rem; font-size: .875rem; color: var(--charcoal); transition: background var(--ease), color var(--ease); }
+  .mob-link:hover { background: var(--cream); color: var(--green); }
+  .mob-actions { display: flex; gap: .75rem; padding: 1.2rem 1.5rem 0; }
+  .mob-actions .btn-shop, .mob-actions .btn-donate { flex: 1; text-align: center; font-size: .9rem; padding: .65rem 1rem; }
+  .breadcrumb { padding: 0.85rem 0; }
+  .breadcrumb .container { width: fit-content; margin-left: 0; }
+  .section-eyebrow { display: block; font-size: .72rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); margin-bottom: .75rem; }
+  .section-heading { font-family: var(--font-display); font-size: clamp(1.8rem,3vw,2.4rem); color: var(--green); line-height: 1.2; }
+  .other-projects { padding: 5.5rem 0; background: var(--cream); }
+  .other-projects__header { margin-bottom: 2.5rem; }
+  .other-projects__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .proj-card { background: var(--white); border-radius: var(--r-lg); overflow: hidden; transition: transform var(--ease), box-shadow var(--ease); display: flex; flex-direction: column; }
+  .proj-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,.09); }
+  .proj-card__thumb { height: 140px; position: relative; }
+  .proj-card__tag { position: absolute; top: .75rem; left: .75rem; background: rgba(255,255,255,.9); color: var(--green); font-size: .65rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: .2rem .6rem; border-radius: 20px; }
+  .proj-card__body { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; }
+  .proj-card__title { font-family: var(--font-display); font-size: 1rem; color: var(--green); margin-bottom: .4rem; }
+  .proj-card__desc { font-size: .82rem; color: var(--charcoal); line-height: 1.55; flex: 1; margin-bottom: .9rem; }
+  .proj-card__link { font-size: .78rem; font-weight: 600; color: var(--teal); display: inline-flex; align-items: center; gap: .3rem; transition: gap var(--ease); }
+  .proj-card:hover .proj-card__link { gap: .6rem; }
+  footer { background: #111; color: var(--silver); padding: 4rem 0 2rem; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-brand h3 { font-family: var(--font-display); color: var(--cream); font-size: 1.15rem; margin-bottom: .75rem; }
+  .footer-brand p { font-size: .85rem; line-height: 1.65; margin-bottom: 1.2rem; max-width: 280px; }
+  .footer-socials { display: flex; gap: .75rem; }
+  .social-btn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; font-size: .8rem; color: var(--silver); transition: background var(--ease), border-color var(--ease); }
+  .social-btn:hover { background: var(--teal); border-color: var(--teal); color: #fff; }
+  .footer-col h4 { color: var(--cream); font-size: .82rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1.1rem; }
+  .footer-col li { margin-bottom: .5rem; }
+  .footer-col a { font-size: .87rem; color: var(--silver); transition: color var(--ease); }
+  .footer-col a:hover { color: var(--cream); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: .8rem; }
+  .footer-legal { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .footer-legal a { color: var(--silver); transition: color var(--ease); }
+  .footer-legal a:hover { color: var(--cream); }
+/* CAD hero — deep indigo night, cherry-blossom accent */
+.page-hero{position:relative;min-height:78vh;display:flex;align-items:flex-end;overflow:hidden;background:var(--cad-deep);}
+.page-hero__bg{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,25,.9)0%,rgba(1,2,80,.5)45%,rgba(58,59,168,.2)100%),linear-gradient(140deg,#010279 0%,#000040 60%,#1a0b40 100%);background-size:cover;background-position:center;}
+.page-hero__bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 78% 28%,rgba(224,86,107,.22),transparent);pointer-events:none;}
+.page-hero__content{position:relative;z-index:2;padding:4rem 0 4.5rem;width:100%;}
+.page-hero__kicker{display:inline-flex;align-items:center;gap:.6rem;font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#b9c0ff;margin-bottom:1rem;}
+.page-hero__kicker::before{content:'';width:28px;height:1px;background:#b9c0ff;}
+.page-hero__title{font-family:var(--font-display);font-size:clamp(3rem,6.5vw,5.6rem);color:var(--cream);line-height:1.0;letter-spacing:-.01em;margin-bottom:.5rem;}
+.page-hero__sub{font-family:var(--font-display);font-style:italic;font-size:clamp(1.2rem,2.4vw,1.6rem);color:rgba(235,235,255,.9);margin-bottom:2rem;max-width:600px;}
+.page-hero__tags{display:flex;flex-wrap:wrap;gap:.6rem;}
+.hero-tag{padding:.35rem .9rem;border-radius:20px;font-size:.72rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;border:1px solid rgba(235,235,255,.3);color:var(--cream);background:rgba(255,255,255,.08);}
+.hero-tag--accent{background:var(--cream);color:var(--cad);border-color:var(--cream);}
+/* ikigai feature */
+.ikigai{padding:5.5rem 0;background:var(--white);}
+.ikigai__header{text-align:center;max-width:680px;margin:0 auto 3rem;}
+.ikigai__term{font-family:var(--font-display);font-size:clamp(2.4rem,5vw,3.6rem);color:var(--cad);line-height:1;margin-bottom:.6rem;letter-spacing:.02em;}
+.ikigai__def{font-size:1rem;color:var(--charcoal);line-height:1.7;font-style:italic;}
+.ikigai__def strong{font-style:normal;color:var(--cad);}
+.ikigai__layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:1rem;}
+.ikigai__viz{position:relative;}
+.ikigai__explain h3{font-family:var(--font-display);font-size:clamp(1.5rem,2.6vw,2rem);color:var(--green);line-height:1.25;margin-bottom:1.1rem;}
+.ikigai__explain p{font-size:1rem;line-height:1.8;color:var(--charcoal);margin-bottom:1.2rem;}
+.ikigai__keys{display:flex;flex-direction:column;gap:.7rem;margin-top:1.5rem;}
+.ik-key{display:flex;align-items:center;gap:.8rem;font-size:.9rem;color:var(--charcoal);}
+.ik-key__dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;}
+.ik-key strong{color:var(--green);}
+/* CAD intro */
+.intro{padding:5.5rem 0;background:var(--cad-wash);}
+.intro__grid{display:grid;grid-template-columns:260px 1fr;gap:5rem;align-items:start;}
+.intro__stat-block{position:sticky;top:calc(var(--nav-h) + 2rem);}
+.intro__big-number{font-family:var(--font-display);font-size:clamp(4rem,7vw,6rem);color:var(--cad);line-height:1;margin-bottom:.3rem;}
+.intro__stat-label{font-size:.82rem;color:var(--charcoal);line-height:1.5;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--silver);}
+.intro__pill-list{display:flex;flex-direction:column;gap:.7rem;}
+.intro__pill{display:flex;align-items:center;gap:.7rem;font-size:.82rem;color:var(--charcoal);}
+.intro__pill-dot{width:8px;height:8px;border-radius:50%;background:var(--cad);flex-shrink:0;}
+.intro__pill strong{color:var(--cad);font-weight:600;}
+.intro__eyebrow{display:block;font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:.9rem;}
+.intro__heading{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.4rem);color:var(--green);line-height:1.2;margin-bottom:1.4rem;}
+.intro__body{font-size:1.05rem;line-height:1.8;color:var(--charcoal);max-width:640px;}
+.intro__body p+p{margin-top:1.2em;}
+.intro__body strong{color:var(--cad);}
+/* guests */
+.guests{padding:5.5rem 0;background:var(--white);}
+.guests__header{text-align:center;max-width:620px;margin:0 auto 3.5rem;}
+.guests__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;}
+.guest{border-radius:var(--r-lg);overflow:hidden;background:var(--cad-wash);transition:transform var(--ease),box-shadow var(--ease);}
+.guest:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(1,2,121,.12);}
+.guest__photo{aspect-ratio:4/3;background:linear-gradient(145deg,var(--cad-lt),var(--cad-deep));position:relative;display:flex;align-items:center;justify-content:center;}
+.guest__ph{color:rgba(255,255,255,.4);font-size:.72rem;letter-spacing:.06em;text-align:center;padding:1rem;}
+.guest__field{position:absolute;top:.8rem;left:.8rem;background:rgba(255,255,255,.92);color:var(--cad);font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .65rem;border-radius:20px;}
+.guest__body{padding:1.3rem;}
+.guest__role{font-family:var(--font-display);font-size:1.05rem;color:var(--green);margin-bottom:.3rem;}
+.guest__name{font-size:.85rem;color:var(--charcoal);}
+/* mission vision split */
+.mv{padding:5.5rem 0;background:var(--cad-wash);}
+.mv__grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.mv-card{background:var(--white);border-radius:var(--r-lg);padding:2.6rem;border-top:4px solid var(--cad);}
+.mv-card__label{font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:.8rem;}
+.mv-card__q{font-family:var(--font-display);font-style:italic;font-size:1rem;color:var(--cad-lt);margin-bottom:1rem;}
+.mv-card__text{font-size:.95rem;line-height:1.75;color:var(--charcoal);}
+/* sesame partner band */
+.sesame{padding:4.5rem 0;background:var(--cad);color:var(--cream);text-align:center;position:relative;overflow:hidden;}
+.sesame::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 50% 0%,rgba(224,86,107,.18),transparent);pointer-events:none;}
+.sesame__inner{position:relative;z-index:1;max-width:720px;margin:0 auto;}
+.sesame__label{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(235,235,255,.6);margin-bottom:1rem;}
+.sesame__name{font-family:var(--font-display);font-size:clamp(2rem,4vw,2.8rem);margin-bottom:1.2rem;}
+.sesame__text{font-size:1rem;line-height:1.75;color:rgba(235,235,255,.85);}
+.sesame__stat{display:inline-block;margin-top:1.6rem;font-family:var(--font-display);font-size:1.1rem;color:#ffd0d8;border:1px solid rgba(255,208,216,.3);border-radius:30px;padding:.5rem 1.4rem;}
+/* CTA */
+.project-cta{background:var(--cad-deep);padding:5rem 0;text-align:center;position:relative;overflow:hidden;}
+.project-cta::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.05)0%,transparent 60%);pointer-events:none;}
+.project-cta__inner{position:relative;z-index:1;}
+.project-cta__label{display:block;font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(235,235,255,.55);margin-bottom:.75rem;}
+.project-cta h2{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);color:var(--white);line-height:1.15;margin-bottom:1rem;max-width:700px;margin-left:auto;margin-right:auto;}
+.project-cta p{font-size:1rem;color:rgba(235,235,255,.7);max-width:520px;margin:0 auto 2.5rem;line-height:1.75;}
+.project-cta__buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-white{background:var(--white);color:var(--cad);font-weight:600;}
+.btn-white:hover{background:var(--cream);transform:translateY(-2px);}
+.btn-outline-white{border:2px solid rgba(255,255,255,.5);color:var(--white);}
+.btn-outline-white:hover{border-color:var(--white);background:rgba(255,255,255,.1);}
+.proj-card:nth-child(1) .proj-card__thumb{background:linear-gradient(135deg,#2a5c08,#195301);}
+.proj-card:nth-child(2) .proj-card__thumb{background:linear-gradient(135deg,#E05C2B,#a83d18);}
+.proj-card:nth-child(3) .proj-card__thumb{background:linear-gradient(135deg,#153B50,#0d2735);}
+@media(max-width:900px){
+  .nav__list,.nav__actions{display:none;}.hamburger{display:flex;}
+  .ikigai__layout{grid-template-columns:1fr;gap:2.5rem;}
+  .intro__grid{grid-template-columns:1fr;gap:2.5rem;}.intro__stat-block{position:static;}
+  .guests__grid{grid-template-columns:1fr 1fr;}.mv__grid{grid-template-columns:1fr;}
+  .other-projects__grid{grid-template-columns:repeat(2,1fr);}.footer-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:640px){
+  .top-bar__info{display:none;}.guests__grid{grid-template-columns:1fr;}
+  .other-projects__grid{grid-template-columns:1fr;}.footer-grid{grid-template-columns:1fr;}
+  .project-cta__buttons{flex-direction:column;align-items:center;}
+}
 
+/* ═══ EMBEDDED IKIGAI ANIMATION ═══ */
+.ikigai-stage{position:relative;width:100%;font-family:'Noto Serif JP',serif;color:#1C1510;overflow:hidden;display:flex;flex-direction:column;align-items:center;}
+.ikigai-stage::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23f)' opacity='0.04'/%3E%3C/svg%3E");}
+.ik-title{position:relative;z-index:1;text-align:center;opacity:0;transform:translateY(-12px);transition:opacity 1.6s cubic-bezier(.16,1,.3,1),transform 1.6s cubic-bezier(.16,1,.3,1);margin-bottom:1rem;}
+.ik-title.in{opacity:1;transform:none;}
+.ik-title__eyebrow{font-size:10px;letter-spacing:.52em;color:#A09070;margin-bottom:8px;font-weight:200;}
+.ik-title__main{height:54px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;}
+.ik-title__jp,.ik-title__en{position:absolute;transition:opacity .6s ease,transform .6s ease;}
+.ik-title__jp{font-size:42px;letter-spacing:.22em;color:#1C1510;font-weight:300;line-height:1.2;}
+.ik-title__en{font-size:26px;letter-spacing:.06em;color:#1C1510;font-weight:300;opacity:0;transform:translateY(10px);}
+.ikigai-stage.phase-en .ik-title__jp{opacity:0;transform:translateY(-10px);}
+.ikigai-stage.phase-en .ik-title__en{opacity:1;transform:none;}
+.ik-title__sub{font-size:9px;letter-spacing:.68em;color:#B0A080;margin-top:4px;font-weight:200;}
+.ik-body{position:relative;z-index:1;display:flex;flex-direction:column;gap:1.5rem;align-items:center;justify-content:center;width:100%;}
+.ik-diagram{display:flex;align-items:center;justify-content:center;min-width:0;}
+.ik-svg-wrap{width:480px;max-width:100%;aspect-ratio:1;}
+.ik-svg{width:100%;height:100%;display:block;}
+.ik-circle-group{cursor:pointer;transition:opacity .35s ease;}
+.ik-circle-group.dim{opacity:.42;}
+.ik-stroke{fill:none;stroke-width:1.3;stroke-linecap:round;}
+.ik-fill{stroke:none;mix-blend-mode:multiply;opacity:0;transition:opacity 1.2s ease,fill .3s ease;}
+.ik-label{opacity:0;transition:opacity 1.2s ease;pointer-events:none;}
+.ik-label text{font-family:'Noto Serif JP',serif;font-weight:300;letter-spacing:.5px;}
+.ik-intersection,.ik-center,.ik-seal{opacity:0;transition:opacity 1.1s ease;pointer-events:none;}
+.ik-intersection text{font-family:'Noto Serif JP',serif;font-weight:400;letter-spacing:1px;fill:#2A1E14;}
+.ik-center text{font-family:'Noto Serif JP',serif;font-weight:400;letter-spacing:1.5px;fill:#1C1510;}
+.ik-seal text{font-family:'Noto Serif JP',serif;font-weight:300;fill:#B03A58;}
+@keyframes ikBreathe{0%,100%{opacity:0;transform:scale(1);}50%{opacity:.3;transform:scale(1.04);}}
+.ik-pulse{fill:none;stroke-width:.6;mix-blend-mode:multiply;transform-origin:center;transform-box:fill-box;opacity:0;}
+.ikigai-stage.drawn .ik-pulse{animation:ikBreathe 3.6s ease-in-out infinite;}
+.ik-pulse.p0{animation-delay:0s;}.ik-pulse.p1{animation-delay:.18s;}.ik-pulse.p2{animation-delay:.36s;}.ik-pulse.p3{animation-delay:.54s;}
+@keyframes ikAura{0%,100%{opacity:.5;rx:44px;ry:44px;}50%{opacity:1;rx:54px;ry:54px;}}
+.ik-aura{opacity:0;}
+.ikigai-stage.drawn .ik-aura{animation:ikAura 3.8s ease-in-out infinite;}
+@keyframes ikGlow{0%,100%{opacity:.4;}50%{opacity:.7;}}
+.ik-glow{fill:none;stroke-width:1.2;opacity:0;pointer-events:none;}
+.ik-circle-group.sel .ik-glow{opacity:.5;animation:ikGlow 2.2s ease-in-out infinite;}
+.ik-hoverring{fill:none;stroke-width:.8;opacity:0;transition:opacity .25s ease;pointer-events:none;}
+.ik-circle-group:not(.sel):hover .ik-hoverring{opacity:.45;}
+.ik-hint{position:relative;z-index:1;font-size:9px;letter-spacing:.3em;color:#A09070;text-transform:uppercase;margin-top:1.2rem;opacity:0;transition:opacity 1.5s ease;}
+.ikigai-stage.drawn .ik-hint{opacity:.5;}
+.ik-panel{width:100%;max-width:620px;overflow:hidden;max-height:0;transition:max-height .5s cubic-bezier(.4,0,.2,1);}
+.ikigai-stage.panel-open .ik-panel{max-height:900px;}
+.ik-panel__inner{width:100%;padding:28px 26px;background:#EDE5D2;border-radius:10px;border:1px solid rgba(0,0,0,.07);opacity:0;transform:translateY(20px);transition:opacity .42s ease,transform .42s ease;margin-top:.5rem;}
+.ikigai-stage.panel-open .ik-panel__inner{opacity:1;transform:none;}
+.ik-panel__close{float:right;background:none;border:1px solid rgba(0,0,0,.12);border-radius:50%;width:30px;height:30px;cursor:pointer;color:#7A6A55;font-size:14px;line-height:1;transition:background .2s ease;}
+.ik-panel__close:hover{background:rgba(0,0,0,.05);}
+.ik-panel__head{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.ik-panel__dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.ik-panel__title{font-size:17px;font-weight:300;letter-spacing:.03em;font-family:'Noto Serif JP',serif;}
+.ik-panel__desc{font-size:13.5px;color:#2A1E14;line-height:1.8;font-weight:300;margin:0 0 28px;font-family:'Noto Serif JP',serif;}
+.ik-panel__sectlabel{font-size:8.5px;letter-spacing:.42em;color:#A09070;margin-bottom:14px;text-transform:uppercase;}
+.ik-conn{margin-bottom:16px;padding-left:14px;}
+.ik-conn__name{font-size:13px;color:#1C1510;font-weight:400;margin-bottom:4px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-family:'Noto Serif JP',serif;}
+.ik-conn__with{font-size:8px;color:#A09070;letter-spacing:.22em;text-transform:uppercase;}
+.ik-conn__desc{font-size:12px;color:#7A6A55;line-height:1.7;}
+.ik-panel__all{margin-top:24px;padding-top:24px;border-top:1px solid rgba(0,0,0,.07);}
+.ik-allrow{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;}
+.ik-allrow__dot{width:7px;height:7px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+.ik-allrow__label{font-size:11px;margin-bottom:2px;font-weight:400;font-family:'Noto Serif JP',serif;}
+.ik-allrow__desc{font-size:11px;color:#7A6A55;line-height:1.55;}
+.ik-panel__center{margin-top:20px;padding-top:18px;border-top:1px solid rgba(0,0,0,.06);text-align:center;}
+.ik-panel__center p{font-size:11px;color:#A87A10;letter-spacing:.12em;font-style:italic;line-height:1.7;margin:0;}
+.ik-panel__center strong{font-style:normal;}
+@media (max-width:640px){.ik-svg-wrap{width:340px;}}
+@media (prefers-reduced-motion:reduce){.ik-pulse,.ik-aura,.ik-glow{animation:none!important;}}
+
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <div class="container">
+    <div class="top-bar__info">
+      <span>UK Charity #1167115</span><span class="top-bar__dot">·</span>
+      <span>Malagasy NGO</span><span class="top-bar__dot">·</span>
+      <span>Association France SIREN 85242793900016</span><span class="top-bar__dot">·</span>
+      <span>Association Suisse</span>
+    </div>
+    <nav class="lang-switch" aria-label="Language switcher">
+      <a href="index.html" class="lang-switch__btn is-active" lang="en">EN</a>
+      <a href="index-fr.html" class="lang-switch__btn" lang="fr">FR</a>
+    </nav>
+  </div>
+</div>
+<header class="navbar" id="navbar" role="banner">
+  <div class="container">
+    <a href="../../index.html" class="navbar__logo" aria-label="Education for Madagascar — home">
+      <img src="../../images/logo_mini.jpeg" alt="Education for Madagascar logo" class="logo-image">
+      <span class="logo-text">Education<br>for Madagascar</span>
+    </a>
+    <ul class="nav__list" role="list">
+      <li class="nav__item" id="ni-who">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-who')">Who we are <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="../../who-we-are/our-story.html">Our story<span class="dropdown__sub">History &amp; founding vision</span></a>
+          <a class="dropdown__link" href="../../who-we-are/team.html">Team &amp; board<span class="dropdown__sub">The people behind E4M</span></a>
+          <a class="dropdown__link" href="../../who-we-are/governance.html">Governance &amp; statutes</a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="../../who-we-are/annual-reports.html">Annual reports</a>
+          <a class="dropdown__link" href="../../who-we-are/partners.html">Our partners</a>
+        </div>
+      </li>
+      <li class="nav__item" id="ni-proj">
+        <button class="nav__link is-active" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-proj')">Our projects <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown--mega">
+          <div class="mega__col">
+            <p class="mega__heading mega__heading--edu">Education</p>
+            <a class="mega__link" href="akka.html">AKKA Montessori <span class="badge badge--age">3–6 yrs</span></a>
+            <a class="mega__link" href="kanto.html">KANTO Culture <span class="badge badge--age">9–22 yrs</span></a>
+            <a class="mega__link" href="care.html">CARE Coding &amp; Robotics</a>
+            <a class="mega__link" href="scola.html" data-scola>SCOLA Scholarship <span class="badge badge--age">17–25</span></a>
+            <a class="mega__link" href="tuto.html">TUTO</a>
+            <a class="mega__link" href="vim.html" data-vim>VIM — Volunteering</a>
+            <a class="mega__link" href="cad.html" style="color:var(--green);font-weight:600;" data-cad>Career Day Awareness</a>
+            <a class="mega__link" href="unesco.html">UNESCO Partnership <span class="badge badge--new">New</span></a>
+          </div>
+          <div class="mega__col">
+            <p class="mega__heading mega__heading--health">Health</p>
+            <a class="mega__link" href="../health/women.html">School for Women</a>
+            <a class="mega__link" href="../health/fody.html">FODY</a>
+            <a class="mega__link" href="../health/tomady.html">TOMADY</a>
+            <div class="mega__col-gap"></div>
+            <p class="mega__heading mega__heading--env">Environment</p>
+            <a class="mega__link" href="../environment/silva.html">SILVA</a>
+            <a class="mega__link" href="../environment/wash.html">WASH</a>
+            <a class="mega__link" href="../environment/permada.html">PERMADA</a>
+          </div>
+          <div class="mega__col">
+            <p class="mega__heading mega__heading--edu">Overview</p>
+            <p class="mega__summary">13 active projects across education, health, and the environment — serving children aged 3 to 18 and women in rural Madagascar.</p>
+            <a class="mega__all-link" href="../index.html">All projects →</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav__item" id="ni-inv">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-inv')">Get involved <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="../../get-involved/volunteer.html">Volunteer (VIM)<span class="dropdown__sub">Live &amp; work in Madagascar</span></a>
+          <a class="dropdown__link" href="../../get-involved/donate.html">Donate<span class="dropdown__sub">Fund our programmes directly</span></a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="../../get-involved/partner.html">Become a partner</a>
+        </div>
+      </li>
+      <li class="nav__item" id="ni-media">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-media')">Media <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="../../media/blog.html">Blog</a>
+          <a class="dropdown__link" href="../../media/newsletters.html">Newsletters</a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="../../who-we-are/annual-reports.html">Annual reports</a>
+        </div>
+      </li>
+    </ul>
+    <div class="nav__actions">
+      <a href="#shop" class="btn-shop">The Shop ↗</a>
+      <a href="../../get-involved/donate.html" class="btn-donate">Donate</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMobile()">
+      <span class="hamburger__bar"></span><span class="hamburger__bar"></span><span class="hamburger__bar"></span>
+    </button>
+  </div>
+</header>
+<nav class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation">
+  <div class="mob-section" id="mob-who">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-who')">Who we are <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="../../who-we-are/our-story.html">Our story</a>
+      <a class="mob-link" href="../../who-we-are/team.html">Team &amp; board</a>
+      <a class="mob-link" href="../../who-we-are/governance.html">Governance &amp; statutes</a>
+      <a class="mob-link" href="../../who-we-are/annual-reports.html">Annual reports</a>
+      <a class="mob-link" href="../../who-we-are/partners.html">Our partners</a>
+    </div>
+  </div>
+  <div class="mob-section" id="mob-proj">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-proj')">Our projects <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <div class="mob-subheading">Education</div>
+      <a class="mob-link" href="akka.html">AKKA Montessori</a>
+      <a class="mob-link" href="kanto.html">KANTO Culture</a>
+      <a class="mob-link" href="care.html">CARE Coding &amp; Robotics</a>
+      <a class="mob-link" href="scola.html" data-scola>SCOLA Scholarship</a>
+      <a class="mob-link" href="tuto.html">TUTO</a>
+      <a class="mob-link" href="vim.html" data-vim>VIM — Volunteering</a>
+      <a class="mob-link" href="cad.html" style="color:var(--green);font-weight:600;" data-cad>Career Day Awareness</a>
+      <a class="mob-link" href="unesco.html">UNESCO Partnership</a>
+      <div class="mob-subheading">Health</div>
+      <a class="mob-link" href="../health/women.html">School for Women</a>
+      <a class="mob-link" href="../health/fody.html">FODY</a>
+      <a class="mob-link" href="../health/tomady.html">TOMADY</a>
+      <div class="mob-subheading">Environment</div>
+      <a class="mob-link" href="../environment/silva.html">SILVA</a>
+      <a class="mob-link" href="../environment/wash.html">WASH</a>
+      <a class="mob-link" href="../environment/permada.html">PERMADA</a>
+    </div>
+  </div>
+  <div class="mob-section" id="mob-inv">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-inv')">Get involved <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="../../get-involved/volunteer.html">Volunteer (VIM)</a>
+      <a class="mob-link" href="../../get-involved/donate.html">Donate</a>
+      <a class="mob-link" href="../../get-involved/partner.html">Become a partner</a>
+    </div>
+  </div>
+  <div class="mob-section" id="mob-media">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-media')">Media <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="../../media/blog.html">Blog</a>
+      <a class="mob-link" href="../../media/newsletters.html">Newsletters</a>
+      <a class="mob-link" href="../../who-we-are/annual-reports.html">Annual reports</a>
+    </div>
+  </div>
+  <div class="mob-actions">
+    <a href="#shop" class="btn-shop">The Shop ↗</a>
+    <a href="../../get-involved/donate.html" class="btn-donate">Donate</a>
+  </div>
+</nav>
+<nav class="breadcrumb breadcrumb--education" aria-label="Breadcrumb">
+  <div class="container">
+    <ul class="breadcrumb__list">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../index.html">Our Projects</a></li>
+      <li><span class="breadcrumb__current">Education</span></li>
+      <li><span class="breadcrumb__current">Career Day Awareness</span></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="page-hero" aria-label="CAD project hero">
+  <div class="page-hero__bg" role="img" aria-label="Young people meeting professionals at Career Day Awareness, Madagascar"></div>
+  <div class="page-hero__content">
+    <div class="container">
+      <span class="page-hero__kicker">Career Day Awareness</span>
+      <h1 class="page-hero__title">CAD</h1>
+      <p class="page-hero__sub">Discovering the professions of the future — and the reason to get up in the morning.</p>
+      <div class="page-hero__tags">
+        <span class="hero-tag hero-tag--accent">Education</span>
+        <span class="hero-tag">Ages 12–22</span>
+        <span class="hero-tag">Annual event</span>
+        <span class="hero-tag">In partnership with SESAME</span>
+        <span class="hero-tag">50% girls</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<p>
+From permaculture to robotics and programming, new and essential professions of our time, the list of our guests for the third edition of "Career Day Awareness", has been drawn up based on the wishes of our children and young people, also according to the emergency that is hitting dangerously our country now.
+<br>
+Each year, we organise an annual project of discovery and information on careers. In 2022, our beneficiaries wanted to discuss in person to a Chef, Tourist Guide, a journalist and a policeman.
+<br>Moreover, we do believe that Malagasy generations need to be involved in sustainability not only if we want to contribute to a better Madagascar through responsible and committed youth, but also because it is no more an option to draw Malagasy development ignoring biodiversity/endemic ecosystems’ preservation.
+Therefore, it seems to us that meeting with an hydrologist, an expert/activist on climate change and a social entrepreneur oriented to Sustainability will help them find the professions that will contribute first and foremost to the economy of a country like Madagascar.  
+</p>
+  
+<section class="ikigai" aria-labelledby="ikigai-heading">
+  <div class="container">
+    <div class="ikigai__header">
+      <h2 class="ikigai__term" id="ikigai-heading">IKIGAI</h2>
+      <p class="ikigai__def"><strong>(n.)</strong> a Japanese concept that translates to "a reason for being" — a reason to get up in the morning; passion, purpose, the thing one lives for.</p>
+    </div>
+    <!-- Animated ikigai diagram — vanilla port of the Figma animation -->
+    <div class="ikigai-stage" id="ikigaiStage">
+      <div class="ik-title" id="ikTitle">
+        <div class="ik-title__eyebrow">— the search for meaning —</div>
+        <div class="ik-title__main">
+          <div class="ik-title__jp">生き甲斐</div>
+          <div class="ik-title__en">A reason for being</div>
+        </div>
+        <div class="ik-title__sub">I · K · I · G · A · I</div>
+      </div>
+      <div class="ik-body">
+        <div class="ik-diagram">
+          <div class="ik-svg-wrap">
+            <svg class="ik-svg" viewBox="0 0 700 700" aria-label="Ikigai diagram — four overlapping circles you can click to explore" id="ikSvg">
+              <defs>
+                <filter id="ink" x="-8%" y="-8%" width="116%" height="116%">
+                  <feTurbulence type="turbulence" baseFrequency="0.028" numOctaves="3" seed="7" result="noise"/>
+                  <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+                <radialGradient id="aura" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#E8C870" stop-opacity="0.28"/>
+                  <stop offset="100%" stop-color="#E8C870" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <ellipse class="ik-aura" cx="350" cy="350" rx="48" ry="48" fill="url(#aura)"/>
+              <g id="ikCircles"></g>
+              <g id="ikPulses"></g>
+              <g id="ikIntersections"></g>
+              <g class="ik-center" id="ikCenter">
+                <ellipse cx="350" cy="348" rx="36" ry="26" fill="#F5EFE0" opacity="0.72"/>
+                <text x="350" y="355" text-anchor="middle" font-size="12.5">Ikigai</text>
+              </g>
+              <g id="ikSeals"></g>
+            </svg>
+          </div>
+        </div>
+        <div class="ik-panel" id="ikPanel"><div class="ik-panel__inner" id="ikPanelInner"></div></div>
+      </div>
+      <div class="ik-hint">Click a circle to explore</div>
+    </div>
+
+    <!-- Explanation, below the animation -->
+    <div class="ikigai__explain" style="max-width:760px;margin:3rem auto 0;text-align:center;">
+      <h3>Choosing the right profession is an investigation</h3>
+      <p>The right path for a young adult sits where four questions meet: the activity they love, the one they are good at, the one the world needs, and the one they can make a living from. The combination of these four elements is their <strong>ikigai</strong> — the occupation closest to what would make them happy, in the short and the long term. CAD exists to guide young Malagasies toward that intersection.</p>
+    </div>
+  </div>
+</section>
+
+<section class="intro" aria-labelledby="intro-heading">
+  <div class="container">
+    <div class="intro__grid">
+      <div class="intro__stat-block">
+        <div class="intro__big-number">3rd</div>
+        <p class="intro__stat-label">edition of Career Day Awareness,<br>shaped by our young people's wishes</p>
+        <ul class="intro__pill-list">
+          <li class="intro__pill"><span class="intro__pill-dot"></span><span><strong>Annual</strong> careers discovery event</span></li>
+          <li class="intro__pill"><span class="intro__pill-dot"></span><span><strong>Professions</strong> of the future</span></li>
+          <li class="intro__pill"><span class="intro__pill-dot"></span><span><strong>Partner</strong> SESAME</span></li>
+          <li class="intro__pill"><span class="intro__pill-dot"></span><span><strong>50%</strong> girls supported</span></li>
+          <li class="intro__pill"><span class="intro__pill-dot"></span><span><strong>Mentor</strong> Nestoria Raoelison</span></li>
+        </ul>
+      </div>
+      <div>
+        <span class="intro__eyebrow">Why Career Day?</span>
+        <h2 class="intro__heading" id="intro-heading">The professions that will build Madagascar</h2>
+        <div class="intro__body">
+          <p>Each year, CAD organises a discovery event introducing children and young people to the <strong>professions of the future</strong> — from permaculture to robotics and programming — chosen from our young people's own wishes and the urgent needs of the country.</p>
+          <p>In 2022, our beneficiaries wanted to meet a chef, a tourist guide, a journalist and a policeman. We also believe Malagasy youth must be involved in sustainability — so meetings with a hydrologist, a climate activist and a sustainability-focused social entrepreneur help them find professions that serve the country's economy and its endemic ecosystems.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="guests" aria-labelledby="guests-heading">
+  <div class="container">
+    <div class="guests__header">
+      <span class="section-eyebrow">Meet the professionals</span>
+      <h2 class="section-heading" id="guests-heading">Careers our young people explored</h2>
+    </div>
+    <div class="guests__grid">
+      <div class="guest"><div class="guest__photo"><span class="guest__field">Culinary</span><div class="guest__ph">CDA_chef.jpg</div></div><div class="guest__body"><h3 class="guest__role">Chef de cuisine</h3><p class="guest__name">with Chef Lalaina Ravelomanana</p></div></div>
+      <div class="guest"><div class="guest__photo"><span class="guest__field">Media</span><div class="guest__ph">CDA_journalism.jpg</div></div><div class="guest__body"><h3 class="guest__role">Journalism</h3><p class="guest__name">with Gaëlle Borgia</p></div></div>
+      <div class="guest"><div class="guest__photo"><span class="guest__field">Environment</span><div class="guest__ph">CDA_agroforestry.jpg</div></div><div class="guest__body"><h3 class="guest__role">Agroforestry</h3><p class="guest__name">with Max Fontaine</p></div></div>
+      <div class="guest"><div class="guest__photo"><span class="guest__field">Tourism</span><div class="guest__ph">CDA_tourism.jpg</div></div><div class="guest__body"><h3 class="guest__role">Tourism Industry</h3><p class="guest__name">with Manitra Randriambololona</p></div></div>
+      <div class="guest"><div class="guest__photo"><span class="guest__field">Defense</span><div class="guest__ph">CDA_defense.jpg</div></div><div class="guest__body"><h3 class="guest__role">Defense</h3><p class="guest__name">with Colonel Ratsarahevitra</p></div></div>
+      <div class="guest"><div class="guest__photo"><span class="guest__field">Agroecology</span><div class="guest__ph">CDA_agroecology.jpg</div></div><div class="guest__body"><h3 class="guest__role">Agroecology</h3><p class="guest__name">with Dr Anselmo Andrianandrasana</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="mv" aria-labelledby="mv-heading">
+  <div class="container">
+    <div class="other-projects__header" style="text-align:center;margin-bottom:3rem;">
+      <span class="section-eyebrow">Vision &amp; mission</span>
+      <h2 class="section-heading" id="mv-heading">Where we go, and how</h2>
+    </div>
+    <div class="mv__grid">
+      <div class="mv-card">
+        <div class="mv-card__label">Vision</div>
+        <p class="mv-card__q">Where do we go? What will it be like when we get there?</p>
+        <p class="mv-card__text">Choosing the right profession is the result of an investigation between what a young adult loves, what the world needs, what they are good at, and what they could make a living at. That combination is their ikigai — the occupation closest to lasting happiness.</p>
+      </div>
+      <div class="mv-card">
+        <div class="mv-card__label">Mission</div>
+        <p class="mv-card__q">What is our approach? What path do we follow?</p>
+        <p class="mv-card__text">To alleviate poverty in Madagascar by accompanying young people in the right direction — through Education, Health Education and Environmental Education — combining what they love, what they are good at, and what will sustain them later.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sesame" aria-labelledby="sesame-heading">
+  <div class="container">
+    <div class="sesame__inner">
+      <p class="sesame__label">In partnership with</p>
+      <h2 class="sesame__name" id="sesame-heading">SESAME</h2>
+      <p class="sesame__text">An educational programme of excellence for underprivileged students. SESAME supports high-school graduates from difficult socio-economic backgrounds who are eager to pursue higher education, succeed in their professional integration, and commit to their country's development.</p>
+      <span class="sesame__stat">50% of those supported are girls</span>
+    </div>
+  </div>
+</section>
+
+<section class="project-cta" aria-labelledby="cta-heading">
+  <div class="container">
+    <div class="project-cta__inner">
+      <span class="project-cta__label">Help a young person find their path</span>
+      <h2 id="cta-heading">Every child deserves<br>a reason to get up in the morning</h2>
+      <p>Support Career Day Awareness and help young Malagasies discover the professions that will feed them, fulfil them, and build their country.</p>
+      <div class="project-cta__buttons">
+        <a href="https://buy.stripe.com/cN2eWi7dYdnK9XifZ6" class="btn btn-white" target="_blank" rel="noopener">Support CAD</a>
+        <a href="../../get-involved/volunteer.html" class="btn btn-outline-white">Share your profession</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="other-projects" aria-labelledby="other-heading">
+  <div class="container">
+    <div class="other-projects__header">
+      <span class="section-eyebrow">Keep exploring</span>
+      <h2 class="section-heading" id="other-heading">Other Education projects</h2>
+    </div>
+    <div class="other-projects__grid">
+      <a class="proj-card" href="scola.html"><div class="proj-card__thumb"><span class="proj-card__tag">Ages 17–25</span></div><div class="proj-card__body"><h3 class="proj-card__title">SCOLA Scholarship</h3><p class="proj-card__desc">Sponsorship and scholarships opening pathways to higher education and independence.</p><span class="proj-card__link">Learn more →</span></div></a>
+      <a class="proj-card" href="vim.html"><div class="proj-card__thumb"><span class="proj-card__tag">Ages 18+</span></div><div class="proj-card__body"><h3 class="proj-card__title">VIM — Volunteering</h3><p class="proj-card__desc">Cultural exchange and meaningful humanitarian work — Quality, Ethics, Sharing.</p><span class="proj-card__link">Learn more →</span></div></a>
+      <a class="proj-card" href="kanto.html"><div class="proj-card__thumb"><span class="proj-card__tag">Ages 9–22</span></div><div class="proj-card__body"><h3 class="proj-card__title">KANTO Culture Programme</h3><p class="proj-card__desc">Music, chess, languages and arts — Art · Mind · Empowerment with Club UNESCO.</p><span class="proj-card__link">Learn more →</span></div></a>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;"><a href="../index.html" class="btn btn-outline">See all 13 projects</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Education for Madagascar</h3>
+        <p>Committed to UN SDG 4 — Quality Education for all children, from early childhood to economic independence.</p>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/educationformadagascar" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener">f</a>
+          <a href="https://www.instagram.com/educationformadagascar/" class="social-btn" aria-label="Instagram" target="_blank" rel="noopener">ig</a>
+          <a href="https://www.linkedin.com/company/educationformadagascar/" class="social-btn" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Education</h4>
+        <ul>
+          <li><a href="akka.html">AKKA Montessori</a></li>
+          <li><a href="kanto.html">KANTO</a></li>
+          <li><a href="scola.html">SCOLA</a></li>
+          <li><a href="care.html">CARE Coding</a></li>
+          <li><a href="vim.html">VIM</a></li>
+          <li><a href="cad.html">Career Day</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="../../media/blog.html">Blog</a></li>
+          <li><a href="#">Artisan Shop</a></li>
+          <li><a href="../../who-we-are/annual-reports.html">Annual Reports</a></li>
+          <li><a href="../../media/newsletters.html">Newsletter</a></li>
+          <li><a href="../health/tomady.html">TOMADY Health</a></li>
+          <li><a href="../environment/silva.html">SILVA Environment</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@educationformadagascar.org">contact@educationformadagascar.org</a></li>
+          <li style="font-size:.85rem;margin-top:.3rem;">23 Milner Drive, Cobham<br>KT11 2EZ, United Kingdom</li>
+          <li style="margin-top:.8rem;font-size:.75rem;opacity:.55;line-height:1.8;">UK Charity #1167115<br>FR SIREN 85242793900016<br>MG NIF 4002796057</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Education for Madagascar. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a><a href="#">Legal Notice</a><a href="#">Safeguarding</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../js/global.js"></script>
+
+<script>
+/* Embedded ikigai animation */
+(function(){
+  const C=350,O=110,R=145,CIRC=2*Math.PI*R,LF=0.56;
+  const CIRCLES=[
+    {id:"love",line1:"What You",line2:"Love",label:"What You Love",cx:C,cy:C-O,lx:C,ly:C-O-R*LF,color:"#B03A58",bg:"rgba(176,58,88,0.15)",bgHigh:"rgba(176,58,88,0.30)",
+     description:"Activities and pursuits that bring you deep joy — things you do for their own sake, making you lose all sense of time. Your passions, creative drives, and the experiences that make you feel most alive.",
+     connections:[{name:"Passion",withLabel:"What You're Good At",desc:"What flows brilliantly and joyfully — effortless excellence without friction."},{name:"Mission",withLabel:"What the World Needs",desc:"Meaningful contribution driven by love for something larger than yourself."}]},
+    {id:"good",line1:"What You're",line2:"Good At",label:"What You're Good At",cx:C+O,cy:C,lx:C+O+R*LF,ly:C,color:"#2B5FA3",bg:"rgba(43,95,163,0.15)",bgHigh:"rgba(43,95,163,0.30)",
+     description:"Your skills, talents, and hard-earned expertise. The areas where you excel through natural aptitude or deliberate practice. What others seek you out for — what you do better than most.",
+     connections:[{name:"Passion",withLabel:"What You Love",desc:"The sweet spot where skill meets joy — energizing and effortless."},{name:"Profession",withLabel:"What You're Paid For",desc:"Reliable and compensated — but can grow hollow without deeper meaning."}]},
+    {id:"paid",line1:"What You're",line2:"Paid For",label:"What You're Paid For",cx:C,cy:C+O,lx:C,ly:C+O+R*LF,color:"#A87A10",bg:"rgba(168,122,16,0.15)",bgHigh:"rgba(168,122,16,0.30)",
+     description:"What the market values and rewards with compensation. The outputs, services, or expertise for which others willingly pay — your economic engine and the foundation of a sustainable life.",
+     connections:[{name:"Profession",withLabel:"What You're Good At",desc:"Stable and skilled — yet without love or meaning, it can feel empty over time."},{name:"Vocation",withLabel:"What the World Needs",desc:"Called to serve a real need — fulfilling, though sometimes undervalued."}]},
+    {id:"world",line1:"What the",line2:"World Needs",label:"What the World Needs",cx:C-O,cy:C,lx:C-O-R*LF,ly:C,color:"#3A7A48",bg:"rgba(58,122,72,0.15)",bgHigh:"rgba(58,122,72,0.30)",
+     description:"Problems worth solving — genuine human needs that make the world better when addressed. The larger purpose your work serves beyond yourself, and what society or your community truly lacks.",
+     connections:[{name:"Vocation",withLabel:"What You're Paid For",desc:"Purpose meets economics — meaningful work that is practically sustainable."},{name:"Mission",withLabel:"What You Love",desc:"Driven by love for something larger — the most fulfilling path of all."}]}
+  ];
+  const INTERSECTIONS=[{label:"Passion",x:C+O*0.63,y:C-O*0.63},{label:"Profession",x:C+O*0.63,y:C+O*0.63},{label:"Vocation",x:C-O*0.63,y:C+O*0.63},{label:"Mission",x:C-O*0.63,y:C-O*0.63}];
+  const SEALS=[{x:28,y:28,char:"心"},{x:672,y:28,char:"道"},{x:28,y:672,char:"命"},{x:672,y:672,char:"禅"}];
+  const NS="http://www.w3.org/2000/svg";
+  const stage=document.getElementById('ikigaiStage');
+  if(!stage)return;
+  const elCircles=document.getElementById('ikCircles'),elPulses=document.getElementById('ikPulses'),elIntr=document.getElementById('ikIntersections'),elSeals=document.getElementById('ikSeals'),panelInner=document.getElementById('ikPanelInner');
+  let selected=null;
+  function mk(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
+  CIRCLES.forEach((c,i)=>{
+    const g=mk('g',{class:'ik-circle-group','data-id':c.id});
+    const fill=mk('circle',{class:'ik-fill',cx:c.cx,cy:c.cy,r:R,fill:c.bg});
+    const stroke=mk('circle',{class:'ik-stroke',cx:c.cx,cy:c.cy,r:R,stroke:c.color,filter:'url(#ink)','stroke-dasharray':CIRC,'stroke-dashoffset':CIRC});
+    const hover=mk('circle',{class:'ik-hoverring',cx:c.cx,cy:c.cy,r:R+3,stroke:c.color});
+    const glow=mk('circle',{class:'ik-glow',cx:c.cx,cy:c.cy,r:R+4,stroke:c.color});
+    const lg=mk('g',{class:'ik-label'});
+    const t1=mk('text',{x:c.lx,y:c.ly-5,'text-anchor':'middle','font-size':11,fill:c.color});t1.textContent=c.line1;
+    const t2=mk('text',{x:c.lx,y:c.ly+10,'text-anchor':'middle','font-size':11,fill:c.color});t2.textContent=c.line2;
+    lg.appendChild(t1);lg.appendChild(t2);
+    g.appendChild(fill);g.appendChild(stroke);g.appendChild(hover);g.appendChild(glow);g.appendChild(lg);
+    g._fill=fill;g._stroke=stroke;g._label=lg;g._data=c;
+    g.addEventListener('click',()=>toggle(c.id));
+    elCircles.appendChild(g);
+    elPulses.appendChild(mk('circle',{class:'ik-pulse p'+i,cx:c.cx,cy:c.cy,r:R,stroke:c.color}));
+  });
+  INTERSECTIONS.forEach(it=>{const g=mk('g',{class:'ik-intersection'});const t=mk('text',{x:it.x,y:it.y+4,'text-anchor':'middle','font-size':10.5});t.textContent=it.label;g.appendChild(t);elIntr.appendChild(g);});
+  SEALS.forEach(s2=>{const g=mk('g',{class:'ik-seal'});g.appendChild(mk('rect',{x:s2.x-9,y:s2.y-9,width:18,height:18,fill:'none',stroke:'#B03A58','stroke-width':0.65,rx:1}));const t=mk('text',{x:s2.x,y:s2.y+5,'text-anchor':'middle','font-size':9});t.textContent=s2.char;g.appendChild(t);elSeals.appendChild(g);});
+  const groups=[...elCircles.querySelectorAll('.ik-circle-group')],labels=[...elCircles.querySelectorAll('.ik-label')],fills=[...elCircles.querySelectorAll('.ik-fill')],intrEls=[...elIntr.querySelectorAll('.ik-intersection')],sealEls=[...elSeals.querySelectorAll('.ik-seal')],centerEl=document.getElementById('ikCenter');
+  function runIntro(){
+    document.getElementById('ikTitle').classList.add('in');
+    setTimeout(()=>stage.classList.add('phase-en'),1100);
+    groups.forEach((g,i)=>{
+      setTimeout(()=>{g._stroke.style.transition='stroke-dashoffset 2.6s cubic-bezier(.4,0,.2,1)';g._stroke.style.strokeDashoffset='0';},i*600);
+      setTimeout(()=>{fills[i].style.opacity='1';},i*600+1200);
+      setTimeout(()=>{labels[i].style.opacity='1';},i*600+1800);
+    });
+    sealEls.forEach((s2,i)=>setTimeout(()=>s2.style.opacity='0.22',2200+i*250));
+    intrEls.forEach((it,i)=>setTimeout(()=>it.style.opacity='1',3200+i*180));
+    setTimeout(()=>stage.classList.add('drawn'),3500);
+    setTimeout(()=>centerEl.style.opacity='1',4400);
+  }
+  function panelHTML(c){
+    const conns=c.connections.map(cn=>`<div class="ik-conn" style="border-left:2px solid ${c.color}55;"><div class="ik-conn__name"><span>${cn.name}</span><span class="ik-conn__with">+ ${cn.withLabel}</span></div><div class="ik-conn__desc">${cn.desc}</div></div>`).join('');
+    const all=CIRCLES.map(cc=>`<div class="ik-allrow" style="opacity:${cc.id===c.id?1:0.65};"><div class="ik-allrow__dot" style="background:${cc.color};"></div><div><div class="ik-allrow__label" style="color:${cc.color};">${cc.label}</div><div class="ik-allrow__desc">${cc.description.slice(0,78)}…</div></div></div>`).join('');
+    return `<button class="ik-panel__close" aria-label="Close">✕</button><div class="ik-panel__head"><div class="ik-panel__dot" style="background:${c.color};"></div><div class="ik-panel__title" style="color:${c.color};">${c.label}</div></div><p class="ik-panel__desc">${c.description}</p><div class="ik-panel__sectlabel">Intersections</div>${conns}<div class="ik-panel__all"><div class="ik-panel__sectlabel">All Four Circles</div>${all}<div class="ik-panel__center"><p>When all four overlap — that convergence is your <strong>ikigai</strong>: a reason for being, the source of a meaningful life.</p></div></div>`;
+  }
+  function toggle(id){
+    selected=(selected===id)?null:id;
+    groups.forEach(g=>{const gid=g.getAttribute('data-id');g.classList.toggle('sel',gid===selected);g.classList.toggle('dim',selected!==null&&gid!==selected);g._fill.setAttribute('fill',gid===selected?g._data.bgHigh:g._data.bg);});
+    if(selected){const c=CIRCLES.find(x=>x.id===selected);panelInner.innerHTML=panelHTML(c);panelInner.querySelector('.ik-panel__close').addEventListener('click',()=>toggle(selected));stage.classList.add('panel-open');}
+    else{stage.classList.remove('panel-open');}
+  }
+  let started=false;function start(){if(started)return;started=true;runIntro();}
+  if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){start();io.disconnect();}});},{threshold:0.25});io.observe(stage);}else{start();}
+})();
+</script>
+
+</body>
+</html>
