@@ -1,1 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WASH — Clean Water &amp; Sanitation | Education for Madagascar</title>
+<meta name="description" content="WASH: clean water and sanitation in Madagascar. Dry toilets, rainwater management, and composting — saving 12m³ of water per person per year. UN SDG 6."/>
+<link rel="stylesheet" href="../../css/global.css">
+<style>
+:root{
+  --green:#195301;--cream:#eeebd9;--teal:#006C65;--charcoal:#535353;--silver:#D5D5D5;--white:#fff;
+  --gold-bg:#EFBF04;--gold-text:#856A00;
+  --wash:#56C1FF;--wash-deep:#0a7abf;--wash-dark:#053d6b;--wash-wash:#e8f6ff;
+  --soil:#7B5C2A;--humus:#3d2817;
+  --font-display:"Charter",Georgia,serif;--font-body:"Avenir Next",system-ui,sans-serif;
+  --nav-h:92px;--topbar-h:40px;--max-w:1160px;--r:4px;--r-lg:10px;--ease:0.22s ease;
+}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--white); color: var(--charcoal); line-height: 1.65; }
+  img  { display: block; max-width: 100%; }
+  a    { text-decoration: none; color: inherit; }
+  ul   { list-style: none; }
+  button { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
+  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+  .btn { display: inline-block; padding: .75rem 1.75rem; border-radius: var(--r); font-weight: 500; font-size: .95rem; cursor: pointer; transition: background var(--ease), color var(--ease), transform var(--ease); }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: var(--green); color: var(--cream); }
+  .btn-primary:hover { background: #1f6701; }
+  .btn-outline { border: 2px solid var(--green); color: var(--green); }
+  .btn-outline:hover { background: var(--green); color: var(--cream); }
+  .top-bar { background: var(--green); color: var(--cream); height: var(--topbar-h); font-size: .72rem; }
+  .top-bar .container { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .top-bar__info { display: flex; align-items: center; gap: 1.25rem; opacity: .85; flex-wrap: wrap; }
+  .top-bar__info span { white-space: nowrap; }
+  .top-bar__dot { opacity: .35; }
+  .lang-switch { display: flex; align-items: center; gap: .25rem; flex-shrink: 0; }
+  .lang-switch__btn { padding: .2rem .55rem; border-radius: var(--r); color: var(--cream); font-size: .72rem; font-weight: 500; opacity: .7; transition: opacity var(--ease), background var(--ease); }
+  .lang-switch__btn:hover { opacity: 1; }
+  .lang-switch__btn.is-active { background: rgba(255,255,255,.15); opacity: 1; }
+  .navbar { position: sticky; top: 0; z-index: 200; background: var(--white); border-bottom: 1px solid var(--silver); height: var(--nav-h); transition: box-shadow var(--ease); }
+  .navbar.is-scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.08); }
+  .navbar .container { height: 100%; display: flex; align-items: center; }
+  .navbar__logo { display: flex; align-items: center; gap: .6rem; margin-right: 2rem; flex-shrink: 0; }
+  .logo-image { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+  .logo-text { font-family: var(--font-display); font-size: 1.20rem; font-weight: 700; color: var(--green); line-height: 1.2; text-transform: uppercase; letter-spacing: .04em; }
+  .nav__list { display: flex; align-items: center; height: 100%; flex: 1; }
+  .nav__item { position: relative; height: 100%; display: flex; align-items: center; }
+  .nav__link { display: flex; align-items: center; gap: .3rem; padding: 0 .9rem; height: 100%; font-size: .875rem; font-weight: 500; color: var(--charcoal); white-space: nowrap; border-bottom: 2px solid transparent; transition: color var(--ease), border-color var(--ease); user-select: none; }
+  .nav__link:hover { color: var(--green); }
+  .nav__link.is-active { color: var(--green); border-bottom-color: var(--green); }
+  .nav__item.is-open .nav__link { color: var(--green); }
+  .nav__chevron { width: 8px; height: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-1px); transition: transform var(--ease); flex-shrink: 0; }
+  .nav__item.is-open .nav__chevron { transform: rotate(-135deg) translateY(2px); }
+  .dropdown { visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(6px); transition: opacity var(--ease), transform var(--ease), visibility 0s var(--ease); position: absolute; top: calc(var(--nav-h) - 1px); left: 0; min-width: 240px; background: var(--white); border: 1px solid var(--silver); border-top: none; border-radius: 0 0 var(--r-lg) var(--r-lg); box-shadow: 0 10px 32px rgba(0,0,0,.09); padding: .5rem 0; }
+  .nav__item.is-open .dropdown { visibility: visible; opacity: 1; pointer-events: auto; transform: translateY(0); transition: opacity var(--ease), transform var(--ease); }
+  .dropdown__link { display: block; padding: .6rem 1.2rem; font-size: .875rem; color: var(--charcoal); transition: background var(--ease), color var(--ease); }
+  .dropdown__link:hover { background: var(--cream); color: var(--green); }
+  .dropdown__sub { display: block; font-size: .75rem; color: var(--charcoal); opacity: .6; margin-top: .1rem; font-weight: 400; }
+  .dropdown__separator { height: 1px; background: var(--silver); margin: .4rem 1.2rem; opacity: .5; }
+  .dropdown--mega { visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(6px); transition: opacity var(--ease), transform var(--ease), visibility 0s var(--ease); position: absolute; top: calc(var(--nav-h) - 1px); left: -60px; width: 620px; background: var(--white); border: 1px solid var(--silver); border-top: none; border-radius: 0 0 var(--r-lg) var(--r-lg); box-shadow: 0 10px 32px rgba(0,0,0,.09); display: grid; grid-template-columns: 1fr 1fr 180px; }
+  .nav__item.is-open .dropdown--mega { visibility: visible; opacity: 1; pointer-events: auto; transform: translateY(0); transition: opacity var(--ease), transform var(--ease); }
+  .mega__col { padding: 1.2rem 1.1rem; border-right: 1px solid rgba(213,213,213,.5); }
+  .mega__col:last-child { border-right: none; background: #f8f7f2; border-radius: 0 0 var(--r-lg) 0; }
+  .mega__heading { font-size: .67rem; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; margin-bottom: .6rem; padding-bottom: .5rem; border-bottom: 1px solid var(--silver); }
+  .mega__heading--edu { color: var(--green); }
+  .mega__heading--health { color: #b83030; }
+  .mega__heading--env { color: var(--teal); }
+  .mega__link { display: flex; align-items: center; gap: .5rem; padding: .4rem 0; font-size: .83rem; color: var(--charcoal); transition: color var(--ease); }
+  .mega__link:hover { color: var(--green); }
+  .badge { font-size: .62rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: .12rem .45rem; border-radius: 20px; flex-shrink: 0; }
+  .badge--age { background: #efefef; color: var(--charcoal); }
+  .badge--new { background: #edf7e8; color: var(--green); }
+  .mega__summary { font-size: .8rem; line-height: 1.6; color: var(--charcoal); margin-bottom: 1rem; }
+  .mega__all-link { display: inline-flex; align-items: center; gap: .3rem; font-size: .82rem; font-weight: 600; color: var(--green); transition: gap var(--ease); }
+  .mega__all-link:hover { gap: .55rem; }
+  .mega__col-gap { margin-top: .9rem; }
+  .nav__actions { display: flex; align-items: center; gap: .5rem; margin-left: auto; padding-left: 1rem; flex-shrink: 0; }
+  .btn-shop { padding: .42rem 1rem; font-size: .82rem; font-weight: 500; color: var(--teal); border: 1.5px solid var(--teal); border-radius: var(--r); transition: background var(--ease), color var(--ease); }
+  .btn-shop:hover { background: var(--teal); color: var(--white); }
+  .btn-donate { padding: .42rem 1.1rem; font-size: .82rem; font-weight: 600; background: var(--green); color: var(--cream); border-radius: var(--r); transition: background var(--ease), color var(--ease), transform var(--ease); }
+  .btn-donate:hover { background: var(--gold-bg); color: var(--gold-text); transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; padding: .4rem; margin-left: auto; border-radius: var(--r); transition: background var(--ease); }
+  .hamburger:hover { background: var(--cream); }
+  .hamburger__bar { width: 100%; height: 2px; background: var(--green); border-radius: 2px; transition: transform var(--ease), opacity var(--ease); }
+  .hamburger.is-open .hamburger__bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.is-open .hamburger__bar:nth-child(2) { opacity: 0; }
+  .hamburger.is-open .hamburger__bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-drawer { display: none; position: fixed; top: calc(var(--topbar-h) + var(--nav-h)); left: 0; right: 0; bottom: 0; background: var(--white); overflow-y: auto; z-index: 190; padding: 1rem 0 2rem; border-top: 1px solid var(--silver); }
+  .mobile-drawer.is-open { display: block; }
+  .mob-section__toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: .85rem 1.5rem; font-size: .95rem; font-weight: 500; color: var(--charcoal); border-bottom: 1px solid var(--silver); background: none; text-align: left; transition: background var(--ease); }
+  .mob-section__toggle:hover { background: var(--cream); }
+  .mob-section__content { display: none; padding: .5rem 0; background: #fafaf7; border-bottom: 1px solid var(--silver); }
+  .mob-section.is-open .mob-section__content { display: block; }
+  .mob-subheading { font-size: .67rem; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; color: var(--green); padding: .6rem 1.8rem .3rem; }
+  .mob-link { display: flex; align-items: center; justify-content: space-between; padding: .55rem 1.8rem; font-size: .875rem; color: var(--charcoal); transition: background var(--ease), color var(--ease); }
+  .mob-link:hover { background: var(--cream); color: var(--green); }
+  .mob-actions { display: flex; gap: .75rem; padding: 1.2rem 1.5rem 0; }
+  .mob-actions .btn-shop, .mob-actions .btn-donate { flex: 1; text-align: center; font-size: .9rem; padding: .65rem 1rem; }
+  .breadcrumb { padding: 0.85rem 0; }
+  .breadcrumb .container { width: fit-content; margin-left: 0; }
+  .section-eyebrow { display: block; font-size: .72rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); margin-bottom: .75rem; }
+  .section-heading { font-family: var(--font-display); font-size: clamp(1.8rem,3vw,2.4rem); color: var(--green); line-height: 1.2; }
+  .other-projects { padding: 5.5rem 0; background: var(--cream); }
+  .other-projects__header { margin-bottom: 2.5rem; }
+  .other-projects__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .proj-card { background: var(--white); border-radius: var(--r-lg); overflow: hidden; transition: transform var(--ease), box-shadow var(--ease); display: flex; flex-direction: column; }
+  .proj-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,.09); }
+  .proj-card__thumb { height: 140px; position: relative; }
+  .proj-card__tag { position: absolute; top: .75rem; left: .75rem; background: rgba(255,255,255,.9); color: var(--green); font-size: .65rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: .2rem .6rem; border-radius: 20px; }
+  .proj-card__body { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; }
+  .proj-card__title { font-family: var(--font-display); font-size: 1rem; color: var(--green); margin-bottom: .4rem; }
+  .proj-card__desc { font-size: .82rem; color: var(--charcoal); line-height: 1.55; flex: 1; margin-bottom: .9rem; }
+  .proj-card__link { font-size: .78rem; font-weight: 600; color: var(--teal); display: inline-flex; align-items: center; gap: .3rem; transition: gap var(--ease); }
+  .proj-card:hover .proj-card__link { gap: .6rem; }
+  footer { background: #111; color: var(--silver); padding: 4rem 0 2rem; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-brand h3 { font-family: var(--font-display); color: var(--cream); font-size: 1.15rem; margin-bottom: .75rem; }
+  .footer-brand p { font-size: .85rem; line-height: 1.65; margin-bottom: 1.2rem; max-width: 280px; }
+  .footer-socials { display: flex; gap: .75rem; }
+  .social-btn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; font-size: .8rem; color: var(--silver); transition: background var(--ease), border-color var(--ease); }
+  .social-btn:hover { background: var(--teal); border-color: var(--teal); color: #fff; }
+  .footer-col h4 { color: var(--cream); font-size: .82rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1.1rem; }
+  .footer-col li { margin-bottom: .5rem; }
+  .footer-col a { font-size: .87rem; color: var(--silver); transition: color var(--ease); }
+  .footer-col a:hover { color: var(--cream); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: .8rem; }
+  .footer-legal { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .footer-legal a { color: var(--silver); transition: color var(--ease); }
+  .footer-legal a:hover { color: var(--cream); }
 
+/* ── HERO ── */
+.page-hero{position:relative;min-height:80vh;display:flex;align-items:flex-end;overflow:hidden;background:var(--wash-dark);}
+.page-hero__bg{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,61,107,.95)0%,rgba(10,122,191,.5)45%,rgba(86,193,255,.18)100%);}
+/* animated water ripple rings */
+.hero-ripples{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+@keyframes ripple{0%{transform:scale(.3);opacity:.7;}100%{transform:scale(4);opacity:0;}}
+.ripple{position:absolute;width:200px;height:200px;border-radius:50%;border:1px solid rgba(86,193,255,.5);}
+.ripple:nth-child(1){animation:ripple 3.6s ease-out infinite;}
+.ripple:nth-child(2){animation:ripple 3.6s ease-out .9s infinite;}
+.ripple:nth-child(3){animation:ripple 3.6s ease-out 1.8s infinite;}
+.ripple:nth-child(4){animation:ripple 3.6s ease-out 2.7s infinite;}
+.page-hero__content{position:relative;z-index:2;padding:4rem 0 4.5rem;width:100%;}
+.page-hero__kicker{display:inline-flex;align-items:center;gap:.6rem;font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#a8dcff;margin-bottom:1rem;}
+.page-hero__kicker::before{content:'';width:28px;height:1px;background:#a8dcff;}
+.page-hero__title{font-family:var(--font-display);font-size:clamp(3rem,7vw,5.8rem);color:var(--cream);line-height:1.0;letter-spacing:-.01em;margin-bottom:.6rem;}
+.page-hero__sub{font-family:var(--font-display);font-style:italic;font-size:clamp(1.1rem,2.2vw,1.55rem);color:rgba(235,248,255,.9);margin-bottom:2rem;max-width:580px;}
+.page-hero__tags{display:flex;flex-wrap:wrap;gap:.6rem;}
+.hero-tag{padding:.35rem .9rem;border-radius:20px;font-size:.72rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;border:1px solid rgba(168,220,255,.3);color:var(--cream);background:rgba(255,255,255,.1);}
+.hero-tag--accent{background:var(--wash);color:var(--wash-dark);border-color:var(--wash);}
+
+/* ── SDG BAND ── */
+.sdg-band{padding:4rem 0;background:var(--wash-dark);border-top:1px solid rgba(86,193,255,.15);}
+.sdg-band__inner{display:grid;grid-template-columns:auto 1fr auto;gap:3rem;align-items:center;max-width:900px;margin:0 auto;}
+.sdg-badge{width:110px;height:110px;border-radius:12px;background:var(--wash);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;flex-shrink:0;box-shadow:0 0 40px rgba(86,193,255,.35);animation:sdgpulse 3s ease-in-out infinite;}
+@keyframes sdgpulse{0%,100%{box-shadow:0 0 30px rgba(86,193,255,.3);}50%{box-shadow:0 0 55px rgba(86,193,255,.6);}}
+.sdg-badge__num{font-family:var(--font-display);font-size:3rem;font-weight:700;color:var(--white);line-height:1;}
+.sdg-badge__text{font-size:.42rem;font-weight:700;color:var(--white);letter-spacing:.06em;text-align:center;line-height:1.3;text-transform:uppercase;padding:0 .3rem;}
+.sdg-icon{display:flex;align-items:center;justify-content:center;}
+.sdg-divider{width:1px;height:80px;background:rgba(86,193,255,.2);}
+.sdg-content h2{font-family:var(--font-display);font-size:clamp(1.4rem,2.5vw,1.9rem);color:var(--cream);line-height:1.2;margin-bottom:.6rem;}
+.sdg-content p{font-size:.95rem;color:rgba(235,248,255,.7);line-height:1.65;}
+
+/* ── SCARCITY — dark, serious ── */
+.scarcity{padding:6rem 0;background:#071e30;color:var(--cream);position:relative;overflow:hidden;}
+.scarcity::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(86,193,255,.08),transparent);pointer-events:none;}
+.scarcity__inner{position:relative;z-index:1;max-width:900px;margin:0 auto;text-align:center;}
+.scarcity__eyebrow{display:block;font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--wash);margin-bottom:1rem;}
+.scarcity__quote{font-family:var(--font-display);font-size:clamp(1.7rem,3.5vw,2.6rem);line-height:1.3;margin-bottom:1.5rem;color:var(--cream);}
+.scarcity__quote em{color:var(--wash);font-style:italic;}
+.scarcity__body{font-size:1rem;line-height:1.8;color:rgba(235,248,255,.75);max-width:680px;margin:0 auto 3rem;}
+/* water stat trio */
+.water-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(86,193,255,.12);border-radius:var(--r-lg);overflow:hidden;max-width:740px;margin:0 auto;}
+.wstat{background:#071e30;padding:2.2rem 1.5rem;text-align:center;}
+.wstat__val{font-family:var(--font-display);font-size:clamp(2.4rem,5vw,3.6rem);color:var(--wash);font-weight:700;line-height:1;margin-bottom:.4rem;}
+.wstat__label{font-size:.82rem;color:rgba(235,248,255,.65);line-height:1.45;}
+
+/* ── WATER COUNTER VISUAL ── */
+.counter-section{padding:5.5rem 0;background:var(--wash-wash);}
+.counter-section__header{text-align:center;max-width:600px;margin:0 auto 3rem;}
+.flush-visual{max-width:820px;margin:0 auto;background:var(--white);border-radius:var(--r-lg);padding:2.4rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;box-shadow:0 8px 32px rgba(10,122,191,.08);}
+.fv-item{text-align:center;padding:1.6rem 1rem;border-radius:var(--r-lg);background:var(--wash-wash);}
+.fv-item__icon{font-size:2rem;margin-bottom:.7rem;}
+.fv-item__val{font-family:var(--font-display);font-size:2.4rem;font-weight:700;color:var(--wash-deep);line-height:1;margin-bottom:.3rem;}
+.fv-item__unit{font-size:.82rem;color:var(--charcoal);}
+.fv-arrow{display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--wash);align-self:center;}
+.fv-result{grid-column:span 3;margin-top:.5rem;text-align:center;padding:1.6rem;border-radius:var(--r-lg);background:var(--wash);color:var(--wash-dark);}
+.fv-result__val{font-family:var(--font-display);font-size:2rem;font-weight:700;}
+.fv-result__label{font-size:.9rem;margin-top:.3rem;}
+
+/* ── DRY TOILET MODELS ── */
+.toilets{padding:5.5rem 0;background:var(--white);}
+.toilets__header{text-align:center;max-width:580px;margin:0 auto 3rem;}
+.toilets__grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:880px;margin:0 auto;}
+.toilet-card{border-radius:var(--r-lg);overflow:hidden;border:1px solid #d4ecfa;transition:transform var(--ease),box-shadow var(--ease);}
+.toilet-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(10,122,191,.1);}
+.toilet-card__head{background:var(--wash-deep);padding:1.8rem;color:var(--white);}
+.toilet-card__model{font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:.4rem;}
+.toilet-card__title{font-family:var(--font-display);font-size:1.35rem;line-height:1.2;}
+.toilet-card__body{padding:1.8rem;background:var(--white);}
+.toilet-card__how{font-size:.88rem;font-weight:600;color:var(--wash-deep);margin-bottom:.5rem;letter-spacing:.04em;}
+.toilet-card__text{font-size:.9rem;line-height:1.7;color:var(--charcoal);}
+.toilet-card__outcome{margin-top:1.2rem;padding:.9rem 1rem;background:var(--wash-wash);border-radius:var(--r);border-left:3px solid var(--wash);}
+.toilet-card__outcome p{font-size:.84rem;color:var(--wash-dark);line-height:1.55;}
+/* circle diagram */
+.circle-section{padding:5.5rem 0;background:var(--wash-dark);color:var(--cream);}
+.circle-section__inner{max-width:900px;margin:0 auto;text-align:center;}
+.circle-viz{position:relative;max-width:480px;margin:3rem auto 0;aspect-ratio:1;}
+.cv-svg{width:100%;height:100%;}
+/* animated path draw */
+@keyframes drawCircle{from{stroke-dashoffset:1320;}to{stroke-dashoffset:0;}}
+.cv-arc{stroke-dasharray:1320;stroke-dashoffset:1320;animation:drawCircle 2.4s cubic-bezier(.4,0,.2,1) forwards;}
+.circle-section.in .cv-arc{animation-play-state:running;}
+.circle-section:not(.in) .cv-arc{animation-play-state:paused;}
+.cv-label{font-family:var(--font-display);font-style:italic;}
+.circle-nodes{position:absolute;inset:0;}
+.cnode{position:absolute;display:flex;flex-direction:column;align-items:center;gap:.3rem;text-align:center;width:100px;}
+.cnode__dot{width:12px;height:12px;border-radius:50%;background:var(--wash);}
+.cnode__text{font-size:.75rem;color:rgba(235,248,255,.85);line-height:1.3;}
+/* node positions */
+.cnode--top{top:0;left:50%;transform:translateX(-50%);}
+.cnode--right{top:50%;right:-20px;transform:translateY(-50%);}
+.cnode--bottom{bottom:0;left:50%;transform:translateX(-50%);}
+.cnode--left{top:50%;left:-20px;transform:translateY(-50%);}
+
+/* ── SITES ── */
+.sites{padding:5.5rem 0;background:var(--wash-wash);}
+.sites__header{text-align:center;max-width:580px;margin:0 auto 3rem;}
+.sites__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;}
+.site-card{background:var(--white);border-radius:var(--r-lg);overflow:hidden;border:1px solid #d4ecfa;transition:transform var(--ease),box-shadow var(--ease);}
+.site-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(10,122,191,.12);}
+.site-card__img{height:140px;background:linear-gradient(135deg,var(--wash-deep),var(--wash-dark));position:relative;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-size:.72rem;letter-spacing:.05em;}
+.site-card__img span{font-size:2rem;}
+.site-card__tag{position:absolute;top:.75rem;left:.75rem;background:rgba(255,255,255,.9);color:var(--wash-deep);font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .6rem;border-radius:20px;}
+.site-card__body{padding:1.4rem;}
+.site-card__name{font-family:var(--font-display);font-size:1.1rem;color:var(--wash-dark);margin-bottom:.3rem;}
+.site-card__loc{font-size:.78rem;color:var(--charcoal);margin-bottom:.7rem;opacity:.75;}
+.site-card__desc{font-size:.85rem;line-height:1.6;color:var(--charcoal);}
+.site-card__tbc{display:inline-block;margin-top:.7rem;font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--wash-deep);background:var(--wash-wash);padding:.2rem .6rem;border-radius:20px;}
+
+/* ── WHY SUSTAINABLE ── */
+.why{padding:5.5rem 0;background:var(--white);}
+.why__header{text-align:center;max-width:580px;margin:0 auto 3rem;}
+.why__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;}
+.why-card{padding:2rem 1.6rem;border-radius:var(--r-lg);background:var(--wash-wash);border-top:3px solid var(--wash);transition:transform var(--ease),box-shadow var(--ease);}
+.why-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(10,122,191,.1);}
+.why-card__icon{font-size:2rem;margin-bottom:.9rem;}
+.why-card__title{font-family:var(--font-display);font-size:1.1rem;color:var(--wash-dark);margin-bottom:.6rem;}
+.why-card__text{font-size:.88rem;line-height:1.65;color:var(--charcoal);}
+
+/* ── CTA ── */
+.project-cta{background:var(--wash-deep);padding:5rem 0;text-align:center;position:relative;overflow:hidden;}
+.project-cta::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.1)0%,transparent 60%);pointer-events:none;}
+.project-cta__inner{position:relative;z-index:1;}
+.project-cta__label{display:block;font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:.75rem;}
+.project-cta h2{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);color:var(--white);line-height:1.15;margin-bottom:1rem;max-width:660px;margin-left:auto;margin-right:auto;}
+.project-cta p{font-size:1rem;color:rgba(255,255,255,.85);max-width:500px;margin:0 auto 2.5rem;line-height:1.75;}
+.project-cta__buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-white{background:var(--white);color:var(--wash-dark);font-weight:600;}
+.btn-white:hover{background:var(--cream);transform:translateY(-2px);}
+.btn-outline-white{border:2px solid rgba(255,255,255,.6);color:var(--white);}
+.btn-outline-white:hover{border-color:var(--white);background:rgba(255,255,255,.12);}
+
+/* other projects */
+.proj-card:nth-child(1) .proj-card__thumb{background:linear-gradient(135deg,#4F8F00,#2c5400);}
+.proj-card:nth-child(2) .proj-card__thumb{background:linear-gradient(135deg,#814800,#4a2900);}
+.proj-card:nth-child(3) .proj-card__thumb{background:linear-gradient(135deg,#195301,#0f2800);}
+
+@media(max-width:900px){
+  .nav__list,.nav__actions{display:none;}.hamburger{display:flex;}
+  .sdg-band__inner{grid-template-columns:1fr;text-align:center;gap:1.5rem;}.sdg-divider{display:none;}
+  .water-stats{grid-template-columns:1fr;}.flush-visual{grid-template-columns:1fr;}.fv-arrow{display:none;}
+  .fv-result{grid-column:span 1;}
+  .toilets__grid{grid-template-columns:1fr;}.sites__grid{grid-template-columns:1fr;}.why__grid{grid-template-columns:1fr;}
+  .other-projects__grid{grid-template-columns:repeat(2,1fr);}.footer-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:640px){
+  .top-bar__info{display:none;}.other-projects__grid{grid-template-columns:1fr;}.footer-grid{grid-template-columns:1fr;}
+  .project-cta__buttons{flex-direction:column;align-items:center;}
+  .circle-viz{max-width:320px;}
+}
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <div class="container">
+    <div class="top-bar__info">
+      <span>UK Charity #1167115</span><span class="top-bar__dot">·</span>
+      <span>Malagasy NGO</span><span class="top-bar__dot">·</span>
+      <span>Association France SIREN 85242793900016</span><span class="top-bar__dot">·</span>
+      <span>Association Suisse</span>
+    </div>
+    <nav class="lang-switch" aria-label="Language switcher">
+      <a href="index.html" class="lang-switch__btn is-active" lang="en">EN</a>
+      <a href="index-fr.html" class="lang-switch__btn" lang="fr">FR</a>
+    </nav>
+  </div>
+</div>
+<header class="navbar" id="navbar" role="banner">
+  <div class="container">
+    <a href="../../index.html" class="navbar__logo" aria-label="Education for Madagascar — home">
+      <img src="../../images/logo_mini.jpeg" alt="Education for Madagascar logo" class="logo-image">
+      <span class="logo-text">Education<br>for Madagascar</span>
+    </a>
+    <ul class="nav__list" role="list">
+      <li class="nav__item" id="ni-who">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-who')">Who we are <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="../../who-we-are/our-story.html">Our story<span class="dropdown__sub">History &amp; founding vision</span></a>
+          <a class="dropdown__link" href="../../who-we-are/team.html">Team &amp; board<span class="dropdown__sub">The people behind E4M</span></a>
+          <a class="dropdown__link" href="../../who-we-are/governance.html">Governance &amp; statutes</a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="../../who-we-are/annual-reports.html">Annual reports</a>
+          <a class="dropdown__link" href="../../who-we-are/partners.html">Our partners</a>
+        </div>
+      </li>
+      <li class="nav__item" id="ni-proj">
+        <button class="nav__link is-active" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-proj')">Our projects <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown--mega">
+          <div class="mega__col">
+            <p class="mega__heading mega__heading--edu">Education</p>
+            <a class="mega__link" href="akka.html">AKKA Montessori <span class="badge badge--age">3–6 yrs</span></a>
+            <a class="mega__link" href="kanto.html">KANTO Culture <span class="badge badge--age">9–22 yrs</span></a>
+            <a class="mega__link" href="care.html">CARE Coding &amp; Robotics</a>
+            <a class="mega__link" href="scola.html" data-scola>SCOLA Scholarship <span class="badge badge--age">17–25</span></a>
+            <a class="mega__link" href="tuto.html">TUTO</a>
+            <a class="mega__link" href="vim.html" data-vim>VIM — Volunteering</a>
+            <a class="mega__link" href="cad.html" data-cad>Career Day Awareness</a>
+            <a class="mega__link" href="unesco.html">UNESCO Partnership <span class="badge badge--new">New</span></a>
+          </div>
+          <div class="mega__col">
+            <p class="mega__heading mega__heading--health">Health</p>
+            <a class="mega__link" href="../health/women.html">School for Women</a>
+            <a class="mega__link" href="../health/fody.html">FODY</a>
+            <a class="mega__link" href="../health/tomady.html">TOMADY</a>
+            <div class="mega__col-gap"></div>
+            <p class="mega__heading mega__heading--env">Environment</p>
+            <a class="mega__link" href="../environment/silva.html">SILVA</a>
+            <a class="mega__link" href="../environment/wash.html">WASH</a>
+            <a class="mega__link" href="../environment/permada.html">PERMADA</a>
+          </div>
+          <div class="mega__col">
+            <p class="mega__heading mega__heading--edu">Overview</p>
+            <p class="mega__summary">13 active projects across education, health, and the environment — serving children aged 3 to 18 and women in rural Madagascar.</p>
+            <a class="mega__all-link" href="../index.html">All projects →</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav__item" id="ni-inv">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-inv')">Get involved <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="../../get-involved/volunteer.html">Volunteer (VIM)<span class="dropdown__sub">Live &amp; work in Madagascar</span></a>
+          <a class="dropdown__link" href="../../get-involved/donate.html">Donate<span class="dropdown__sub">Fund our programmes directly</span></a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="../../get-involved/partner.html">Become a partner</a>
+        </div>
+      </li>
+      <li class="nav__item" id="ni-media">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-media')">Media <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="../../media/blog.html">Blog</a>
+          <a class="dropdown__link" href="../../media/newsletters.html">Newsletters</a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="../../who-we-are/annual-reports.html">Annual reports</a>
+        </div>
+      </li>
+    </ul>
+    <div class="nav__actions">
+      <a href="#shop" class="btn-shop">The Shop ↗</a>
+      <a href="../../get-involved/donate.html" class="btn-donate">Donate</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMobile()">
+      <span class="hamburger__bar"></span><span class="hamburger__bar"></span><span class="hamburger__bar"></span>
+    </button>
+  </div>
+</header>
+<nav class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation">
+  <div class="mob-section" id="mob-who">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-who')">Who we are <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="../../who-we-are/our-story.html">Our story</a>
+      <a class="mob-link" href="../../who-we-are/team.html">Team &amp; board</a>
+      <a class="mob-link" href="../../who-we-are/governance.html">Governance &amp; statutes</a>
+      <a class="mob-link" href="../../who-we-are/annual-reports.html">Annual reports</a>
+      <a class="mob-link" href="../../who-we-are/partners.html">Our partners</a>
+    </div>
+  </div>
+  <div class="mob-section" id="mob-proj">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-proj')">Our projects <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <div class="mob-subheading">Education</div>
+      <a class="mob-link" href="akka.html">AKKA Montessori</a>
+      <a class="mob-link" href="kanto.html">KANTO Culture</a>
+      <a class="mob-link" href="care.html">CARE Coding &amp; Robotics</a>
+      <a class="mob-link" href="scola.html" data-scola>SCOLA Scholarship</a>
+      <a class="mob-link" href="tuto.html">TUTO</a>
+      <a class="mob-link" href="vim.html" data-vim>VIM — Volunteering</a>
+      <a class="mob-link" href="cad.html" data-cad>Career Day Awareness</a>
+      <a class="mob-link" href="unesco.html">UNESCO Partnership</a>
+      <div class="mob-subheading">Health</div>
+      <a class="mob-link" href="../health/women.html">School for Women</a>
+      <a class="mob-link" href="../health/fody.html">FODY</a>
+      <a class="mob-link" href="../health/tomady.html">TOMADY</a>
+      <div class="mob-subheading">Environment</div>
+      <a class="mob-link" href="../environment/silva.html">SILVA</a>
+      <a class="mob-link" href="../environment/wash.html">WASH</a>
+      <a class="mob-link" href="../environment/permada.html">PERMADA</a>
+    </div>
+  </div>
+  <div class="mob-section" id="mob-inv">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-inv')">Get involved <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="../../get-involved/volunteer.html">Volunteer (VIM)</a>
+      <a class="mob-link" href="../../get-involved/donate.html">Donate</a>
+      <a class="mob-link" href="../../get-involved/partner.html">Become a partner</a>
+    </div>
+  </div>
+  <div class="mob-section" id="mob-media">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-media')">Media <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="../../media/blog.html">Blog</a>
+      <a class="mob-link" href="../../media/newsletters.html">Newsletters</a>
+      <a class="mob-link" href="../../who-we-are/annual-reports.html">Annual reports</a>
+    </div>
+  </div>
+  <div class="mob-actions">
+    <a href="#shop" class="btn-shop">The Shop ↗</a>
+    <a href="../../get-involved/donate.html" class="btn-donate">Donate</a>
+  </div>
+</nav>
+
+
+<nav class="breadcrumb breadcrumb--environment" aria-label="Breadcrumb">
+  <div class="container">
+    <ul class="breadcrumb__list">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../index.html">Our Projects</a></li>
+      <li><span class="breadcrumb__current">Environment</span></li>
+      <li><span class="breadcrumb__current">WASH</span></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero" aria-label="WASH project hero">
+  <div class="page-hero__bg"></div>
+  <div class="hero-ripples" aria-hidden="true">
+    <div class="ripple"></div><div class="ripple"></div>
+    <div class="ripple"></div><div class="ripple"></div>
+  </div>
+  <div class="page-hero__content">
+    <div class="container">
+      <span class="page-hero__kicker">Clean Water &amp; Sanitation</span>
+      <h1 class="page-hero__title">WASH</h1>
+      <p class="page-hero__sub">Water is not a luxury. In Madagascar, it is a matter of survival — and of justice.</p>
+      <div class="page-hero__tags">
+        <span class="hero-tag hero-tag--accent">Environment</span>
+        <span class="hero-tag">UN SDG 6</span>
+        <span class="hero-tag">Dry toilets</span>
+        <span class="hero-tag">12m³ saved / person / year</span>
+        <span class="hero-tag">Ambohibe · Morondava</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SDG 6 BAND -->
+<section class="sdg-band" aria-label="United Nations Sustainable Development Goal 6">
+  <div class="container">
+    <div class="sdg-band__inner">
+      <div class="sdg-badge" role="img" aria-label="SDG 6 — Clean Water and Sanitation">
+        <span class="sdg-badge__num">6</span>
+        <span class="sdg-badge__text">Clean Water<br>and Sanitation</span>
+      </div>
+      <div class="sdg-divider"></div>
+      <div class="sdg-content">
+        <h2>Committed to UN Sustainable Development Goal 6</h2>
+        <p>Clean water and sanitation is one of the 17 global goals set by the United Nations. Madagascar is one of its most urgent frontiers — and WASH is Education for Madagascar's direct response.</p>
+      </div>
+      <div class="sdg-icon" aria-hidden="true">
+        <svg viewBox="0 0 80 100" width="60" fill="none">
+          <path d="M20,20 L60,20 L60,68 L40,88 L20,68 Z" fill="none" stroke="rgba(86,193,255,.3)" stroke-width="1.5"/>
+          <path d="M40,30 L40,72 M40,72 L30,62 M40,72 L50,62" stroke="rgba(86,193,255,.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="40" cy="48" r="8" fill="rgba(86,193,255,.2)" stroke="rgba(86,193,255,.4)" stroke-width="1.2"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCARCITY — dark, impactful -->
+<section class="scarcity" id="scarcitySection" aria-labelledby="scarcity-heading">
+  <div class="container">
+    <div class="scarcity__inner">
+      <span class="scarcity__eyebrow">The reality on the ground</span>
+      <p class="scarcity__quote" id="scarcity-heading">
+        Water scarcity is a serious issue in the world.<br>In Madagascar, it is <em>critical</em>.
+      </p>
+      <p class="scarcity__body">
+        On the hill of Ambohibe, drinking water is rare. A single toilet flush wastes more water than a family has access to in a day. The consequences reach far beyond thirst — unmanaged wastewater, soil degradation, disease, and the loss of the very humus that could feed the next generation.
+      </p>
+      <div class="water-stats" role="list">
+        <div class="wstat" role="listitem">
+          <div class="wstat__val" id="ws1">9L</div>
+          <div class="wstat__label">wasted per<br>toilet flush</div>
+        </div>
+        <div class="wstat" role="listitem">
+          <div class="wstat__val" id="ws2">36L</div>
+          <div class="wstat__label">wasted per<br>person per day</div>
+        </div>
+        <div class="wstat" role="listitem">
+          <div class="wstat__val" id="ws3">12m³</div>
+          <div class="wstat__label">wasted per<br>person per year</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTER VISUAL — the water saved -->
+<section class="counter-section" aria-labelledby="counter-heading">
+  <div class="container">
+    <div class="counter-section__header">
+      <span class="section-eyebrow" style="color:var(--wash-deep);">What a dry toilet saves</span>
+      <h2 class="section-heading" id="counter-heading" style="color:var(--wash-dark);">The maths of a better choice</h2>
+    </div>
+    <div class="flush-visual" role="table" aria-label="Water savings calculation">
+      <div class="fv-item">
+        <div class="fv-item__icon">🚽</div>
+        <div class="fv-item__val">9</div>
+        <div class="fv-item__unit">litres per flush</div>
+      </div>
+      <div class="fv-arrow" aria-hidden="true">×</div>
+      <div class="fv-item">
+        <div class="fv-item__icon">📅</div>
+        <div class="fv-item__val">4</div>
+        <div class="fv-item__unit">uses per day</div>
+      </div>
+      <div class="fv-result">
+        <div class="fv-result__val">12,000 litres saved — every year, per person.</div>
+        <div class="fv-result__label">That water stays clean. That humus returns to the soil. <strong>The circle is complete.</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DRY TOILET MODELS -->
+<section class="toilets" aria-labelledby="toilets-heading">
+  <div class="container">
+    <div class="toilets__header">
+      <span class="section-eyebrow" style="color:var(--wash-deep);">Our solution</span>
+      <h2 class="section-heading" id="toilets-heading" style="color:var(--wash-dark);">Two models of dry toilet — one purpose</h2>
+    </div>
+    <div class="toilets__grid">
+      <div class="toilet-card">
+        <div class="toilet-card__head">
+          <div class="toilet-card__model">Model 01 — Basic</div>
+          <h3 class="toilet-card__title">The Wood Chip Toilet</h3>
+        </div>
+        <div class="toilet-card__body">
+          <p class="toilet-card__how">How it works</p>
+          <p class="toilet-card__text">Wood chips or sawdust are added after each use. They absorb moisture and eliminate odours naturally — no chemicals, no water, no smell.</p>
+          <div class="toilet-card__outcome"><p>✓ No water used. Output goes directly to the compost bin, which feeds the permaculture garden.</p></div>
+        </div>
+      </div>
+      <div class="toilet-card">
+        <div class="toilet-card__head">
+          <div class="toilet-card__model">Model 02 — Advanced</div>
+          <h3 class="toilet-card__title">The Separation Toilet</h3>
+        </div>
+        <div class="toilet-card__body">
+          <p class="toilet-card__how">How it works</p>
+          <p class="toilet-card__text">A liquid and solid separator collects urine separately, which is used directly as a nitrogen-rich fertiliser. Solids compost separately into rich humus.</p>
+          <div class="toilet-card__outcome"><p>✓ Produces two distinct soil inputs. Zero water. No chemical fertiliser needed — ever.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE WATER CYCLE — animated circle -->
+<section class="circle-section" id="circleSection" aria-labelledby="circle-heading">
+  <div class="container">
+    <div class="circle-section__inner">
+      <span class="section-eyebrow" style="color:var(--wash);">The full loop</span>
+      <h2 class="section-heading" id="circle-heading" style="color:var(--cream);">The circle is complete</h2>
+      <p style="color:rgba(235,248,255,.75);font-size:1rem;line-height:1.75;max-width:580px;margin:.8rem auto 0;">
+        What was once a problem becomes a resource. Human waste → compost → fertile soil → food → community health. No water wasted. No chemicals added. No humus lost.
+      </p>
+      <div class="circle-viz" aria-hidden="true">
+        <svg class="cv-svg" viewBox="0 0 400 400">
+          <circle cx="200" cy="200" r="150" fill="none" stroke="rgba(86,193,255,.12)" stroke-width="1.5"/>
+          <circle cx="200" cy="200" r="150" fill="none" stroke="var(--wash)" stroke-width="2.5"
+            stroke-dasharray="1320" stroke-dashoffset="1320" id="cycleArc" stroke-linecap="round"
+            style="transform:rotate(-90deg);transform-origin:200px 200px;"/>
+          <!-- arrow head at end -->
+          <polygon points="196,53 204,53 200,44" fill="var(--wash)" id="cycleArrow" opacity="0"/>
+          <!-- labels -->
+          <text x="200" y="42" text-anchor="middle" font-family="Charter,Georgia,serif" font-style="italic" font-size="13" fill="rgba(235,248,255,.9)">Dry toilet</text>
+          <text x="368" y="207" text-anchor="start" font-family="Charter,Georgia,serif" font-style="italic" font-size="13" fill="rgba(235,248,255,.9)">Compost</text>
+          <text x="200" y="370" text-anchor="middle" font-family="Charter,Georgia,serif" font-style="italic" font-size="13" fill="rgba(235,248,255,.9)">Humus · soil</text>
+          <text x="32" y="207" text-anchor="end" font-family="Charter,Georgia,serif" font-style="italic" font-size="13" fill="rgba(235,248,255,.9)">Food · health</text>
+          <!-- center -->
+          <text x="200" y="194" text-anchor="middle" font-family="Charter,Georgia,serif" font-size="15" font-weight="700" fill="var(--wash)">Zero</text>
+          <text x="200" y="212" text-anchor="middle" font-family="Charter,Georgia,serif" font-size="13" fill="rgba(235,248,255,.7)">water wasted</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SITES -->
+<section class="sites" aria-labelledby="sites-heading">
+  <div class="container">
+    <div class="sites__header">
+      <span class="section-eyebrow" style="color:var(--wash-deep);">Where we work</span>
+      <h2 class="section-heading" id="sites-heading" style="color:var(--wash-dark);">Our WASH sites</h2>
+    </div>
+    <div class="sites__grid">
+      <div class="site-card">
+        <div class="site-card__img"><span>💧</span><span class="site-card__tag">Site 01</span></div>
+        <div class="site-card__body">
+          <h3 class="site-card__name">Ambohibe Campus</h3>
+          <p class="site-card__loc">Antananarivo area</p>
+          <p class="site-card__desc">The pilot site — two dry toilet models installed, rainwater pipe system organised, and composting integrated with the PERMADA garden.</p>
+          <span class="site-card__tbc">Active</span>
+        </div>
+      </div>
+      <div class="site-card">
+        <div class="site-card__img"><span>💧</span><span class="site-card__tag">Site 02</span></div>
+        <div class="site-card__body">
+          <h3 class="site-card__name">Mandromondromotra</h3>
+          <p class="site-card__loc">Near Taolagnaro (Fort Dauphin) · Anosy region</p>
+          <p class="site-card__desc">New WASH site at a middle school with 300 students — dry toilet installation and permaculture garden creation underway.</p>
+          <span class="site-card__tbc">New · 2024</span>
+        </div>
+      </div>
+      <div class="site-card">
+        <div class="site-card__img"><span>💧</span><span class="site-card__tag">Site 03</span></div>
+        <div class="site-card__body">
+          <h3 class="site-card__name">Morondava Region</h3>
+          <p class="site-card__loc">West Coast, Madagascar</p>
+          <p class="site-card__desc">Sanitation and hygiene education alongside the School for Women and VIM volunteering programmes — details to be confirmed.</p>
+          <span class="site-card__tbc">TBC — confirm with team</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY SUSTAINABLE -->
+<section class="why" aria-labelledby="why-heading">
+  <div class="container">
+    <div class="why__header">
+      <span class="section-eyebrow" style="color:var(--wash-deep);">Why it matters</span>
+      <h2 class="section-heading" id="why-heading" style="color:var(--wash-dark);">A sustainable decision on every level</h2>
+    </div>
+    <div class="why__grid">
+      <div class="why-card">
+        <div class="why-card__icon">💧</div>
+        <h3 class="why-card__title">Preserves drinking water</h3>
+        <p class="why-card__text">On the hill of Ambohibe, water is rare. Dry toilets save 12m³ per person per year — water that stays clean for drinking, cooking, and hygiene.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card__icon">🌱</div>
+        <h3 class="why-card__title">Feeds the soil</h3>
+        <p class="why-card__text">Composted waste returns humus and nutrients to the land — eliminating the need for chemical fertilisers and linking directly to the PERMADA garden.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card__icon">🔬</div>
+        <h3 class="why-card__title">Protects public health</h3>
+        <p class="why-card__text">Open defecation and unmanaged wastewater cause disease. Education on sanitation and hygiene breaks the cycle — protecting children and families.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="project-cta" aria-labelledby="cta-heading">
+  <div class="container">
+    <div class="project-cta__inner">
+      <span class="project-cta__label">Support clean water in Madagascar</span>
+      <h2 id="cta-heading">Water is not a luxury.<br>Help us make it a right.</h2>
+      <p>Your donation funds dry toilets, rainwater systems, hygiene education, and the composting infrastructure that closes the loop — for families, for the soil, for Madagascar.</p>
+      <div class="project-cta__buttons">
+        <a href="https://buy.stripe.com/cN2eWi7dYdnK9XifZ6" class="btn btn-white" target="_blank" rel="noopener">Donate to WASH</a>
+        <a href="permada.html" class="btn btn-outline-white">See PERMADA — the soil connection</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OTHER PROJECTS -->
+<section class="other-projects" aria-labelledby="other-heading">
+  <div class="container">
+    <div class="other-projects__header">
+      <span class="section-eyebrow">Keep exploring</span>
+      <h2 class="section-heading" id="other-heading">Other Environment projects</h2>
+    </div>
+    <div class="other-projects__grid">
+      <a class="proj-card" href="permada.html"><div class="proj-card__thumb"><span class="proj-card__tag">Permaculture</span></div><div class="proj-card__body"><h3 class="proj-card__title">PERMADA</h3><p class="proj-card__desc">Restoring desertified soil into fertile ground — 72 people, zero chemicals, food self-sufficiency.</p><span class="proj-card__link">Learn more →</span></div></a>
+      <a class="proj-card" href="silva.html"><div class="proj-card__thumb"><span class="proj-card__tag">Reforestation</span></div><div class="proj-card__body"><h3 class="proj-card__title">SILVA — Edible Forest</h3><p class="proj-card__desc">54 children planting acacia, moringa, jacaranda — building a living forest at Anjozorobe.</p><span class="proj-card__link">Learn more →</span></div></a>
+      <a class="proj-card" href="../../projects/education/vim.html"><div class="proj-card__thumb"><span class="proj-card__tag">Volunteering</span></div><div class="proj-card__body"><h3 class="proj-card__title">VIM — Volunteering</h3><p class="proj-card__desc">Plant mangroves, help in the garden, teach children — quality, ethics, sharing.</p><span class="proj-card__link">Learn more →</span></div></a>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;"><a href="../index.html" class="btn btn-outline">See all 13 projects</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Education for Madagascar</h3>
+        <p>Committed to UN SDG 4 — Quality Education for all children, from early childhood to economic independence.</p>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/educationformadagascar" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener">f</a>
+          <a href="https://www.instagram.com/educationformadagascar/" class="social-btn" aria-label="Instagram" target="_blank" rel="noopener">ig</a>
+          <a href="https://www.linkedin.com/company/educationformadagascar/" class="social-btn" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Education</h4>
+        <ul>
+          <li><a href="akka.html">AKKA Montessori</a></li>
+          <li><a href="kanto.html">KANTO</a></li>
+          <li><a href="scola.html">SCOLA</a></li>
+          <li><a href="care.html">CARE Coding</a></li>
+          <li><a href="vim.html">VIM</a></li>
+          <li><a href="cad.html">Career Day</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="../../media/blog.html">Blog</a></li>
+          <li><a href="#">Artisan Shop</a></li>
+          <li><a href="../../who-we-are/annual-reports.html">Annual Reports</a></li>
+          <li><a href="../../media/newsletters.html">Newsletter</a></li>
+          <li><a href="../health/tomady.html">TOMADY Health</a></li>
+          <li><a href="../environment/silva.html">SILVA Environment</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@educationformadagascar.org">contact@educationformadagascar.org</a></li>
+          <li style="font-size:.85rem;margin-top:.3rem;">23 Milner Drive, Cobham<br>KT11 2EZ, United Kingdom</li>
+          <li style="margin-top:.8rem;font-size:.75rem;opacity:.55;line-height:1.8;">UK Charity #1167115<br>FR SIREN 85242793900016<br>MG NIF 4002796057</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Education for Madagascar. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a><a href="#">Legal Notice</a><a href="#">Safeguarding</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../js/global.js"></script>
+
+<script>
+/* Circle arc animation on scroll */
+(function(){
+  var sec=document.getElementById('circleSection');
+  var arc=document.getElementById('cycleArc');
+  var arr=document.getElementById('cycleArrow');
+  if(!sec||!arc)return;
+  var done=false;
+  function run(){
+    if(done)return;done=true;
+    arc.style.transition='stroke-dashoffset 2.4s cubic-bezier(.4,0,.2,1)';
+    arc.style.strokeDashoffset='0';
+    setTimeout(function(){arr.setAttribute('opacity','1');},2200);
+  }
+  var io=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting)run();});},{threshold:.4});
+  io.observe(sec);
+})();
+/* Scarcity counters count up */
+(function(){
+  var sec=document.getElementById('scarcitySection');if(!sec)return;
+  var done=false;
+  function countUp(el,target,suffix,dur){
+    var start=performance.now();
+    function step(now){
+      var p=Math.min((now-start)/dur,1);
+      var v=Math.round((1-Math.pow(1-p,3))*target);
+      el.textContent=v+suffix;
+      if(p<1)requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  function run(){
+    if(done)return;done=true;
+    countUp(document.getElementById('ws1'),9,'L',1200);
+    setTimeout(function(){countUp(document.getElementById('ws2'),36,'L',1400);},200);
+    setTimeout(function(){
+      var el=document.getElementById('ws3');
+      var start=performance.now();
+      function step(now){
+        var p=Math.min((now-start)/1600,1);
+        var v=Math.round((1-Math.pow(1-p,3))*12);
+        el.textContent=v+'m³';
+        if(p<1)requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    },400);
+  }
+  var io=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting)run();});},{threshold:.4});
+  io.observe(sec);
+})();
+</script>
+
+</body>
+</html>
