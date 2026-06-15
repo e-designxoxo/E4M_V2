@@ -1,1 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TOMADY — Health Centre · Good Health &amp; Well-being | Education for Madagascar</title>
+<meta name="description" content="TOMADY Health Centre: accessible primary healthcare in Madagascar. General practice, family planning, prenatal care, diabetes and blood pressure screening, maternal and child health — UN SDG 3 Good Health and Well-being."/>
+<link rel="stylesheet" href="../../css/global.css">
+<style>
+:root{
+  --green:#195301;--cream:#F4F1EA;--teal:#006C65;--charcoal:#535353;--silver:#D5D5D5;--white:#fff;
+  --fody:#C0532B;--fody-deep:#9A3F1E;--fody-dark:#2A2A28;--fody-lt:#D87B52;--fody-wash:#F4F1EA;--teal:#2C6E63;--teal-deep:#1F5048;--teal-wash:#E4EDEA;--sage:#7BA890;--sage-wash:#E4EDE4;--trust:#2C6E63;--trust-deep:#1F5048;--trust-wash:#E4EDEA;--charcoal-h:#2A2A28;
+  --ink:#2A2A28;--dust:#33322f;--sand:#3a3a36;--sand-deep:#2A2A28;
+  --font-display:"Charter",Georgia,serif;--font-body:"Avenir Next",system-ui,sans-serif;
+  --nav-h:92px;--topbar-h:40px;--max-w:1160px;--r:2px;--r-lg:4px;--ease:0.22s ease;
+}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--white); color: var(--charcoal); line-height: 1.65; }
+  img  { display: block; max-width: 100%; }
+  a    { text-decoration: none; color: inherit; }
+  ul   { list-style: none; }
+  button { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
+  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+  .btn { display: inline-block; padding: .75rem 1.75rem; border-radius: var(--r); font-weight: 500; font-size: .95rem; cursor: pointer; transition: background var(--ease), color var(--ease), transform var(--ease); }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: var(--green); color: var(--cream); }
+  .btn-primary:hover { background: #1f6701; }
+  .btn-outline { border: 2px solid var(--green); color: var(--green); }
+  .btn-outline:hover { background: var(--green); color: var(--cream); }
+  .top-bar { background: var(--green); color: var(--cream); height: var(--topbar-h); font-size: .72rem; }
+  .top-bar .container { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .top-bar__info { display: flex; align-items: center; gap: 1.25rem; opacity: .85; flex-wrap: wrap; }
+  .top-bar__info span { white-space: nowrap; }
+  .top-bar__dot { opacity: .35; }
+  .lang-switch { display: flex; align-items: center; gap: .25rem; flex-shrink: 0; }
+  .lang-switch__btn { padding: .2rem .55rem; border-radius: var(--r); color: var(--cream); font-size: .72rem; font-weight: 500; opacity: .7; transition: opacity var(--ease), background var(--ease); }
+  .lang-switch__btn:hover { opacity: 1; }
+  .lang-switch__btn.is-active { background: rgba(255,255,255,.15); opacity: 1; }
+  .navbar { position: sticky; top: 0; z-index: 200; background: var(--white); border-bottom: 1px solid var(--silver); height: var(--nav-h); transition: box-shadow var(--ease); }
+  .navbar.is-scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.08); }
+  .navbar .container { height: 100%; display: flex; align-items: center; }
+  .navbar__logo { display: flex; align-items: center; gap: .6rem; margin-right: 2rem; flex-shrink: 0; }
+  .logo-image { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+  .logo-text { font-family: var(--font-display); font-size: 1.20rem; font-weight: 700; color: var(--green); line-height: 1.2; text-transform: uppercase; letter-spacing: .04em; }
+  .nav__list { display: flex; align-items: center; height: 100%; flex: 1; }
+  .nav__item { position: relative; height: 100%; display: flex; align-items: center; }
+  .nav__link { display: flex; align-items: center; gap: .3rem; padding: 0 .9rem; height: 100%; font-size: .875rem; font-weight: 500; color: var(--charcoal); white-space: nowrap; border-bottom: 2px solid transparent; transition: color var(--ease), border-color var(--ease); user-select: none; }
+  .nav__link:hover { color: var(--green); }
+  .nav__link.is-active { color: var(--green); border-bottom-color: var(--green); }
+  .nav__item.is-open .nav__link { color: var(--green); }
+  .nav__chevron { width: 8px; height: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-1px); transition: transform var(--ease); flex-shrink: 0; }
+  .nav__item.is-open .nav__chevron { transform: rotate(-135deg) translateY(2px); }
+  .dropdown { visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(6px); transition: opacity var(--ease), transform var(--ease), visibility 0s var(--ease); position: absolute; top: calc(var(--nav-h) - 1px); left: 0; min-width: 240px; background: var(--white); border: 1px solid var(--silver); border-top: none; border-radius: 0 0 var(--r-lg) var(--r-lg); box-shadow: 0 10px 32px rgba(0,0,0,.09); padding: .5rem 0; }
+  .nav__item.is-open .dropdown { visibility: visible; opacity: 1; pointer-events: auto; transform: translateY(0); transition: opacity var(--ease), transform var(--ease); }
+  .dropdown__link { display: block; padding: .6rem 1.2rem; font-size: .875rem; color: var(--charcoal); transition: background var(--ease), color var(--ease); }
+  .dropdown__link:hover { background: var(--cream); color: var(--green); }
+  .dropdown__sub { display: block; font-size: .75rem; color: var(--charcoal); opacity: .6; margin-top: .1rem; font-weight: 400; }
+  .dropdown__separator { height: 1px; background: var(--silver); margin: .4rem 1.2rem; opacity: .5; }
+  .dropdown--mega { visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(6px); transition: opacity var(--ease), transform var(--ease), visibility 0s var(--ease); position: absolute; top: calc(var(--nav-h) - 1px); left: -60px; width: 620px; background: var(--white); border: 1px solid var(--silver); border-top: none; border-radius: 0 0 var(--r-lg) var(--r-lg); box-shadow: 0 10px 32px rgba(0,0,0,.09); display: grid; grid-template-columns: 1fr 1fr 180px; }
+  .nav__item.is-open .dropdown--mega { visibility: visible; opacity: 1; pointer-events: auto; transform: translateY(0); transition: opacity var(--ease), transform var(--ease); }
+  .mega__col { padding: 1.2rem 1.1rem; border-right: 1px solid rgba(213,213,213,.5); }
+  .mega__col:last-child { border-right: none; background: #f8f7f2; border-radius: 0 0 var(--r-lg) 0; }
+  .mega__heading { font-size: .67rem; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; margin-bottom: .6rem; padding-bottom: .5rem; border-bottom: 1px solid var(--silver); }
+  .mega__heading--edu { color: var(--green); }
+  .mega__heading--health { color: #b83030; }
+  .mega__heading--env { color: var(--teal); }
+  .mega__link { display: flex; align-items: center; gap: .5rem; padding: .4rem 0; font-size: .83rem; color: var(--charcoal); transition: color var(--ease); }
+  .mega__link:hover { color: var(--green); }
+  .badge { font-size: .62rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: .12rem .45rem; border-radius: 20px; flex-shrink: 0; }
+  .badge--age { background: #efefef; color: var(--charcoal); }
+  .badge--new { background: #edf7e8; color: var(--green); }
+  .mega__summary { font-size: .8rem; line-height: 1.6; color: var(--charcoal); margin-bottom: 1rem; }
+  .mega__all-link { display: inline-flex; align-items: center; gap: .3rem; font-size: .82rem; font-weight: 600; color: var(--green); transition: gap var(--ease); }
+  .mega__all-link:hover { gap: .55rem; }
+  .mega__col-gap { margin-top: .9rem; }
+  .nav__actions { display: flex; align-items: center; gap: .5rem; margin-left: auto; padding-left: 1rem; flex-shrink: 0; }
+  .btn-shop { padding: .42rem 1rem; font-size: .82rem; font-weight: 500; color: var(--teal); border: 1.5px solid var(--teal); border-radius: var(--r); transition: background var(--ease), color var(--ease); }
+  .btn-shop:hover { background: var(--teal); color: var(--white); }
+  .btn-donate { padding: .42rem 1.1rem; font-size: .82rem; font-weight: 600; background: var(--green); color: var(--cream); border-radius: var(--r); transition: background var(--ease), color var(--ease), transform var(--ease); }
+  .btn-donate:hover { background: var(--gold-bg); color: var(--gold-text); transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; padding: .4rem; margin-left: auto; border-radius: var(--r); transition: background var(--ease); }
+  .hamburger:hover { background: var(--cream); }
+  .hamburger__bar { width: 100%; height: 2px; background: var(--green); border-radius: 2px; transition: transform var(--ease), opacity var(--ease); }
+  .hamburger.is-open .hamburger__bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.is-open .hamburger__bar:nth-child(2) { opacity: 0; }
+  .hamburger.is-open .hamburger__bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-drawer { display: none; position: fixed; top: calc(var(--topbar-h) + var(--nav-h)); left: 0; right: 0; bottom: 0; background: var(--white); overflow-y: auto; z-index: 190; padding: 1rem 0 2rem; border-top: 1px solid var(--silver); }
+  .mobile-drawer.is-open { display: block; }
+  .mob-section__toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: .85rem 1.5rem; font-size: .95rem; font-weight: 500; color: var(--charcoal); border-bottom: 1px solid var(--silver); background: none; text-align: left; transition: background var(--ease); }
+  .mob-section__toggle:hover { background: var(--cream); }
+  .mob-section__content { display: none; padding: .5rem 0; background: #fafaf7; border-bottom: 1px solid var(--silver); }
+  .mob-section.is-open .mob-section__content { display: block; }
+  .mob-subheading { font-size: .67rem; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; color: var(--green); padding: .6rem 1.8rem .3rem; }
+  .mob-link { display: flex; align-items: center; justify-content: space-between; padding: .55rem 1.8rem; font-size: .875rem; color: var(--charcoal); transition: background var(--ease), color var(--ease); }
+  .mob-link:hover { background: var(--cream); color: var(--green); }
+  .mob-actions { display: flex; gap: .75rem; padding: 1.2rem 1.5rem 0; }
+  .mob-actions .btn-shop, .mob-actions .btn-donate { flex: 1; text-align: center; font-size: .9rem; padding: .65rem 1rem; }
+  .breadcrumb { padding: 0.85rem 0; }
+  .breadcrumb .container { width: fit-content; margin-left: 0; }
+  .section-eyebrow { display: block; font-size: .72rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); margin-bottom: .75rem; }
+  .section-heading { font-family: var(--font-display); font-size: clamp(1.8rem,3vw,2.4rem); color: var(--green); line-height: 1.2; }
+  .other-projects { padding: 5.5rem 0; background: var(--cream); }
+  .other-projects__header { margin-bottom: 2.5rem; }
+  .other-projects__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .proj-card { background: var(--white); border-radius: var(--r-lg); overflow: hidden; transition: transform var(--ease), box-shadow var(--ease); display: flex; flex-direction: column; }
+  .proj-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,.09); }
+  .proj-card__thumb { height: 140px; position: relative; }
+  .proj-card__tag { position: absolute; top: .75rem; left: .75rem; background: rgba(255,255,255,.9); color: var(--green); font-size: .65rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: .2rem .6rem; border-radius: 20px; }
+  .proj-card__body { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; }
+  .proj-card__title { font-family: var(--font-display); font-size: 1rem; color: var(--green); margin-bottom: .4rem; }
+  .proj-card__desc { font-size: .82rem; color: var(--charcoal); line-height: 1.55; flex: 1; margin-bottom: .9rem; }
+  .proj-card__link { font-size: .78rem; font-weight: 600; color: var(--teal); display: inline-flex; align-items: center; gap: .3rem; transition: gap var(--ease); }
+  .proj-card:hover .proj-card__link { gap: .6rem; }
+  footer { background: #111; color: var(--silver); padding: 4rem 0 2rem; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-brand h3 { font-family: var(--font-display); color: var(--cream); font-size: 1.15rem; margin-bottom: .75rem; }
+  .footer-brand p { font-size: .85rem; line-height: 1.65; margin-bottom: 1.2rem; max-width: 280px; }
+  .footer-socials { display: flex; gap: .75rem; }
+  .social-btn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; font-size: .8rem; color: var(--silver); transition: background var(--ease), border-color var(--ease); }
+  .social-btn:hover { background: var(--teal); border-color: var(--teal); color: #fff; }
+  .footer-col h4 { color: var(--cream); font-size: .82rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1.1rem; }
+  .footer-col li { margin-bottom: .5rem; }
+  .footer-col a { font-size: .87rem; color: var(--silver); transition: color var(--ease); }
+  .footer-col a:hover { color: var(--cream); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: .8rem; }
+  .footer-legal { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .footer-legal a { color: var(--silver); transition: color var(--ease); }
+  .footer-legal a:hover { color: var(--cream); }
+.btn,.proj-card,.proj-card__thumb{border-radius:0!important;}
 
+/* ── HERO — dramatic photo, text top, tags below ── */
+.page-hero{position:relative;min-height:92vh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;background:var(--ink);}
+.page-hero__photo{position:absolute;inset:0;background:radial-gradient(ellipse 120% 80% at 50% 20%,#3a4a44 0%,#2a3230 60%,#222420 100%);}
+.page-hero__photo-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.16);font-size:.75rem;letter-spacing:.06em;text-align:center;}
+/* relief: layered vignette + top light + bottom deepening */
+.page-hero__relief{position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 8%,rgba(192,83,43,.12),transparent 55%),
+    linear-gradient(to top,rgba(34,36,32,.96)0%,rgba(34,36,32,.66)28%,rgba(34,36,32,.26)55%,rgba(34,36,32,.10)80%,rgba(34,36,32,.30)100%);}
+.page-hero__relief::after{content:'';position:absolute;inset:0;box-shadow:inset 0 0 180px 40px rgba(0,0,0,.7);}
+.page-hero__content{position:relative;z-index:2;padding:0 0 3.5rem;width:100%;}
+.hero-kicker-line{display:flex;align-items:center;gap:1.2rem;margin-bottom:1.4rem;}
+.hero-kicker-line__label{font-size:.68rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:#E8B79E;}
+.hero-kicker-line__rule{flex:1;height:1px;background:rgba(232,183,158,.3);max-width:340px;}
+.page-hero__title{font-family:var(--font-display);font-size:clamp(5rem,12vw,9.5rem);color:var(--cream);line-height:.88;letter-spacing:-.03em;margin-bottom:1.2rem;text-shadow:0 8px 60px rgba(0,0,0,.6);}
+.page-hero__sub{font-family:var(--font-display);font-style:italic;font-size:clamp(1.2rem,2.4vw,1.7rem);color:rgba(245,242,220,.82);max-width:600px;line-height:1.35;margin-bottom:.8rem;}
+.page-hero__def{font-size:.86rem;color:#E8B79E;font-style:italic;margin-bottom:0;}
+/* tags row — below, separated by rule */
+.page-hero__tagsrow{position:relative;z-index:2;border-top:1px solid rgba(244,241,234,.18);}
+.page-hero__tags{display:flex;flex-wrap:wrap;gap:0;align-items:stretch;}
+.hero-tag{padding:1.1rem 1.6rem 1.1rem 0;margin-right:1.6rem;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,242,220,.55);border-right:1px solid rgba(244,241,234,.15);display:flex;align-items:center;}
+.hero-tag:last-child{border-right:none;}
+.hero-tag--accent{color:#E8B79E;}
+.hero-tag strong{color:#E8B79E;font-weight:600;margin-right:.5rem;font-family:var(--font-display);font-size:1.3rem;}
+
+/* ── SDG BAND — Option B locked: white badge col, olive desc col, garden below ── */
+.sdg-band{background:var(--cream);position:relative;overflow:hidden;}
+.sdg-band__top{display:grid;grid-template-columns:440px 1fr;min-height:400px;border-bottom:1px solid rgba(146,144,0,.15);}
+.sdg-band__badge-col{display:flex;align-items:center;justify-content:center;padding:3rem;background:var(--cream);border-right:1px solid rgba(44,110,99,.15);position:relative;}
+
+.sdg-badge{width:200px;height:200px;background:var(--teal);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;position:relative;box-shadow:0 12px 40px rgba(44,110,99,.22);}
+.sdg-badge::before{content:'SDG GOAL';position:absolute;top:-26px;font-size:.625rem;font-weight:600;letter-spacing:.24em;color:var(--teal-deep);text-transform:uppercase;}
+.sdg-cycle{position:relative;width:100%;height:110px;display:flex;align-items:center;justify-content:center;}
+.cycle-face{position:absolute;display:flex;flex-direction:column;align-items:center;transition:opacity .7s ease,transform .7s cubic-bezier(.16,1,.3,1);}
+.cycle-num{font-family:var(--font-display);font-size:6rem;font-weight:700;color:var(--white);line-height:1;}
+.cycle-word{font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--white);line-height:1.15;text-align:center;letter-spacing:-.01em;}
+.face-num{opacity:1;transform:translateY(0);}
+.face-word{opacity:0;transform:translateY(12px);}
+.sdg-badge.flipped .face-num{opacity:0;transform:translateY(-12px);}
+.sdg-badge.flipped .face-word{opacity:1;transform:translateY(0);}
+.sdg-badge__sub{font-size:.625rem;font-weight:600;letter-spacing:.16em;color:rgba(255,255,255,.65);text-transform:uppercase;margin-top:6px;}
+.sdg-band__desc{padding:3.5rem 4rem;display:flex;flex-direction:column;justify-content:center;background:var(--teal);}
+.sdg-band__eyebrow{font-size:.625rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem;}
+.sdg-band__eyebrow::before{content:'';width:22px;height:1px;background:rgba(255,255,255,.5);}
+.sdg-band__rule{width:44px;height:3px;background:var(--fody);margin-bottom:1.4rem;}
+.sdg-band__statement{font-family:var(--font-display);font-size:clamp(1.5rem,2.8vw,2.2rem);color:var(--white);line-height:1.32;margin-bottom:1.2rem;}
+.sdg-band__body{font-size:.95rem;color:rgba(255,255,255,.85);line-height:1.75;max-width:560px;}
+/* garden strip */
+
+/* ── WHY IT MATTERS — editorial split on cream ── */
+.matters{padding:6.5rem 0;background:var(--cream);}
+.matters__grid{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;max-width:1100px;margin:0 auto;}
+.matters__photo{margin:0;position:relative;}
+.matters__photo-img{height:100%;min-height:440px;background:var(--teal-deep);position:relative;overflow:hidden;}
+.matters__photo-img .matters__ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-size:.76rem;text-align:center;padding:2rem;line-height:1.6;letter-spacing:.03em;}
+.matters__text{background:var(--white);padding:3.5rem 3.5rem;display:flex;flex-direction:column;justify-content:center;border:1px solid rgba(44,110,99,.12);border-left:none;}
+.matters__label{font-size:.68rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--teal);margin-bottom:1.2rem;}
+.matters__heading{font-family:var(--font-display);font-size:clamp(1.9rem,3.4vw,2.7rem);color:var(--charcoal-h);line-height:1.12;margin-bottom:0;}
+.matters__rule{width:48px;height:3px;background:var(--fody);margin:1.3rem 0 1.6rem;}
+.matters__lead{font-size:1.15rem;line-height:1.7;color:var(--charcoal-h);margin-bottom:1.2rem;font-family:var(--font-display);}
+.matters__lead em{font-style:italic;color:var(--fody-deep);}
+.matters__body{font-size:.98rem;line-height:1.8;color:var(--charcoal);margin-bottom:2rem;}
+.matters__def{background:var(--sage-wash);border-left:3px solid var(--teal);padding:1.3rem 1.5rem;display:flex;flex-direction:column;gap:.3rem;}
+.matters__def-word{font-family:var(--font-display);font-size:1.3rem;color:var(--teal-deep);font-style:italic;}
+.matters__def-text{font-size:.9rem;line-height:1.6;color:var(--charcoal);}
+.matters__def-text em{color:var(--teal-deep);font-style:normal;font-size:.82rem;letter-spacing:.02em;}
+
+/* ── PERMACULTURE CENTREPIECE — alternating editorial ── */
+/* ── PERMACULTURE CENTREPIECE — continuous magazine flow ── */
+.centrepiece{padding:7rem 0;background:var(--white);}
+.centrepiece__head{max-width:660px;margin:0 auto 4.5rem;text-align:center;}
+.centrepiece__eyebrow{font-size:.68rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--fody);margin-bottom:1.2rem;display:inline-flex;align-items:center;gap:.8rem;}
+.centrepiece__eyebrow::before,.centrepiece__eyebrow::after{content:'';width:28px;height:1px;background:var(--fody);}
+.centrepiece__title{font-family:var(--font-display);font-size:clamp(1.9rem,3.4vw,2.6rem);color:var(--fody-deep);line-height:1.15;margin-bottom:1.5rem;}
+.centrepiece__lead{font-size:1.08rem;line-height:1.9;color:var(--charcoal);}
+/* title-overlap editorial rows (ACF-style) */
+.cp-row{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;max-width:1080px;margin:0 auto 4.5rem;gap:0;}
+.cp-row:last-child{margin-bottom:0;}
+.cp-row--reverse .cp-row__photo{order:2;}
+.cp-row--reverse .cp-row__panel{order:1;}
+.cp-row__photo{margin:0;position:relative;z-index:1;}
+.cp-row__img{aspect-ratio:5/4;background:#2C3A36;position:relative;overflow:hidden;}
+.cp-row__img .cp-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.32);font-size:.74rem;text-align:center;padding:1.2rem;letter-spacing:.04em;line-height:1.6;}
+/* panel overlaps the photo edge */
+.cp-row__panel{background:var(--white);padding:3rem 3rem;position:relative;z-index:2;margin-left:-3rem;box-shadow:0 20px 50px rgba(0,0,0,.08);}
+.cp-row--reverse .cp-row__panel{margin-left:0;margin-right:-3rem;}
+.cp-row__panel p{font-size:.98rem;line-height:1.85;color:var(--charcoal);margin-bottom:1em;}
+.cp-subtitle{font-family:var(--font-display);font-size:clamp(1.4rem,2.4vw,1.9rem);color:var(--fody-deep);line-height:1.18;margin-bottom:.3rem;}
+.ed-label{font-size:.65rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--fody);margin-bottom:.6rem;display:flex;align-items:center;gap:.8rem;}
+.ed-label::before{content:'';width:20px;height:1px;background:var(--fody);}
+.ed-rule{width:32px;height:2px;background:var(--fody);margin:1rem 0 1.4rem;}
+.ed-facts{margin-top:1.4rem;display:flex;flex-direction:column;gap:.55rem;border-top:1px solid var(--silver);padding-top:1.2rem;}
+.ed-facts--row{flex-direction:row;flex-wrap:wrap;gap:1.5rem;border-top:none;padding-top:.5rem;}
+.ed-fact{font-size:.84rem;color:var(--charcoal);display:flex;gap:1rem;align-items:baseline;}
+.ed-facts--row .ed-fact{flex:1;min-width:200px;}
+.ed-fact::before{content:'—';color:var(--fody);flex-shrink:0;}
+
+/* ── GALLERY — editorial, image + meaningful text ── */
+.gallery{padding:7rem 0;background:#26302C;}
+.gallery__head{text-align:center;margin-bottom:3.5rem;}
+.gallery__eyebrow{font-size:.68rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:#E8B79E;margin-bottom:1rem;display:inline-flex;align-items:center;gap:.8rem;}
+.gallery__eyebrow::before,.gallery__eyebrow::after{content:'';width:28px;height:1px;background:#E8B79E;}
+.gallery__title{font-family:var(--font-display);font-size:clamp(1.9rem,3.4vw,2.6rem);color:var(--cream);line-height:1.15;}
+.gallery__underline{width:48px;height:3px;background:var(--fody);margin:1.2rem auto 0;}
+.gallery__ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.38);font-size:.72rem;text-align:center;padding:1rem;letter-spacing:.03em;line-height:1.6;}
+.gallery__ph-box{aspect-ratio:3/2;background:#2C3A36;position:relative;overflow:hidden;}
+/* feature: image + text, balanced */
+.gallery__feature{display:grid;grid-template-columns:1.1fr .9fr;gap:0;max-width:1040px;margin:0 auto 1.5rem;align-items:stretch;}
+.gallery__feature-photo{margin:0;}
+.gallery__feature-photo .gallery__ph-box{aspect-ratio:auto;height:100%;min-height:340px;}
+.gallery__feature-text{background:var(--cream);padding:3rem 2.8rem;display:flex;flex-direction:column;justify-content:center;}
+.gallery__feature-h{font-family:var(--font-display);font-size:clamp(1.4rem,2.4vw,1.9rem);color:var(--charcoal-h);line-height:1.18;margin-bottom:0;}
+.gallery__feature-rule{width:40px;height:3px;background:var(--fody);margin:1rem 0 1.3rem;}
+.gallery__feature-text p{font-size:.95rem;line-height:1.8;color:var(--charcoal);margin-bottom:1em;}
+.gallery__feature-text p:last-child{margin-bottom:0;}
+/* two-up equal pair */
+.gallery__pair{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:1040px;margin:0 auto;}
+.gallery__item{margin:0;}
+.gallery__item figcaption{font-size:.85rem;color:rgba(244,241,234,.7);line-height:1.55;margin-top:.8rem;letter-spacing:.01em;font-style:italic;}
+
+/* ── GEOGRAPHY — map with animated points ── */
+.geo{padding:6.5rem 0;background:var(--fody-wash);border-top:1px solid rgba(146,144,0,.15);}
+.geo__villages{margin-top:1.6rem;display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem 2rem;}
+.geo__village{display:flex;align-items:baseline;gap:.7rem;padding:.5rem 0;border-bottom:1px solid rgba(146,144,0,.1);}
+.geo__village-name{font-family:var(--font-display);font-size:1rem;color:var(--teal-deep);line-height:1.3;}
+.geo__village-idx{font-size:.68rem;color:var(--charcoal);opacity:.4;font-weight:600;letter-spacing:.05em;min-width:1.4rem;}
+
+.geo__inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;max-width:1040px;margin:0 auto;}
+.geo__label{font-size:.65rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--teal);margin-bottom:1.3rem;display:flex;align-items:center;gap:.8rem;}
+.geo__label::before{content:'';width:20px;height:1px;background:var(--teal);}
+.geo__title{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.4rem);color:var(--charcoal-h);line-height:1.15;margin-bottom:1.4rem;}
+.geo__body{font-size:.98rem;line-height:1.8;color:var(--charcoal);margin-bottom:1.5rem;}
+.geo__body p+p{margin-top:1em;}
+.geo__quote{font-family:var(--font-display);font-style:italic;font-size:clamp(1.1rem,2vw,1.4rem);color:var(--teal-deep);line-height:1.5;margin-top:2rem;padding-left:1.5rem;border-left:2px solid var(--fody);}
+.geo__quote-attr{font-size:.76rem;color:var(--charcoal);opacity:.6;padding-left:1.5rem;margin-top:.6rem;display:flex;align-items:center;gap:.5rem;}
+.geo__quote-attr::before{content:'—';}
+.geo__photo{margin:0;}
+.geo__photo-img{aspect-ratio:4/5;background:#2C3A36;position:relative;overflow:hidden;}
+.geo__photo-img .geo__photo-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:.74rem;text-align:center;padding:1.5rem;letter-spacing:.04em;line-height:1.6;}
+.geo__photo-cap{font-size:.78rem;color:var(--charcoal);opacity:.65;line-height:1.5;margin-top:.7rem;letter-spacing:.02em;font-style:italic;text-align:center;}
+.geo__partner-block{margin-top:2rem;padding:1.4rem;border:1px solid rgba(146,144,0,.25);background:var(--white);}
+.geo__partner-label{font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:.4rem;}
+.geo__partner-name{font-family:var(--font-display);font-size:1rem;color:var(--teal-deep);margin-bottom:.2rem;}
+.geo__partner-desc{font-size:.8rem;color:var(--charcoal);opacity:.7;}
+
+/* ── PERMADA LINK (THE LONG-TERM ANSWER) — kept from V2 ── */
+.perma-link{background:var(--fody-wash);padding:6rem 0;position:relative;overflow:hidden;border-top:1px solid rgba(146,144,0,.15);border-bottom:1px solid rgba(146,144,0,.15);}
+.perma-link::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 0% 50%,rgba(146,144,0,.05),transparent);pointer-events:none;}
+.perma-link__inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1;}
+.perma-link__photo{aspect-ratio:5/4;background:#2C3A36;position:relative;overflow:hidden;}
+.perma-link__photo-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.2);font-size:.72rem;letter-spacing:.05em;}
+.perma-link__photo-cap{position:absolute;bottom:0;left:0;right:0;padding:1rem 1.2rem;background:linear-gradient(to top,rgba(0,0,0,.78),transparent);color:rgba(255,255,255,.85);font-size:.75rem;}
+.perma-link__label{font-size:.65rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--teal);margin-bottom:1.2rem;display:flex;align-items:center;gap:.8rem;}
+.perma-link__label::before{content:'';width:20px;height:1px;background:var(--teal);}
+.perma-link__title{font-family:var(--font-display);font-size:clamp(1.6rem,2.8vw,2.2rem);color:var(--charcoal-h);line-height:1.2;margin-bottom:1.2rem;}
+.perma-link__body{font-size:.97rem;line-height:1.8;color:var(--charcoal);margin-bottom:2rem;}
+.perma-link__rule{width:32px;height:3px;background:var(--fody);margin-bottom:2rem;}
+.perma-link__cta{display:inline-flex;align-items:center;gap:.8rem;font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-deep);border-bottom:1px solid var(--fody);padding-bottom:.2rem;transition:color var(--ease),border-color var(--ease);}
+.perma-link__cta:hover{color:var(--fody);border-color:var(--teal);}
+
+/* ── SDG CONTEXT — with editorial photo ── */
+.sdg-context{padding:6rem 0;background:var(--white);border-top:1px solid var(--silver);border-bottom:1px solid var(--silver);}
+.sdg-context__inner{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.sdg-context__photo{aspect-ratio:4/5;background:#1a1a10;position:relative;overflow:hidden;}
+.sdg-context__photo-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.2);font-size:.72rem;text-align:center;padding:1rem;letter-spacing:.04em;}
+.sdg-context__photo-cap{position:absolute;bottom:0;left:0;right:0;padding:1rem 1.2rem;background:linear-gradient(to top,rgba(0,0,0,.78),transparent);color:rgba(255,255,255,.85);font-size:.74rem;}
+.sdg-context__quote-block{padding:2rem 2.2rem;background:var(--fody-wash);border-left:3px solid var(--fody);margin-bottom:2rem;}
+.sdg-context__quote{font-family:var(--font-display);font-style:italic;font-size:clamp(1.15rem,2vw,1.45rem);color:var(--fody-deep);line-height:1.55;margin-bottom:1rem;}
+.sdg-context__quote-attr{font-size:.76rem;color:var(--charcoal);opacity:.6;letter-spacing:.04em;}
+.sdg-context__heading{font-family:var(--font-display);font-size:clamp(1.5rem,2.6vw,2rem);color:var(--fody-deep);line-height:1.2;margin-bottom:1rem;}
+.sdg-context__body{font-size:.98rem;line-height:1.8;color:var(--charcoal);margin-bottom:1.5rem;}
+.sdg-context__sdgs{display:flex;flex-direction:column;gap:.6rem;border-top:1px solid var(--silver);padding-top:1.4rem;}
+.sdg-row{display:flex;align-items:baseline;gap:.9rem;font-size:.84rem;}
+.sdg-row__num{font-family:var(--font-display);font-size:1rem;color:var(--fody);font-weight:700;min-width:3rem;}
+.sdg-row__label{color:var(--charcoal);}
+
+/* ── CTA — with fody bird shadow ── */
+.project-cta{background:var(--teal);padding:6rem 0;position:relative;overflow:hidden;}
+.project-cta__inner{display:grid;grid-template-columns:1fr auto;gap:4rem;align-items:center;max-width:var(--max-w);margin:0 auto;padding:0 2rem;position:relative;z-index:1;}
+.project-cta__label{font-size:.65rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:.8rem;display:flex;align-items:center;gap:.8rem;}
+.project-cta__label::before{content:'';width:20px;height:1px;background:rgba(255,255,255,.3);}
+.project-cta h2{font-family:var(--font-display);font-size:clamp(2rem,4vw,3.2rem);color:var(--white);line-height:1.1;margin-bottom:.8rem;}
+.project-cta p{font-size:.97rem;color:rgba(255,255,255,.8);max-width:520px;line-height:1.75;}
+.project-cta__buttons{display:flex;flex-direction:column;gap:.8rem;flex-shrink:0;}
+.btn-white{display:inline-block;padding:.85rem 2.2rem;background:var(--fody);color:var(--white);font-weight:600;font-size:.88rem;letter-spacing:.06em;text-transform:uppercase;transition:background var(--ease),transform var(--ease);text-align:center;}
+.btn-white:hover{background:var(--fody-deep);transform:translateY(-2px);}
+.btn-outline-white{display:inline-block;padding:.85rem 2.2rem;border:1px solid rgba(255,255,255,.5);color:var(--white);font-size:.88rem;letter-spacing:.06em;text-transform:uppercase;text-align:center;transition:border-color var(--ease),background var(--ease);}
+.btn-outline-white:hover{border-color:var(--white);background:rgba(255,255,255,.08);}
+
+.proj-card:nth-child(1) .proj-card__thumb{background:linear-gradient(135deg,#929000,#5a5900);}
+.proj-card:nth-child(2) .proj-card__thumb{background:linear-gradient(135deg,#CB297B,#7a1248);}
+.proj-card:nth-child(3) .proj-card__thumb{background:linear-gradient(135deg,#4F8F00,#2c5400);}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s cubic-bezier(.16,1,.3,1);}
+.reveal.in{opacity:1;transform:none;}
+.reveal-left{opacity:0;transform:translateX(-24px);transition:opacity .75s ease,transform .75s cubic-bezier(.16,1,.3,1);}
+.reveal-left.in{opacity:1;transform:none;}
+.reveal-right{opacity:0;transform:translateX(24px);transition:opacity .75s ease,transform .75s cubic-bezier(.16,1,.3,1);}
+.reveal-right.in{opacity:1;transform:none;}
+
+@media(max-width:1000px){
+  .gallery__feature{grid-template-columns:1fr;}.gallery__feature-photo .gallery__ph-box{min-height:240px;}
+  .gallery__pair{grid-template-columns:1fr;}
+  .services__grid .svc{flex:0 1 calc(50% - 0.7rem);}
+  .matters__grid{grid-template-columns:1fr;}.matters__text{border-left:1px solid rgba(44,110,99,.12);border-top:none;}.matters__photo-img{min-height:300px;}
+  .cp-row{grid-template-columns:1fr;max-width:560px;}
+  .cp-row--reverse .cp-row__photo,.cp-row--reverse .cp-row__panel{order:unset;}
+  .cp-row__panel{margin-left:0!important;margin-right:0!important;margin-top:-2.5rem;width:92%;margin-left:auto!important;margin-right:auto!important;}
+  .sdg-band__top{grid-template-columns:320px 1fr;}
+  .villages{grid-template-columns:1fr;}.villages__photo{min-height:200px;}
+  .ed-split{grid-template-columns:1fr;}
+  .geo__inner{grid-template-columns:1fr;gap:3.5rem;}
+  .perma-link__inner{grid-template-columns:1fr;gap:2.5rem;}
+  .sdg-context__inner{grid-template-columns:1fr;gap:2.5rem;}
+  .project-cta__inner{grid-template-columns:1fr;}.project-cta__buttons{flex-direction:row;}
+  .other-projects__grid{grid-template-columns:repeat(2,1fr);}.footer-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  .nav__list,.nav__actions{display:none;}.hamburger{display:flex;}
+  .sdg-band__top{grid-template-columns:1fr;}.sdg-band__badge-col{padding:2.5rem;}
+  .villages__list{grid-template-columns:1fr 1fr;}
+  .page-hero__tags{flex-direction:column;}.hero-tag{border-right:none;margin-right:0;padding:.7rem 0;border-bottom:1px solid rgba(244,241,234,.15);}
+  .other-projects__grid{grid-template-columns:1fr;}.footer-grid{grid-template-columns:1fr;}
+  .project-cta__buttons{flex-direction:column;}
+}
+@media(max-width:480px){
+  .geo__villages{grid-template-columns:1fr;}
+  .top-bar__info{display:none;}
+  .villages__list{grid-template-columns:1fr;}
+}
+
+/* ══ BENTO METRIC GRID — unified, terracotta numbers as hero ══ */
+.bento{padding:6.5rem 0;background:var(--cream);}
+.bento__head{max-width:680px;margin:0 auto 3.5rem;text-align:center;}
+.bento__eyebrow{font-size:.68rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem;display:inline-flex;align-items:center;gap:.8rem;}
+.bento__eyebrow::before,.bento__eyebrow::after{content:'';width:28px;height:1px;background:var(--teal);}
+.bento__title{font-family:var(--font-display);font-size:clamp(1.9rem,3.4vw,2.6rem);color:var(--charcoal-h);line-height:1.15;}
+.bento__underline{width:48px;height:3px;background:var(--fody);margin:1.2rem auto 0;}
+.bento__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;max-width:1080px;margin:0 auto;}
+.metric{background:var(--white);border:1px solid rgba(44,110,99,.14);border-radius:var(--r-lg);padding:2.5rem 1.5rem;text-align:center;display:flex;flex-direction:column;align-items:center;transition:transform var(--ease),box-shadow var(--ease);}
+.metric:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(42,42,40,.07);}
+.metric--accent{background:var(--teal-wash);border-color:rgba(44,110,99,.2);}
+.metric__num{font-family:var(--font-display);font-size:clamp(3.2rem,5.5vw,4.6rem);font-weight:700;line-height:.95;letter-spacing:-.02em;color:var(--fody);margin-bottom:.8rem;}
+.metric--accent .metric__num{color:var(--teal);}
+.metric__pct{font-size:.5em;vertical-align:super;}
+.metric__label{font-size:.92rem;font-weight:600;color:var(--charcoal-h);line-height:1.3;margin-bottom:.3rem;}
+.metric__sub{font-size:.78rem;color:var(--charcoal);opacity:.65;line-height:1.4;}
+.metric__sub--tbc{color:var(--teal);opacity:.85;font-weight:600;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;}
+
+/* ══ SERVICES SHOWCASE — the 7 core services ══ */
+.services{padding:7rem 0;background:var(--white);}
+.services__head{max-width:660px;margin:0 auto 3.5rem;text-align:center;}
+.services__eyebrow{font-size:.68rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem;display:inline-flex;align-items:center;gap:.8rem;}
+.services__eyebrow::before,.services__eyebrow::after{content:'';width:28px;height:1px;background:var(--teal);}
+.services__title{font-family:var(--font-display);font-size:clamp(1.9rem,3.4vw,2.6rem);color:var(--charcoal-h);line-height:1.15;}
+.services__underline{width:48px;height:3px;background:var(--fody);margin:1.2rem auto 1.6rem;}
+.services__lead{font-size:1.02rem;line-height:1.8;color:var(--charcoal);}
+.services__grid{display:flex;flex-wrap:wrap;gap:1.25rem;max-width:1080px;margin:0 auto;justify-content:center;}
+.svc{flex:0 1 calc(25% - 0.94rem);}
+.svc{background:var(--white);border:1px solid rgba(44,110,99,.16);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column;transition:transform var(--ease),box-shadow var(--ease);}
+.svc:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(42,42,40,.08);}
+.svc__media{height:165px;background:var(--teal-wash);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:1px solid rgba(44,110,99,.1);}
+.svc__media-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--teal);opacity:.4;font-size:.66rem;letter-spacing:.04em;}
+/* icon overlays the photo — editable opacity via --svc-icon-opacity */
+.svc__icon{position:relative;z-index:2;color:var(--teal);opacity:var(--svc-icon-opacity,.9);width:42px;height:42px;display:block;}
+.svc__icon svg{width:100%;height:100%;display:block;}
+.svc__body{padding:1.4rem 1.4rem 1.6rem;flex:1;display:flex;flex-direction:column;}
+.svc__num{font-family:var(--font-display);font-size:.85rem;font-weight:700;color:var(--fody);margin-bottom:.5rem;letter-spacing:.04em;}
+.svc__name{font-family:var(--font-display);font-size:1.15rem;color:var(--charcoal-h);line-height:1.2;margin-bottom:.5rem;}
+.svc__desc{font-size:.85rem;line-height:1.6;color:var(--charcoal);opacity:.85;}
+
+/* ══ METHODOLOGY — care pathway, alternating images ══ */
+.method{padding:7rem 0;background:var(--teal-wash);border-top:1px solid rgba(44,110,99,.12);border-bottom:1px solid rgba(44,110,99,.12);}
+.method__head{max-width:680px;margin:0 auto 4rem;text-align:center;}
+.method__eyebrow{font-size:.68rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem;display:inline-flex;align-items:center;gap:.8rem;}
+.method__eyebrow::before,.method__eyebrow::after{content:'';width:28px;height:1px;background:var(--teal);}
+.method__title{font-family:var(--font-display);font-size:clamp(1.8rem,3.2vw,2.5rem);color:var(--charcoal-h);line-height:1.15;}
+.method__underline{width:48px;height:3px;background:var(--fody);margin:1.2rem auto 1.6rem;}
+.method__lead{font-size:1.02rem;line-height:1.8;color:var(--charcoal);}
+.method__flow{max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:2rem;}
+.mstep{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:0;background:var(--white);border:1px solid rgba(44,110,99,.14);border-radius:var(--r-lg);overflow:hidden;}
+.mstep--reverse .mstep__photo{order:2;}
+.mstep--reverse .mstep__body{order:1;}
+.mstep__photo{margin:0;align-self:stretch;}
+.mstep__photo-img{height:100%;min-height:260px;background:#2C3A36;position:relative;overflow:hidden;}
+.mstep__ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-size:.72rem;letter-spacing:.04em;}
+.mstep__body{padding:2.6rem 2.8rem;}
+.mstep__num{font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--fody);line-height:1;margin-bottom:.6rem;}
+.mstep__title{font-family:var(--font-display);font-size:clamp(1.3rem,2.2vw,1.7rem);color:var(--charcoal-h);line-height:1.15;margin-bottom:0;}
+.mstep__rule{width:36px;height:3px;background:var(--teal);margin:1rem 0 1.2rem;}
+.mstep__text{font-size:.95rem;line-height:1.75;color:var(--charcoal);margin-bottom:1.2rem;}
+.mstep__tbc{display:inline-block;font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-deep);background:var(--sage-wash);padding:.2rem .6rem;border-radius:2px;}
+
+/* ══ V2: TRUST / CREDENTIALS LAYER ══ */
+.trust{padding:6.5rem 0;background:var(--white);}
+.trust__head{max-width:680px;margin:0 auto 3.5rem;text-align:center;}
+.trust__eyebrow{font-size:.68rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--trust);margin-bottom:1rem;display:inline-flex;align-items:center;gap:.8rem;}
+.trust__eyebrow::before,.trust__eyebrow::after{content:'';width:28px;height:1px;background:var(--trust);}
+.trust__title{font-family:var(--font-display);font-size:clamp(1.8rem,3.2vw,2.5rem);color:var(--charcoal-h);line-height:1.15;}
+.trust__grid{display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;max-width:1040px;margin:0 auto;}
+.trust__partners{border:1px solid var(--silver);padding:2.5rem;}
+.trust__block-label{font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--trust);margin-bottom:1.5rem;}
+.trust__partner-row{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2rem;}
+.trust__partner{flex:1;min-width:130px;height:72px;border:1px dashed rgba(27,108,168,.3);display:flex;align-items:center;justify-content:center;text-align:center;font-size:.7rem;color:var(--trust);background:var(--trust-wash);padding:.5rem;letter-spacing:.04em;}
+.trust__gov{border-top:1px solid var(--silver);padding-top:1.5rem;}
+.trust__gov-item{display:flex;align-items:baseline;gap:.8rem;padding:.5rem 0;font-size:.88rem;color:var(--charcoal);}
+.trust__gov-item a{color:var(--trust);border-bottom:1px solid rgba(27,108,168,.3);}
+.trust__gov-item::before{content:'';width:6px;height:6px;border:1px solid var(--trust);flex-shrink:0;align-self:center;}
+.trust__sdg{background:var(--teal);color:var(--white);padding:2.5rem;display:flex;flex-direction:column;}
+.trust__sdg-badge{display:flex;align-items:center;gap:1.2rem;margin-bottom:1.5rem;}
+.trust__sdg-num{font-family:var(--font-display);font-size:3.5rem;font-weight:700;line-height:1;}
+.trust__sdg-text{font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;line-height:1.4;color:rgba(255,255,255,.85);}
+.trust__sdg-body{font-size:.92rem;line-height:1.7;color:rgba(255,255,255,.85);margin-top:auto;}
+.trust__sdg-list{margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.2);padding-top:1.2rem;display:flex;flex-direction:column;gap:.5rem;}
+.trust__sdg-row{font-size:.82rem;color:rgba(255,255,255,.85);display:flex;gap:.7rem;}
+.trust__sdg-row strong{color:var(--white);font-family:var(--font-display);min-width:3rem;}
+
+@media(max-width:1000px){
+  .bento__grid{grid-template-columns:repeat(2,1fr);}
+  .bento-card--lg,.bento-card--feature{grid-column:span 2;}.bento-card--feature{grid-row:span 1;}
+  .mstep{grid-template-columns:1fr;}
+  .mstep--reverse .mstep__photo,.mstep--reverse .mstep__body{order:unset;}
+  .mstep__photo-img{min-height:200px;}
+  .trust__grid{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  .services__grid .svc{flex:0 1 100%;}
+  .bento__grid{grid-template-columns:1fr;}.bento-card--lg,.bento-card--feature{grid-column:span 1;}
+  .trust__partner{min-width:100%;}
+}
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <div class="container">
+    <div class="top-bar__info">
+      <span>UK Charity #1167115</span><span class="top-bar__dot">·</span>
+      <span>Malagasy NGO</span><span class="top-bar__dot">·</span>
+      <span>Association France SIREN 85242793900016</span><span class="top-bar__dot">·</span>
+      <span>Association Suisse</span>
+    </div>
+    <nav class="lang-switch" aria-label="Language switcher">
+      <a href="index.html" class="lang-switch__btn is-active" lang="en">EN</a>
+      <a href="index-fr.html" class="lang-switch__btn" lang="fr">FR</a>
+    </nav>
+  </div>
+</div>
+<header class="navbar" id="navbar" role="banner">
+  <div class="container">
+    <a href="../../index.html" class="navbar__logo" aria-label="Education for Madagascar — home">
+      <img src="../../images/logo_mini.jpeg" alt="Education for Madagascar logo" class="logo-image">
+      <span class="logo-text">Education<br>for Madagascar</span>
+    </a>
+    <ul class="nav__list" role="list">
+      <li class="nav__item" id="ni-who">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-who')">Who we are <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="../../who-we-are/our-story.html">Our story<span class="dropdown__sub">History &amp; founding vision</span></a>
+          <a class="dropdown__link" href="../../who-we-are/team.html">Team &amp; board<span class="dropdown__sub">The people behind E4M</span></a>
+          <a class="dropdown__link" href="../../who-we-are/governance.html">Governance &amp; statutes</a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="../../who-we-are/annual-reports.html">Annual reports</a>
+          <a class="dropdown__link" href="../../who-we-are/partners.html">Our partners</a>
+        </div>
+      </li>
+      <li class="nav__item" id="ni-proj">
+        <button class="nav__link is-active" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-proj')">Our projects <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown--mega">
+          <div class="mega__col">
+            <p class="mega__heading mega__heading--edu">Education</p>
+            <a class="mega__link" href="akka.html">AKKA Montessori <span class="badge badge--age">3–6 yrs</span></a>
+            <a class="mega__link" href="kanto.html">KANTO Culture <span class="badge badge--age">9–22 yrs</span></a>
+            <a class="mega__link" href="care.html">CARE Coding &amp; Robotics</a>
+            <a class="mega__link" href="scola.html" data-scola>SCOLA Scholarship <span class="badge badge--age">17–25</span></a>
+            <a class="mega__link" href="tuto.html">TUTO</a>
+            <a class="mega__link" href="vim.html" data-vim>VIM — Volunteering</a>
+            <a class="mega__link" href="cad.html" data-cad>Career Day Awareness</a>
+            <a class="mega__link" href="unesco.html">UNESCO Partnership <span class="badge badge--new">New</span></a>
+          </div>
+          <div class="mega__col">
+            <p class="mega__heading mega__heading--health">Health</p>
+            <a class="mega__link" href="../health/women.html">School for Women</a>
+            <a class="mega__link" href="../health/fody.html">FODY</a>
+            <a class="mega__link" href="../health/tomady.html">TOMADY</a>
+            <div class="mega__col-gap"></div>
+            <p class="mega__heading mega__heading--env">Environment</p>
+            <a class="mega__link" href="../environment/silva.html">SILVA</a>
+            <a class="mega__link" href="../environment/wash.html">WASH</a>
+            <a class="mega__link" href="../environment/permada.html">PERMADA</a>
+          </div>
+          <div class="mega__col">
+            <p class="mega__heading mega__heading--edu">Overview</p>
+            <p class="mega__summary">13 active projects across education, health, and the environment — serving children aged 3 to 18 and women in rural Madagascar.</p>
+            <a class="mega__all-link" href="../index.html">All projects →</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav__item" id="ni-inv">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-inv')">Get involved <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="../../get-involved/volunteer.html">Volunteer (VIM)<span class="dropdown__sub">Live &amp; work in Madagascar</span></a>
+          <a class="dropdown__link" href="../../get-involved/donate.html">Donate<span class="dropdown__sub">Fund our programmes directly</span></a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="../../get-involved/partner.html">Become a partner</a>
+        </div>
+      </li>
+      <li class="nav__item" id="ni-media">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-media')">Media <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="../../media/blog.html">Blog</a>
+          <a class="dropdown__link" href="../../media/newsletters.html">Newsletters</a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="../../who-we-are/annual-reports.html">Annual reports</a>
+        </div>
+      </li>
+    </ul>
+    <div class="nav__actions">
+      <a href="#shop" class="btn-shop">The Shop ↗</a>
+      <a href="../../get-involved/donate.html" class="btn-donate">Donate</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMobile()">
+      <span class="hamburger__bar"></span><span class="hamburger__bar"></span><span class="hamburger__bar"></span>
+    </button>
+  </div>
+</header>
+<nav class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation">
+  <div class="mob-section" id="mob-who">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-who')">Who we are <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="../../who-we-are/our-story.html">Our story</a>
+      <a class="mob-link" href="../../who-we-are/team.html">Team &amp; board</a>
+      <a class="mob-link" href="../../who-we-are/governance.html">Governance &amp; statutes</a>
+      <a class="mob-link" href="../../who-we-are/annual-reports.html">Annual reports</a>
+      <a class="mob-link" href="../../who-we-are/partners.html">Our partners</a>
+    </div>
+  </div>
+  <div class="mob-section" id="mob-proj">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-proj')">Our projects <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <div class="mob-subheading">Education</div>
+      <a class="mob-link" href="akka.html">AKKA Montessori</a>
+      <a class="mob-link" href="kanto.html">KANTO Culture</a>
+      <a class="mob-link" href="care.html">CARE Coding &amp; Robotics</a>
+      <a class="mob-link" href="scola.html" data-scola>SCOLA Scholarship</a>
+      <a class="mob-link" href="tuto.html">TUTO</a>
+      <a class="mob-link" href="vim.html" data-vim>VIM — Volunteering</a>
+      <a class="mob-link" href="cad.html" data-cad>Career Day Awareness</a>
+      <a class="mob-link" href="unesco.html">UNESCO Partnership</a>
+      <div class="mob-subheading">Health</div>
+      <a class="mob-link" href="../health/women.html">School for Women</a>
+      <a class="mob-link" href="../health/fody.html">FODY</a>
+      <a class="mob-link" href="../health/tomady.html">TOMADY</a>
+      <div class="mob-subheading">Environment</div>
+      <a class="mob-link" href="../environment/silva.html">SILVA</a>
+      <a class="mob-link" href="../environment/wash.html">WASH</a>
+      <a class="mob-link" href="../environment/permada.html">PERMADA</a>
+    </div>
+  </div>
+  <div class="mob-section" id="mob-inv">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-inv')">Get involved <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="../../get-involved/volunteer.html">Volunteer (VIM)</a>
+      <a class="mob-link" href="../../get-involved/donate.html">Donate</a>
+      <a class="mob-link" href="../../get-involved/partner.html">Become a partner</a>
+    </div>
+  </div>
+  <div class="mob-section" id="mob-media">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-media')">Media <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="../../media/blog.html">Blog</a>
+      <a class="mob-link" href="../../media/newsletters.html">Newsletters</a>
+      <a class="mob-link" href="../../who-we-are/annual-reports.html">Annual reports</a>
+    </div>
+  </div>
+  <div class="mob-actions">
+    <a href="#shop" class="btn-shop">The Shop ↗</a>
+    <a href="../../get-involved/donate.html" class="btn-donate">Donate</a>
+  </div>
+</nav>
+
+
+<nav class="breadcrumb breadcrumb--health" aria-label="Breadcrumb">
+  <div class="container">
+    <ul class="breadcrumb__list">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../index.html">Our Projects</a></li>
+      <li><span class="breadcrumb__current">Health</span></li>
+      <li><span class="breadcrumb__current">TOMADY</span></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero" aria-label="FODY — fighting hunger in Madagascar">
+  <div class="page-hero__photo" role="img" aria-label="Food distribution in the Anosy region, southern Madagascar">
+    <div class="page-hero__photo-ph">TOMADY_hero.jpg — warm photograph of care in action [TBC]</div>
+  </div>
+  <div class="page-hero__relief"></div>
+  <div class="page-hero__content">
+    <div class="container">
+      <div class="hero-kicker-line">
+        <span class="hero-kicker-line__label">Health · Medical Care</span>
+        <span class="hero-kicker-line__rule"></span>
+      </div>
+      <h1 class="page-hero__title">TOMADY</h1>
+      <p class="page-hero__sub">Accessible healthcare where there was none — because good health is where every other future begins.</p>
+      <p class="page-hero__def">tomady (Malagasy) — well-being.</p>
+    </div>
+  </div>
+  <div class="page-hero__tagsrow">
+    <div class="container">
+      <div class="page-hero__tags">
+        <span class="hero-tag hero-tag--accent">UN SDG 3 — Good Health</span>
+        <span class="hero-tag"><strong>7</strong> core medical services</span>
+        <span class="hero-tag">Prevention-first care</span>
+        <span class="hero-tag">Open weekly · [TBC location]</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SDG 2 IMMERSIVE — cycling -->
+<section class="sdg-band" id="sdgBand" aria-label="UN Sustainable Development Goal 3 — Good Health and Well-being">
+  <div class="sdg-band__top">
+    <div class="sdg-band__badge-col">
+      <div class="sdg-badge" id="sdgBadge">
+        <div class="sdg-cycle">
+          <div class="cycle-face face-num"><span class="cycle-num">3</span></div>
+          <div class="cycle-face face-word"><span class="cycle-word">Good<br>Health</span></div>
+        </div>
+        <div class="sdg-badge__sub">United Nations</div>
+      </div>
+    </div>
+    <div class="sdg-band__desc">
+      <div class="sdg-band__eyebrow">UN Sustainable Development Goal</div>
+      <div class="sdg-band__rule"></div>
+      <p class="sdg-band__statement">Ensure healthy lives and promote well-being for all, at every age.</p>
+      <p class="sdg-band__body">Across rural Madagascar, basic medical care is out of reach for many families — a clinic can be hours away, and the cost of a single consultation impossible. The TOMADY Health Centre is Education for Madagascar's answer: free, accessible, prevention-first care, because good health is the foundation every other future is built on.</p>
+    </div>
+  </div>
+  
+</section>
+
+<!-- BENTO METRIC GRID — unified data layer -->
+<section class="bento" aria-labelledby="bento-heading">
+  <div class="container">
+    <div class="bento__head reveal" data-reveal>
+      <span class="bento__eyebrow">The impact in numbers</span>
+      <h2 class="bento__title" id="bento-heading">Care, measured</h2>
+      <div class="bento__underline"></div>
+    </div>
+    <div class="bento__grid">
+      <div class="metric reveal" data-reveal>
+        <div class="metric__num">7</div>
+        <div class="metric__label">core medical services</div>
+        <div class="metric__sub">delivered under one roof</div>
+      </div>
+      <div class="metric reveal" data-reveal>
+        <div class="metric__num">[TBC]</div>
+        <div class="metric__label">patients seen / year</div>
+        <div class="metric__sub metric__sub--tbc">to be confirmed</div>
+      </div>
+      <div class="metric metric--accent reveal" data-reveal>
+        <div class="metric__num">Free</div>
+        <div class="metric__label">or low-cost care</div>
+        <div class="metric__sub">no family turned away</div>
+      </div>
+      <div class="metric reveal" data-reveal>
+        <div class="metric__num">[TBC]<span class="metric__pct">%</span></div>
+        <div class="metric__label">preventive consultations</div>
+        <div class="metric__sub metric__sub--tbc">to be confirmed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY IT MATTERS — editorial split on cream -->
+<section class="matters" aria-labelledby="matters-heading">
+  <div class="container">
+    <div class="matters__grid">
+      <figure class="matters__photo reveal-left" data-reveal>
+        <div class="matters__photo-img"><div class="matters__ph">TOMADY_patient.jpg — a warm, human photograph: a patient's smile, or care in action [TBC]</div></div>
+      </figure>
+      <div class="matters__text reveal-right" data-reveal>
+        <div class="matters__label">Why it matters</div>
+        <h2 class="matters__heading" id="matters-heading">Healthcare, within reach</h2>
+        <div class="matters__rule"></div>
+        <p class="matters__lead">In much of rural Madagascar, a doctor is hours away — and a single consultation can cost more than a family earns in a week. <em>For many, healthcare simply isn't an option.</em></p>
+        <p class="matters__body">TOMADY exists to change that: treating illness early, before it becomes catastrophe, and keeping families well enough to learn, work, and build a future.</p>
+        <div class="matters__def">
+          <span class="matters__def-word">tomady</span>
+          <span class="matters__def-text"><em>(Malagasy)</em> — well-being: to be strong, sound, and in good health.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY — editorial, image + meaningful text -->
+<section class="gallery" aria-label="TOMADY — at the centre">
+  <div class="container">
+    <div class="gallery__head reveal" data-reveal>
+      <span class="gallery__eyebrow">At the centre</span>
+      <h2 class="gallery__title">Care in practice</h2>
+      <div class="gallery__underline"></div>
+    </div>
+
+    <!-- feature: image left + real text right -->
+    <div class="gallery__feature reveal" data-reveal>
+      <figure class="gallery__feature-photo">
+        <div class="gallery__ph-box"><div class="gallery__ph">TOMADY_centre-wide.jpg — the TOMADY health centre, [TBC location]</div></div>
+      </figure>
+      <div class="gallery__feature-text">
+        <h3 class="gallery__feature-h">A place families can reach</h3>
+        <div class="gallery__feature-rule"></div>
+        <p>For many in rural Madagascar, the nearest clinic is hours away. The TOMADY Health Centre brings consultation, screening, and maternal care into the heart of the community — so that catching illness early is no longer a privilege, but the norm.</p>
+        <p>Every visit is a chance to treat what's wrong today, and to prevent what could go wrong tomorrow.</p>
+      </div>
+    </div>
+
+    <!-- two-up supporting row, equal, with captions -->
+    <div class="gallery__pair reveal" data-reveal>
+      <figure class="gallery__item">
+        <div class="gallery__ph-box"><div class="gallery__ph">TOMADY_consultation.jpg — a consultation in progress</div></div>
+        <figcaption>Consultations treat the illnesses of daily life — and catch the early signs of bigger problems.</figcaption>
+      </figure>
+      <figure class="gallery__item">
+        <div class="gallery__ph-box"><div class="gallery__ph">TOMADY_maternal.jpg — maternal &amp; child health</div></div>
+        <figcaption>Maternal and child health: the right care, at the moment it matters most.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES SHOWCASE — the 7 core services -->
+<section class="services" aria-labelledby="svc-heading">
+  <div class="container">
+    <div class="services__head reveal" data-reveal>
+      <span class="services__eyebrow">The heart of TOMADY</span>
+      <h2 class="services__title" id="svc-heading">Seven services, under one roof</h2>
+      <div class="services__underline"></div>
+      <p class="services__lead">TOMADY is a prevention-first health centre — catching illness early and keeping families well, through seven core medical services delivered by qualified professionals.</p>
+    </div>
+    <div class="services__grid">
+      <div class="svc reveal" data-reveal>
+        <div class="svc__media">
+          <div class="svc__media-ph">TOMADY_svc01.jpg [TBC]</div>
+          <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v6a4 4 0 0 0 8 0V3"/><path d="M10 17a4 4 0 0 0 8 0v-1a2 2 0 1 1 2-2"/><circle cx="20" cy="11" r="2"/></svg></span>
+        </div>
+        <div class="svc__body">
+          <div class="svc__num">01</div>
+          <h3 class="svc__name">General practice</h3>
+          <p class="svc__desc">Primary consultations for the illnesses and injuries of daily life.</p>
+        </div>
+      </div>
+      <div class="svc reveal" data-reveal>
+        <div class="svc__media">
+          <div class="svc__media-ph">TOMADY_svc02.jpg [TBC]</div>
+          <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-6-4.5-6-9a3 3 0 0 1 6-1 3 3 0 0 1 6 1c0 4.5-6 9-6 9z"/></svg></span>
+        </div>
+        <div class="svc__body">
+          <div class="svc__num">02</div>
+          <h3 class="svc__name">Family planning</h3>
+          <p class="svc__desc">Confidential advice and care for women and couples.</p>
+        </div>
+      </div>
+      <div class="svc reveal" data-reveal>
+        <div class="svc__media">
+          <div class="svc__media-ph">TOMADY_svc03.jpg [TBC]</div>
+          <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M12 12c-3 0-5 2-5 5v3h10v-3c0-3-2-5-5-5z"/><path d="M12 8v0"/></svg></span>
+        </div>
+        <div class="svc__body">
+          <div class="svc__num">03</div>
+          <h3 class="svc__name">Prenatal consultation</h3>
+          <p class="svc__desc">Monitoring and support through every stage of pregnancy.</p>
+        </div>
+      </div>
+      <div class="svc reveal" data-reveal>
+        <div class="svc__media">
+          <div class="svc__media-ph">TOMADY_svc04.jpg [TBC]</div>
+          <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s5 6 5 10a5 5 0 0 1-10 0c0-4 5-10 5-10z"/></svg></span>
+        </div>
+        <div class="svc__body">
+          <div class="svc__num">04</div>
+          <h3 class="svc__name">Diabetes screening</h3>
+          <p class="svc__desc">Early detection and ongoing management of diabetes.</p>
+        </div>
+      </div>
+      <div class="svc reveal" data-reveal>
+        <div class="svc__media">
+          <div class="svc__media-ph">TOMADY_svc05.jpg [TBC]</div>
+          <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg></span>
+        </div>
+        <div class="svc__body">
+          <div class="svc__num">05</div>
+          <h3 class="svc__name">Blood pressure</h3>
+          <p class="svc__desc">Routine monitoring to catch cardiovascular risk early.</p>
+        </div>
+      </div>
+      <div class="svc reveal" data-reveal>
+        <div class="svc__media">
+          <div class="svc__media-ph">TOMADY_svc06.jpg [TBC]</div>
+          <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="19" cy="15" r="5"/><path d="M11 38 V29 a8 8 0 0 1 16 0 V38"/><circle cx="32" cy="21" r="3.5"/><path d="M27 38 v-7 a5 5 0 0 1 10 0 v7"/></svg></span>
+        </div>
+        <div class="svc__body">
+          <div class="svc__num">06</div>
+          <h3 class="svc__name">Maternal &amp; child health</h3>
+          <p class="svc__desc">Care for mothers and their young children, together.</p>
+        </div>
+      </div>
+      <div class="svc reveal" data-reveal>
+        <div class="svc__media">
+          <div class="svc__media-ph">TOMADY_svc07.jpg [TBC]</div>
+          <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9.5 12l1.8 1.8L15 10"/></svg></span>
+        </div>
+        <div class="svc__body">
+          <div class="svc__num">07</div>
+          <h3 class="svc__name">Hygiene &amp; prevention</h3>
+          <p class="svc__desc">Teaching the practices that stop illness before it starts.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY — care pathway, alternating images -->
+<section class="method" aria-labelledby="method-heading">
+  <div class="container">
+    <div class="method__head reveal" data-reveal>
+      <span class="method__eyebrow">How our care works</span>
+      <h2 class="method__title" id="method-heading">A clear pathway, every visit</h2>
+      <div class="method__underline"></div>
+      <p class="method__lead">TOMADY follows a structured care framework — so treatment is consistent, follow-up is reliable, and no patient falls through the gaps. [TBC — confirm the centre's actual pathway with the medical team.]</p>
+    </div>
+    <div class="method__flow">
+    <div class="mstep reveal" data-reveal>
+      <figure class="mstep__photo">
+        <div class="mstep__photo-img"><div class="mstep__ph">TOMADY_step01.jpg [TBC]</div></div>
+      </figure>
+      <div class="mstep__body">
+        <div class="mstep__num">01</div>
+        <h3 class="mstep__title">Welcome &amp; triage</h3>
+        <div class="mstep__rule"></div>
+        <p class="mstep__text">Every patient is received and assessed on arrival, with urgent cases prioritised so the most serious needs are met first.</p>
+        <span class="mstep__tbc">To be confirmed</span>
+      </div>
+    </div>
+    <div class="mstep mstep--reverse reveal" data-reveal>
+      <div class="mstep__body">
+        <div class="mstep__num">02</div>
+        <h3 class="mstep__title">Consultation</h3>
+        <div class="mstep__rule"></div>
+        <p class="mstep__text">A qualified clinician examines, diagnoses, and treats — or refers onward where specialist care is needed.</p>
+        <span class="mstep__tbc">To be confirmed</span>
+      </div>
+      <figure class="mstep__photo">
+        <div class="mstep__photo-img"><div class="mstep__ph">TOMADY_step02.jpg [TBC]</div></div>
+      </figure>
+    </div>
+    <div class="mstep reveal" data-reveal>
+      <figure class="mstep__photo">
+        <div class="mstep__photo-img"><div class="mstep__ph">TOMADY_step03.jpg [TBC]</div></div>
+      </figure>
+      <div class="mstep__body">
+        <div class="mstep__num">03</div>
+        <h3 class="mstep__title">Care &amp; education</h3>
+        <div class="mstep__rule"></div>
+        <p class="mstep__text">Treatment is paired with prevention: each visit includes guidance on hygiene, nutrition, and staying well at home.</p>
+        <span class="mstep__tbc">To be confirmed</span>
+      </div>
+    </div>
+    <div class="mstep mstep--reverse reveal" data-reveal>
+      <div class="mstep__body">
+        <div class="mstep__num">04</div>
+        <h3 class="mstep__title">Follow-up</h3>
+        <div class="mstep__rule"></div>
+        <p class="mstep__text">Patients are tracked over time, so chronic conditions are managed and no one falls through the gaps.</p>
+        <span class="mstep__tbc">To be confirmed</span>
+      </div>
+      <figure class="mstep__photo">
+        <div class="mstep__photo-img"><div class="mstep__ph">TOMADY_step04.jpg [TBC]</div></div>
+      </figure>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- GEOGRAPHY — animated map -->
+<section class="geo" aria-labelledby="geo-heading">
+  <div class="container">
+    <div class="geo__inner">
+      <div class="reveal-left" data-reveal>
+        <div class="geo__label">Visiting the centre</div>
+        <h2 class="geo__title" id="geo-heading">Care that meets families where they are</h2>
+        <div class="geo__body">
+          <p>The TOMADY Health Centre operates at <strong>[TBC location]</strong>, serving the surrounding community with regular consultation days. No appointment is turned away for inability to pay.</p>
+          <p>Opening days and hours: <strong>[TBC — e.g. every Saturday, 8h–16h]</strong>. The centre is staffed by qualified medical professionals and supported by Education for Madagascar.</p>
+        </div>
+        <blockquote class="geo__quote">"Making it possible for all children and their families to live in good health, and promoting the well-being of all at all ages, are essential conditions for child development and education."</blockquote>
+        <div class="geo__quote-attr">Education for Madagascar</div>
+        <div class="geo__partner-block">
+          <div class="geo__partner-label">Medical lead</div>
+          <div class="geo__partner-name">Dr Suzy Ratsimbazafy</div>
+          <div class="geo__partner-desc">Lead physician at the TOMADY Health Centre [TBC]</div>
+        </div>
+      </div>
+      <div class="reveal-right" data-reveal>
+        <figure class="geo__photo">
+          <div class="geo__photo-img"><div class="geo__photo-ph">TOMADY_centre.jpg — the TOMADY health centre, [TBC location]</div></div>
+          <figcaption class="geo__photo-cap">The TOMADY Health Centre — [TBC location]</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE FOUNDATION — health enables everything else -->
+<section class="perma-link" aria-labelledby="pl-heading">
+  <div class="container">
+    <div class="perma-link__inner">
+      <div class="perma-link__photo reveal-left" data-reveal>
+        <div class="perma-link__photo-ph">TOMADY_child.jpg<br>A healthy child · the foundation of every future</div>
+        <div class="perma-link__photo-cap">Good health is where education, opportunity, and a future begin</div>
+      </div>
+      <div class="reveal-right" data-reveal>
+        <div class="perma-link__label">Why health comes first</div>
+        <h2 class="perma-link__title" id="pl-heading">A child cannot learn on an empty, aching body.</h2>
+        <div class="perma-link__rule"></div>
+        <p class="perma-link__body">Education for Madagascar exists to give children a future through education — but a sick child cannot attend school, and an exhausted, unwell parent cannot support one. TOMADY removes that barrier. By keeping families well, the health centre makes every other project — education, nutrition, opportunity — possible.</p>
+        <a href="fody.html" class="perma-link__cta">See FODY — nutrition &amp; food security →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- V2: TRUST / CREDENTIALS LAYER -->
+<section class="trust" aria-labelledby="trust-heading">
+  <div class="container">
+    <div class="trust__head reveal" data-reveal>
+      <span class="trust__eyebrow">Credentials &amp; oversight</span>
+      <h2 class="trust__title" id="trust-heading">Care you can trust</h2>
+    </div>
+    <div class="trust__grid">
+      <div class="trust__partners reveal-left" data-reveal>
+        <div class="trust__block-label">Partners &amp; oversight</div>
+        <div class="trust__partner-row">
+          <div class="trust__partner">[TBC]<br>Ministry of Health</div>
+          <div class="trust__partner">[TBC]<br>WHO / UN body</div>
+          <div class="trust__partner">[TBC]<br>Clinical partner</div>
+        </div>
+        <div class="trust__gov">
+          <div class="trust__block-label">Governance &amp; transparency</div>
+          <div class="trust__gov-item">Medical team &amp; clinician bios — <a href="#">[TBC link]</a></div>
+          <div class="trust__gov-item">Board of directors — <a href="../../who-we-are/index.html">Who we are</a></div>
+          <div class="trust__gov-item">Annual reports &amp; financials — <a href="https://www.educationformadagascar.com/annual-report.html" target="_blank" rel="noopener">Annual reports</a></div>
+          <div class="trust__gov-item">Registered charity — UK 1167115 · ONG Madagascar NIF 4002796057</div>
+        </div>
+      </div>
+      <div class="trust__sdg reveal-right" data-reveal>
+        <div class="trust__sdg-badge">
+          <span class="trust__sdg-num">3</span>
+          <span class="trust__sdg-text">Good Health<br>&amp; Well-being</span>
+        </div>
+        <p class="trust__sdg-body">TOMADY is aligned with UN Sustainable Development Goal 3 — and supports several others through the connected work of Education for Madagascar.</p>
+        <div class="trust__sdg-list">
+          <div class="trust__sdg-row"><strong>SDG 3</strong> Good Health &amp; Well-being — the core mission</div>
+          <div class="trust__sdg-row"><strong>SDG 4</strong> Quality Education — a well child can learn</div>
+          <div class="trust__sdg-row"><strong>SDG 5</strong> Gender Equality — maternal &amp; family-planning care</div>
+          <div class="trust__sdg-row"><strong>SDG 1</strong> No Poverty — care that doesn't bankrupt families</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="project-cta" aria-labelledby="cta-heading">
+    <div class="project-cta__inner">
+    <div>
+      <div class="project-cta__label">Support healthcare in Madagascar</div>
+      <h2 id="cta-heading">Health is where<br>every future begins.</h2>
+      <p>A donation to TOMADY funds free and low-cost consultations, prenatal and maternal care, and the preventive medicine that keeps families well — and keeps children in school.</p>
+    </div>
+    <div class="project-cta__buttons">
+      <a href="https://buy.stripe.com/cN2eWi7dYdnK9XifZ6" class="btn-white" target="_blank" rel="noopener">Donate to TOMADY</a>
+      <a href="fody.html" class="btn-outline-white">See FODY</a>
+    </div>
+  </div>
+</section>
+
+<!-- OTHER HEALTH PROJECTS -->
+<section class="other-projects" aria-labelledby="other-heading">
+  <div class="container">
+    <div class="other-projects__header">
+      <span class="section-eyebrow">Keep exploring</span>
+      <h2 class="section-heading" id="other-heading">Other Health projects</h2>
+    </div>
+    <div class="other-projects__grid">
+      <a class="proj-card" href="fody.html"><div class="proj-card__thumb"><span class="proj-card__tag">Nutrition · SDG 2</span></div><div class="proj-card__body"><h3 class="proj-card__title">FODY</h3><p class="proj-card__desc">Fighting hunger in southern Madagascar — permaculture food production and emergency distribution.</p><span class="proj-card__link">Learn more →</span></div></a>
+      <a class="proj-card" href="women.html"><div class="proj-card__thumb"><span class="proj-card__tag">SDG 5</span></div><div class="proj-card__body"><h3 class="proj-card__title">School for Women</h3><p class="proj-card__desc">328 women, 4 villages, monthly programme since 2019 — health, rights and empowerment.</p><span class="proj-card__link">Learn more →</span></div></a>
+      <a class="proj-card" href="../../projects/environment/permada.html"><div class="proj-card__thumb"><span class="proj-card__tag">Permaculture</span></div><div class="proj-card__body"><h3 class="proj-card__title">PERMADA</h3><p class="proj-card__desc">The soil project behind the food — restoring land to feed families, zero chemicals.</p><span class="proj-card__link">Learn more →</span></div></a>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;"><a href="../index.html" class="btn btn-outline">See all 13 projects</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Education for Madagascar</h3>
+        <p>Committed to UN SDG 4 — Quality Education for all children, from early childhood to economic independence.</p>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/educationformadagascar" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener">f</a>
+          <a href="https://www.instagram.com/educationformadagascar/" class="social-btn" aria-label="Instagram" target="_blank" rel="noopener">ig</a>
+          <a href="https://www.linkedin.com/company/educationformadagascar/" class="social-btn" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Education</h4>
+        <ul>
+          <li><a href="akka.html">AKKA Montessori</a></li>
+          <li><a href="kanto.html">KANTO</a></li>
+          <li><a href="scola.html">SCOLA</a></li>
+          <li><a href="care.html">CARE Coding</a></li>
+          <li><a href="vim.html">VIM</a></li>
+          <li><a href="cad.html">Career Day</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="../../media/blog.html">Blog</a></li>
+          <li><a href="#">Artisan Shop</a></li>
+          <li><a href="../../who-we-are/annual-reports.html">Annual Reports</a></li>
+          <li><a href="../../media/newsletters.html">Newsletter</a></li>
+          <li><a href="../health/tomady.html">TOMADY Health</a></li>
+          <li><a href="../environment/silva.html">SILVA Environment</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@educationformadagascar.org">contact@educationformadagascar.org</a></li>
+          <li style="font-size:.85rem;margin-top:.3rem;">23 Milner Drive, Cobham<br>KT11 2EZ, United Kingdom</li>
+          <li style="margin-top:.8rem;font-size:.75rem;opacity:.55;line-height:1.8;">UK Charity #1167115<br>FR SIREN 85242793900016<br>MG NIF 4002796057</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Education for Madagascar. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a><a href="#">Legal Notice</a><a href="#">Safeguarding</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../js/global.js"></script>
+
+<script>
+/* reveal */
+(function(){
+  var els=document.querySelectorAll('[data-reveal]');
+  var io=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting)en.target.classList.add('in');});},{threshold:0.15});
+  els.forEach(function(el){io.observe(el);});
+})();
+
+/* SDG badge cycle 2 <-> Zero Hunger */
+(function(){
+  var badge=document.getElementById('sdgBadge');if(!badge)return;
+  setInterval(function(){badge.classList.toggle('flipped');},3000);
+})();
+
+</script>
+
+</body>
+</html>
