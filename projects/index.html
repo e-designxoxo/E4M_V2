@@ -685,7 +685,7 @@
     }
 
     .project-card__sdg-divider {
-      width: 8px;
+      width: 1px;
       align-self: stretch;
       background: rgba(255,255,255,.5);
       margin: 0 .15rem;
@@ -1156,98 +1156,121 @@
 <div class="top-bar">
   <div class="container">
     <div class="top-bar__info">
-      <span>UK Charity #1167115</span>
-      <span class="top-bar__dot">|</span>
-      <span>France: SIREN 852427939</span>
-      <span class="top-bar__dot">|</span>
-      <span>Madagascar: NIF 4002796057</span>
+      <span>UK Charity #1167115</span><span class="top-bar__dot">·</span>
+      <span>Malagasy NGO</span><span class="top-bar__dot">·</span>
+      <span>Association France SIREN 85242793900016</span><span class="top-bar__dot">·</span>
+      <span>Association Suisse</span>
     </div>
-    <div class="lang-switch" aria-label="Language switcher">
-      <a class="lang-switch__btn is-active" href="#">EN</a>
-      <a class="lang-switch__btn" href="#">FR</a>
-    </div>
+    <nav class="lang-switch" aria-label="Language switcher">
+      <a href="index.html" class="lang-switch__btn is-active" lang="en">EN</a>
+      <a href="../index-fr.html" class="lang-switch__btn" lang="fr">FR</a>
+    </nav>
   </div>
 </div>
 
-<nav class="navbar" id="navbar" aria-label="Main navigation">
+<header class="navbar" id="navbar" role="banner">
   <div class="container">
-    <a href="../homepage.html" class="navbar__logo">
-      <span class="logo-circle"><img src="../images/logo2.jpg" alt="Education for Madagascar logo"/></span>
+    <a href="../homepage.html" class="navbar__logo" aria-label="Education for Madagascar — home">
+      <img src="../images/logo_mini.jpeg" alt="Education for Madagascar logo" class="logo-image"/>
       <span class="logo-text">Education<br>for Madagascar</span>
     </a>
-
-    <ul class="nav__list" aria-label="Desktop navigation">
-      <li class="nav__item">
-        <a href="../homepage.html" class="nav__link">Home</a>
+    <ul class="nav__list" role="list">
+      <li class="nav__item" id="ni-who">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-who')">Who we are <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="../who-we-are/our-story.html">Our story<span class="dropdown__sub">History &amp; founding vision</span></a>
+          <a class="dropdown__link" href="../who-we-are/team.html">Team &amp; board<span class="dropdown__sub">The people behind E4M</span></a>
+          <a class="dropdown__link" href="../who-we-are/governance.html">Governance &amp; statutes</a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="../who-we-are/annual-reports.html">Annual reports</a>
+          <a class="dropdown__link" href="../who-we-are/partners.html">Our partners</a>
+        </div>
       </li>
-
       <li class="nav__item" id="ni-proj">
         <button class="nav__link is-active" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-proj')">Our projects <span class="nav__chevron" aria-hidden="true"></span></button>
         <div class="dropdown--mega">
           <div class="mega__col">
-            <h3 class="mega__heading mega__heading--edu">Education</h3>
-            <a class="mega__link" href="education/akka.html">AKKA Montessori <span class="badge badge--age">3-6 yrs</span></a>
-            <a class="mega__link" href="education/kanto.html">KANTO Culture <span class="badge badge--age">7-12 yrs</span></a>
+            <p class="mega__heading mega__heading--edu">Education</p>
+            <a class="mega__link" href="education/akka.html">AKKA Montessori <span class="badge badge--age">3–6 yrs</span></a>
+            <a class="mega__link" href="education/kanto.html">KANTO Culture <span class="badge badge--age">9–22 yrs</span></a>
             <a class="mega__link" href="education/care.html">CARE Coding &amp; Robotics</a>
-            <a class="mega__link" href="education/scola.html">SCOLA Scholarship <span class="badge badge--age">18+</span></a>
+            <a class="mega__link" href="education/scola.html">SCOLA Scholarship <span class="badge badge--age">17–25</span></a>
             <a class="mega__link" href="education/tuto.html">TUTO</a>
-            <a class="mega__link" href="education/vim.html">VIM Volunteering <span class="badge badge--int">Intl.</span></a>
+            <a class="mega__link" href="education/vim.html">VIM — Volunteering</a>
             <a class="mega__link" href="education/cad.html">Career Day Awareness</a>
+            <a class="mega__link" href="education/unesco.html">UNESCO Partnership <span class="badge badge--new">New</span></a>
           </div>
           <div class="mega__col">
-            <h3 class="mega__heading mega__heading--health">Health &amp; Social</h3>
+            <p class="mega__heading mega__heading--health">Health</p>
             <a class="mega__link" href="health/women.html">School for Women</a>
             <a class="mega__link" href="health/fody.html">FODY</a>
             <a class="mega__link" href="health/tomady.html">TOMADY</a>
-            <h3 class="mega__heading mega__heading--env mega__col-gap">Environment</h3>
+            <div class="mega__col-gap"></div>
+            <p class="mega__heading mega__heading--env">Environment</p>
             <a class="mega__link" href="environment/silva.html">SILVA</a>
             <a class="mega__link" href="environment/wash.html">WASH</a>
             <a class="mega__link" href="environment/permada.html">PERMADA</a>
           </div>
           <div class="mega__col">
-            <p class="mega__summary">13 active projects across education, health, and the environment, serving children, women and rural communities in Madagascar.</p>
-            <a class="mega__all-link" href="index.html">All projects -></a>
+            <p class="mega__heading mega__heading--edu">Overview</p>
+            <p class="mega__summary">13 active projects across education, health, and the environment — serving children aged 3 to 18 and women in rural Madagascar.</p>
+            <a class="mega__all-link" href="index.html" style="color:var(--green);font-weight:600;">You are here</a>
           </div>
         </div>
       </li>
-
-      <li class="nav__item">
-        <a href="education/vim.html" class="nav__link">Volunteer</a>
+      <li class="nav__item" id="ni-inv">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-inv')">Get involved <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="../get-involved/volunteer.html">Volunteer (VIM)<span class="dropdown__sub">Live &amp; work in Madagascar</span></a>
+          <a class="dropdown__link" href="../get-involved/donate.html">Donate<span class="dropdown__sub">Fund our programmes directly</span></a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="../get-involved/partner.html">Become a partner</a>
+        </div>
       </li>
-      <li class="nav__item">
-        <a href="mailto:contact@educationformadagascar.org" class="nav__link">Contact</a>
+      <li class="nav__item" id="ni-media">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-media')">Media <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="../media/blog.html">Blog</a>
+          <a class="dropdown__link" href="../media/newsletters.html">Newsletters</a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="../who-we-are/annual-reports.html">Annual reports</a>
+        </div>
       </li>
     </ul>
-
     <div class="nav__actions">
-      <a href="https://buy.stripe.com/cN2eWi7dYdnK9XifZ6" class="btn-donate" target="_blank" rel="noopener">Donate</a>
+      <a href="#shop" class="btn-shop">The Shop ↗</a>
+      <a href="../get-involved/donate.html" class="btn-donate">Donate</a>
     </div>
-
-    <button class="hamburger" id="hamburger" onclick="toggleMobile()" aria-label="Open menu" aria-expanded="false">
-      <span class="hamburger__bar"></span>
-      <span class="hamburger__bar"></span>
-      <span class="hamburger__bar"></span>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMobile()">
+      <span class="hamburger__bar"></span><span class="hamburger__bar"></span><span class="hamburger__bar"></span>
     </button>
   </div>
-</nav>
+</header>
 
-<div class="mobile-drawer" id="mobile-drawer">
-  <div class="mob-section">
-    <a class="mob-link" href="../homepage.html">Home</a>
+<nav class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation">
+  <div class="mob-section" id="mob-who">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-who')">Who we are <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="../who-we-are/our-story.html">Our story</a>
+      <a class="mob-link" href="../who-we-are/team.html">Team &amp; board</a>
+      <a class="mob-link" href="../who-we-are/governance.html">Governance &amp; statutes</a>
+      <a class="mob-link" href="../who-we-are/annual-reports.html">Annual reports</a>
+      <a class="mob-link" href="../who-we-are/partners.html">Our partners</a>
+    </div>
   </div>
-  <div class="mob-section" id="mob-proj">
+  <div class="mob-section is-open" id="mob-proj">
     <button class="mob-section__toggle" onclick="toggleMobSection('mob-proj')">Our projects <span class="nav__chevron"></span></button>
     <div class="mob-section__content">
-      <a class="mob-link mob-link--strong" href="index.html">All projects -></a>
       <div class="mob-subheading">Education</div>
       <a class="mob-link" href="education/akka.html">AKKA Montessori</a>
       <a class="mob-link" href="education/kanto.html">KANTO Culture</a>
       <a class="mob-link" href="education/care.html">CARE Coding &amp; Robotics</a>
       <a class="mob-link" href="education/scola.html">SCOLA Scholarship</a>
       <a class="mob-link" href="education/tuto.html">TUTO</a>
-      <a class="mob-link" href="education/vim.html">VIM Volunteering</a>
+      <a class="mob-link" href="education/vim.html">VIM — Volunteering</a>
       <a class="mob-link" href="education/cad.html">Career Day Awareness</a>
-      <div class="mob-subheading mob-subheading--health">Health &amp; Social</div>
+      <a class="mob-link" href="education/unesco.html">UNESCO Partnership</a>
+      <div class="mob-subheading mob-subheading--health">Health</div>
       <a class="mob-link" href="health/women.html">School for Women</a>
       <a class="mob-link" href="health/fody.html">FODY</a>
       <a class="mob-link" href="health/tomady.html">TOMADY</a>
@@ -1257,11 +1280,27 @@
       <a class="mob-link" href="environment/permada.html">PERMADA</a>
     </div>
   </div>
-  <div class="mob-actions">
-    <a href="education/vim.html" class="btn-shop">Volunteer</a>
-    <a href="https://buy.stripe.com/cN2eWi7dYdnK9XifZ6" class="btn-donate" target="_blank" rel="noopener">Donate</a>
+  <div class="mob-section" id="mob-inv">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-inv')">Get involved <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="../get-involved/volunteer.html">Volunteer (VIM)</a>
+      <a class="mob-link" href="../get-involved/donate.html">Donate</a>
+      <a class="mob-link" href="../get-involved/partner.html">Become a partner</a>
+    </div>
   </div>
-</div>
+  <div class="mob-section" id="mob-media">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-media')">Media <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="../media/blog.html">Blog</a>
+      <a class="mob-link" href="../media/newsletters.html">Newsletters</a>
+      <a class="mob-link" href="../who-we-are/annual-reports.html">Annual reports</a>
+    </div>
+  </div>
+  <div class="mob-actions">
+    <a href="#shop" class="btn-shop">The Shop ↗</a>
+    <a href="../get-involved/donate.html" class="btn-donate">Donate</a>
+  </div>
+</nav>
 
 <main>
   <section class="ap-hero" aria-labelledby="page-title">
@@ -1530,10 +1569,10 @@
             <span class="project-card__sdg-num">4</span>
             <span class="project-card__sdg-name">Quality Education</span>
           </div>
-          <div class="project-card__photo" aria-hidden="true"><span class="soon-badge">Coming soon</span></div>
+          <div class="project-card__photo" aria-hidden="true"><span class="soon-badge">Just announced</span></div>
           <div class="project-card__body">
             <h3 class="project-card__title"><em>UNESCO Partnership</em>World Heritage education</h3>
-            <p class="project-card__action">Coming soon</p>
+            <p class="project-card__action">Just announced.</p>
             <p class="project-card__fact">A new World Heritage education partnership, launching soon.</p>
             <span class="project-card__link">View project →</span>
           </div>
