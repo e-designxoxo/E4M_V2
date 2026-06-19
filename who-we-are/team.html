@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Team &amp; Board — Education for Madagascar</title>
+  <meta name="description" content="Meet the four elected boards of Education for Madagascar — in Madagascar, France, the United Kingdom and Switzerland — and the team on the ground."/>
+  <link rel="stylesheet" href="../css/global.css"/>
+  <style>
+    :root { --ink:#152016; --muted:#687066; --line:rgba(21,32,22,.1); }
+
+    /* ── HERO ── */
+    .team-hero {
+      background: linear-gradient(135deg, #143f00 0%, #195301 55%, #0f3d00 100%);
+      color: var(--cream);
+      padding: 5rem 0 4.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .team-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(238,235,217,.06) 1px, transparent 1px);
+      background-size: 22px 22px;
+      mask-image: radial-gradient(ellipse 80% 70% at 40% 50%, #000 40%, transparent 95%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 40% 50%, #000 40%, transparent 95%);
+      pointer-events: none;
+    }
+    .team-hero__inner { position: relative; z-index: 1; max-width: 680px; }
+    .team-hero__kicker {
+      display: inline-flex; align-items: center; gap: .7rem;
+      font-size: .72rem; font-weight: 600; letter-spacing: .24em; text-transform: uppercase;
+      color: rgba(238,235,217,.68); margin-bottom: 1.4rem;
+    }
+    .team-hero__kicker::before { content:""; width:26px; height:1px; background:rgba(238,235,217,.4); }
+    .team-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4.4vw, 3.8rem);
+      line-height: 1.06; letter-spacing: -.015em; margin-bottom: 1.4rem;
+    }
+    .team-hero__title em { font-style: italic; color: #cfe0a3; }
+    .team-hero__lead { font-size: 1.04rem; line-height: 1.72; color: rgba(238,235,217,.82); }
+
+    /* ── BOARD SECTION ── */
+    .board-section { padding: 5.5rem 0; }
+    .board-section:nth-child(odd) { background: var(--surface-bg); }
+    .board-section:nth-child(even) { background: var(--surface-raised); }
+
+    .board-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .board-flag {
+      font-size: 2.4rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .board-header__text {}
+    .board-header__country {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: .3rem;
+    }
+    .board-header__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+      color: var(--green);
+      line-height: 1.15;
+      margin-bottom: .5rem;
+    }
+    .board-header__reg {
+      font-size: .8rem;
+      color: var(--charcoal);
+      opacity: .65;
+    }
+
+    /* ── PERSON CARDS ── */
+    .board-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .person-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(21,32,22,.04);
+    }
+    .person-card__photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: linear-gradient(135deg, var(--surface-raised), var(--silver));
+      position: relative;
+      overflow: hidden;
+    }
+    .person-card__photo img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      display: block;
+    }
+    .person-card__photo-placeholder {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: .6rem;
+    }
+    .person-card__photo:has(img) .person-card__photo-placeholder { display: none; }
+    .person-card__photo-placeholder svg { opacity: .18; }
+    .person-card__photo-placeholder span {
+      font-size: .6rem; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(25,83,1,.35);
+    }
+    .person-card__body { padding: 1.2rem 1.25rem 1.4rem; }
+    .person-card__role {
+      font-size: .66rem; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: .35rem;
+    }
+    .person-card__name {
+      font-family: var(--font-display);
+      font-size: 1.2rem; color: var(--green);
+      line-height: 1.2; margin-bottom: .3rem;
+    }
+    .person-card__note {
+      font-size: .8rem; color: var(--muted); line-height: 1.5;
+    }
+
+    /* ── FIELD TEAM ── */
+    .field-section {
+      padding: 5.5rem 0;
+      background: var(--cream);
+      border-top: 1px solid var(--silver);
+    }
+    .field-section__head { max-width: 580px; margin-bottom: 3rem; }
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+    .field-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .field-card__photo {
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, var(--surface-raised), var(--silver));
+      position: relative;
+      overflow: hidden;
+    }
+    .field-card__photo img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
+    .field-card__photo-placeholder {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .field-card__photo:has(img) .field-card__photo-placeholder { display: none; }
+    .field-card__photo-placeholder svg { opacity: .2; }
+    .field-card__body { padding: 1rem 1.1rem 1.2rem; }
+    .field-card__name {
+      font-family: var(--font-display);
+      font-size: 1.05rem; color: var(--green); margin-bottom: .2rem;
+    }
+    .field-card__title { font-size: .8rem; color: var(--muted); line-height: 1.4; }
+
+    /* ── JOIN CTA ── */
+    .join-section {
+      padding: 4rem 0;
+      background: var(--surface-bg);
+    }
+    .join-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+      padding: 2.5rem 3rem;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 4px 24px rgba(21,32,22,.05);
+    }
+    .join-inner h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+      color: var(--green); margin-bottom: .3rem;
+    }
+    .join-inner p { font-size: .94rem; color: var(--charcoal); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .board-grid { grid-template-columns: repeat(2, 1fr); }
+      .field-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .board-grid { grid-template-columns: 1fr; }
+      .field-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="container">
+    <div class="top-bar__info">
+      <span>UK Charity #1167115</span><span class="top-bar__dot">·</span>
+      <span>Malagasy NGO</span><span class="top-bar__dot">·</span>
+      <span>Association France SIREN 85242793900016</span><span class="top-bar__dot">·</span>
+      <span>Association Suisse</span>
+    </div>
+    <nav class="lang-switch" aria-label="Language switcher">
+      <a href="team.html" class="lang-switch__btn is-active" lang="en">EN</a>
+      <a href="#" class="lang-switch__btn" lang="fr">FR</a>
+    </nav>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar" role="banner">
+  <div class="container">
+    <a href="../homepage.html" class="navbar__logo" aria-label="Education for Madagascar — home">
+      <img src="../images/logo_mini.jpeg" alt="Education for Madagascar logo" class="logo-image"/>
+      <span class="logo-text">Education<br>for Madagascar</span>
+    </a>
+    <ul class="nav__list" role="list">
+      <li class="nav__item" id="ni-who">
+        <button class="nav__link is-active" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-who')">Who we are <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="our-story.html">Our story<span class="dropdown__sub">History &amp; founding vision</span></a>
+          <a class="dropdown__link" href="team.html" style="color:var(--green);font-weight:600;">Team &amp; board<span class="dropdown__sub">The people behind E4M</span></a>
+          <a class="dropdown__link" href="governance.html">Governance &amp; statutes</a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="annual-reports.html">Annual reports</a>
+          <a class="dropdown__link" href="partners.html">Our partners</a>
+        </div>
+      </li>
+      <li class="nav__item" id="ni-proj">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-proj')">Our projects <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown--mega">
+          <div class="mega__col">
+            <p class="mega__heading mega__heading--edu">Education</p>
+            <a class="mega__link" href="../projects/education/akka.html">AKKA Montessori <span class="badge badge--age">3–6 yrs</span></a>
+            <a class="mega__link" href="../projects/education/kanto.html">KANTO Culture</a>
+            <a class="mega__link" href="../projects/education/care.html">CARE Coding &amp; Robotics</a>
+            <a class="mega__link" href="../projects/education/scola.html">SCOLA Scholarship</a>
+            <a class="mega__link" href="../projects/education/tuto.html">TUTO</a>
+            <a class="mega__link" href="../projects/education/vim.html">VIM — Volunteering</a>
+            <a class="mega__link" href="../projects/education/cad.html">Career Day Awareness</a>
+            <a class="mega__link" href="../projects/education/unesco.html">UNESCO Partnership <span class="badge badge--new">New</span></a>
+          </div>
+          <div class="mega__col">
+            <p class="mega__heading mega__heading--health">Health</p>
+            <a class="mega__link" href="../projects/health/women.html">School for Women</a>
+            <a class="mega__link" href="../projects/health/fody.html">FODY</a>
+            <a class="mega__link" href="../projects/health/tomady.html">TOMADY</a>
+            <div class="mega__col-gap"></div>
+            <p class="mega__heading mega__heading--env">Environment</p>
+            <a class="mega__link" href="../projects/environment/silva.html">SILVA</a>
+            <a class="mega__link" href="../projects/environment/wash.html">WASH</a>
+            <a class="mega__link" href="../projects/environment/permada.html">PERMADA</a>
+          </div>
+          <div class="mega__col">
+            <p class="mega__summary">13 active projects across education, health, and the environment.</p>
+            <a class="mega__all-link" href="../projects/index.html">All projects →</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav__item" id="ni-inv">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-inv')">Get involved <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="../get-involved/volunteer.html">Volunteer (VIM)<span class="dropdown__sub">Live &amp; work in Madagascar</span></a>
+          <a class="dropdown__link" href="../get-involved/donate.html">Donate</a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="../get-involved/partner.html">Become a partner</a>
+        </div>
+      </li>
+      <li class="nav__item" id="ni-media">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-media')">Media <span class="nav__chevron" aria-hidden="true"></span></button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="../media/blog.html">Blog</a>
+          <a class="dropdown__link" href="../media/newsletters.html">Newsletters</a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="annual-reports.html">Annual reports</a>
+        </div>
+      </li>
+    </ul>
+    <div class="nav__actions">
+      <a href="#shop" class="btn-shop">The Shop ↗</a>
+      <a href="../get-involved/donate.html" class="btn-donate">Donate</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMobile()">
+      <span class="hamburger__bar"></span><span class="hamburger__bar"></span><span class="hamburger__bar"></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation">
+  <div class="mob-section is-open" id="mob-who">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-who')">Who we are <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="our-story.html">Our story</a>
+      <a class="mob-link" href="team.html" style="color:var(--green);font-weight:600;">Team &amp; board</a>
+      <a class="mob-link" href="governance.html">Governance &amp; statutes</a>
+      <a class="mob-link" href="annual-reports.html">Annual reports</a>
+      <a class="mob-link" href="partners.html">Our partners</a>
+    </div>
+  </div>
+  <div class="mob-section" id="mob-proj">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-proj')">Our projects <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <div class="mob-subheading">Education</div>
+      <a class="mob-link" href="../projects/education/akka.html">AKKA Montessori</a>
+      <a class="mob-link" href="../projects/education/vim.html">VIM — Volunteering</a>
+      <div class="mob-subheading mob-subheading--health">Health</div>
+      <a class="mob-link" href="../projects/health/tomady.html">TOMADY</a>
+      <div class="mob-subheading mob-subheading--env">Environment</div>
+      <a class="mob-link" href="../projects/environment/silva.html">SILVA</a>
+    </div>
+  </div>
+  <div class="mob-actions">
+    <a href="#shop" class="btn-shop">The Shop ↗</a>
+    <a href="../get-involved/donate.html" class="btn-donate">Donate</a>
+  </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<nav class="breadcrumb" aria-label="Breadcrumb" style="background:var(--surface-raised);">
+  <div class="container">
+    <ul class="breadcrumb__list" style="color:var(--green);">
+      <li><a href="../homepage.html" style="color:var(--teal);">Home</a></li>
+      <li><a href="our-story.html" style="color:var(--teal);">Who we are</a></li>
+      <li><span style="color:var(--green);font-weight:600;">Team &amp; board</span></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <!-- HERO -->
+  <section class="team-hero" aria-labelledby="team-title">
+    <div class="container">
+      <div class="team-hero__inner">
+        <div class="team-hero__kicker">Who we are · Team &amp; board</div>
+        <h1 class="team-hero__title" id="team-title">Four boards.<br/><em>One direction.</em></h1>
+        <p class="team-hero__lead">Education for Madagascar is governed by elected boards in four countries — Madagascar, France, the United Kingdom and Switzerland — working together under a shared mission and a single legal framework.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MADAGASCAR BOARD -->
+  <section class="board-section" aria-labelledby="board-mg">
+    <div class="container">
+      <div class="board-header reveal">
+        <div class="board-flag" aria-hidden="true">🇲🇬</div>
+        <div class="board-header__text">
+          <div class="board-header__country">Madagascar</div>
+          <h2 class="board-header__title" id="board-mg">Malagasy NGO — Board of Directors 2024</h2>
+          <p class="board-header__reg">NIF 4002796057 · INSTAT 94951 11 2017 003692 · Registered Antananarivo, May 2017</p>
+        </div>
+      </div>
+      <div class="board-grid">
+        <div class="person-card reveal">
+          <div class="person-card__photo">
+            <!-- <img src="../images/team/jackie-randriantsoa.jpg" alt="Jackie Sutter Randriantsoa"/> -->
+            <div class="person-card__photo-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              <span>Photo coming</span>
+            </div>
+          </div>
+          <div class="person-card__body">
+            <div class="person-card__role">President</div>
+            <div class="person-card__name">Jackie Sutter Randriantsoa</div>
+          </div>
+        </div>
+        <div class="person-card reveal d1">
+          <div class="person-card__photo">
+            <!-- <img src="../images/team/herisoa-raobera.jpg" alt="Herisoa Raobera"/> -->
+            <div class="person-card__photo-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              <span>Photo coming</span>
+            </div>
+          </div>
+          <div class="person-card__body">
+            <div class="person-card__role">Vice President</div>
+            <div class="person-card__name">Herisoa Raobera</div>
+          </div>
+        </div>
+        <div class="person-card reveal d2">
+          <div class="person-card__photo">
+            <!-- <img src="../images/team/michou-andriamalala.jpg" alt="Michou Andriamalala"/> -->
+            <div class="person-card__photo-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              <span>Photo coming</span>
+            </div>
+          </div>
+          <div class="person-card__body">
+            <div class="person-card__role">General Secretary</div>
+            <div class="person-card__name">Michou Andriamalala</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FRANCE BOARD -->
+  <section class="board-section" aria-labelledby="board-fr">
+    <div class="container">
+      <div class="board-header reveal">
+        <div class="board-flag" aria-hidden="true">🇫🇷</div>
+        <div class="board-header__text">
+          <div class="board-header__country">France</div>
+          <h2 class="board-header__title" id="board-fr">Association France — Board of Directors 2024</h2>
+          <p class="board-header__reg">SIREN / SIRET 85242793900016 · Registered 2018</p>
+        </div>
+      </div>
+      <div class="board-grid">
+        <div class="person-card reveal">
+          <div class="person-card__photo">
+            <!-- <img src="../images/team/patricia-peterson.jpg" alt="Patricia Peterson Fontenay"/> -->
+            <div class="person-card__photo-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              <span>Photo coming</span>
+            </div>
+          </div>
+          <div class="person-card__body">
+            <div class="person-card__role">President</div>
+            <div class="person-card__name">Patricia Peterson Fontenay</div>
+          </div>
+        </div>
+        <div class="person-card reveal d1">
+          <div class="person-card__photo">
+            <!-- <img src="../images/team/coralie-tordjman.jpg" alt="Coralie Tordjman"/> -->
+            <div class="person-card__photo-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              <span>Photo coming</span>
+            </div>
+          </div>
+          <div class="person-card__body">
+            <div class="person-card__role">Vice President</div>
+            <div class="person-card__name">Coralie Tordjman</div>
+          </div>
+        </div>
+        <div class="person-card reveal d2">
+          <div class="person-card__photo">
+            <!-- <img src="../images/team/jade-rakoto.jpg" alt="Jade Rakoto"/> -->
+            <div class="person-card__photo-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              <span>Photo coming</span>
+            </div>
+          </div>
+          <div class="person-card__body">
+            <div class="person-card__role">General Secretary</div>
+            <div class="person-card__name">Jade Rakoto</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UK BOARD -->
+  <section class="board-section" aria-labelledby="board-uk">
+    <div class="container">
+      <div class="board-header reveal">
+        <div class="board-flag" aria-hidden="true">🇬🇧</div>
+        <div class="board-header__text">
+          <div class="board-header__country">United Kingdom</div>
+          <h2 class="board-header__title" id="board-uk">Charity Incorporated Organisation — Board 2024</h2>
+          <p class="board-header__reg">Registered in England &amp; Wales No. 1167115 · 16th May 2016</p>
+        </div>
+      </div>
+      <div class="board-grid">
+        <div class="person-card reveal">
+          <div class="person-card__photo">
+            <!-- <img src="../images/team/jackie-sutter.jpg" alt="Jackie Sutter"/> -->
+            <div class="person-card__photo-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              <span>Photo coming</span>
+            </div>
+          </div>
+          <div class="person-card__body">
+            <div class="person-card__role">Chairperson</div>
+            <div class="person-card__name">Jackie Sutter</div>
+          </div>
+        </div>
+        <div class="person-card reveal d1">
+          <div class="person-card__photo">
+            <!-- <img src="../images/team/anne-sophie-flochel.jpg" alt="Anne Sophie Flochel"/> -->
+            <div class="person-card__photo-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              <span>Photo coming</span>
+            </div>
+          </div>
+          <div class="person-card__body">
+            <div class="person-card__role">Deputy Chair</div>
+            <div class="person-card__name">Anne Sophie Flochel</div>
+          </div>
+        </div>
+        <div class="person-card reveal d2">
+          <div class="person-card__photo">
+            <!-- <img src="../images/team/matthieu-sutter.jpg" alt="Matthieu Sutter"/> -->
+            <div class="person-card__photo-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              <span>Photo coming</span>
+            </div>
+          </div>
+          <div class="person-card__body">
+            <div class="person-card__role">General Secretary</div>
+            <div class="person-card__name">Matthieu Sutter</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SWITZERLAND BOARD -->
+  <section class="board-section" aria-labelledby="board-ch">
+    <div class="container">
+      <div class="board-header reveal">
+        <div class="board-flag" aria-hidden="true">🇨🇭</div>
+        <div class="board-header__text">
+          <div class="board-header__country">Switzerland</div>
+          <h2 class="board-header__title" id="board-ch">Association Suisse — Board since 2022</h2>
+          <p class="board-header__reg">Registered Geneva, 2022</p>
+        </div>
+      </div>
+      <div class="board-grid">
+        <div class="person-card reveal">
+          <div class="person-card__photo">
+            <!-- <img src="../images/team/sophie-blomme.jpg" alt="Sophie Blommé"/> -->
+            <div class="person-card__photo-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              <span>Photo coming</span>
+            </div>
+          </div>
+          <div class="person-card__body">
+            <div class="person-card__role">President</div>
+            <div class="person-card__name">Sophie Blommé</div>
+          </div>
+        </div>
+        <div class="person-card reveal d1">
+          <div class="person-card__photo">
+            <!-- <img src="../images/team/jackie-sutter.jpg" alt="Jackie Sutter"/> -->
+            <div class="person-card__photo-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              <span>Photo coming</span>
+            </div>
+          </div>
+          <div class="person-card__body">
+            <div class="person-card__role">Vice President</div>
+            <div class="person-card__name">Jackie Sutter</div>
+          </div>
+        </div>
+        <div class="person-card reveal d2">
+          <div class="person-card__photo">
+            <!-- <img src="../images/team/fanja-andrianatoandro.jpg" alt="Fanja Andrianatoandro"/> -->
+            <div class="person-card__photo-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              <span>Photo coming</span>
+            </div>
+          </div>
+          <div class="person-card__body">
+            <div class="person-card__role">General Secretary</div>
+            <div class="person-card__name">Fanja Andrianatoandro</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIELD TEAM -->
+  <section class="field-section" aria-labelledby="field-title">
+    <div class="container">
+      <div class="field-section__head reveal">
+        <span class="eyebrow">The team on the ground</span>
+        <h2 class="section-title" id="field-title">Madagascar field team</h2>
+        <p style="margin-top:.8rem;font-size:.97rem;color:var(--charcoal);line-height:1.7;">The educators, coordinators and field workers who make the 13 programmes run every day. Photos and bios will be added as the team confirms them.</p>
+      </div>
+      <div class="field-grid">
+        <!-- Add field team members here — structure: -->
+        <!-- <div class="field-card">
+          <div class="field-card__photo">
+            <img src="../images/team/name.jpg" alt="Name"/>
+            <div class="field-card__photo-placeholder"><svg>...</svg></div>
+          </div>
+          <div class="field-card__body">
+            <div class="field-card__name">Name</div>
+            <div class="field-card__title">Role</div>
+          </div>
+        </div> -->
+        <div class="field-card reveal">
+          <div class="field-card__photo">
+            <div class="field-card__photo-placeholder">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="opacity:.2;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            </div>
+          </div>
+          <div class="field-card__body">
+            <div class="field-card__name" style="color:var(--charcoal);opacity:.4;">Team member</div>
+            <div class="field-card__title" style="opacity:.4;">Role · Ambohimahasoa</div>
+          </div>
+        </div>
+        <div class="field-card reveal d1">
+          <div class="field-card__photo">
+            <div class="field-card__photo-placeholder">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="opacity:.2;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            </div>
+          </div>
+          <div class="field-card__body">
+            <div class="field-card__name" style="color:var(--charcoal);opacity:.4;">Team member</div>
+            <div class="field-card__title" style="opacity:.4;">Role · Antananarivo</div>
+          </div>
+        </div>
+        <div class="field-card reveal d2">
+          <div class="field-card__photo">
+            <div class="field-card__photo-placeholder">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="opacity:.2;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            </div>
+          </div>
+          <div class="field-card__body">
+            <div class="field-card__name" style="color:var(--charcoal);opacity:.4;">Team member</div>
+            <div class="field-card__title" style="opacity:.4;">Role · Ambohibe</div>
+          </div>
+        </div>
+        <div class="field-card reveal d3">
+          <div class="field-card__photo">
+            <div class="field-card__photo-placeholder">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="opacity:.2;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            </div>
+          </div>
+          <div class="field-card__body">
+            <div class="field-card__name" style="color:var(--charcoal);opacity:.4;">Team member</div>
+            <div class="field-card__title" style="opacity:.4;">Role · Taolagnaro</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN -->
+  <section class="join-section">
+    <div class="container">
+      <div class="join-inner reveal">
+        <div>
+          <h2>Want to join the team?</h2>
+          <p>VIM volunteers work alongside the field team in Madagascar. We're also always open to board-level expertise and institutional partnerships.</p>
+        </div>
+        <div style="display:flex;gap:.8rem;flex-wrap:wrap;">
+          <a href="../projects/education/vim.html" class="btn btn-green">Volunteer with VIM</a>
+          <a href="../get-involved/partner.html" class="btn btn-outline-green">Become a partner</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Education for Madagascar</h3>
+        <p>Committed to UN SDG 4 — Quality Education for all children, from early childhood to economic independence.</p>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/educationformadagascar" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener">f</a>
+          <a href="https://www.instagram.com/educationformadagascar/" class="social-btn" aria-label="Instagram" target="_blank" rel="noopener">ig</a>
+          <a href="https://www.linkedin.com/company/educationformadagascar/" class="social-btn" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Who we are</h4>
+        <ul>
+          <li><a href="our-story.html">Our story</a></li>
+          <li><a href="team.html">Team &amp; board</a></li>
+          <li><a href="governance.html">Governance</a></li>
+          <li><a href="annual-reports.html">Annual reports</a></li>
+          <li><a href="partners.html">Our partners</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our work</h4>
+        <ul>
+          <li><a href="../projects/education/akka.html">AKKA Montessori</a></li>
+          <li><a href="../projects/education/vim.html">VIM Volunteering</a></li>
+          <li><a href="../projects/health/tomady.html">TOMADY Health</a></li>
+          <li><a href="../projects/environment/silva.html">SILVA Environment</a></li>
+          <li><a href="../projects/index.html">All 13 projects →</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@educationformadagascar.org">contact@educationformadagascar.org</a></li>
+          <li style="font-size:.85rem;margin-top:.3rem;">23 Milner Drive, Cobham<br>KT11 2EZ, United Kingdom</li>
+          <li style="margin-top:.8rem;font-size:.75rem;opacity:.55;line-height:1.8;">UK Charity #1167115<br>FR SIREN 85242793900016<br>MG NIF 4002796057</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Education for Madagascar. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a><a href="#">Legal Notice</a><a href="#">Safeguarding</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/global.js"></script>
+</body>
+</html>
