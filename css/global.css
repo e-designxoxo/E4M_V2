@@ -39,9 +39,9 @@
   --nav-h: 92px;
   --topbar-h: 40px;
   --max-w: 1160px;
-  --r: 4px;
+  --r: 10px;
   --r-sm: 6px;
-  --r-lg: 10px;
+  --r-lg: 16px;
   --r-pill: 100px;
   --ease: .22s ease;
   --ease2: .45s cubic-bezier(.22,1,.36,1);
