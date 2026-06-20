@@ -14,31 +14,58 @@
       --line: rgba(21,32,22,.1);
     }
 
-    /* ── HERO ── */
+    /* ── HERO — full-bleed photo, distinct from every other page's green hero ── */
     .story-hero {
-      background: linear-gradient(135deg, #143f00 0%, #195301 55%, #0f3d00 100%);
-      color: var(--cream);
-      padding: 5.5rem 0 5rem;
       position: relative;
+      min-height: 78vh;
+      display: flex;
+      align-items: flex-end;
       overflow: hidden;
+      background: linear-gradient(135deg, #2a3a1f 0%, #1c2a14 100%);
     }
-    .story-hero::before {
+    .story-hero__photo {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .story-hero__photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .story-hero__photo-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        linear-gradient(135deg, rgba(25,83,1,.55), rgba(0,108,101,.5)),
+        linear-gradient(135deg, #2a3a1f 0%, #1c2a14 100%);
+    }
+    .story-hero__photo:has(img) .story-hero__photo-placeholder { display: none; }
+    .story-hero__photo-placeholder span {
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(238,235,217,.4);
+    }
+    /* gradient scrim for text legibility over any photo */
+    .story-hero::after {
       content: "";
       position: absolute;
       inset: 0;
-      background-image: radial-gradient(rgba(238,235,217,.06) 1px, transparent 1px);
-      background-size: 22px 22px;
-      mask-image: radial-gradient(ellipse 80% 70% at 40% 50%, #000 40%, transparent 95%);
-      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 40% 50%, #000 40%, transparent 95%);
+      z-index: 1;
+      background: linear-gradient(0deg, rgba(10,20,5,.88) 0%, rgba(10,20,5,.5) 38%, rgba(10,20,5,.05) 70%);
       pointer-events: none;
     }
     .story-hero__inner {
       position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
+      z-index: 2;
+      width: 100%;
+      padding: 4rem 0 3.5rem;
     }
     .story-hero__kicker {
       display: inline-flex;
@@ -48,51 +75,93 @@
       font-weight: 600;
       letter-spacing: .24em;
       text-transform: uppercase;
-      color: rgba(238,235,217,.68);
-      margin-bottom: 1.5rem;
+      color: rgba(238,235,217,.75);
+      margin-bottom: 1.4rem;
     }
-    .story-hero__kicker::before { content:""; width:26px; height:1px; background:rgba(238,235,217,.4); }
+    .story-hero__kicker::before { content:""; width:26px; height:1px; background:rgba(238,235,217,.5); }
     .story-hero__title {
       font-family: var(--font-display);
-      font-size: clamp(2.4rem, 4.6vw, 4rem);
-      line-height: 1.06;
+      font-size: clamp(2.6rem, 5.6vw, 4.6rem);
+      line-height: 1.05;
       letter-spacing: -.015em;
-      margin-bottom: 1.6rem;
+      color: var(--cream);
+      max-width: 760px;
+      margin-bottom: 1.5rem;
     }
     .story-hero__title em { font-style: italic; color: #cfe0a3; }
     .story-hero__lead {
-      font-size: 1.06rem;
+      font-size: 1.08rem;
       line-height: 1.75;
-      color: rgba(238,235,217,.84);
-      max-width: 520px;
+      color: rgba(238,235,217,.88);
+      max-width: 540px;
     }
-    .story-hero__stats {
+
+    /* ── STATS STRIP — moved out of the hero, slim band beneath ── */
+    .stats-strip {
+      background: var(--green);
+      border-bottom: 1px solid rgba(238,235,217,.12);
+    }
+    .stats-strip__inner {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
+      grid-template-columns: repeat(4, 1fr);
     }
-    .story-stat {
-      background: rgba(238,235,217,.07);
-      border: 1px solid rgba(238,235,217,.14);
-      border-radius: 10px;
-      padding: 1.4rem 1.2rem;
-      backdrop-filter: blur(10px);
+    .stats-strip__item {
+      padding: 1.6rem 1.5rem;
+      text-align: center;
+      border-right: 1px solid rgba(238,235,217,.14);
     }
-    .story-stat__num {
+    .stats-strip__item:last-child { border-right: none; }
+    .stats-strip__num {
       font-family: var(--font-display);
-      font-size: 2.8rem;
+      font-size: 2.1rem;
       line-height: 1;
       color: var(--cream);
       display: block;
+      margin-bottom: .3rem;
     }
-    .story-stat__label {
-      font-size: .75rem;
+    .stats-strip__label {
+      font-size: .68rem;
       font-weight: 600;
-      letter-spacing: .1em;
+      letter-spacing: .08em;
       text-transform: uppercase;
-      color: rgba(238,235,217,.62);
-      margin-top: .4rem;
-      display: block;
+      color: rgba(238,235,217,.65);
+    }
+
+    /* ── HOW THE IDEA CAME TO LIFE — narrative section, no person spotlight ── */
+    .origin-section {
+      padding: 6.5rem 0;
+      background: var(--white);
+    }
+    .origin-inner {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .origin-text__body {
+      font-size: 1.04rem;
+      line-height: 1.85;
+      color: var(--charcoal);
+      margin-top: 1.4rem;
+    }
+    .origin-text__body p + p { margin-top: 1.1rem; }
+    .origin-photo {
+      position: relative;
+      aspect-ratio: 4/5;
+      border-radius: 14px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(25,83,1,.08), rgba(0,108,101,.12));
+    }
+    .origin-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .origin-photo__placeholder {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: .6rem;
+    }
+    .origin-photo:has(img) .origin-photo__placeholder { display: none; }
+    .origin-photo__placeholder span {
+      font-size: .65rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(25,83,1,.4);
     }
 
     /* ── TIMELINE ── */
@@ -233,58 +302,99 @@
 
     /* ── PATRON ── */
     .patron-section {
-      padding: 5rem 0;
+      padding: 5.5rem 0;
       background: var(--cream);
       border-top: 1px solid var(--silver);
     }
+    .patron-section__eyebrow-row {
+      text-align: center;
+      max-width: 580px;
+      margin: 0 auto 3.5rem;
+    }
+    .patron-section__kicker {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: .8rem;
+      display: block;
+    }
+    .patron-section__sub {
+      font-size: .92rem;
+      color: var(--charcoal);
+      opacity: .8;
+      line-height: 1.65;
+    }
     .patron-inner {
-      display: flex;
-      gap: 3rem;
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 4rem;
       align-items: center;
-      max-width: 860px;
+      max-width: 980px;
+      margin: 0 auto;
     }
     .patron-photo {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 4/5;
+      border-radius: 14px;
       overflow: hidden;
       flex-shrink: 0;
-      background: linear-gradient(135deg, rgba(25,83,1,.1), rgba(0,108,101,.15));
+      background: linear-gradient(135deg, rgba(25,83,1,.1), rgba(0,108,101,.14));
       position: relative;
+      box-shadow: 0 24px 60px rgba(21,32,22,.12);
+      justify-self: end;
     }
-    .patron-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .patron-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .patron-photo__placeholder {
       position: absolute;
       inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
+      gap: .6rem;
     }
     .patron-photo:has(img) .patron-photo__placeholder { display: none; }
+    .patron-photo__placeholder svg {
+      width: 56px; height: 56px;
+      color: rgba(25,83,1,.25);
+    }
     .patron-photo__placeholder span {
-      font-size: 2rem;
-      opacity: .2;
+      font-size: .65rem; font-weight: 600;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(25,83,1,.4);
     }
     .patron-text__eyebrow {
-      font-size: .68rem;
+      font-size: .7rem;
       font-weight: 700;
-      letter-spacing: .18em;
+      letter-spacing: .2em;
       text-transform: uppercase;
       color: var(--teal);
-      margin-bottom: .6rem;
+      margin-bottom: .8rem;
       display: block;
     }
     .patron-text h2 {
       font-family: var(--font-display);
-      font-size: 1.5rem;
+      font-size: clamp(2rem, 3.4vw, 2.6rem);
       color: var(--green);
-      margin-bottom: .5rem;
+      line-height: 1.1;
+      margin-bottom: .4rem;
+    }
+    .patron-text__role {
+      font-size: .95rem;
+      color: var(--charcoal);
+      opacity: .7;
+      margin-bottom: 1.6rem;
+      line-height: 1.5;
     }
     .patron-text p {
-      font-size: .96rem;
-      line-height: 1.7;
+      font-size: 1rem;
+      line-height: 1.82;
       color: var(--charcoal);
     }
+    .patron-text p + p { margin-top: 1.1rem; }
 
     /* ── VALUES ── */
     .values-section {
@@ -361,13 +471,18 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      .story-hero__inner,
       .mission-inner { grid-template-columns: 1fr; gap: 2.5rem; }
       .values-grid { grid-template-columns: 1fr; }
+      .origin-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .origin-photo { max-width: 420px; margin: 0 auto; aspect-ratio: 4/5; }
+      .stats-strip__inner { grid-template-columns: repeat(2, 1fr); }
+      .stats-strip__item:nth-child(2) { border-right: none; }
+      .patron-inner { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
+      .patron-photo { justify-self: center; max-width: 280px; }
+      .patron-text p { text-align: left; }
     }
     @media (max-width: 640px) {
-      .story-hero__stats { grid-template-columns: 1fr 1fr; }
-      .patron-inner { flex-direction: column; }
+      .story-hero { min-height: 64vh; }
       .timeline::before { left: 60px; }
       .timeline__item { grid-template-columns: 60px 1fr; gap: 1rem; }
     }
@@ -534,31 +649,62 @@
 </nav>
 
 <main>
-  <!-- HERO -->
+  <!-- HERO — full-bleed photo, breaks from the green hero used on every other page -->
   <section class="story-hero" aria-labelledby="story-title">
+    <div class="story-hero__photo">
+      <!-- Drop in a real field photo: <img src="../images/story-hero.jpg" alt="Education for Madagascar in the field"/> -->
+      <div class="story-hero__photo-placeholder"><span>Hero photo coming soon — wide field shot, people-led</span></div>
+    </div>
     <div class="container">
       <div class="story-hero__inner">
-        <div>
-          <div class="story-hero__kicker">Who we are · Our story</div>
-          <h1 class="story-hero__title" id="story-title">Built on one belief.<br/><em>Education changes everything.</em></h1>
-          <p class="story-hero__lead">Founded by Malagasy educators and international partners, Education for Madagascar has grown from a single classroom in Antananarivo into a four-country NGO running 13 programmes across education, health and the environment.</p>
+        <div class="story-hero__kicker">Who we are · Our story</div>
+        <h1 class="story-hero__title" id="story-title">Built on one belief.<br/><em>Education changes everything.</em></h1>
+        <p class="story-hero__lead">Founded by Malagasy educators and international partners, Education for Madagascar has grown from a single classroom in Antananarivo into a four-country NGO running 13 programmes across education, health and the environment.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS STRIP — moved out of the hero so the photo stays uncluttered -->
+  <section class="stats-strip" aria-label="Education for Madagascar in numbers">
+    <div class="container">
+      <div class="stats-strip__inner">
+        <div class="stats-strip__item">
+          <span class="stats-strip__num">2016</span>
+          <span class="stats-strip__label">Founded (UK entity)</span>
         </div>
-        <div class="story-hero__stats">
-          <div class="story-stat">
-            <span class="story-stat__num">2016</span>
-            <span class="story-stat__label">Year of founding<br>(UK entity)</span>
+        <div class="stats-strip__item">
+          <span class="stats-strip__num">4</span>
+          <span class="stats-strip__label">Countries registered in</span>
+        </div>
+        <div class="stats-strip__item">
+          <span class="stats-strip__num">13</span>
+          <span class="stats-strip__label">Active programmes</span>
+        </div>
+        <div class="stats-strip__item">
+          <span class="stats-strip__num">756</span>
+          <span class="stats-strip__label">Children reached</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW THE IDEA CAME TO LIFE — quiet editorial narrative, no founder spotlight -->
+  <section class="origin-section" aria-labelledby="origin-title">
+    <div class="container">
+      <div class="origin-inner">
+        <div class="origin-text reveal">
+          <span class="eyebrow">How the idea came to life</span>
+          <h2 class="section-title" id="origin-title">From a conviction, a school.<br/>From a school, an organisation.</h2>
+          <div class="origin-text__body">
+            <p>Education for Madagascar began with a simple observation, repeated across every village its founders had visited: where children could learn, families found a way forward. Where they could not, every other intervention — food, water, healthcare — would eventually be undone by the next generation's lack of opportunity.</p>
+            <p>What started in 2016 as a single Montessori classroom in Antananarivo became, over eight years, a four-country NGO running 13 programmes across education, health, and the environment. The original conviction has not changed. Only the scale.</p>
           </div>
-          <div class="story-stat">
-            <span class="story-stat__num">4</span>
-            <span class="story-stat__label">Countries registered in</span>
-          </div>
-          <div class="story-stat">
-            <span class="story-stat__num">13</span>
-            <span class="story-stat__label">Active programmes</span>
-          </div>
-          <div class="story-stat">
-            <span class="story-stat__num">756</span>
-            <span class="story-stat__label">Children reached</span>
+        </div>
+        <div class="origin-photo reveal d1">
+          <!-- Drop in a field photo: <img src="../images/origin-classroom.jpg" alt="Children at AKKA Montessori"/> -->
+          <div class="origin-photo__placeholder">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="opacity:.3;"><rect x="3" y="6" width="18" height="13" rx="1"/><path d="M3 10h18M8 14h3"/></svg>
+            <span>Photo coming soon</span>
           </div>
         </div>
       </div>
@@ -640,15 +786,24 @@
   <!-- PATRON -->
   <section class="patron-section" aria-labelledby="patron-title">
     <div class="container">
+      <div class="patron-section__eyebrow-row reveal">
+        <span class="patron-section__kicker">External support</span>
+        <p class="patron-section__sub">Education for Madagascar is governed by elected boards across four countries. Its public visibility and credibility are also carried by a Patron — a distinct role that lends external recognition to the work, without involvement in day-to-day governance.</p>
+      </div>
       <div class="patron-inner">
-        <div class="patron-photo">
+        <div class="patron-photo reveal">
           <!-- Replace with: <img src="../images/patron-gregoire-mulliez.jpg" alt="Grégoire Mulliez"/> -->
-          <div class="patron-photo__placeholder"><span>👤</span></div>
+          <div class="patron-photo__placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            <span>Photo coming soon</span>
+          </div>
         </div>
-        <div class="patron-text reveal">
-          <span class="patron-text__eyebrow">Our patron since 2018</span>
+        <div class="patron-text reveal d1">
+          <span class="patron-text__eyebrow">Our Patron · Since 2018</span>
           <h2 id="patron-title">Grégoire Mulliez</h2>
-          <p>Grégoire Mulliez has been the patron of Education for Madagascar since 2018 — on behalf of a long-standing friendship, and to the wellbeing of humanity. His support has been a steady and generous anchor for the organisation's growth.</p>
+          <p class="patron-text__role">Patron of Education for Madagascar</p>
+          <p>Grégoire Mulliez has been Patron of Education for Madagascar since 2018 — a role he accepted on behalf of a long-standing friendship, and in service of the wellbeing of the children and communities the organisation supports.</p>
+          <p>His patronage has been a steady and generous anchor for the organisation's growth across four countries, lending visibility and institutional credibility to the mission. The Patron role is, by design, distinct from the elected boards: it carries no executive or governance authority, and is held independently of the day-to-day running of the four legal entities.</p>
         </div>
       </div>
     </div>
@@ -691,7 +846,7 @@
         <!-- Replace with: <img src="../images/orgchart-2025.jpg" alt="Education for Madagascar organisation chart 2025"/> -->
         <div class="orgchart-frame__placeholder">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="opacity:.3"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="8.5" y="14" width="7" height="7" rx="1"/><line x1="6.5" y1="10" x2="6.5" y2="14"/><line x1="17.5" y1="10" x2="17.5" y2="14"/><line x1="6.5" y1="14" x2="12" y2="14"/><line x1="17.5" y1="14" x2="12" y2="14"/></svg>
-          <span>Organigramme 2026 — to be inserted</span>
+          <span>Organigramme 2025 — to be inserted</span>
         </div>
       </div>
     </div>
