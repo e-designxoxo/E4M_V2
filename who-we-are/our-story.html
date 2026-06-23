@@ -408,11 +408,18 @@
       gap: 1.4rem;
     }
     .value-card {
-      padding: 2rem 1.8rem;
+      padding: 2rem 1.8rem 2.2rem;
       background: var(--white);
       border: 1px solid var(--line);
       border-radius: 12px;
       box-shadow: 0 1px 3px rgba(21,32,22,.04);
+    }
+    .value-card__icon {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 1.2rem;
+      color: var(--green);
+      opacity: .18;
     }
     .value-card__num {
       font-family: var(--font-display);
@@ -432,6 +439,95 @@
       font-size: .9rem;
       line-height: 1.68;
       color: var(--charcoal);
+    }
+
+    /* ── PATRON — full-width banner ── */
+    .patron-section {
+      padding: 0;
+      background: var(--cream);
+      border-top: 1px solid var(--silver);
+      border-bottom: 1px solid var(--silver);
+      overflow: hidden;
+    }
+    .patron-banner {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      min-height: 420px;
+    }
+    .patron-banner__photo {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(25,83,1,.12), rgba(0,108,101,.15));
+    }
+    .patron-banner__photo img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      display: block;
+    }
+    .patron-banner__photo-placeholder {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: .8rem;
+    }
+    .patron-banner__photo:has(img) .patron-banner__photo-placeholder { display: none; }
+    .patron-banner__photo-placeholder svg { opacity: .15; }
+    .patron-banner__photo-placeholder span {
+      font-size: .62rem; font-weight: 600;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(25,83,1,.35);
+    }
+    .patron-banner__body {
+      padding: 4rem 4rem 4rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .patron-banner__kicker {
+      font-size: .68rem; font-weight: 700;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: .7rem;
+    }
+    .patron-banner__kicker::before {
+      content: ""; width: 24px; height: 1.5px;
+      background: var(--teal); flex-shrink: 0;
+    }
+    .patron-banner__name {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+      color: var(--green);
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+    .patron-banner__quote {
+      font-family: var(--font-display);
+      font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+      font-style: italic;
+      color: var(--charcoal);
+      line-height: 1.55;
+      max-width: 480px;
+      border-left: 2px solid var(--teal);
+      padding-left: 1.2rem;
+      margin-top: .5rem;
+    }
+    .patron-banner__since {
+      margin-top: 2rem;
+      font-size: .8rem;
+      color: var(--charcoal);
+      opacity: .6;
+      letter-spacing: .06em;
+    }
+
+    @media (max-width: 860px) {
+      .patron-banner {
+        grid-template-columns: 1fr;
+      }
+      .patron-banner__photo {
+        height: 280px;
+      }
+      .patron-banner__body {
+        padding: 2.5rem 2rem;
+      }
     }
 
     /* ── ORG CHART ── */
@@ -785,26 +881,19 @@
 
   <!-- PATRON -->
   <section class="patron-section" aria-labelledby="patron-title">
-    <div class="container">
-      <div class="patron-section__eyebrow-row reveal">
-        <span class="patron-section__kicker">External support</span>
-        <p class="patron-section__sub">Education for Madagascar is governed by elected boards across four countries. Its public visibility and credibility are also carried by a Patron — a distinct role that lends external recognition to the work, without involvement in day-to-day governance.</p>
+    <div class="patron-banner">
+      <div class="patron-banner__photo reveal">
+        <!-- Replace with: <img src="../images/patron-gregoire-mulliez.jpg" alt="Grégoire Mulliez"/> -->
+        <div class="patron-banner__photo-placeholder">
+          <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          <span>Photo to insert</span>
+        </div>
       </div>
-      <div class="patron-inner">
-        <div class="patron-photo reveal">
-          <!-- Replace with: <img src="../images/patron-gregoire-mulliez.jpg" alt="Grégoire Mulliez"/> -->
-          <div class="patron-photo__placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-            <span>Photo coming soon</span>
-          </div>
-        </div>
-        <div class="patron-text reveal d1">
-          <span class="patron-text__eyebrow">Our Patron · Since 2018</span>
-          <h2 id="patron-title">Grégoire Mulliez</h2>
-          <p class="patron-text__role">Patron of Education for Madagascar</p>
-          <p>Grégoire Mulliez has been Patron of Education for Madagascar since 2018 — a role he accepted on behalf of a long-standing friendship, and in service of the wellbeing of the children and communities the organisation supports.</p>
-          <p>His patronage has been a steady and generous anchor for the organisation's growth across four countries, lending visibility and institutional credibility to the mission. The Patron role is, by design, distinct from the elected boards: it carries no executive or governance authority, and is held independently of the day-to-day running of the four legal entities.</p>
-        </div>
+      <div class="patron-banner__body reveal d1">
+        <div class="patron-banner__kicker">Patron of Education for Madagascar</div>
+        <h2 class="patron-banner__name" id="patron-title">Grégoire<br/>Mulliez</h2>
+        <p class="patron-banner__quote">"On behalf of a long-standing friendship, and to the wellbeing of humanity."</p>
+        <p class="patron-banner__since">Patron since 2018</p>
       </div>
     </div>
   </section>
@@ -818,16 +907,37 @@
       </div>
       <div class="values-grid">
         <div class="value-card reveal">
+          <!-- Quality — medal / star -->
+          <svg class="value-card__icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="24" r="16" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M32 14l2.47 5.01L40 20.27l-4 3.9.94 5.5L32 27l-4.94 2.6.94-5.5-4-3.9 5.53-.8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M22 37l-6 18 16-8 16 8-6-18" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+          </svg>
           <div class="value-card__num">01</div>
           <h3>Quality</h3>
           <p>We believe in the Montessori principle: a child who loves to learn will keep learning. Every programme is designed around genuine educational quality, not just attendance numbers.</p>
         </div>
         <div class="value-card reveal d1">
+          <!-- Ethics — scales of justice -->
+          <svg class="value-card__icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="32" y1="8" x2="32" y2="56" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="16" y1="16" x2="48" y2="16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M12 16l-8 16h16l-8-16z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M52 16l-8 16h16l-8-16z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+            <line x1="22" y1="56" x2="42" y2="56" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
           <div class="value-card__num">02</div>
           <h3>Ethics</h3>
           <p>We work with Malagasy communities, not for them. Local leadership, transparent governance and honest reporting are non-negotiable — to our beneficiaries, our partners and our donors.</p>
         </div>
         <div class="value-card reveal d2">
+          <!-- Sharing — two arrows cycling -->
+          <svg class="value-card__icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 22a20 20 0 0 1 38 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M8 18l4 4 4-4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M52 42a20 20 0 0 1-38-4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M56 46l-4-4-4 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
           <div class="value-card__num">03</div>
           <h3>Sharing</h3>
           <p>Knowledge, resources and skills flow in both directions. Volunteers learn from Madagascar; Madagascar gains from the world. That exchange is the foundation of lasting change.</p>
@@ -848,6 +958,12 @@
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="opacity:.3"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="8.5" y="14" width="7" height="7" rx="1"/><line x1="6.5" y1="10" x2="6.5" y2="14"/><line x1="17.5" y1="10" x2="17.5" y2="14"/><line x1="6.5" y1="14" x2="12" y2="14"/><line x1="17.5" y1="14" x2="12" y2="14"/></svg>
           <span>Organigramme 2025 — to be inserted</span>
         </div>
+      </div>
+      <div style="margin-top:2rem;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;">
+        <a href="team.html" class="btn btn-green" style="display:inline-flex;align-items:center;gap:.5rem;">
+          Meet the full team &amp; board →
+        </a>
+        <span style="font-size:.88rem;color:var(--charcoal);opacity:.65;">12 board members across four countries</span>
       </div>
     </div>
   </section>
