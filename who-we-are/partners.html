@@ -1,205 +1,641 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our Partners — Education for Madagascar</title>
-  <meta name="description" content="Education for Madagascar works alongside a network of institutional, educational and corporate partners — from the UN to Montessori networks, local NGOs and international foundations."/>
-  <link rel="stylesheet" href="../css/global.css"/>
+  <meta name="description" content="The institutions, companies and associations that stand alongside Education for Madagascar across 13 field programmes." />
   <style>
-    :root { 
-      --ink:#152016; 
-      --muted:#687066; 
-      --line:rgba(21,32,22,.1); 
-      --green:        #195301;
-      --cream:        #eeebd9;
-      --teal:         #006C65;
-      --charcoal:     #535353;
-      --silver:       #D5D5D5;
-      --white:        #ffffff;
-    /* Gold — Donate button hover */
-      --gold-bg:      #EFBF04;
-      --gold-text:    #856A00;
+  :root {
+    --green:#195301; --cream:#EEEBD9; --teal:#006C65; --charcoal:#535353;
+    --silver:#D5D5D5; --white:#ffffff; --gold-bg:#EFBF04; --gold-text:#856A00;
+    --font-display:"Charter",Georgia,serif; --font-body:"Avenir Next",system-ui,sans-serif;
+    --nav-h:92px; --topbar-h:40px; --max-w:1160px;
+    --r:10px; --r-sm:6px; --r-lg:16px; --r-pill:100px;
+    --ease:.22s ease; --ease2:.45s cubic-bezier(.22,1,.36,1);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+  body{font-family:var(--font-body);background:var(--white);color:var(--charcoal);line-height:1.65}
+  img{display:block;max-width:100%}
+  a{text-decoration:none;color:inherit}
+  ul{list-style:none}
+  button{font-family:var(--font-body);cursor:pointer;border:none;background:none}
+  .container{max-width:var(--max-w);margin:0 auto;padding:0 2rem}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.75rem;border-radius:var(--r-pill);font-weight:500;font-size:.95rem;transition:background var(--ease),color var(--ease),transform var(--ease)}
+  .btn:hover{transform:translateY(-1px)}
+
+  /* ── TOP BAR ── */
+  .top-bar{background:var(--green);color:var(--cream);height:var(--topbar-h);font-size:.72rem}
+  .top-bar .container{height:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+  .top-bar__info{display:flex;align-items:center;gap:1.25rem;opacity:.8;flex-wrap:wrap}
+  .top-bar__info span{white-space:nowrap}
+  .top-bar__dot{opacity:.3}
+  .lang-switch{display:flex;gap:.2rem;flex-shrink:0}
+  .lang-switch__btn{padding:.22rem .6rem;border-radius:var(--r-pill);color:var(--cream);font-size:.72rem;font-weight:500;opacity:.65;transition:opacity var(--ease),background var(--ease)}
+  .lang-switch__btn:hover{opacity:1}
+  .lang-switch__btn.is-active{background:rgba(255,255,255,.18);opacity:1}
+
+  /* ── NAVBAR ── */
+  .navbar{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(213,213,213,.6);height:var(--nav-h);transition:box-shadow var(--ease)}
+  .navbar.is-scrolled{box-shadow:0 1px 24px rgba(0,0,0,.07)}
+  .navbar .container{height:100%;display:flex;align-items:center}
+  .navbar__logo{display:flex;align-items:center;gap:.65rem;margin-right:2rem;flex-shrink:0}
+  .logo-circle{width:44px;height:44px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;color:var(--cream);font-size:.68rem;font-weight:700;letter-spacing:.06em;flex-shrink:0}
+  .logo-text{font-family:var(--font-display);font-size:.85rem;font-weight:700;color:var(--green);line-height:1.2;text-transform:uppercase;letter-spacing:.04em}
+  .nav__list{display:flex;align-items:center;height:100%;flex:1}
+  .nav__item{position:relative;height:100%;display:flex;align-items:center}
+  .nav__link{display:flex;align-items:center;gap:.3rem;padding:0 .9rem;height:100%;font-size:.875rem;font-weight:500;color:var(--charcoal);white-space:nowrap;border-bottom:2px solid transparent;transition:color var(--ease),border-color var(--ease);user-select:none}
+  .nav__link:hover,.nav__item.is-open .nav__link{color:var(--green)}
+  .nav__link.is-active{color:var(--green);border-bottom-color:var(--green)}
+  .nav__chevron{width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-1px);transition:transform var(--ease);flex-shrink:0}
+  .nav__item.is-open .nav__chevron{transform:rotate(-135deg) translateY(2px)}
+  .dropdown{visibility:hidden;opacity:0;pointer-events:none;transform:translateY(6px);transition:opacity var(--ease),transform var(--ease),visibility 0s var(--ease);position:absolute;top:calc(var(--nav-h) - 1px);left:0;min-width:240px;background:rgba(255,255,255,.97);backdrop-filter:blur(20px);border:1px solid var(--silver);border-top:none;border-radius:0 0 var(--r) var(--r);box-shadow:0 10px 32px rgba(0,0,0,.09);padding:.5rem 0}
+  .nav__item.is-open .dropdown{visibility:visible;opacity:1;pointer-events:auto;transform:translateY(0)}
+  .dropdown__link{display:block;padding:.6rem 1.2rem;font-size:.875rem;color:var(--charcoal);transition:background var(--ease),color var(--ease)}
+  .dropdown__link:hover{background:var(--cream);color:var(--green)}
+  .dropdown__link.is-active{color:var(--green);font-weight:600}
+  .dropdown__sub{display:block;font-size:.75rem;opacity:.55;margin-top:.1rem}
+  .dropdown__separator{height:1px;background:var(--silver);margin:.4rem 1.2rem;opacity:.5}
+  .dropdown--mega{visibility:hidden;opacity:0;pointer-events:none;transform:translateY(6px);transition:opacity var(--ease),transform var(--ease),visibility 0s var(--ease);position:absolute;top:calc(var(--nav-h) - 1px);left:-60px;width:620px;background:rgba(255,255,255,.97);backdrop-filter:blur(20px);border:1px solid var(--silver);border-top:none;border-radius:0 0 var(--r) var(--r);box-shadow:0 10px 32px rgba(0,0,0,.09);display:grid;grid-template-columns:1fr 1fr 180px}
+  .nav__item.is-open .dropdown--mega{visibility:visible;opacity:1;pointer-events:auto;transform:translateY(0)}
+  .mega__col{padding:1.2rem 1.1rem;border-right:1px solid rgba(213,213,213,.5)}
+  .mega__col:last-child{border-right:none;background:#f8f7f2;border-radius:0 0 var(--r) 0}
+  .mega__heading{font-size:.67rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;margin-bottom:.6rem;padding-bottom:.5rem;border-bottom:1px solid var(--silver)}
+  .mega__heading--edu{color:var(--green)}.mega__heading--health{color:#b83030}.mega__heading--env{color:var(--teal)}
+  .mega__link{display:flex;align-items:center;gap:.5rem;padding:.4rem 0;font-size:.83rem;color:var(--charcoal);transition:color var(--ease)}
+  .mega__link:hover{color:var(--green)}
+  .badge{font-size:.6rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.1rem .4rem;border-radius:var(--r-pill);flex-shrink:0}
+  .badge--age{background:#efefef;color:var(--charcoal)}.badge--new{background:#edf7e8;color:var(--green)}.badge--int{background:#e6f4f3;color:var(--teal)}
+  .mega__summary{font-size:.8rem;line-height:1.6;margin-bottom:1rem}
+  .mega__all-link{display:inline-flex;align-items:center;gap:.3rem;font-size:.82rem;font-weight:600;color:var(--green);transition:gap var(--ease)}
+  .mega__all-link:hover{gap:.55rem}
+  .mega__col-gap{margin-top:.9rem}
+  .nav__actions{display:flex;align-items:center;gap:.5rem;margin-left:auto;padding-left:1rem;flex-shrink:0}
+  .btn-shop{padding:.42rem 1rem;font-size:.82rem;font-weight:500;color:var(--teal);border:1.5px solid var(--teal);border-radius:var(--r-pill);transition:background var(--ease),color var(--ease)}
+  .btn-shop:hover{background:var(--teal);color:var(--white)}
+  .btn-donate{padding:.42rem 1.1rem;font-size:.82rem;font-weight:600;background:var(--green);color:var(--cream);border-radius:var(--r-pill);transition:background var(--ease),color var(--ease),transform var(--ease)}
+  .btn-donate:hover{background:var(--gold-bg);color:var(--gold-text);transform:translateY(-1px)}
+  .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;padding:.4rem;margin-left:auto;border-radius:var(--r-sm)}
+  .hamburger__bar{width:100%;height:2px;background:var(--green);border-radius:2px;transition:transform var(--ease),opacity var(--ease)}
+  .hamburger.is-open .hamburger__bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .hamburger.is-open .hamburger__bar:nth-child(2){opacity:0}
+  .hamburger.is-open .hamburger__bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  /* ── MOBILE DRAWER ── */
+  .mobile-drawer{display:none;position:fixed;top:calc(var(--topbar-h) + var(--nav-h));left:0;right:0;bottom:0;background:var(--white);overflow-y:auto;z-index:190;padding:1rem 0 2rem}
+  .mobile-drawer.is-open{display:block}
+  .mob-section__toggle{width:100%;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;font-size:.95rem;font-weight:500;color:var(--charcoal);border-bottom:1px solid var(--silver);text-align:left}
+  .mob-section__toggle:hover{background:var(--cream)}
+  .mob-section__content{display:none;padding:.5rem 0;background:#fafaf7;border-bottom:1px solid var(--silver)}
+  .mob-section.is-open .mob-section__content{display:block}
+  .mob-subheading{font-size:.67rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--green);padding:.6rem 1.8rem .3rem}
+  .mob-subheading--health{color:#b83030}.mob-subheading--env{color:var(--teal)}
+  .mob-link{display:flex;align-items:center;justify-content:space-between;padding:.55rem 1.8rem;font-size:.875rem;color:var(--charcoal);transition:background var(--ease),color var(--ease)}
+  .mob-link:hover{background:var(--cream);color:var(--green)}
+  .mob-actions{display:flex;gap:.75rem;padding:1.2rem 1.5rem 0}
+  .mob-actions .btn-shop,.mob-actions .btn-donate{flex:1;text-align:center;font-size:.9rem;padding:.65rem 1rem}
+
+  /* ── BREADCRUMB ── */
+  .breadcrumb{border-bottom:1px solid rgba(0,0,0,.06);padding:.85rem 0}
+  .breadcrumb__list{display:flex;align-items:center;gap:.4rem;font-size:.78rem;font-weight:500;flex-wrap:wrap}
+  .breadcrumb__list a{color:var(--teal);transition:opacity var(--ease)}
+  .breadcrumb__list a:hover{opacity:.7}
+  .breadcrumb__sep{opacity:.35}
+  .breadcrumb__current{color:var(--charcoal);opacity:.65}
+
+  /* ── REVEAL ── */
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .55s var(--ease2),transform .55s var(--ease2)}
+  .reveal.is-visible{opacity:1;transform:none}
+  .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+  .d4{transition-delay:.32s}.d5{transition-delay:.40s}
+
+  /* ════════════════════════════════════════
+     HERO — photo bg, blurred, text over
+  ════════════════════════════════════════ */
+  .partners-hero {
+    position: relative;
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  /* Photo layer — blurred field photo behind text */
+  .partners-hero__bg {
+    position: absolute;
+    inset: 0;
+    /* Replace with real photo: background-image: url('../images/partners-event.jpg'); */
+    background-color: #1a2e10;
+    background-image:
+      linear-gradient(135deg, rgba(8,22,3,.82) 0%, rgba(25,83,1,.65) 55%, rgba(0,60,50,.75) 100%);
+    background-size: cover;
+    background-position: center;
+    filter: blur(0px); /* blur only applies once real photo is in */
+  }
+  /* When a real photo is used, add this class to .partners-hero__bg:
+     .has-photo { filter: blur(3px); transform: scale(1.04); } */
+
+  /* Dark gradient scrim so text is always readable */
+  .partners-hero__bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(8,22,3,.88) 40%, rgba(8,22,3,.4) 100%);
+  }
+
+  .partners-hero__content {
+    position: relative;
+    z-index: 1;
+    padding: 5.5rem 0 5rem;
+    width: 100%;
+  }
+
+  .partners-hero__eyebrow {
+    display: block;
+    font-size: .72rem;
+    font-weight: 500;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: rgba(238,235,217,.5);
+    margin-bottom: 1rem;
+  }
+  .partners-hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem,6vw,5rem);
+    color: var(--cream);
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    max-width: 620px;
+  }
+  .partners-hero h1 em { font-style: italic; }
+  .partners-hero__sub {
+    font-size: 1.05rem;
+    color: rgba(238,235,217,.7);
+    max-width: 500px;
+    line-height: 1.75;
+  }
+  .partners-hero__count {
+    display: inline-flex;
+    align-items: baseline;
+    gap: .6rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,.12);
+  }
+  .partners-hero__count strong {
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    color: var(--cream);
+    line-height: 1;
+  }
+  .partners-hero__count span {
+    font-size: .88rem;
+    color: rgba(238,235,217,.55);
+  }
+
+  /* ════════════════════════════════════════
+     LOGO WALL SECTIONS
+  ════════════════════════════════════════ */
+  .logo-wall {
+    padding: 5rem 0;
+    background: var(--white);
+  }
+  .logo-wall + .logo-wall {
+    border-top: 1px solid rgba(213,213,213,.4);
+    padding-top: 4.5rem;
+  }
+
+  /* Bold section heading replacing ruled label */
+  .cat-heading {
+    margin-bottom: 3rem;
+  }
+  .cat-heading__eyebrow {
+    display: block;
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: .5rem;
+  }
+  .cat-heading h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    color: var(--green);
+    line-height: 1.15;
+  }
+  .cat-heading h2 em { font-style: italic; }
+
+  /* Grid — larger cells */
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+
+  .logo-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 180px;
+    padding: 2rem 2rem;
+    border: 1px solid rgba(213,213,213,.4);
+    margin: -1px 0 0 -1px;
+    position: relative;
+    transition: background var(--ease);
+  }
+  .logo-cell:hover { background: var(--cream); z-index: 1; }
+
+  .logo-cell__img {
+    display: block;
+    max-width: 150px;
+    max-height: 70px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(1);
+    opacity: .55;
+    transition: filter .3s ease, opacity .3s ease;
+  }
+  .logo-cell:hover .logo-cell__img { filter: grayscale(0); opacity: 1; }
+
+  .logo-cell__name {
+    font-family: var(--font-display);
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    opacity: .35;
+    text-align: center;
+    line-height: 1.35;
+    transition: opacity var(--ease), color var(--ease);
+  }
+  .logo-cell:hover .logo-cell__name { opacity: 1; color: var(--green); }
+
+  .logo-cell__tooltip {
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1a1a1a;
+    color: #fff;
+    font-size: .68rem;
+    font-weight: 500;
+    padding: .3rem .65rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .15s ease;
+    z-index: 10;
+  }
+  .logo-cell__tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%; left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid transparent;
+    border-top-color: #1a1a1a;
+  }
+  .logo-cell:hover .logo-cell__tooltip { opacity: 1; }
+
+  /* ════════════════════════════════════════
+     EINSTEIN PULLQUOTE
+  ════════════════════════════════════════ */
     
-    }
+.pullquote-band {
+  background: var(--green);
+  padding: 5rem 0;
+}
+.pullquote-band__inner {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+.pullquote-band__photo {
+  width: 280px;
+  height: 320px;
+  object-fit: cover;
+  object-position: center top;
+  filter: grayscale(1);
+  display: block;
+}
+/* Placeholder when no photo yet */
+.pullquote-band__photo-slot {
+  width: 280px;
+  height: 320px;
+  background: rgba(255,255,255,.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(238,235,217,.3);
+}
+.pullquote-band blockquote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+  color: var(--cream);
+  line-height: 1.4;
+  margin-bottom: 2rem;
+}
+.pullquote-band__attr {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.pullquote-band__attr::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: rgba(238,235,217,.35);
+  flex-shrink: 0;
+}
+.pullquote-band__name {
+  font-size: .8rem;
+  font-weight: 600;
+  color: rgba(238,235,217,.9);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.pullquote-band__source {
+  font-size: .76rem;
+  color: rgba(238,235,217,.4);
+  margin-left: .35rem;
+}
+@media(max-width:700px) {
+  .pullquote-band__inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .pullquote-band__photo,
+  .pullquote-band__photo-slot { width: 100%; height: 260px; }
+}
+    
+  /* ════════════════════════════════════════
+     PHOTO BAND — 2 field photos before CTA
+  ════════════════════════════════════════ */
+  .photo-band {
+    padding: 5rem 0;
+    background: var(--cream);
+  }
+  .photo-band__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: end;
+  }
+  .photo-band__text {
+    padding-bottom: 1rem;
+  }
+  .photo-band__eyebrow {
+    display: block;
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: .8rem;
+  }
+  .photo-band__text h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem,3vw,2.2rem);
+    color: var(--green);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .photo-band__text h2 em { font-style: italic; }
+  .photo-band__text p {
+    font-size: 1rem;
+    color: var(--charcoal);
+    line-height: 1.75;
+    max-width: 420px;
+    opacity: .8;
+  }
 
-    .partners-hero {
-      background:linear-gradient(135deg,#143f00 0%,#195301 55%,#0f3d00 100%);
-      color:var(--cream); padding:5rem 0 4.5rem;
-      position:relative; overflow:hidden;
-    }
-    .partners-hero::before {
-      content:""; position:absolute; inset:0;
-      background-image:radial-gradient(rgba(238,235,217,.06) 1px,transparent 1px);
-      background-size:22px 22px;
-      mask-image:radial-gradient(ellipse 80% 70% at 40% 50%,#000 40%,transparent 95%);
-      -webkit-mask-image:radial-gradient(ellipse 80% 70% at 40% 50%,#000 40%,transparent 95%);
-      pointer-events:none;
-    }
-    .partners-hero__inner { position:relative; z-index:1; max-width:680px; }
-    .partners-hero__kicker {
-      display:inline-flex; align-items:center; gap:.7rem;
-      font-size:.72rem; font-weight:600; letter-spacing:.24em; text-transform:uppercase;
-      color:rgba(238,235,217,.68); margin-bottom:1.4rem;
-    }
-    .partners-hero__kicker::before { content:""; width:26px; height:1px; background:rgba(238,235,217,.4); }
-    .partners-hero__title {
-      font-family:var(--font-display);
-      font-size:clamp(2.2rem,4vw,3.5rem);
-      line-height:1.08; letter-spacing:-.015em; margin-bottom:1.4rem;
-    }
-    .partners-hero__title em { font-style:italic; color:#cfe0a3; }
-    .partners-hero__lead { font-size:1.04rem; line-height:1.72; color:rgba(238,235,217,.82); }
+  /* Photo slots — drop real images in */
+  .photo-slot {
+    position: relative;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    background: #c5cbb8;
+  }
+  .photo-slot--tall { aspect-ratio: 4/5; }
+  .photo-slot--wide { aspect-ratio: 16/10; }
 
-    /* ── PARTNER CATEGORIES ── */
-    .partners-section { padding:5.5rem 0; }
-    .partners-section:nth-child(odd) { background:var(--surface-bg); }
-    .partners-section:nth-child(even) { background:var(--surface-raised); }
-    .partners-section__head { max-width:640px; margin-bottom:3rem; }
+  .photo-slot img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 
-    /* ── PARTNER CARDS ── */
-    .partner-grid {
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:1.25rem;
-    }
-    .partner-card {
-      display:flex; flex-direction:column;
-      background:var(--white);
-      border:1px solid var(--line);
-      border-radius:12px; overflow:hidden;
-      text-decoration:none; color:inherit;
-      transition:transform var(--ease), box-shadow var(--ease), border-color var(--ease);
-    }
-    .partner-card:hover {
-      transform:translateY(-3px);
-      box-shadow:0 10px 28px rgba(21,32,22,.1);
-      border-color:rgba(25,83,1,.2);
-    }
-    .partner-card__logo {
-      height:110px;
-      display:flex; align-items:center; justify-content:center;
-      padding:1.5rem;
-      background:var(--surface-raised);
-      border-bottom:1px solid var(--line);
-    }
-    .partner-card__logo img {
-      max-width:100%; max-height:60px;
-      object-fit:contain; display:block;
-      filter:grayscale(20%);
-      transition:filter var(--ease);
-    }
-    .partner-card:hover .partner-card__logo img { filter:grayscale(0%); }
-    .partner-card__logo-placeholder {
-      width:60px; height:60px;
-      border-radius:8px;
-      background:linear-gradient(135deg,rgba(25,83,1,.08),rgba(0,108,101,.1));
-      display:flex; align-items:center; justify-content:center;
-      font-size:1.5rem; color:rgba(25,83,1,.3);
-      font-family:var(--font-display);
-    }
-    .partner-card__body { padding:1rem 1.2rem 1.3rem; flex:1; display:flex; flex-direction:column; }
-    .partner-card__name {
-      font-family:var(--font-display); font-size:1rem;
-      color:var(--green); margin-bottom:.25rem; line-height:1.25;
-    }
-    .partner-card__type {
-      font-size:.7rem; font-weight:600; letter-spacing:.1em;
-      text-transform:uppercase; color:var(--teal); margin-bottom:.5rem;
-    }
-    .partner-card__desc { font-size:.82rem; color:var(--muted); line-height:1.55; flex:1; }
+  /* Placeholder shown when no img present */
+  .photo-slot__placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    color: rgba(83,83,83,.4);
+    font-size: .75rem;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  .photo-slot:has(img) .photo-slot__placeholder { display: none; }
 
-    /* ── BECOME A PARTNER CTA ── */
-    .btn-cream-solid {
-      color: var(--green);
-    }
-      
-    .become-section {
-      padding:5rem 0;
-      background:var(--green);
-      color:var(--cream);
-    }
-    .become-inner {
-      display:flex; align-items:center; justify-content:space-between;
-      gap:2rem; flex-wrap:wrap;
-    }
-    .become-inner h2 {
-      font-family:var(--font-display);
-      font-size:clamp(1.6rem,3vw,2.4rem);
-      line-height:1.2; margin-bottom:.6rem;
-    }
-    .become-inner p { font-size:.97rem; color:rgba(238,235,217,.8); max-width:540px; }
+  .photo-slot__placeholder svg {
+    width: 32px; height: 32px;
+    opacity: .3;
+  }
 
-    @media (max-width:900px) { .partner-grid { grid-template-columns:repeat(2,1fr); } }
-    @media (max-width:560px) { .partner-grid { grid-template-columns:1fr 1fr; } }
+  /* Two-photo grid layout: left = tall portrait, right = stacked */
+  .photo-band__photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 1rem;
+    height: 480px;
+  }
+  .photo-band__photos .photo-slot:nth-child(1) {
+    grid-row: 1;
+    height: 100%;
+  }
+  .photo-band__photos .photo-slot:nth-child(2) {
+    grid-row: 1;
+    height: 100%;
+  }
+
+  /* ════════════════════════════════════════
+     BECOME A PARTNER CTA
+  ════════════════════════════════════════ */
+  .become-section {
+    background: var(--green);
+    padding: 6rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .become-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,rgba(255,255,255,.05) 0%,transparent 60%);
+    pointer-events: none;
+  }
+  .become-inner { position: relative; z-index: 1; }
+  .become-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem,4vw,3rem);
+    color: var(--cream);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    max-width: 620px;
+  }
+  .become-section h2 em { font-style: italic; }
+  .become-section p {
+    font-size: 1rem;
+    color: rgba(238,235,217,.75);
+    max-width: 480px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+  .become-section__buttons { display: flex; gap: .8rem; flex-wrap: wrap; }
+  .btn-cream-solid { background: var(--cream); color: var(--green); font-weight: 600; }
+  .btn-cream-solid:hover { background: var(--white); }
+  .btn-outline-light { border: 1.5px solid rgba(255,255,255,.35); color: var(--cream); }
+  .btn-outline-light:hover { border-color: rgba(255,255,255,.7); background: rgba(255,255,255,.07); }
+
+  /* ── FOOTER ── */
+  footer{background:#0d1a0a;color:var(--silver);padding:4rem 0 2rem}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+  .footer-brand h3{font-family:var(--font-display);color:var(--cream);font-size:1.1rem;margin-bottom:.75rem}
+  .footer-brand p{font-size:.85rem;line-height:1.65;margin-bottom:1.2rem;max-width:280px}
+  .footer-socials{display:flex;gap:.75rem}
+  .social-btn{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--silver);transition:background var(--ease),border-color var(--ease)}
+  .social-btn:hover{background:var(--teal);border-color:var(--teal);color:#fff}
+  .footer-col h4{color:var(--cream);font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.1rem}
+  .footer-col li{margin-bottom:.5rem}
+  .footer-col a{font-size:.87rem;color:var(--silver);transition:color var(--ease)}
+  .footer-col a:hover{color:var(--cream)}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.78rem}
+  .footer-legal{display:flex;gap:1.5rem;flex-wrap:wrap}
+  .footer-legal a{color:var(--silver)}.footer-legal a:hover{color:var(--cream)}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px){
+    .nav__list,.nav__actions{display:none}
+    .hamburger{display:flex}
+    .top-bar__info{display:none}
+    .footer-grid{grid-template-columns:1fr 1fr}
+    .logo-grid{grid-template-columns:repeat(auto-fill,minmax(175px,1fr))}
+    .photo-band__inner{grid-template-columns:1fr}
+    .photo-band__photos{height:340px}
+  }
+  @media(max-width:640px){
+    .footer-grid{grid-template-columns:1fr}
+    .logo-grid{grid-template-columns:repeat(2,1fr)}
+    .logo-cell{height:140px;padding:1.25rem}
+    .partners-hero__content{padding:4rem 0 3.5rem}
+    .photo-band__photos{grid-template-columns:1fr;height:auto;gap:.75rem}
+    .photo-band__photos .photo-slot{height:260px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+  }
   </style>
 </head>
 <body>
 
+<!-- TOP BAR -->
 <div class="top-bar">
   <div class="container">
     <div class="top-bar__info">
       <span>UK Charity #1167115</span><span class="top-bar__dot">·</span>
       <span>Malagasy NGO</span><span class="top-bar__dot">·</span>
-      <span>Association France SIREN 85242793900016</span>
+      <span>Association France SIREN 85242793900016</span><span class="top-bar__dot">·</span>
+      <span>Association Suisse</span>
     </div>
     <nav class="lang-switch" aria-label="Language switcher">
       <a href="partners.html" class="lang-switch__btn is-active" lang="en">EN</a>
-      <a href="#" class="lang-switch__btn" lang="fr">FR</a>
+      <a href="partners-fr.html" class="lang-switch__btn" lang="fr">FR</a>
     </nav>
   </div>
 </div>
 
+<!-- NAVBAR -->
 <header class="navbar" id="navbar" role="banner">
   <div class="container">
-    <a href="../homepage.html" class="navbar__logo">
-      <img src="../images/logo_mini.jpeg" alt="Education for Madagascar logo" class="logo-image"/>
+    <a href="../index.html" class="navbar__logo" aria-label="Education for Madagascar — home">
+      <div class="logo-circle">E4M</div>
       <span class="logo-text">Education<br>for Madagascar</span>
     </a>
     <ul class="nav__list" role="list">
       <li class="nav__item" id="ni-who">
-        <button class="nav__link is-active" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-who')">Who we are <span class="nav__chevron" aria-hidden="true"></span></button>
+        <button class="nav__link is-active" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-who')">
+          Who we are <span class="nav__chevron" aria-hidden="true"></span>
+        </button>
         <div class="dropdown">
           <a class="dropdown__link" href="our-story.html">Our story<span class="dropdown__sub">History &amp; founding vision</span></a>
-          <a class="dropdown__link" href="team.html">Team &amp; board</a>
+          <a class="dropdown__link" href="team.html">Team &amp; board<span class="dropdown__sub">The people behind E4M</span></a>
           <a class="dropdown__link" href="governance.html">Governance &amp; statutes</a>
           <div class="dropdown__separator"></div>
           <a class="dropdown__link" href="annual-reports.html">Annual reports</a>
-          <a class="dropdown__link" href="partners.html" style="color:var(--green);font-weight:600;">Our partners</a>
+          <a class="dropdown__link is-active" href="partners.html">Our partners</a>
         </div>
       </li>
       <li class="nav__item" id="ni-proj">
-        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-proj')">Our projects <span class="nav__chevron" aria-hidden="true"></span></button>
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-proj')">
+          Our projects <span class="nav__chevron" aria-hidden="true"></span>
+        </button>
         <div class="dropdown--mega">
           <div class="mega__col">
             <p class="mega__heading mega__heading--edu">Education</p>
-            <a class="mega__link" href="../projects/education/akka.html">AKKA Montessori</a>
-            <a class="mega__link" href="../projects/education/vim.html">VIM — Volunteering</a>
+            <a class="mega__link" href="../projects/education/akka.html">AKKA Montessori <span class="badge badge--age">3–6</span></a>
+            <a class="mega__link" href="../projects/education/kanto.html">KANTO Culture <span class="badge badge--age">7–12</span></a>
+            <a class="mega__link" href="../projects/education/care.html">CARE Coding &amp; Robotics</a>
+            <a class="mega__link" href="../projects/education/scola.html">SCOLA Scholarship <span class="badge badge--age">18+</span></a>
+            <a class="mega__link" href="../projects/education/tuto.html">TUTO</a>
+            <a class="mega__link" href="../projects/education/vim.html">VIM Volunteering <span class="badge badge--int">Intl.</span></a>
+            <a class="mega__link" href="../projects/education/cad.html">Career Day Awareness</a>
+            <a class="mega__link" href="../projects/education/unesco.html">UNESCO Partnership <span class="badge badge--new">New</span></a>
           </div>
           <div class="mega__col">
             <p class="mega__heading mega__heading--health">Health</p>
+            <a class="mega__link" href="../projects/health/women.html">School for Women</a>
+            <a class="mega__link" href="../projects/health/fody.html">FODY</a>
             <a class="mega__link" href="../projects/health/tomady.html">TOMADY</a>
             <div class="mega__col-gap"></div>
             <p class="mega__heading mega__heading--env">Environment</p>
             <a class="mega__link" href="../projects/environment/silva.html">SILVA</a>
+            <a class="mega__link" href="../projects/environment/wash.html">WASH</a>
+            <a class="mega__link" href="../projects/environment/permada.html">PERMADA</a>
           </div>
           <div class="mega__col">
+            <p class="mega__heading mega__heading--edu">Overview</p>
             <p class="mega__summary">13 active projects across education, health, and the environment.</p>
             <a class="mega__all-link" href="../projects/index.html">All projects →</a>
           </div>
         </div>
       </li>
       <li class="nav__item" id="ni-inv">
-        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-inv')">Get involved <span class="nav__chevron" aria-hidden="true"></span></button>
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-inv')">
+          Get involved <span class="nav__chevron" aria-hidden="true"></span>
+        </button>
         <div class="dropdown">
-          <a class="dropdown__link" href="../get-involved/volunteer.html">Volunteer (VIM)</a>
-          <a class="dropdown__link" href="../get-involved/donate.html">Donate</a>
+          <a class="dropdown__link" href="../get-involved/volunteer.html">Volunteer (VIM)<span class="dropdown__sub">Live &amp; work in Madagascar</span></a>
+          <a class="dropdown__link" href="../get-involved/donate.html">Donate<span class="dropdown__sub">Fund our programmes directly</span></a>
           <div class="dropdown__separator"></div>
           <a class="dropdown__link" href="../get-involved/partner.html">Become a partner</a>
         </div>
       </li>
       <li class="nav__item" id="ni-media">
-        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-media')">Media <span class="nav__chevron" aria-hidden="true"></span></button>
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-media')">
+          Media <span class="nav__chevron" aria-hidden="true"></span>
+        </button>
         <div class="dropdown">
           <a class="dropdown__link" href="../media/blog.html">Blog</a>
           <a class="dropdown__link" href="../media/newsletters.html">Newsletters</a>
@@ -218,8 +654,9 @@
   </div>
 </header>
 
+<!-- MOBILE DRAWER -->
 <nav class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation">
-  <div class="mob-section is-open" id="mob-who">
+  <div class="mob-section" id="mob-who">
     <button class="mob-section__toggle" onclick="toggleMobSection('mob-who')">Who we are <span class="nav__chevron"></span></button>
     <div class="mob-section__content">
       <a class="mob-link" href="our-story.html">Our story</a>
@@ -229,233 +666,272 @@
       <a class="mob-link" href="partners.html" style="color:var(--green);font-weight:600;">Our partners</a>
     </div>
   </div>
+  <div class="mob-section" id="mob-proj">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-proj')">Our projects <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <div class="mob-subheading">Education</div>
+      <a class="mob-link" href="../projects/education/akka.html">AKKA Montessori</a>
+      <a class="mob-link" href="../projects/education/kanto.html">KANTO Culture</a>
+      <div class="mob-subheading mob-subheading--health">Health</div>
+      <a class="mob-link" href="../projects/health/women.html">School for Women</a>
+      <a class="mob-link" href="../projects/health/fody.html">FODY</a>
+      <div class="mob-subheading mob-subheading--env">Environment</div>
+      <a class="mob-link" href="../projects/environment/silva.html">SILVA</a>
+      <a class="mob-link" href="../projects/environment/wash.html">WASH</a>
+    </div>
+  </div>
+  <div class="mob-section" id="mob-inv">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-inv')">Get involved <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="../get-involved/volunteer.html">Volunteer (VIM)</a>
+      <a class="mob-link" href="../get-involved/donate.html">Donate</a>
+      <a class="mob-link" href="../get-involved/partner.html">Become a partner</a>
+    </div>
+  </div>
   <div class="mob-actions">
     <a href="#shop" class="btn-shop">The Shop ↗</a>
     <a href="../get-involved/donate.html" class="btn-donate">Donate</a>
   </div>
 </nav>
 
-<nav class="breadcrumb" aria-label="Breadcrumb" style="background:var(--surface-raised);">
+<!-- BREADCRUMB -->
+<nav class="breadcrumb" aria-label="Breadcrumb">
   <div class="container">
-    <ul class="breadcrumb__list" style="color:var(--green);">
-      <li><a href="../homepage.html" style="color:var(--teal);">Home</a></li>
-      <li><a href="our-story.html" style="color:var(--teal);">Who we are</a></li>
-      <li><span style="color:var(--green);font-weight:600;">Our partners</span></li>
+    <ul class="breadcrumb__list">
+      <li><a href="../index.html">Home</a></li>
+      <li><span class="breadcrumb__sep">›</span></li>
+      <li><a href="our-story.html">Who we are</a></li>
+      <li><span class="breadcrumb__sep">›</span></li>
+      <li><span class="breadcrumb__current">Our partners</span></li>
     </ul>
   </div>
 </nav>
 
-<main>
-  <section class="partners-hero">
+<!-- ════ HERO — photo bg, blurred ════ -->
+<section class="partners-hero" aria-label="Partners page hero">
+  <div class="partners-hero__bg" role="img" aria-label="E4M team and partners in the field">
+    <!--
+      TO ADD PHOTO:
+      1. Add style="background-image:url('../images/partners-event.jpg')" to .partners-hero__bg
+      2. Add class="has-photo" to .partners-hero__bg
+      CSS for .has-photo: filter:blur(3px); transform:scale(1.04);
+    -->
+  </div>
+  <div class="partners-hero__content">
     <div class="container">
-      <div class="partners-hero__inner">
-        <div class="partners-hero__kicker">Who we are · Our partners</div>
-        <h1 class="partners-hero__title">The network<br/><em>that makes it possible.</em></h1>
-        <p class="partners-hero__lead">Education for Madagascar works alongside educational institutions, civil society organisations, international bodies and corporate partners — each contributing expertise, funding or field capacity.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- EDUCATION & MONTESSORI PARTNERS -->
-  <section class="partners-section" aria-labelledby="edu-partners">
-    <div class="container">
-      <div class="partners-section__head reveal">
-        <span class="eyebrow">Education &amp; pedagogy</span>
-        <h2 class="section-title" id="edu-partners">Educational partners</h2>
-        <p style="margin-top:.8rem;font-size:.97rem;color:var(--charcoal);line-height:1.7;">The Montessori networks, UNESCO and educational organisations that shape our pedagogical approach and methodology.</p>
-      </div>
-      <div class="partner-grid">
-        <a class="partner-card reveal" href="https://montessoriconsulting.fr" target="_blank" rel="noopener">
-          <div class="partner-card__logo">
-            <!-- <img src="../images/partners/mhk.jpg" alt="MHK Montessori Consulting"/> -->
-            <div class="partner-card__logo-placeholder">MHK</div>
-          </div>
-          <div class="partner-card__body">
-            <div class="partner-card__type">Pedagogy</div>
-            <div class="partner-card__name">MHK — Montessori Consulting</div>
-            <div class="partner-card__desc">Pedagogical support and Montessori methodology for the AKKA school.</div>
-          </div>
-        </a>
-        <a class="partner-card reveal d1" href="https://montessori-esf.org" target="_blank" rel="noopener">
-          <div class="partner-card__logo">
-            <!-- <img src="../images/partners/logo-yis.png" alt="YIS"/> -->
-            <div class="partner-card__logo-placeholder">YIS</div>
-          </div>
-          <div class="partner-card__body">
-            <div class="partner-card__type">Montessori</div>
-            <div class="partner-card__name">YIS — Montessori ESF</div>
-            <div class="partner-card__desc">International Montessori training and educational standards partner.</div>
-          </div>
-        </a>
-        <a class="partner-card reveal d2" href="https://www.montessori-france.asso.fr" target="_blank" rel="noopener">
-          <div class="partner-card__logo">
-            <div class="partner-card__logo-placeholder">MF</div>
-          </div>
-          <div class="partner-card__body">
-            <div class="partner-card__type">Montessori</div>
-            <div class="partner-card__name">Montessori France</div>
-            <div class="partner-card__desc">The French Montessori association — training, accreditation and methodology.</div>
-          </div>
-        </a>
-        <a class="partner-card reveal" href="http://madagascar-unesco.com" target="_blank" rel="noopener">
-          <div class="partner-card__logo">
-            <div class="partner-card__logo-placeholder">UN</div>
-          </div>
-          <div class="partner-card__body">
-            <div class="partner-card__type">International</div>
-            <div class="partner-card__name">UNESCO Madagascar</div>
-            <div class="partner-card__desc">Partner for the KANTO project and the new UNESCO World Heritage education partnership.</div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- LOCAL & MALAGASY PARTNERS -->
-  <section class="partners-section" aria-labelledby="local-partners">
-    <div class="container">
-      <div class="partners-section__head reveal">
-        <span class="eyebrow">Madagascar</span>
-        <h2 class="section-title" id="local-partners">Local &amp; Malagasy partners</h2>
-        <p style="margin-top:.8rem;font-size:.97rem;color:var(--charcoal);line-height:1.7;">The Malagasy institutions, schools and organisations we work alongside in the field.</p>
-      </div>
-      <div class="partner-grid">
-        <a class="partner-card reveal" href="https://hakafy.com" target="_blank" rel="noopener">
-          <div class="partner-card__logo">
-            <div class="partner-card__logo-placeholder">HK</div>
-          </div>
-          <div class="partner-card__body">
-            <div class="partner-card__type">Local partner</div>
-            <div class="partner-card__name">Hakafy</div>
-            <div class="partner-card__desc">Malagasy partner supporting community programmes and field coordination.</div>
-          </div>
-        </a>
-        <a class="partner-card reveal d1" href="https://www.iscam.mg" target="_blank" rel="noopener">
-          <div class="partner-card__logo">
-            <div class="partner-card__logo-placeholder">ISC</div>
-          </div>
-          <div class="partner-card__body">
-            <div class="partner-card__type">Higher education</div>
-            <div class="partner-card__name">ISCAM</div>
-            <div class="partner-card__desc">Institut Supérieur de Communication, d'Administration et de Management — partner for career and scholarship programmes.</div>
-          </div>
-        </a>
-        <a class="partner-card reveal d2" href="https://www.alliancefrancaisemorondava.com" target="_blank" rel="noopener">
-          <div class="partner-card__logo">
-            <div class="partner-card__logo-placeholder">AF</div>
-          </div>
-          <div class="partner-card__body">
-            <div class="partner-card__type">Cultural</div>
-            <div class="partner-card__name">Alliance Française Morondava</div>
-            <div class="partner-card__desc">Cultural and language education partner in the Morondava region.</div>
-          </div>
-        </a>
-        <a class="partner-card reveal" href="https://www.facebook.com/ACTaolagnaro" target="_blank" rel="noopener">
-          <div class="partner-card__logo">
-            <div class="partner-card__logo-placeholder">ACT</div>
-          </div>
-          <div class="partner-card__body">
-            <div class="partner-card__type">Civil society</div>
-            <div class="partner-card__name">ACT Taolagnaro</div>
-            <div class="partner-card__desc">Community organisation active in the Anosy region, supporting FODY and field operations.</div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- INSTITUTIONAL & CORPORATE PARTNERS -->
-  <section class="partners-section" aria-labelledby="inst-partners">
-    <div class="container">
-      <div class="partners-section__head reveal">
-        <span class="eyebrow">Institutional &amp; corporate</span>
-        <h2 class="section-title" id="inst-partners">Institutional &amp; corporate partners</h2>
-        <p style="margin-top:.8rem;font-size:.97rem;color:var(--charcoal);line-height:1.7;">Foundations, platforms and companies whose support extends the organisation's capacity and reach.</p>
-      </div>
-      <div class="partner-grid">
-        <a class="partner-card reveal" href="https://benevity.com" target="_blank" rel="noopener">
-          <div class="partner-card__logo">
-            <div class="partner-card__logo-placeholder">BNV</div>
-          </div>
-          <div class="partner-card__body">
-            <div class="partner-card__type">Giving platform</div>
-            <div class="partner-card__name">Benevity</div>
-            <div class="partner-card__desc">Corporate giving platform enabling employees worldwide to support E4M through their employer.</div>
-          </div>
-        </a>
-        <a class="partner-card reveal d1" href="https://www.canalplus-madagascar.com" target="_blank" rel="noopener">
-          <div class="partner-card__logo">
-            <div class="partner-card__logo-placeholder">C+</div>
-          </div>
-          <div class="partner-card__body">
-            <div class="partner-card__type">Corporate</div>
-            <div class="partner-card__name">Canal+ Madagascar</div>
-            <div class="partner-card__desc">Media and communications partner in Madagascar, supporting visibility and outreach.</div>
-          </div>
-        </a>
-        <a class="partner-card reveal d2" href="https://mwm.ai" target="_blank" rel="noopener">
-          <div class="partner-card__logo">
-            <div class="partner-card__logo-placeholder">MWM</div>
-          </div>
-          <div class="partner-card__body">
-            <div class="partner-card__type">Technology</div>
-            <div class="partner-card__name">MWM</div>
-            <div class="partner-card__desc">Digital and creative technology partner supporting communication and content.</div>
-          </div>
-        </a>
-        <a class="partner-card reveal" href="#" target="_blank" rel="noopener">
-          <div class="partner-card__logo">
-            <!-- <img src="../images/partners/acs.jpg" alt="ACS by Johnson Banks"/> -->
-            <div class="partner-card__logo-placeholder">ACS</div>
-          </div>
-          <div class="partner-card__body">
-            <div class="partner-card__type">Foundation</div>
-            <div class="partner-card__name">ACS by Johnson Banks</div>
-            <div class="partner-card__desc">Design and institutional support partner.</div>
-          </div>
-        </a>
-        <a class="partner-card reveal d1" href="http://associationops.canalblog.com" target="_blank" rel="noopener">
-          <div class="partner-card__logo">
-            <div class="partner-card__logo-placeholder">OPS</div>
-          </div>
-          <div class="partner-card__body">
-            <div class="partner-card__type">Civil society</div>
-            <div class="partner-card__name">Association OPS</div>
-            <div class="partner-card__desc">Civil society partner supporting field and community initiatives.</div>
-          </div>
-        </a>
-        <a class="partner-card reveal d2" href="https://www.lyon.fr" target="_blank" rel="noopener">
-          <div class="partner-card__logo">
-            <!-- <img src="../images/partners/ville-de-lyon.png" alt="Ville de Lyon"/> -->
-            <div class="partner-card__logo-placeholder">LYN</div>
-          </div>
-          <div class="partner-card__body">
-            <div class="partner-card__type">Institutional</div>
-            <div class="partner-card__name">Ville de Lyon</div>
-            <div class="partner-card__desc">Institutional partner supporting E4M's French operations and fundraising.</div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- BECOME A PARTNER -->
-  <section class="become-section" aria-labelledby="become-title">
-    <div class="container">
-      <div class="become-inner reveal">
-        <div>
-          <h2 id="become-title">Bring your institution alongside this work.</h2>
-          <p>Whether you represent a foundation, a company, a school or a public body — there's a concrete way to contribute. Let's talk about what a partnership could look like.</p>
-        </div>
-        <div style="display:flex;gap:.8rem;flex-wrap:wrap;">
-          <a href="../get-involved/partner.html" class="btn btn-cream-solid">Discuss a partnership</a>
-          <a href="mailto:contact@educationformadagascar.org" class="btn btn-outline-light">Write to us</a>
+      <div class="reveal">
+        <span class="partners-hero__eyebrow">Who stands with us</span>
+        <h1>They believe in the <em>same north star.</em></h1>
+        <p class="partners-hero__sub">From Paris to Antananarivo, these institutions, companies, and associations have chosen to put their name alongside this work.</p>
+        <div class="partners-hero__count">
+          <strong>14</strong>
+          <span>active partnerships across education, health &amp; environment</span>
         </div>
       </div>
     </div>
-  </section>
-</main>
+  </div>
+</section>
 
+<!-- ════ EDUCATION & PEDAGOGY ════ -->
+<section class="logo-wall" aria-labelledby="edu-heading">
+  <div class="container">
+    <div class="cat-heading reveal">
+      <span class="cat-heading__eyebrow">Category 01</span>
+      <h2 id="edu-heading">Education &amp; <em>Pedagogy</em></h2>
+    </div>
+    <div class="logo-grid" role="list">
+
+      <a href="https://montessoriconsulting.fr" class="logo-cell reveal" target="_blank" rel="noopener" role="listitem" aria-label="Maison de la Houle">
+        <!-- <img src="../images/partners/mhk.jpg" alt="Maison de la Houle" class="logo-cell__img"> -->
+        <span class="logo-cell__name">Maison de la Houle</span>
+        <span class="logo-cell__tooltip">Maison de la Houle</span>
+      </a>
+
+      <a href="https://montessori-esf.org" class="logo-cell reveal d1" target="_blank" rel="noopener" role="listitem" aria-label="Association Montessori Internationale">
+        <!-- <img src="../images/partners/ami.png" alt="AMI" class="logo-cell__img"> -->
+        <span class="logo-cell__name">Association Montessori Internationale</span>
+        <span class="logo-cell__tooltip">AMI</span>
+      </a>
+
+      <a href="https://www.montessori-france.asso.fr" class="logo-cell reveal d2" target="_blank" rel="noopener" role="listitem" aria-label="Montessori France">
+        <!-- <img src="../images/partners/montessori-france.png" alt="Montessori France" class="logo-cell__img"> -->
+        <span class="logo-cell__name">Montessori France</span>
+        <span class="logo-cell__tooltip">Montessori France</span>
+      </a>
+
+      <a href="http://madagascar-unesco.com/commission2.html" class="logo-cell reveal d3" target="_blank" rel="noopener" role="listitem" aria-label="Club UNESCO Madagascar">
+        <!-- <img src="../images/partners/unesco-mg.png" alt="Club UNESCO Madagascar" class="logo-cell__img"> -->
+        <span class="logo-cell__name">Club UNESCO Madagascar</span>
+        <span class="logo-cell__tooltip">Club UNESCO Madagascar</span>
+      </a>
+
+      <a href="#" class="logo-cell reveal d4" role="listitem" aria-label="SESAME">
+        <!-- <img src="../images/partners/sesame.png" alt="SESAME" class="logo-cell__img"> -->
+        <span class="logo-cell__name">SESAME</span>
+        <span class="logo-cell__tooltip">SESAME</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ LOCAL & MALAGASY ════ -->
+<section class="logo-wall" aria-labelledby="local-heading">
+  <div class="container">
+    <div class="cat-heading reveal">
+      <span class="cat-heading__eyebrow">Category 02</span>
+      <h2 id="local-heading">Local &amp; <em>Malagasy</em></h2>
+    </div>
+    <div class="logo-grid" role="list">
+
+      <a href="https://www.iscam.mg" class="logo-cell reveal" target="_blank" rel="noopener" role="listitem" aria-label="ISCAM">
+        <!-- <img src="../images/partners/iscam.png" alt="ISCAM" class="logo-cell__img"> -->
+        <span class="logo-cell__name">ISCAM</span>
+        <span class="logo-cell__tooltip">ISCAM Madagascar</span>
+      </a>
+
+      <a href="https://hakafy.com" class="logo-cell reveal d1" target="_blank" rel="noopener" role="listitem" aria-label="Haka Fy">
+        <!-- <img src="../images/partners/hakafy.png" alt="Haka Fy" class="logo-cell__img"> -->
+        <span class="logo-cell__name">Haka Fy</span>
+        <span class="logo-cell__tooltip">Haka Fy Authentic Restaurant</span>
+      </a>
+
+      <a href="#" class="logo-cell reveal d2" role="listitem" aria-label="Koezy Company">
+        <!-- <img src="../images/partners/koezy.png" alt="Koezy Company" class="logo-cell__img"> -->
+        <span class="logo-cell__name">Koezy Company</span>
+        <span class="logo-cell__tooltip">Koezy Company</span>
+      </a>
+
+      <a href="https://www.alliancefrancaisemorondava.com" class="logo-cell reveal d3" target="_blank" rel="noopener" role="listitem" aria-label="Alliance Française Morondava">
+        <!-- <img src="../images/partners/af-morondava.png" alt="Alliance Française Morondava" class="logo-cell__img"> -->
+        <span class="logo-cell__name">Alliance Française Morondava</span>
+        <span class="logo-cell__tooltip">Alliance Française Morondava</span>
+      </a>
+
+      <a href="https://www.facebook.com/ACTaolagnaro" class="logo-cell reveal d4" target="_blank" rel="noopener" role="listitem" aria-label="American Corner Taolagnaro">
+        <!-- <img src="../images/partners/american-corner.png" alt="American Corner Taolagnaro" class="logo-cell__img"> -->
+        <span class="logo-cell__name">American Corner Taolagnaro</span>
+        <span class="logo-cell__tooltip">American Corner Taolagnaro</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ INSTITUTIONAL & CORPORATE ════ -->
+<section class="logo-wall" aria-labelledby="inst-heading">
+  <div class="container">
+    <div class="cat-heading reveal">
+      <span class="cat-heading__eyebrow">Category 03</span>
+      <h2 id="inst-heading">Institutional &amp; <em>Corporate</em></h2>
+    </div>
+    <div class="logo-grid" role="list">
+
+      <a href="https://www.canalplus-madagascar.com" class="logo-cell reveal" target="_blank" rel="noopener" role="listitem" aria-label="Canal+ Madagascar">
+        <!-- <img src="../images/partners/canal-plus.png" alt="Canal+" class="logo-cell__img"> -->
+        <span class="logo-cell__name">Canal+</span>
+        <span class="logo-cell__tooltip">Canal+ Madagascar</span>
+      </a>
+
+      <a href="https://mwm.ai" class="logo-cell reveal d1" target="_blank" rel="noopener" role="listitem" aria-label="MWM">
+        <!-- <img src="../images/partners/mwm.png" alt="MWM" class="logo-cell__img"> -->
+        <span class="logo-cell__name">MWM</span>
+        <span class="logo-cell__tooltip">MWM</span>
+      </a>
+
+      <a href="#" class="logo-cell reveal d2" role="listitem" aria-label="Viseo">
+        <!-- <img src="../images/partners/viseo.png" alt="Viseo" class="logo-cell__img"> -->
+        <span class="logo-cell__name">Viseo</span>
+        <span class="logo-cell__tooltip">Viseo</span>
+      </a>
+
+      <a href="#" class="logo-cell reveal d3" role="listitem" aria-label="Ville de Lyon">
+        <!-- <img src="../images/partners/lyon.png" alt="Ville de Lyon" class="logo-cell__img"> -->
+        <span class="logo-cell__name">Ville de Lyon</span>
+        <span class="logo-cell__tooltip">Ville de Lyon</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ EINSTEIN PULLQUOTE ════ -->
+<section class="pullquote-band" aria-label="Quote">
+  <div class="container">
+    <div class="pullquote-band__inner reveal">
+
+      <img src="../images/einstein.jpg"  alt="Albert Einstein, in class" class="pullquote-band__photo">
+
+
+      <div>
+        <blockquote>
+          "Thus do we mortals achieve immortality in the permanent things which we create in common"
+        </blockquote>
+        <div class="pullquote-band__attr">
+          <span class="pullquote-band__name">Albert Einstein</span>
+          <span class="pullquote-band__source"><em>The World As I See It</em>, 1949</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ PHOTO BAND ════ -->
+<section class="photo-band" aria-label="Field photos">
+  <div class="container">
+    <div class="photo-band__inner">
+
+      <div class="photo-band__text reveal">
+        <span class="photo-band__eyebrow">In the field</span>
+        <h2>Partnerships that <em>show up.</em></h2>
+        <p>Our partners don't just lend their logos — they send people, open doors, and stay for the long haul. These photos are from our partners events in Madagascar.</p>
+      </div>
+
+      <div class="photo-band__photos reveal d1">
+        <!--
+          Photo slot 1 — tall portrait
+          Drop in: <img src="../images/partners-field-1.jpg" alt="Partners at E4M event">
+        -->
+        <div class="photo-slot photo-slot--tall">
+          <!-- <img src="../images/partners-field-1.jpg" alt="Partners gathering at E4M event"> -->
+          <div class="photo-slot__placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 2</span>
+          </div>
+        </div>
+        <!--
+          Photo slot 2 — tall portrait
+          Drop in: <img src="../images/partners-field-2.jpg" alt="Partners at E4M event">
+        -->
+        <div class="photo-slot photo-slot--tall">
+          <!-- <img src="../images/partners-field-2.jpg" alt="Partners at AKKA school visit"> -->
+          <div class="photo-slot__placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 3</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ BECOME A PARTNER ════ -->
+<section class="become-section" aria-labelledby="become-title">
+  <div class="container">
+    <div class="become-inner reveal">
+      <h2 id="become-title">Bring your institution <em>alongside this work.</em></h2>
+      <p>Whether you represent a foundation, a company, a school or a public body — there's a concrete way to contribute. Let's talk about what a partnership could look like.</p>
+      <div class="become-section__buttons">
+        <a href="../get-involved/partner.html" class="btn btn-cream-solid">Discuss a partnership</a>
+        <a href="mailto:contact@educationformadagascar.org" class="btn btn-outline-light">Write to us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
   <div class="container">
     <div class="footer-grid">
@@ -480,24 +956,45 @@
       </div>
       <div class="footer-col">
         <h4>Our work</h4>
-        <ul><li><a href="../projects/index.html">All 13 projects →</a></li></ul>
+        <ul>
+          <li><a href="../projects/index.html">All 13 projects →</a></li>
+          <li><a href="../projects/education/akka.html">AKKA Montessori</a></li>
+          <li><a href="../projects/health/tomady.html">TOMADY Health</a></li>
+          <li><a href="../projects/environment/silva.html">SILVA Environment</a></li>
+          <li><a href="../media/newsletters.html">Newsletters</a></li>
+        </ul>
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
         <ul>
           <li><a href="mailto:contact@educationformadagascar.org">contact@educationformadagascar.org</a></li>
           <li style="font-size:.85rem;margin-top:.3rem;">23 Milner Drive, Cobham<br>KT11 2EZ, United Kingdom</li>
+          <li style="margin-top:.8rem;font-size:.75rem;opacity:.55;line-height:1.8;">UK Charity #1167115<br>FR SIREN 85242793900016<br>MG NIF 4002796057</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© 2026 Education for Madagascar. All rights reserved.</span>
       <div class="footer-legal">
-        <a href="#">Privacy Policy</a><a href="#">Legal Notice</a><a href="#">Safeguarding</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Legal Notice</a>
+        <a href="#">Safeguarding</a>
       </div>
     </div>
   </div>
 </footer>
-<script src="../js/global.js"></script>
+
+<script>
+const navbar=document.getElementById('navbar');
+if(navbar)window.addEventListener('scroll',()=>navbar.classList.toggle('is-scrolled',scrollY>10),{passive:true});
+function toggleNav(id){const el=document.getElementById(id),was=el.classList.contains('is-open');document.querySelectorAll('.nav__item.is-open').forEach(n=>{n.classList.remove('is-open');n.querySelector('[aria-expanded]').setAttribute('aria-expanded','false')});if(!was){el.classList.add('is-open');el.querySelector('[aria-expanded]').setAttribute('aria-expanded','true')}}
+document.addEventListener('click',e=>{if(!e.target.closest('.nav__item'))document.querySelectorAll('.nav__item.is-open').forEach(n=>{n.classList.remove('is-open');n.querySelector('[aria-expanded]').setAttribute('aria-expanded','false')})});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.nav__item.is-open').forEach(n=>{n.classList.remove('is-open');n.querySelector('[aria-expanded]').setAttribute('aria-expanded','false')})});
+const hbg=document.getElementById('hamburger'),drw=document.getElementById('mobile-drawer');
+function toggleMobile(){const o=drw.classList.toggle('is-open');hbg.classList.toggle('is-open',o);hbg.setAttribute('aria-expanded',String(o));document.body.style.overflow=o?'hidden':''}
+function toggleMobSection(id){document.getElementById(id).classList.toggle('is-open')}
+const obs=new IntersectionObserver((entries,ob)=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');ob.unobserve(e.target)}}),{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
 </body>
 </html>
