@@ -7,7 +7,21 @@
   <meta name="description" content="Education for Madagascar works alongside a network of institutional, educational and corporate partners — from the UN to Montessori networks, local NGOs and international foundations."/>
   <link rel="stylesheet" href="../css/global.css"/>
   <style>
-    :root { --ink:#152016; --muted:#687066; --line:rgba(21,32,22,.1); }
+    :root { 
+      --ink:#152016; 
+      --muted:#687066; 
+      --line:rgba(21,32,22,.1); 
+      --green:        #195301;
+      --cream:        #eeebd9;
+      --teal:         #006C65;
+      --charcoal:     #535353;
+      --silver:       #D5D5D5;
+      --white:        #ffffff;
+    /* Gold — Donate button hover */
+      --gold-bg:      #EFBF04;
+      --gold-text:    #856A00;
+    
+    }
 
     .partners-hero {
       background:linear-gradient(135deg,#143f00 0%,#195301 55%,#0f3d00 100%);
@@ -96,6 +110,10 @@
     .partner-card__desc { font-size:.82rem; color:var(--muted); line-height:1.55; flex:1; }
 
     /* ── BECOME A PARTNER CTA ── */
+    .btn-cream-solid {
+      color: var(--green);
+    }
+      
     .become-section {
       padding:5rem 0;
       background:var(--green);
