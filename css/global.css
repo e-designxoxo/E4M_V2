@@ -323,6 +323,7 @@ footer { background:#0d1a0a; color:var(--silver); padding:4rem 0 2rem; }
 .footer-socials { display:flex; gap:.75rem; }
 .social-btn { width:36px; height:36px; border-radius:50%; border:1px solid rgba(255,255,255,.12); display:flex; align-items:center; justify-content:center; font-size:.8rem; color:var(--silver); transition:background var(--ease),border-color var(--ease); }
 .social-btn:hover { background:var(--teal); border-color:var(--teal); color:#fff; }
+css.social-btn svg { display: block; }
 .footer-col h4 { color:var(--cream); font-size:.8rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; margin-bottom:1.1rem; }
 .footer-col li { margin-bottom:.5rem; }
 .footer-col a { font-size:.87rem; color:var(--silver); transition:color var(--ease); }
