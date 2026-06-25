@@ -132,11 +132,10 @@ function selectAmount(btn, amount) {
 }
 
 /* ─────────────────────────────────────────────────────────────────
-  ICONS - SOCIAL ICONS — inject sprite + replace .social-btn content 
+   SOCIAL ICONS — inject sprite + replace .social-btn content 
    ───────────────────────────────────────────────────────────────── */
 
-(function() {
-  // Inject sprite into DOM
+document.addEventListener('DOMContentLoaded', function() {
   const sprite = document.createElement('div');
   sprite.style.display = 'none';
   sprite.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg">
@@ -156,10 +155,9 @@ function selectAmount(btn, amount) {
   </svg>`;
   document.body.prepend(sprite);
 
-  // Replace .social-btn text content with the right icon
+  const map = { Facebook: 'icon-facebook', Instagram: 'icon-instagram', LinkedIn: 'icon-linkedin' };
   document.querySelectorAll('.social-btn[aria-label]').forEach(btn => {
-    const map = { Facebook: 'icon-facebook', Instagram: 'icon-instagram', LinkedIn: 'icon-linkedin' };
     const id = map[btn.getAttribute('aria-label')];
     if (id) btn.innerHTML = `<svg width="18" height="18" aria-hidden="true"><use href="#${id}"/></svg>`;
   });
-})();
+});
