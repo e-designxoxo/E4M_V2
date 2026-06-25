@@ -135,22 +135,22 @@ function selectAmount(btn, amount) {
    SOCIAL ICONS — inject sprite + replace .social-btn content 
    ───────────────────────────────────────────────────────────────── */
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const sprite = document.createElement('div');
   sprite.style.display = 'none';
   sprite.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg">
     <symbol id="icon-facebook" viewBox="0 0 24 24">
-      <path fill="#195301" d="M17 2h-3a5 5 0 0 0-5 5v3H6v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+      <path d="M17 2h-3a5 5 0 0 0-5 5v3H6v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
     </symbol>
     <symbol id="icon-instagram" viewBox="0 0 24 24">
-      <rect fill="none" stroke="#195301" stroke-width="2" x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-      <circle fill="none" stroke="#195301" stroke-width="2" cx="12" cy="12" r="4"/>
-      <circle fill="#195301" cx="17.5" cy="6.5" r="1.2"/>
+      <rect fill="none" stroke="currentColor" stroke-width="2" x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+      <circle fill="none" stroke="currentColor" stroke-width="2" cx="12" cy="12" r="4"/>
+      <circle cx="17.5" cy="6.5" r="1.2"/>
     </symbol>
     <symbol id="icon-linkedin" viewBox="0 0 24 24">
-      <path fill="#195301" d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-      <rect fill="#195301" x="2" y="9" width="4" height="12"/>
-      <circle fill="#195301" cx="4" cy="4" r="2"/>
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/>
+      <rect x="2" y="9" width="4" height="12"/>
+      <circle cx="4" cy="4" r="2"/>
     </symbol>
   </svg>`;
   document.body.prepend(sprite);
@@ -158,6 +158,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const map = { Facebook: 'icon-facebook', Instagram: 'icon-instagram', LinkedIn: 'icon-linkedin' };
   document.querySelectorAll('.social-btn[aria-label]').forEach(btn => {
     const id = map[btn.getAttribute('aria-label')];
-    if (id) btn.innerHTML = `<svg width="18" height="18" aria-hidden="true"><use href="#${id}"/></svg>`;
+    if (id) btn.innerHTML = `<svg width="18" height="18" aria-hidden="true" style="display:block;fill:currentColor"><use href="#${id}"/></svg>`;
   });
 });
