@@ -174,3 +174,12 @@ document.addEventListener('DOMContentLoaded', function () {
   link.href = '/favicon-32x32.png';
   document.head.appendChild(link);
 })();
+
+// ── FIX DONATE BUTTON LINKS ──
+document.addEventListener('DOMContentLoaded', function() {
+  const depth = (window.location.pathname.match(/\//g) || []).length - 1;
+  const prefix = depth <= 1 ? '' : depth === 2 ? '../' : '../../';
+  document.querySelectorAll('.btn-donate, .btn-donate-nav').forEach(btn => {
+    btn.href = prefix + 'get-involved/donate.html';
+  });
+});
