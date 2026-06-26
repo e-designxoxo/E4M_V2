@@ -161,3 +161,16 @@ document.addEventListener('DOMContentLoaded', function () {
     if (id) btn.innerHTML = `<svg width="18" height="18" aria-hidden="true" style="display:block;fill:currentColor"><use href="#${id}"/></svg>`;
   });
 });
+
+/* ────────────────────────────────────────────────────────────
+   FAVICON — the image next to the title, when opening the page 
+   ────────────────────────────────────────────────────────────  */
+
+(function() {
+  const link = document.createElement('link');
+  link.rel = 'icon';
+  link.type = 'image/png';
+  link.sizes = '32x32';
+  link.href = '/favicon-32x32.png';
+  document.head.appendChild(link);
+})();
