@@ -41,6 +41,7 @@ button{font-family:var(--font-body);cursor:pointer;border:none;background:none}
 /* ════════════════════════════════════════
    NAVBAR — top bar & menu
 ════════════════════════════════════════ */
+    
 .top-bar{background:var(--green);color:var(--cream);height:var(--topbar-h);font-size:.72rem}
 .top-bar .container{height:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem}
 .top-bar__info{display:flex;align-items:center;gap:1.25rem;opacity:.85;flex-wrap:wrap}
@@ -170,6 +171,10 @@ button{font-family:var(--font-body);cursor:pointer;border:none;background:none}
 }
 .hero-tag:last-child{border-right:none}
 .hero-tag strong{color:var(--cream);font-weight:700}
+.hero-tag strong:hover  {
+    color: var(--gold-text);
+    background-color: var(--gold); 
+}
 .hero-tag--cta{
   background:var(--cream);color:var(--green);
   font-weight:700;letter-spacing:.04em;text-transform:uppercase;
