@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Education for Madagascar — Building futures through education</title>
+<meta name="description" content="We build futures through education in Madagascar. 13 grassroots programmes across education, health and environment — since 2016."/>
+<style>
+:root{
+  --ink:#0d2b01;--green:#195301;--cream:#EEEBD9;--teal:#006C65;
+  --charcoal:#535353;--silver:#D5D5D5;--white:#fff;
+  --gold-bg:#EFBF04;--gold-text:#856A00;
+  --font-display:"Charter",Georgia,serif;
+  --font-body:"Avenir Next",system-ui,sans-serif;
+  --nav-h:80px;--topbar-h:36px;--max-w:1160px;--r:4px;--r-lg:10px;
+  --ease:.22s ease;--spring:.8s cubic-bezier(.34,1.08,.64,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:var(--font-body);background:var(--ink);color:var(--cream);line-height:1.65;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{font-family:var(--font-body);cursor:pointer;border:none;background:none}
+.container{max-width:var(--max-w);margin:0 auto;padding:0 2.5rem}
+
+/* ════════════════════════════════════════
+   TOP BAR — minimal
+════════════════════════════════════════ */
+.top-bar{
+  background:var(--ink);color:var(--cream);
+  height:var(--topbar-h);font-size:.7rem;
+  border-bottom:1px solid rgba(238,235,217,.05);
+}
+.top-bar .container{height:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.top-bar__info{display:flex;align-items:center;gap:1.1rem;opacity:.5;flex-wrap:wrap}
+.top-bar__info span{white-space:nowrap}
+.top-bar__dot{opacity:.3}
+.lang-switch{display:flex;gap:.2rem;flex-shrink:0}
+.lang-switch__btn{padding:.18rem .5rem;border-radius:var(--r);color:var(--cream);font-size:.7rem;font-weight:500;opacity:.5;transition:opacity var(--ease),background var(--ease)}
+.lang-switch__btn:hover{opacity:1}
+.lang-switch__btn.is-active{background:rgba(255,255,255,.1);opacity:1}
+
+/* ════════════════════════════════════════
+   NAVBAR — transparent over hero, solidifies on scroll
+════════════════════════════════════════ */
+.navbar{
+  position:sticky;top:0;z-index:200;
+  background:transparent;
+  height:var(--nav-h);
+  transition:background var(--ease),box-shadow var(--ease),border-color var(--ease);
+  border-bottom:1px solid transparent;
+}
+.navbar.is-scrolled{
+  background:rgba(13,43,1,.96);
+  backdrop-filter:blur(16px);
+  border-bottom-color:rgba(238,235,217,.07);
+  box-shadow:0 2px 32px rgba(0,0,0,.4);
+}
+.navbar .container{height:100%;display:flex;align-items:center}
+.navbar__logo{display:flex;align-items:center;gap:.6rem;margin-right:2rem;flex-shrink:0}
+.logo-image{width:54px;height:54px;border-radius:50%;object-fit:cover;display:block;flex-shrink:0}
+.logo-text{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--cream);line-height:1.2;text-transform:uppercase;letter-spacing:.04em}
+.nav__list{display:flex;align-items:center;height:100%;flex:1}
+.nav__item{position:relative;height:100%;display:flex;align-items:center}
+.nav__link{display:flex;align-items:center;gap:.3rem;padding:0 .85rem;height:100%;font-size:.84rem;font-weight:500;color:rgba(238,235,217,.7);white-space:nowrap;border-bottom:2px solid transparent;transition:color var(--ease),border-color var(--ease);user-select:none}
+.nav__link:hover,.nav__item.is-open .nav__link{color:var(--cream)}
+.nav__link.is-active{color:var(--cream);border-bottom-color:rgba(238,235,217,.4)}
+.nav__chevron{width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-1px);transition:transform var(--ease);flex-shrink:0}
+.nav__item.is-open .nav__chevron{transform:rotate(-135deg) translateY(2px)}
+.dropdown{visibility:hidden;opacity:0;pointer-events:none;transform:translateY(6px);transition:opacity var(--ease),transform var(--ease),visibility 0s var(--ease);position:absolute;top:calc(var(--nav-h) - 1px);left:0;min-width:240px;background:rgba(10,34,1,.98);backdrop-filter:blur(20px);border:1px solid rgba(238,235,217,.1);border-top:none;border-radius:0 0 var(--r-lg) var(--r-lg);box-shadow:0 12px 40px rgba(0,0,0,.6);padding:.5rem 0}
+.nav__item.is-open .dropdown{visibility:visible;opacity:1;pointer-events:auto;transform:translateY(0)}
+.dropdown__link{display:block;padding:.6rem 1.2rem;font-size:.84rem;color:rgba(238,235,217,.7);transition:background var(--ease),color var(--ease)}
+.dropdown__link:hover{background:rgba(238,235,217,.05);color:var(--cream)}
+.dropdown__sub{display:block;font-size:.73rem;opacity:.45;margin-top:.1rem}
+.dropdown__separator{height:1px;background:rgba(238,235,217,.08);margin:.4rem 1.2rem}
+.dropdown--mega{visibility:hidden;opacity:0;pointer-events:none;transform:translateY(6px);transition:opacity var(--ease),transform var(--ease),visibility 0s var(--ease);position:absolute;top:calc(var(--nav-h) - 1px);left:-60px;width:620px;background:rgba(10,34,1,.98);backdrop-filter:blur(20px);border:1px solid rgba(238,235,217,.1);border-top:none;border-radius:0 0 var(--r-lg) var(--r-lg);box-shadow:0 12px 40px rgba(0,0,0,.6);display:grid;grid-template-columns:1fr 1fr 180px}
+.nav__item.is-open .dropdown--mega{visibility:visible;opacity:1;pointer-events:auto;transform:translateY(0)}
+.mega__col{padding:1.2rem 1.1rem;border-right:1px solid rgba(238,235,217,.07)}
+.mega__col:last-child{border-right:none;background:rgba(238,235,217,.03);border-radius:0 0 var(--r-lg) 0}
+.mega__heading{font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;margin-bottom:.6rem;padding-bottom:.5rem;border-bottom:1px solid rgba(238,235,217,.08)}
+.mega__heading--edu{color:#8bd47a}.mega__heading--health{color:#f07a7a}.mega__heading--env{color:#5dc9c2}
+.mega__link{display:flex;align-items:center;gap:.5rem;padding:.4rem 0;font-size:.82rem;color:rgba(238,235,217,.65);transition:color var(--ease)}
+.mega__link:hover{color:var(--cream)}
+.badge{font-size:.6rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.1rem .4rem;border-radius:20px;flex-shrink:0}
+.badge--age{background:rgba(238,235,217,.08);color:rgba(238,235,217,.6)}
+.badge--new{background:rgba(139,212,122,.12);color:#8bd47a}
+.badge--int{background:rgba(93,201,194,.12);color:#5dc9c2}
+.mega__summary{font-size:.78rem;line-height:1.6;color:rgba(238,235,217,.55);margin-bottom:1rem}
+.mega__all-link{display:inline-flex;align-items:center;gap:.3rem;font-size:.8rem;font-weight:600;color:var(--cream);transition:gap var(--ease)}
+.mega__all-link:hover{gap:.55rem}
+.mega__col-gap{margin-top:.9rem}
+.nav__actions{display:flex;align-items:center;gap:.5rem;margin-left:auto;padding-left:1rem;flex-shrink:0}
+.btn-shop{padding:.4rem .9rem;font-size:.8rem;font-weight:500;color:rgba(238,235,217,.65);border:1px solid rgba(238,235,217,.18);border-radius:var(--r);transition:color var(--ease),border-color var(--ease)}
+.btn-shop:hover{color:var(--cream);border-color:rgba(238,235,217,.45)}
+.btn-donate{padding:.4rem 1rem;font-size:.8rem;font-weight:600;background:var(--cream);color:var(--ink);border-radius:var(--r);transition:background var(--ease),color var(--ease),transform var(--ease)}
+.btn-donate:hover{background:var(--gold-bg);color:var(--gold-text);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:34px;height:34px;padding:.4rem;margin-left:auto;border-radius:var(--r)}
+.hamburger__bar{width:100%;height:2px;background:var(--cream);border-radius:2px;transition:transform var(--ease),opacity var(--ease)}
+.hamburger.is-open .hamburger__bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.is-open .hamburger__bar:nth-child(2){opacity:0}
+.hamburger.is-open .hamburger__bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-drawer{display:none;position:fixed;top:calc(var(--topbar-h) + var(--nav-h));left:0;right:0;bottom:0;background:var(--ink);overflow-y:auto;z-index:190;padding:1rem 0 2rem;border-top:1px solid rgba(238,235,217,.08)}
+.mobile-drawer.is-open{display:block}
+.mob-section__toggle{width:100%;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;font-size:.92rem;font-weight:500;color:rgba(238,235,217,.75);border-bottom:1px solid rgba(238,235,217,.07);background:none;text-align:left}
+.mob-section__toggle:hover{background:rgba(238,235,217,.04)}
+.mob-section__content{display:none;padding:.5rem 0;background:rgba(0,0,0,.15);border-bottom:1px solid rgba(238,235,217,.07)}
+.mob-section.is-open .mob-section__content{display:block}
+.mob-subheading{font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:#8bd47a;padding:.6rem 1.8rem .3rem}
+.mob-subheading--health{color:#f07a7a}.mob-subheading--env{color:#5dc9c2}
+.mob-link{display:flex;align-items:center;justify-content:space-between;padding:.55rem 1.8rem;font-size:.85rem;color:rgba(238,235,217,.65);transition:background var(--ease),color var(--ease)}
+.mob-link:hover{background:rgba(238,235,217,.04);color:var(--cream)}
+.mob-actions{display:flex;gap:.75rem;padding:1.2rem 1.5rem 0}
+.mob-actions .btn-shop,.mob-actions .btn-donate{flex:1;text-align:center;font-size:.88rem;padding:.65rem 1rem}
+
+/* ════════════════════════════════════════
+   HERO — full viewport, pure image + one sentence
+   Nothing else. Project Basecamp / Ocean Conservancy approach.
+════════════════════════════════════════ */
+.hero{
+  position:relative;
+  width:100%;
+  height:100vh;
+  min-height:600px;
+  overflow:hidden;
+  /* pulls up behind transparent navbar */
+  margin-top:calc(-1 * var(--nav-h));
+}
+
+/* Video or photo layer */
+.hero__media{
+  position:absolute;
+  inset:0;
+  background:#0e2208;
+  background-size:cover;
+  background-position:center 35%;
+  /* Add photo: style="background-image:url('images/hero.jpg')"   */
+  /* Add video: drop <video> inside with position:absolute inset:0 */
+}
+.hero__media img,
+.hero__media video{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;display:block;
+}
+/* Placeholder gradient — rich, not flat */
+.hero__media-ph{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 55% 70% at 70% 40%, rgba(30,80,12,.6), transparent 60%),
+    linear-gradient(160deg, #0e2208 0%, #1a3a0d 40%, #0a1f06 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(238,235,217,.1);
+}
+
+/* Grain — analogue texture */
+.hero__grain{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23g)' opacity='0.07'/%3E%3C/svg%3E");
+}
+
+/* Scrim — directional, heavy bottom-left, photo breathes top-right */
+.hero__scrim{
+  position:absolute;inset:0;z-index:2;
+  background:
+    radial-gradient(ellipse 85% 65% at 5% 100%, rgba(5,12,2,.94) 0%, transparent 60%),
+    linear-gradient(to top, rgba(5,12,2,.55) 0%, rgba(5,12,2,.0) 55%),
+    linear-gradient(to bottom, rgba(5,12,2,.5) 0%, transparent 30%);
+}
+
+/* The single sentence — bottom left, large, direct */
+.hero__sentence{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  z-index:3;
+  padding:0 5vw 6vh;
+}
+.hero__mission-tag{
+  display:block;
+  font-size:.65rem;
+  font-weight:600;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:rgba(238,235,217,.35);
+  margin-bottom:1.4rem;
+}
+.hero__h1{
+  font-family:var(--font-display);
+  font-size:clamp(4rem, 10vw, 10.5rem);
+  color:var(--cream);
+  line-height:.9;
+  letter-spacing:-.03em;
+  max-width:820px;
+  /* Staggered reveal */
+  opacity:0;
+  transform:translateY(24px);
+  animation:heroReveal .9s 0.3s cubic-bezier(.16,1,.3,1) forwards;
+}
+.hero__h1 em{
+  font-style:italic;
+  color:rgba(238,235,217,.42);
+}
+@keyframes heroReveal{
+  to{opacity:1;transform:none}
+}
+
+/* Scroll cue — thin pulsing line */
+.hero__scroll{
+  position:absolute;
+  bottom:0;
+  right:5vw;
+  z-index:4;
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  font-size:.58rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(238,235,217,.22);
+  padding-bottom:1.8rem;
+  animation:heroReveal .7s 1.4s both;
+}
+.hero__scroll::after{
+  content:'';width:1px;height:48px;
+  background:linear-gradient(to bottom, transparent, rgba(238,235,217,.28));
+}
+
+/* ════════════════════════════════════════
+   PILLARS — from V3, now full-height magazine cards
+   Auto-cycle + hover. Generous, not slivers.
+════════════════════════════════════════ */
+.pillars-section{
+  background:var(--ink);
+}
+
+/* Three cards in a row */
+.pillars{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  height:62vh;
+  min-height:440px;
+  max-height:680px;
+}
+
+.pillar{
+  position:relative;
+  overflow:hidden;
+  display:block;
+  text-decoration:none;
+  cursor:pointer;
+  border-right:1px solid rgba(238,235,217,.06);
+  transition:flex var(--spring);
+}
+.pillar:last-child{border-right:none}
+
+/* Photo bg */
+.pillar__bg{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  transform-origin:center;
+  transition:transform 1.2s cubic-bezier(.25,.46,.45,.94);
+}
+.pillar__bg-ph{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:.5rem;
+  font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(238,235,217,.08);
+}
+
+/* Placeholder colours — distinct so each panel reads as its own */
+.pillar:nth-child(1) .pillar__bg{background-color:#1d4210}
+.pillar:nth-child(2) .pillar__bg{background-color:#0e2d1c}
+.pillar:nth-child(3) .pillar__bg{background-color:#1a320e}
+
+/* Scrim — two-layer for depth */
+.pillar__scrim{
+  position:absolute;inset:0;z-index:2;
+  background:
+    linear-gradient(to top, rgba(5,12,2,.94) 0%, rgba(5,12,2,.4) 45%, rgba(5,12,2,.08) 75%, transparent 100%),
+    linear-gradient(to bottom, rgba(5,12,2,.35) 0%, transparent 25%);
+  transition:opacity .6s ease;
+}
+
+/* Grain per card */
+.pillar__grain{
+  position:absolute;inset:0;z-index:3;pointer-events:none;
+  opacity:.35;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='0.07'/%3E%3C/svg%3E");
+}
+
+/* Active state — photo zooms slightly */
+.pillar.is-active .pillar__bg{transform:scale(1.04)}
+
+/* Inactive — slightly darker */
+.pillar:not(.is-active) .pillar__scrim{
+  background:
+    linear-gradient(to top, rgba(5,12,2,.97) 0%, rgba(5,12,2,.7) 50%, rgba(5,12,2,.4) 100%);
+}
+
+/* Body — bottom of each card */
+.pillar__body{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  z-index:4;
+  padding:2rem 1.8rem 1.8rem;
+}
+.pillar__sdg{
+  display:block;
+  font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(238,235,217,.3);
+  margin-bottom:.65rem;
+  transition:color .5s ease;
+}
+.pillar.is-active .pillar__sdg{color:rgba(238,235,217,.55)}
+
+.pillar__word{
+  font-family:var(--font-display);
+  font-size:clamp(2.2rem,3.5vw,3.4rem);
+  color:rgba(238,235,217,.55);
+  letter-spacing:-.02em;
+  line-height:1;
+  margin-bottom:.65rem;
+  transition:color var(--spring),transform var(--spring);
+}
+.pillar.is-active .pillar__word{
+  color:var(--cream);
+  transform:translateY(-3px);
+}
+
+.pillar__desc{
+  font-size:.82rem;
+  color:rgba(238,235,217,.35);
+  line-height:1.6;
+  max-width:260px;
+  transition:color .5s ease,transform var(--spring);
+  opacity:0;
+  transform:translateY(8px);
+  transition:opacity .4s ease, transform .4s ease, color .4s ease;
+}
+.pillar.is-active .pillar__desc{
+  opacity:1;
+  color:rgba(238,235,217,.65);
+  transform:none;
+}
+
+.pillar__link{
+  display:inline-flex;align-items:center;gap:.4rem;
+  margin-top:.9rem;
+  font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:rgba(238,235,217,.2);
+  transition:color .4s ease,gap .3s ease;
+  opacity:0;
+  transition:opacity .4s ease .1s, color .4s ease, gap .3s ease;
+}
+.pillar.is-active .pillar__link{
+  opacity:1;
+  color:rgba(238,235,217,.6);
+}
+.pillar.is-active:hover .pillar__link{
+  color:var(--cream);gap:.65rem;
+}
+
+/* Progress bar — thin, bottom of section */
+.pillars-progress{
+  height:2px;
+  background:rgba(238,235,217,.06);
+  position:relative;
+  overflow:hidden;
+}
+.pillars-progress__bar{
+  position:absolute;
+  top:0;left:0;height:100%;
+  background:rgba(238,235,217,.3);
+  width:33.333%;
+  transition:transform var(--spring);
+}
+
+/* ════════════════════════════════════════
+   MISSION + CTAs — flows directly below pillars
+   Rails to Trails: one continuous editorial read
+════════════════════════════════════════ */
+.mission-flow{
+  background:var(--ink);
+  padding:5.5rem 0 6rem;
+  border-top:1px solid rgba(238,235,217,.06);
+}
+.mission-flow__inner{
+  display:grid;
+  grid-template-columns:1fr 380px;
+  gap:5rem;
+  align-items:start;
+}
+.mission-flow__text{}
+.mission-flow__h2{
+  font-family:var(--font-display);
+  font-size:clamp(2rem,3.5vw,3.4rem);
+  color:var(--cream);
+  line-height:1.1;
+  margin-bottom:1.2rem;
+  letter-spacing:-.01em;
+}
+.mission-flow__h2 em{font-style:italic;color:rgba(238,235,217,.4)}
+.mission-flow__body{
+  font-size:1rem;
+  color:rgba(238,235,217,.6);
+  line-height:1.8;
+  max-width:540px;
+}
+
+/* Right column: stats + CTAs */
+.mission-flow__right{}
+.mission-stats{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:rgba(238,235,217,.07);
+  border:1px solid rgba(238,235,217,.07);
+  margin-bottom:2rem;
+}
+.mstat{
+  background:var(--ink);
+  padding:1.4rem 1.2rem;
+  transition:background var(--ease);
+}
+.mstat:hover{background:rgba(238,235,217,.03)}
+.mstat__num{
+  font-family:var(--font-display);
+  font-size:2.2rem;color:var(--cream);line-height:1;margin-bottom:.2rem;
+}
+.mstat__label{
+  font-size:.62rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(238,235,217,.3);line-height:1.4;
+}
+.mission-flow__ctas{
+  display:flex;flex-direction:column;gap:.75rem;
+}
+.btn-discover{
+  display:flex;align-items:center;justify-content:space-between;gap:.5rem;
+  padding:1.1rem 1.4rem;
+  border:1px solid rgba(238,235,217,.25);
+  color:var(--cream);
+  font-size:.88rem;font-weight:600;letter-spacing:.04em;
+  transition:border-color var(--ease),background var(--ease),gap var(--ease);
+}
+.btn-discover:hover{border-color:rgba(238,235,217,.6);background:rgba(238,235,217,.05)}
+.btn-discover .arrow{transition:transform var(--ease)}
+.btn-discover:hover .arrow{transform:translateX(4px)}
+.btn-donate-flow{
+  display:flex;align-items:center;justify-content:space-between;gap:.5rem;
+  padding:1.1rem 1.4rem;
+  background:var(--cream);
+  color:var(--ink);
+  font-size:.88rem;font-weight:700;letter-spacing:.04em;
+  transition:background var(--ease),color var(--ease);
+}
+.btn-donate-flow:hover{background:var(--gold-bg);color:var(--gold-text)}
+
+/* ════════════════════════════════════════
+   TRANSITION TO CREAM / remaining homepage
+════════════════════════════════════════ */
+.page-transition{
+  background:var(--cream);
+  padding:6rem 0;
+  text-align:center;
+}
+.page-transition__label{
+  display:block;font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:1rem;
+}
+.page-transition__text{
+  font-family:var(--font-display);
+  font-size:clamp(1.7rem,3vw,2.8rem);
+  color:var(--ink);line-height:1.2;
+  max-width:720px;margin:0 auto 1.5rem;
+}
+.page-transition__text em{font-style:italic;color:var(--green)}
+.page-transition__sub{
+  font-size:.98rem;color:var(--charcoal);
+  max-width:460px;margin:0 auto 2rem;line-height:1.75;opacity:.75;
+}
+.page-transition__cta{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.8rem 1.8rem;
+  border:1.5px solid rgba(13,43,1,.2);color:var(--ink);
+  font-size:.86rem;font-weight:600;letter-spacing:.04em;
+  transition:border-color var(--ease),background var(--ease),transform var(--ease);
+}
+.page-transition__cta:hover{border-color:var(--ink);background:rgba(13,43,1,.04);transform:translateY(-1px)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .nav__list,.nav__actions{display:none}
+  .hamburger{display:flex}
+  .pillars{height:55vh;min-height:360px}
+  .mission-flow__inner{grid-template-columns:1fr;gap:3rem}
+}
+@media(max-width:640px){
+  .top-bar__info{display:none}
+  .pillars{
+    grid-template-columns:1fr;
+    grid-template-rows:repeat(3,1fr);
+    height:auto;min-height:0;max-height:none;
+  }
+  .pillar{height:240px;border-right:none;border-bottom:1px solid rgba(238,235,217,.06)}
+  .pillar:last-child{border-bottom:none}
+  .hero__h1{font-size:clamp(3rem,12vw,5.5rem)}
+  .mission-stats{grid-template-columns:1fr 1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  .pillar__bg,.pillar__word,.hero__h1{transition:none;animation:none;opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="container">
+    <div class="top-bar__info">
+      <span>UK Charity #1167115</span><span class="top-bar__dot">·</span>
+      <span>Malagasy NGO</span><span class="top-bar__dot">·</span>
+      <span>Association France SIREN 85242793900016</span><span class="top-bar__dot">·</span>
+      <span>Association Suisse</span>
+    </div>
+    <nav class="lang-switch" aria-label="Language switcher">
+      <a href="homepage.html" class="lang-switch__btn is-active" lang="en">EN</a>
+      <a href="homepage-fr.html" class="lang-switch__btn" lang="fr">FR</a>
+    </nav>
+  </div>
+</div>
+
+<!-- NAVBAR — transparent on load, solidifies on scroll -->
+<header class="navbar" id="navbar" role="banner">
+  <div class="container">
+    <a href="index.html" class="navbar__logo" aria-label="Education for Madagascar — home">
+      <img src="images/logo_mini.jpeg" alt="Education for Madagascar logo" class="logo-image">
+      <span class="logo-text">Education<br>for Madagascar</span>
+    </a>
+    <ul class="nav__list" role="list">
+      <li class="nav__item" id="ni-who">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-who')">Who we are <span class="nav__chevron"></span></button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="who-we-are/our-story.html">Our story<span class="dropdown__sub">History &amp; founding vision</span></a>
+          <a class="dropdown__link" href="who-we-are/team.html">Team &amp; board<span class="dropdown__sub">The people behind E4M</span></a>
+          <a class="dropdown__link" href="who-we-are/governance.html">Governance &amp; statutes<span class="dropdown__sub">Legal structure &amp; founding documents</span></a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="who-we-are/annual-reports.html">Annual reports<span class="dropdown__sub">Financial transparency, year by year</span></a>
+          <a class="dropdown__link" href="who-we-are/partners.html">Our partners<span class="dropdown__sub">Foundations, sponsors &amp; institutions</span></a>
+        </div>
+      </li>
+      <li class="nav__item" id="ni-proj">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-proj')">Our projects <span class="nav__chevron"></span></button>
+        <div class="dropdown--mega">
+          <div class="mega__col">
+            <p class="mega__heading mega__heading--edu">Education</p>
+            <a class="mega__link" href="projects/education/akka.html">AKKA Montessori <span class="badge badge--age">3–6 yrs</span></a>
+            <a class="mega__link" href="projects/education/kanto.html">KANTO Culture <span class="badge badge--age">7–12 yrs</span></a>
+            <a class="mega__link" href="projects/education/care.html">CARE Coding &amp; Robotics</a>
+            <a class="mega__link" href="projects/education/scola.html">SCOLA Scholarship <span class="badge badge--age">18+</span></a>
+            <a class="mega__link" href="projects/education/tuto.html">TUTO</a>
+            <a class="mega__link" href="projects/education/vim.html">VIM — Volunteering <span class="badge badge--int">Intl.</span></a>
+            <a class="mega__link" href="projects/education/cad.html">Career Day Awareness</a>
+            <a class="mega__link" href="projects/education/unesco.html">UNESCO Partnership <span class="badge badge--new">New</span></a>
+          </div>
+          <div class="mega__col">
+            <p class="mega__heading mega__heading--health">Health</p>
+            <a class="mega__link" href="projects/health/women.html">School for Women</a>
+            <a class="mega__link" href="projects/health/fody.html">FODY</a>
+            <a class="mega__link" href="projects/health/tomady.html">TOMADY</a>
+            <div class="mega__col-gap"></div>
+            <p class="mega__heading mega__heading--env">Environment</p>
+            <a class="mega__link" href="projects/environment/silva.html">SILVA</a>
+            <a class="mega__link" href="projects/environment/wash.html">WASH</a>
+            <a class="mega__link" href="projects/environment/permada.html">PERMADA</a>
+          </div>
+          <div class="mega__col">
+            <p class="mega__heading mega__heading--edu">Overview</p>
+            <p class="mega__summary">13 active projects across education, health, and the environment.</p>
+            <a class="mega__all-link" href="projects/index.html">All projects →</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav__item" id="ni-inv">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-inv')">Get involved <span class="nav__chevron"></span></button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="get-involved/volunteer.html">Volunteer (VIM)<span class="dropdown__sub">Live &amp; work in Madagascar</span></a>
+          <a class="dropdown__link" href="get-involved/donate.html">Donate<span class="dropdown__sub">Fund our programmes directly</span></a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="get-involved/partner.html">Become a partner<span class="dropdown__sub">Corporate sponsors &amp; foundations</span></a>
+        </div>
+      </li>
+      <li class="nav__item" id="ni-media">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-media')">Media <span class="nav__chevron"></span></button>
+        <div class="dropdown">
+          <a class="dropdown__link" href="media/blog.html">Blog<span class="dropdown__sub">Stories, insights &amp; field updates</span></a>
+          <a class="dropdown__link" href="media/newsletters.html">Newsletters<span class="dropdown__sub">Subscribe to our updates</span></a>
+          <div class="dropdown__separator"></div>
+          <a class="dropdown__link" href="who-we-are/annual-reports.html">Annual reports<span class="dropdown__sub">Financial &amp; impact transparency</span></a>
+        </div>
+      </li>
+    </ul>
+    <div class="nav__actions">
+      <a href="#shop" class="btn-shop">The Shop ↗</a>
+      <a href="get-involved/donate.html" class="btn-donate">Donate</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMobile()">
+      <span class="hamburger__bar"></span><span class="hamburger__bar"></span><span class="hamburger__bar"></span>
+    </button>
+  </div>
+</header>
+
+<!-- MOBILE DRAWER -->
+<nav class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation">
+  <div class="mob-section" id="mob-who">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-who')">Who we are <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="who-we-are/our-story.html">Our story</a>
+      <a class="mob-link" href="who-we-are/team.html">Team &amp; board</a>
+      <a class="mob-link" href="who-we-are/governance.html">Governance &amp; statutes</a>
+      <a class="mob-link" href="who-we-are/annual-reports.html">Annual reports</a>
+      <a class="mob-link" href="who-we-are/partners.html">Our partners</a>
+    </div>
+  </div>
+  <div class="mob-section" id="mob-proj">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-proj')">Our projects <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="projects/index.html">All projects →</a>
+      <div class="mob-subheading">Education</div>
+      <a class="mob-link" href="projects/education/akka.html">AKKA Montessori</a>
+      <a class="mob-link" href="projects/education/kanto.html">KANTO Culture</a>
+      <a class="mob-link" href="projects/education/care.html">CARE Coding &amp; Robotics</a>
+      <a class="mob-link" href="projects/education/scola.html">SCOLA Scholarship</a>
+      <a class="mob-link" href="projects/education/tuto.html">TUTO</a>
+      <a class="mob-link" href="projects/education/vim.html">VIM — Volunteering</a>
+      <div class="mob-subheading mob-subheading--health">Health</div>
+      <a class="mob-link" href="projects/health/women.html">School for Women</a>
+      <a class="mob-link" href="projects/health/fody.html">FODY</a>
+      <a class="mob-link" href="projects/health/tomady.html">TOMADY</a>
+      <div class="mob-subheading mob-subheading--env">Environment</div>
+      <a class="mob-link" href="projects/environment/silva.html">SILVA</a>
+      <a class="mob-link" href="projects/environment/wash.html">WASH</a>
+      <a class="mob-link" href="projects/environment/permada.html">PERMADA</a>
+    </div>
+  </div>
+  <div class="mob-section" id="mob-inv">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-inv')">Get involved <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="get-involved/volunteer.html">Volunteer (VIM)</a>
+      <a class="mob-link" href="get-involved/donate.html">Donate</a>
+      <a class="mob-link" href="get-involved/partner.html">Become a partner</a>
+    </div>
+  </div>
+  <div class="mob-section" id="mob-media">
+    <button class="mob-section__toggle" onclick="toggleMobSection('mob-media')">Media <span class="nav__chevron"></span></button>
+    <div class="mob-section__content">
+      <a class="mob-link" href="media/blog.html">Blog</a>
+      <a class="mob-link" href="media/newsletters.html">Newsletters</a>
+      <a class="mob-link" href="who-we-are/annual-reports.html">Annual reports</a>
+    </div>
+  </div>
+  <div class="mob-actions">
+    <a href="#shop" class="btn-shop">The Shop ↗</a>
+    <a href="get-involved/donate.html" class="btn-donate">Donate</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HERO — full viewport, one sentence
+     (navbar pulls up behind it — transparent)
+══════════════════════════════════════ -->
+<section class="hero" aria-label="Education for Madagascar">
+
+  <div class="hero__media">
+    <!--
+      PHOTO: add style="background-image:url('images/hero.jpg')" to .hero__media
+      VIDEO: uncomment below and add your video file
+      <video autoplay muted loop playsinline poster="images/hero-poster.jpg">
+        <source src="videos/hero.mp4" type="video/mp4">
+      </video>
+    -->
+    <div class="hero__media-ph">hero — photo or video · 1920×1080 minimum</div>
+  </div>
+
+  <div class="hero__grain" aria-hidden="true"></div>
+  <div class="hero__scrim"></div>
+
+  <div class="hero__sentence">
+    <span class="hero__mission-tag">To relieve poverty in Madagascar · Since 2016</span>
+    <h1 class="hero__h1">
+      We build<br><em>futures</em><br>through<br>education.
+    </h1>
+  </div>
+
+  <div class="hero__scroll" aria-hidden="true">scroll</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PILLARS — Education / Health / Environment
+     Full-height cards, auto-cycle + hover
+══════════════════════════════════════ -->
+<section class="pillars-section" aria-label="Three pillars of our work">
+  <div class="pillars" id="pillars">
+
+    <a class="pillar is-active" href="projects/education/akka.html" data-i="0" aria-label="Education — 8 programmes">
+      <div class="pillar__bg">
+        <!-- style="background-image:url('images/pillar-education.jpg')" -->
+      </div>
+      <div class="pillar__bg-ph">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="24" height="24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        education photo
+      </div>
+      <div class="pillar__scrim"></div>
+      <div class="pillar__grain" aria-hidden="true"></div>
+      <div class="pillar__body">
+        <span class="pillar__sdg">SDG 4 · Quality Education for All</span>
+        <div class="pillar__word">Education</div>
+        <p class="pillar__desc">From Montessori foundations to coding, scholarships and career awareness — 8 programmes building futures from age 3 to 25.</p>
+        <span class="pillar__link">Explore 8 programmes <span class="arrow">→</span></span>
+      </div>
+    </a>
+
+    <a class="pillar" href="projects/health/fody.html" data-i="1" aria-label="Health — 3 programmes">
+      <div class="pillar__bg">
+        <!-- style="background-image:url('images/pillar-health.jpg')" -->
+      </div>
+      <div class="pillar__bg-ph">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="24" height="24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        health photo
+      </div>
+      <div class="pillar__scrim"></div>
+      <div class="pillar__grain" aria-hidden="true"></div>
+      <div class="pillar__body">
+        <span class="pillar__sdg">SDG 2 · 3 · 5 · Wellbeing</span>
+        <div class="pillar__word">Health</div>
+        <p class="pillar__desc">Nutrition, prenatal care and women's empowerment — 3 programmes removing the barriers that stop children from learning.</p>
+        <span class="pillar__link">Explore 3 programmes <span class="arrow">→</span></span>
+      </div>
+    </a>
+
+    <a class="pillar" href="projects/environment/silva.html" data-i="2" aria-label="Environment — 3 programmes">
+      <div class="pillar__bg">
+        <!-- style="background-image:url('images/pillar-environment.jpg')" -->
+      </div>
+      <div class="pillar__bg-ph">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="24" height="24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        environment photo
+      </div>
+      <div class="pillar__scrim"></div>
+      <div class="pillar__grain" aria-hidden="true"></div>
+      <div class="pillar__body">
+        <span class="pillar__sdg">SDG 6 · 13 · Climate &amp; Water</span>
+        <div class="pillar__word">Environment</div>
+        <p class="pillar__desc">Reforestation, clean water and permaculture — 3 programmes rebuilding the land and the future at the same time.</p>
+        <span class="pillar__link">Explore 3 programmes <span class="arrow">→</span></span>
+      </div>
+    </a>
+
+  </div>
+  <!-- Progress indicator -->
+  <div class="pillars-progress" aria-hidden="true">
+    <div class="pillars-progress__bar" id="progressBar"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     MISSION FLOW — editorial, one read
+     (Rails to Trails: no hard section break)
+══════════════════════════════════════ -->
+<section class="mission-flow" aria-labelledby="mission-h">
+  <div class="container">
+    <div class="mission-flow__inner">
+
+      <div class="mission-flow__text">
+        <h2 class="mission-flow__h2" id="mission-h">
+          An education for life,<br>with respect for the child —<br>to offer a better future, with respect<br>for the family, the community,<br>the <em>environment</em> and the planet.
+        </h2>
+        <p class="mission-flow__body">
+          In Madagascar, investing in education from an early age is crucial to breaking the cycle of poverty — providing children with a solid foundation to contribute to an educated and inclusive society. 100% of donations go directly to the children and to the training of educators.
+        </p>
+      </div>
+
+      <div class="mission-flow__right">
+        <div class="mission-stats">
+          <div class="mstat">
+            <div class="mstat__num">13</div>
+            <div class="mstat__label">Active<br>programmes</div>
+          </div>
+          <div class="mstat">
+            <div class="mstat__num">756</div>
+            <div class="mstat__label">Children<br>supported</div>
+          </div>
+          <div class="mstat">
+            <div class="mstat__num">4</div>
+            <div class="mstat__label">Countries,<br>one mission</div>
+          </div>
+          <div class="mstat">
+            <div class="mstat__num">2016</div>
+            <div class="mstat__label">Founded<br>in England</div>
+          </div>
+        </div>
+        <div class="mission-flow__ctas">
+          <a href="projects/index.html" class="btn-discover">
+            Discover our work <span class="arrow">→</span>
+          </a>
+          <a href="get-involved/donate.html" class="btn-donate-flow">
+            Donate now →
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PAGE TRANSITION — cream, into homepage
+══════════════════════════════════════ -->
+<section class="page-transition" aria-labelledby="transition-h">
+  <div class="container">
+    <span class="page-transition__label">13 programmes · 3 pillars · 1 mission</span>
+    <h2 class="page-transition__text" id="transition-h">
+      Education is the <em>long-term</em> lever.<br>Everything else removes the obstacles.
+    </h2>
+    <p class="page-transition__sub">
+      Health, food, water, environment — each programme answers one barrier that stands between a child and a quality education.
+    </p>
+    <a href="projects/index.html" class="page-transition__cta">See all 13 projects →</a>
+  </div>
+</section>
+
+<!--
+══════════════════════════════════════════════════════
+  INSERT EXISTING homepage.html content below:
+  Trust strip → Impact → Projects preview →
+  Blog + Shop → Volunteer → Donate → Footer
+══════════════════════════════════════════════════════
+-->
+
+<script>
+/* ── Nav ── */
+const nb = document.getElementById('navbar');
+let ticking = false;
+window.addEventListener('scroll', ()=>{
+  if(!ticking){
+    requestAnimationFrame(()=>{
+      nb.classList.toggle('is-scrolled', scrollY > 60);
+      ticking = false;
+    });
+    ticking = true;
+  }
+}, {passive:true});
+
+function toggleNav(id){
+  const el=document.getElementById(id), was=el.classList.contains('is-open');
+  document.querySelectorAll('.nav__item.is-open').forEach(n=>{
+    n.classList.remove('is-open');
+    n.querySelector('[aria-expanded]').setAttribute('aria-expanded','false');
+  });
+  if(!was){el.classList.add('is-open');el.querySelector('[aria-expanded]').setAttribute('aria-expanded','true')}
+}
+document.addEventListener('click', e=>{
+  if(!e.target.closest('.nav__item'))
+    document.querySelectorAll('.nav__item.is-open').forEach(n=>{
+      n.classList.remove('is-open');
+      n.querySelector('[aria-expanded]').setAttribute('aria-expanded','false');
+    });
+});
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape')
+    document.querySelectorAll('.nav__item.is-open').forEach(n=>{
+      n.classList.remove('is-open');
+      n.querySelector('[aria-expanded]').setAttribute('aria-expanded','false');
+    });
+});
+const hbg=document.getElementById('hamburger'), drw=document.getElementById('mobile-drawer');
+function toggleMobile(){const o=drw.classList.toggle('is-open');hbg.classList.toggle('is-open',o);hbg.setAttribute('aria-expanded',String(o));document.body.style.overflow=o?'hidden':''}
+function toggleMobSection(id){document.getElementById(id).classList.toggle('is-open')}
+
+/* ── Pillars: auto-cycle + hover ── */
+const pillars = document.querySelectorAll('.pillar');
+const progressBar = document.getElementById('progressBar');
+const CYCLE_MS = 4200;
+let current = 0;
+let timer;
+let paused = false;
+
+function activate(i){
+  current = i;
+  pillars.forEach((p, j) => p.classList.toggle('is-active', j === i));
+  /* Progress bar jumps to position */
+  progressBar.style.transform = `translateX(${i * 100}%)`;
+}
+
+function startTimer(){
+  clearInterval(timer);
+  timer = setInterval(()=>{
+    if(!paused) activate((current+1) % pillars.length);
+  }, CYCLE_MS);
+}
+
+pillars.forEach((p, i) => {
+  /* Hover — expand and pause */
+  p.addEventListener('mouseenter', ()=>{
+    paused = true;
+    activate(i);
+  });
+  p.addEventListener('mouseleave', ()=>{
+    paused = false;
+    startTimer();
+  });
+  /* Click: if not active, expand instead of navigate */
+  p.addEventListener('click', e=>{
+    if(i !== current){ e.preventDefault(); activate(i); }
+    /* if already active, href fires normally */
+  });
+});
+
+activate(0);
+startTimer();
+</script>
+</body>
+</html>
