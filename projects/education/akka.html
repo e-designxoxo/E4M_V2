@@ -1,632 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AKKA Montessori — Education for Madagascar</title>
-  <meta name="description" content="AKKA Montessori School in Madagascar — Akanin'ny Kilonga, the House of Children. Bilingual Montessori education for 30 children aged 3 to 6, rooted in Malagasy culture." />
-
-    <link rel="stylesheet" href="../../css/global.css">
-
-  <!-- ─── FONTS ───────────────────────────────────────────────── -->
-  <!-- Charter & Avenir Next are system fonts — no CDN needed.    -->
-  <!-- If unavailable the fallbacks (Georgia / system-ui) apply.  -->
-
-  <style>
-  
-  /* ═══════════════════════════════════════════════════════════════
-     DESIGN TOKENS — inherited from homepage V2
-     Only change these 15 lines to restyle everything.
-     ═══════════════════════════════════════════════════════════════ */
-  :root {
-    --green:        #195301;
-    --cream:        #eeebd9;
-    --teal:         #006C65;
-    --charcoal:     #535353;
-    --silver:       #D5D5D5;
-    --white:        #ffffff;
-    /* Gold — Donate button hover */
-    --gold-bg:      #EFBF04;
-    --gold-text:    #856A00;
-    /* Typography */
-    --font-display: "Charter", Georgia, serif;
-    --font-body:    "Avenir Next", system-ui, sans-serif;
-    /* Layout */
-    --nav-h:        92px;
-    --topbar-h:     40px;
-    --max-w:        1160px;
-    --r:            4px;
-    --r-lg:         10px;
-    --ease:         0.22s ease;
-  }
-
-  /* ═══════════ RESET ═══════════ */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html   { scroll-behavior: smooth; }
-  body   { font-family: var(--font-body); background: var(--white); color: var(--charcoal); line-height: 1.65; }
-  img    { display: block; max-width: 100%; }
-  a      { text-decoration: none; color: inherit; }
-  ul     { list-style: none; }
-  button { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
-
-  /* ═══════════ UTILITIES ═══════════ */
-  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
-  .btn { display: inline-block; padding: .75rem 1.75rem; border-radius: var(--r); font-weight: 500; font-size: .95rem; cursor: pointer; transition: background var(--ease), color var(--ease), transform var(--ease); }
-  .btn:hover          { transform: translateY(-2px); }
-  .btn-primary        { background: var(--green); color: var(--cream); }
-  .btn-primary:hover  { background: #1f6701; }
-  .btn-outline        { border: 2px solid var(--green); color: var(--green); }
-  .btn-outline:hover  { background: var(--green); color: var(--cream); }
-  .btn-cream          { display: inline-block; padding: .65rem 1.5rem; border-radius: var(--r); background: var(--cream); color: var(--green); font-weight: 600; font-size: .9rem; transition: background var(--ease), transform var(--ease); }
-  .btn-cream:hover    { background: var(--white); transform: translateY(-2px); }
-  .section-label { display: block; font-size: .72rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); margin-bottom: .75rem; }
-  .section-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--green); line-height: 1.2; margin-bottom: 1.1rem; }
-  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .55s ease, transform .55s ease; }
-  .fade-up.visible { opacity: 1; transform: none; }
-
-  /* ═══════════════════════════════════════════════════════════════
-     TOP BAR
-     ═══════════════════════════════════════════════════════════════ */
-  .top-bar { background: var(--green); color: var(--cream); height: var(--topbar-h); font-size: .72rem; }
-  .top-bar .container { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-  .top-bar__info { display: flex; align-items: center; gap: 1.25rem; opacity: .85; flex-wrap: wrap; }
-  .top-bar__info span { white-space: nowrap; }
-  .top-bar__dot { opacity: .35; }
-  .lang-switch { display: flex; align-items: center; gap: .25rem; flex-shrink: 0; }
-  .lang-switch__btn { padding: .2rem .55rem; border-radius: var(--r); color: var(--cream); font-size: .72rem; font-weight: 500; opacity: .7; transition: opacity var(--ease), background var(--ease); }
-  .lang-switch__btn:hover     { opacity: 1; }
-  .lang-switch__btn.is-active { background: rgba(255,255,255,.15); opacity: 1; }
-
-  /* ═══════════════════════════════════════════════════════════════
-     NAVBAR
-     ═══════════════════════════════════════════════════════════════ */
-  .navbar { position: sticky; top: 0; z-index: 200; background: var(--white); border-bottom: 1px solid var(--silver); height: var(--nav-h); transition: box-shadow var(--ease); }
-  .navbar.is-scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.08); }
-  .navbar .container  { height: 100%; display: flex; align-items: center; }
-
-  /* Logo */
-  .navbar__logo { display: flex; align-items: center; gap: .6rem; margin-right: 2rem; flex-shrink: 0; }
-  
-
-  .logo-image{
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  flex-shrink: 0;
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AKKA Montessori — Akanin'ny Kilonga · Education for Madagascar</title>
+<meta name="description" content="AKKA Montessori School — Akanin'ny Kilonga, the House of Children. Bilingual Montessori education for children aged 3 to 6 in Antananarivo, Madagascar."/>
+<link rel="stylesheet" href="../../css/global.css">
+<style>
+:root{
+  --green:#195301;--cream:#EEEBD9;--teal:#006C65;--charcoal:#535353;
+  --silver:#D5D5D5;--white:#fff;--gold-bg:#EFBF04;--gold-text:#856A00;
+  --gold:#EFBF04;
+  --accent:#b5681f;--accent-lt:#f5e8d8;
+  --ink:#0d2b01;
+  --font-display:"Charter",Georgia,serif;
+  --font-body:"Avenir Next",system-ui,sans-serif;
+  --nav-h:92px;--topbar-h:40px;--max-w:1160px;
+  --r:4px;--r-lg:10px;--ease:.22s ease;
+  --ease2:.5s cubic-bezier(.22,1,.36,1);
 }
-    
-.logo-text{
-  font-family: var(--font-display);
-  font-size: 1.20rem;
-  font-weight: 700;
-  color: var(--green);
-  line-height: 1.2;
-  text-transform: uppercase;
-  letter-spacing: .04em;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:var(--font-body);background:var(--white);color:var(--charcoal);line-height:1.65}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{font-family:var(--font-body);cursor:pointer;border:none;background:none}
+.container{max-width:var(--max-w);margin:0 auto;padding:0 2rem}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease2),transform .7s var(--ease2)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+/* ══ NAV ══ */
+.top-bar{background:var(--green);color:var(--cream);height:var(--topbar-h);font-size:.72rem}
+.top-bar .container{height:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.top-bar__info{display:flex;align-items:center;gap:1.25rem;opacity:.85;flex-wrap:wrap}
+.top-bar__info span{white-space:nowrap}.top-bar__dot{opacity:.35}
+.lang-switch{display:flex;gap:.25rem;flex-shrink:0}
+.lang-switch__btn{padding:.2rem .55rem;border-radius:var(--r);color:var(--cream);font-size:.72rem;font-weight:500;opacity:.7;transition:opacity var(--ease),background var(--ease)}
+.lang-switch__btn:hover{opacity:1}.lang-switch__btn.is-active{background:rgba(255,255,255,.15);opacity:1}
+.navbar{position:sticky;top:0;z-index:200;background:var(--white);border-bottom:1px solid var(--silver);height:var(--nav-h);transition:box-shadow var(--ease)}
+.navbar.is-scrolled{box-shadow:0 2px 20px rgba(0,0,0,.08)}
+.navbar .container{height:100%;display:flex;align-items:center}
+.navbar__logo{display:flex;align-items:center;gap:.6rem;margin-right:2rem;flex-shrink:0}
+.logo-image{width:60px;height:60px;border-radius:50%;object-fit:cover;display:block;flex-shrink:0}
+.logo-text{font-family:var(--font-display);font-size:1.20rem;font-weight:700;color:var(--green);line-height:1.2;text-transform:uppercase;letter-spacing:.04em}
+.nav__list{display:flex;align-items:center;height:100%;flex:1}
+.nav__item{position:relative;height:100%;display:flex;align-items:center}
+.nav__link{display:flex;align-items:center;gap:.3rem;padding:0 .9rem;height:100%;font-size:.875rem;font-weight:500;color:var(--charcoal);white-space:nowrap;border-bottom:2px solid transparent;transition:color var(--ease),border-color var(--ease);user-select:none}
+.nav__link:hover,.nav__item.is-open .nav__link{color:var(--green)}
+.nav__link.is-active{color:var(--green);border-bottom-color:var(--green)}
+.nav__chevron{width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-1px);transition:transform var(--ease);flex-shrink:0}
+.nav__item.is-open .nav__chevron{transform:rotate(-135deg) translateY(2px)}
+.dropdown{visibility:hidden;opacity:0;pointer-events:none;transform:translateY(6px);transition:opacity var(--ease),transform var(--ease),visibility 0s var(--ease);position:absolute;top:calc(var(--nav-h) - 1px);left:0;min-width:240px;background:var(--white);border:1px solid var(--silver);border-top:none;border-radius:0 0 var(--r-lg) var(--r-lg);box-shadow:0 10px 32px rgba(0,0,0,.09);padding:.5rem 0}
+.nav__item.is-open .dropdown{visibility:visible;opacity:1;pointer-events:auto;transform:translateY(0)}
+.dropdown__link{display:block;padding:.6rem 1.2rem;font-size:.875rem;color:var(--charcoal);transition:background var(--ease),color var(--ease)}
+.dropdown__link:hover{background:var(--cream);color:var(--green)}
+.dropdown__link.is-active{color:var(--green);font-weight:600}
+.dropdown__sub{display:block;font-size:.75rem;opacity:.55;margin-top:.1rem}
+.dropdown__separator{height:1px;background:var(--silver);margin:.4rem 1.2rem;opacity:.5}
+.dropdown--mega{visibility:hidden;opacity:0;pointer-events:none;transform:translateY(6px);transition:opacity var(--ease),transform var(--ease),visibility 0s var(--ease);position:absolute;top:calc(var(--nav-h) - 1px);left:-60px;width:620px;background:var(--white);border:1px solid var(--silver);border-top:none;border-radius:0 0 var(--r-lg) var(--r-lg);box-shadow:0 10px 32px rgba(0,0,0,.09);display:grid;grid-template-columns:1fr 1fr 180px}
+.nav__item.is-open .dropdown--mega{visibility:visible;opacity:1;pointer-events:auto;transform:translateY(0)}
+.mega__col{padding:1.2rem 1.1rem;border-right:1px solid rgba(213,213,213,.5)}
+.mega__col:last-child{border-right:none;background:#f8f7f2;border-radius:0 0 var(--r-lg) 0}
+.mega__heading{font-size:.67rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;margin-bottom:.6rem;padding-bottom:.5rem;border-bottom:1px solid var(--silver)}
+.mega__heading--edu{color:var(--green)}.mega__heading--health{color:#b83030}.mega__heading--env{color:var(--teal)}
+.mega__link{display:flex;align-items:center;gap:.5rem;padding:.4rem 0;font-size:.83rem;color:var(--charcoal);transition:color var(--ease)}
+.mega__link:hover{color:var(--green)}
+.badge{font-size:.62rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.12rem .45rem;border-radius:20px;flex-shrink:0}
+.badge--age{background:#efefef;color:var(--charcoal)}.badge--new{background:#edf7e8;color:var(--green)}.badge--int{background:#e6f4f3;color:var(--teal)}
+.badge--gold{background:var(--gold);color:#5a3d00;font-weight:700}
+.mega__summary{font-size:.8rem;line-height:1.6;color:var(--charcoal);margin-bottom:1rem}
+.mega__all-link{display:inline-flex;align-items:center;gap:.3rem;font-size:.82rem;font-weight:600;color:var(--green);transition:gap var(--ease)}
+.mega__all-link:hover{gap:.55rem}
+.mega__col-gap{margin-top:.9rem}
+.nav__actions{display:flex;align-items:center;gap:.5rem;margin-left:auto;padding-left:1rem;flex-shrink:0}
+.btn-shop{padding:.42rem 1rem;font-size:.82rem;font-weight:500;color:var(--teal);border:1.5px solid var(--teal);border-radius:var(--r);transition:background var(--ease),color var(--ease)}
+.btn-shop:hover{background:var(--teal);color:var(--white)}
+.btn-donate{padding:.42rem 1.1rem;font-size:.82rem;font-weight:600;background:var(--green);color:var(--cream);border-radius:var(--r);transition:background var(--ease),color var(--ease),transform var(--ease)}
+.btn-donate:hover{background:var(--gold-bg);color:var(--gold-text);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;padding:.4rem;margin-left:auto;border-radius:var(--r)}
+.hamburger__bar{width:100%;height:2px;background:var(--green);border-radius:2px;transition:transform var(--ease),opacity var(--ease)}
+.hamburger.is-open .hamburger__bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.is-open .hamburger__bar:nth-child(2){opacity:0}
+.hamburger.is-open .hamburger__bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-drawer{display:none;position:fixed;top:calc(var(--topbar-h) + var(--nav-h));left:0;right:0;bottom:0;background:var(--white);overflow-y:auto;z-index:190;padding:1rem 0 2rem;border-top:1px solid var(--silver)}
+.mobile-drawer.is-open{display:block}
+.mob-section__toggle{width:100%;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;font-size:.95rem;font-weight:500;color:var(--charcoal);border-bottom:1px solid var(--silver);background:none;text-align:left;transition:background var(--ease)}
+.mob-section__toggle:hover{background:var(--cream)}
+.mob-section__content{display:none;padding:.5rem 0;background:#fafaf7;border-bottom:1px solid var(--silver)}
+.mob-section.is-open .mob-section__content{display:block}
+.mob-subheading{font-size:.67rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--green);padding:.6rem 1.8rem .3rem}
+.mob-subheading--health{color:#b83030}.mob-subheading--env{color:var(--teal)}
+.mob-link{display:flex;align-items:center;justify-content:space-between;padding:.55rem 1.8rem;font-size:.875rem;color:var(--charcoal);transition:background var(--ease),color var(--ease)}
+.mob-link:hover{background:var(--cream);color:var(--green)}
+.mob-actions{display:flex;gap:.75rem;padding:1.2rem 1.5rem 0}
+.mob-actions .btn-shop,.mob-actions .btn-donate{flex:1;text-align:center;font-size:.9rem;padding:.65rem 1rem}
+.breadcrumb{padding:.85rem 0;border-bottom:1px solid rgba(0,0,0,.06)}
+.breadcrumb__list{display:flex;align-items:center;gap:.4rem;font-size:.78rem;font-weight:500;list-style:none}
+.breadcrumb__list a{color:var(--teal)}.breadcrumb__list a:hover{opacity:.7}
+.breadcrumb__sep{opacity:.35}.breadcrumb__current{opacity:.65}
+
+/* ════════════════════════════════════════
+   HERO
+════════════════════════════════════════ */
+.page-hero{position:relative;min-height:76vh;display:flex;align-items:flex-end;overflow:hidden;background:var(--green)}
+.page-hero__bg{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(to top,rgba(8,22,3,.92) 0%,rgba(8,22,3,.38) 45%,rgba(8,22,3,.1) 100%),
+    linear-gradient(135deg,#1e4a06 0%,var(--teal) 55%,#1a4a00 100%);
+  background-size:cover;background-position:center 30%;
+  /* ADD PHOTO: style="background-image:url('../../images/_PAR1348 copy.jpeg')" */
 }
+.page-hero__bg::after{content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.018'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4z'/%3E%3C/g%3E%3C/svg%3E")}
+.page-hero__content{position:relative;z-index:2;padding:4rem 0 4.5rem;width:100%}
+.page-hero__malagasy{display:inline-block;font-family:var(--font-display);font-style:italic;font-size:clamp(1rem,1.8vw,1.15rem);color:rgba(238,235,217,.5);letter-spacing:.06em;margin-bottom:.6rem}
+.page-hero__title{font-family:var(--font-display);font-size:clamp(3.2rem,7vw,6rem);color:var(--cream);line-height:1;letter-spacing:-.01em;margin-bottom:.8rem}
+.page-hero__tagline{font-family:var(--font-display);font-style:italic;font-size:clamp(1.1rem,2vw,1.4rem);color:rgba(238,235,217,.78);margin-bottom:2rem;max-width:560px}
+.page-hero__tags{display:flex;flex-wrap:wrap;gap:.6rem}
+.hero-tag{padding:.35rem .9rem;border-radius:20px;font-size:.75rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;border:1px solid rgba(238,235,217,.28);color:var(--cream);background:rgba(255,255,255,.07)}
+.hero-tag--gold{background:var(--gold);border-color:var(--gold);color:#4a2e00;font-weight:700}
+.scroll-hint{position:absolute;bottom:2rem;right:2rem;display:flex;flex-direction:column;align-items:center;gap:.4rem;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(238,235,217,.4);z-index:2}
+.scroll-hint__line{width:1px;height:40px;background:linear-gradient(to bottom,transparent,rgba(238,235,217,.4));animation:scrollline 1.8s ease-in-out infinite}
+@keyframes scrollline{0%,100%{transform:scaleY(0);transform-origin:top;opacity:0}40%{transform:scaleY(1);transform-origin:top;opacity:1}70%{transform:scaleY(1);transform-origin:bottom;opacity:1}100%{transform:scaleY(0);transform-origin:bottom;opacity:0}}
 
-    /* To use real logo image:
-       background-image: url('images/logo_mini.jpeg'); background-size: cover;
-       then remove the "E4M" text node inside below. */
-  
-  /* Desktop nav list */
-  .nav__list { display: flex; align-items: center; height: 100%; flex: 1; }
-  .nav__item  { position: relative; height: 100%; display: flex; align-items: center; }
-  .nav__link  { display: flex; align-items: center; gap: .3rem; padding: 0 .9rem; height: 100%; font-size: .875rem; font-weight: 500; color: var(--charcoal); white-space: nowrap; border-bottom: 2px solid transparent; transition: color var(--ease), border-color var(--ease); user-select: none; }
-  .nav__link:hover                  { color: var(--green); }
-  .nav__link.is-active              { color: var(--green); border-bottom-color: var(--green); }
-  .nav__item.is-open .nav__link     { color: var(--green); }
-  .nav__chevron { width: 8px; height: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-1px); transition: transform var(--ease); flex-shrink: 0; }
-  .nav__item.is-open .nav__chevron  { transform: rotate(-135deg) translateY(2px); }
+/* ════════════════════════════════════════
+   INTRO
+════════════════════════════════════════ */
+.intro{padding:5.5rem 0;background:var(--white)}
+.intro__grid{display:grid;grid-template-columns:260px 1fr;gap:5rem;align-items:start}
+.intro__stat-block{position:sticky;top:calc(var(--nav-h) + 2rem)}
+.intro__big-number{font-family:var(--font-display);font-size:clamp(4rem,7vw,6rem);color:var(--green);line-height:1;margin-bottom:.3rem}
+.intro__stat-label{font-size:.82rem;color:var(--charcoal);line-height:1.5;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--silver)}
+.intro__pill-list{display:flex;flex-direction:column;gap:.7rem}
+.intro__pill{display:flex;align-items:center;gap:.7rem;font-size:.82rem;color:var(--charcoal)}
+.intro__pill-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.intro__pill strong{color:var(--green);font-weight:600}
+.intro__eyebrow{display:block;font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:.9rem}
+.intro__heading{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.4rem);color:var(--green);line-height:1.2;margin-bottom:1.4rem}
+.intro__body{font-size:1.05rem;line-height:1.8;color:var(--charcoal);max-width:640px}
+.intro__body p+p{margin-top:1.2em}
+.intro__body strong{color:var(--green)}
 
-  /* Simple dropdown */
-  .dropdown {
-    visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(6px);
-    transition: opacity var(--ease), transform var(--ease), visibility 0s var(--ease);
-    position: absolute; top: calc(var(--nav-h) - 1px); left: 0; min-width: 240px;
-    background: var(--white); border: 1px solid var(--silver); border-top: none;
-    border-radius: 0 0 var(--r-lg) var(--r-lg); box-shadow: 0 10px 32px rgba(0,0,0,.09); padding: .5rem 0;
-  }
-  .nav__item.is-open .dropdown { visibility: visible; opacity: 1; pointer-events: auto; transform: translateY(0); transition: opacity var(--ease), transform var(--ease); }
-  .dropdown__link { display: block; padding: .6rem 1.2rem; font-size: .875rem; color: var(--charcoal); transition: background var(--ease), color var(--ease); }
-  .dropdown__link:hover   { background: var(--cream); color: var(--green); }
-  .dropdown__sub          { display: block; font-size: .75rem; color: var(--charcoal); opacity: .6; margin-top: .1rem; font-weight: 400; }
-  .dropdown__separator    { height: 1px; background: var(--silver); margin: .4rem 1.2rem; opacity: .5; }
+/* ════════════════════════════════════════
+   CAROUSEL — full-width, auto-loops, bigger
+════════════════════════════════════════ */
+.carousel-section{background:var(--cream);padding:4.5rem 0 0}
+.carousel-section__head{padding-bottom:2rem}
+.carousel-eyebrow{display:block;font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:.6rem}
+.carousel-title{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.4rem);color:var(--green);line-height:1.2}
 
-  /* Mega dropdown */
-  .dropdown--mega {
-    visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(6px);
-    transition: opacity var(--ease), transform var(--ease), visibility 0s var(--ease);
-    position: absolute; top: calc(var(--nav-h) - 1px); left: -60px; width: 620px;
-    background: var(--white); border: 1px solid var(--silver); border-top: none;
-    border-radius: 0 0 var(--r-lg) var(--r-lg); box-shadow: 0 10px 32px rgba(0,0,0,.09);
-    display: grid; grid-template-columns: 1fr 1fr 180px;
-  }
-  .nav__item.is-open .dropdown--mega { visibility: visible; opacity: 1; pointer-events: auto; transform: translateY(0); transition: opacity var(--ease), transform var(--ease); }
-  .mega__col          { padding: 1.2rem 1.1rem; border-right: 1px solid rgba(213,213,213,.5); }
-  .mega__col:last-child { border-right: none; background: #f8f7f2; border-radius: 0 0 var(--r-lg) 0; }
-  .mega__heading      { font-size: .67rem; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; margin-bottom: .6rem; padding-bottom: .5rem; border-bottom: 1px solid var(--silver); }
-  .mega__heading--edu    { color: var(--green); }
-  .mega__heading--health { color: #b83030; }
-  .mega__heading--env    { color: var(--teal); }
-  .mega__link     { display: flex; align-items: center; gap: .5rem; padding: .4rem 0; font-size: .83rem; color: var(--charcoal); transition: color var(--ease); }
-  .mega__link:hover { color: var(--green); }
-  .badge          { font-size: .62rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: .12rem .45rem; border-radius: 20px; flex-shrink: 0; }
-  .badge--age     { background: #efefef; color: var(--charcoal); }
-  .badge--new     { background: #edf7e8; color: var(--green); }
-  .badge--int     { background: #e6f4f3; color: var(--teal); }
-  .mega__summary  { font-size: .8rem; line-height: 1.6; color: var(--charcoal); margin-bottom: 1rem; }
-  .mega__all-link { display: inline-flex; align-items: center; gap: .3rem; font-size: .82rem; font-weight: 600; color: var(--green); transition: gap var(--ease); }
-  .mega__all-link:hover { gap: .55rem; }
-  .mega__col-gap  { margin-top: .9rem; }
+.carousel{position:relative;overflow:hidden;user-select:none}
+.carousel__track{display:flex;transition:transform .55s cubic-bezier(.25,.46,.45,.94);cursor:grab;will-change:transform}
+.carousel__track.no-transition{transition:none}
+.carousel__track.is-dragging{cursor:grabbing;transition:none}
 
-  /* Nav right actions */
-  .nav__actions { display: flex; align-items: center; gap: .5rem; margin-left: auto; padding-left: 1rem; flex-shrink: 0; }
-  /* Shop */
-  .btn-shop       { padding: .42rem 1rem; font-size: .82rem; font-weight: 500; color: var(--teal); border: 1.5px solid var(--teal); border-radius: var(--r); transition: background var(--ease), color var(--ease); }
-  .btn-shop:hover { background: var(--teal); color: var(--white); }
-  /* Donate — green default, GOLD on hover */
-  .btn-donate         { padding: .42rem 1.1rem; font-size: .82rem; font-weight: 600; background: var(--green); color: var(--cream); border-radius: var(--r); transition: background var(--ease), color var(--ease), transform var(--ease); }
-  .btn-donate:hover   { background: var(--gold-bg); color: var(--gold-text); transform: translateY(-1px); }
+/* Taller slides — more generous */
+.carousel__slide{flex:0 0 calc(100% / 3);position:relative;overflow:hidden}
+.carousel__slide img{width:100%;height:380px;object-fit:cover;display:block;transition:transform .6s ease;pointer-events:none}
+.carousel__slide:hover img{transform:scale(1.03)}
 
-  /* Hamburger */
-  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; padding: .4rem; margin-left: auto; border-radius: var(--r); transition: background var(--ease); }
-  .hamburger:hover { background: var(--cream); }
-  .hamburger__bar  { width: 100%; height: 2px; background: var(--green); border-radius: 2px; transition: transform var(--ease), opacity var(--ease); }
-  .hamburger.is-open .hamburger__bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .hamburger.is-open .hamburger__bar:nth-child(2) { opacity: 0; }
-  .hamburger.is-open .hamburger__bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.carousel__ph{width:100%;height:380px;background:linear-gradient(145deg,#c5cbb8,#adb5a2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:rgba(83,83,83,.3);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase}
+.carousel__ph svg{opacity:.25;flex-shrink:0}
 
-  /* ═══════════════════════════════════════════════════════════════
-     MOBILE DRAWER
-     ═══════════════════════════════════════════════════════════════ */
-  .mobile-drawer { display: none; position: fixed; top: calc(var(--topbar-h) + var(--nav-h)); left: 0; right: 0; bottom: 0; background: var(--white); overflow-y: auto; z-index: 190; padding: 1rem 0 2rem; border-top: 1px solid var(--silver); }
-  .mobile-drawer.is-open { display: block; }
-  .mob-section__toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: .85rem 1.5rem; font-size: .95rem; font-weight: 500; color: var(--charcoal); border-bottom: 1px solid var(--silver); background: none; text-align: left; transition: background var(--ease); }
-  .mob-section__toggle:hover { background: var(--cream); }
-  .mob-section__content { display: none; padding: .5rem 0; background: #fafaf7; border-bottom: 1px solid var(--silver); }
-  .mob-section.is-open .mob-section__content { display: block; }
-  .mob-subheading { font-size: .67rem; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; color: var(--green); padding: .6rem 1.8rem .3rem; }
-  .mob-subheading--health { color: #b83030; }
-  .mob-subheading--env    { color: var(--teal); }
-  .mob-link { display: flex; align-items: center; justify-content: space-between; padding: .55rem 1.8rem; font-size: .875rem; color: var(--charcoal); transition: background var(--ease), color var(--ease); }
-  .mob-link:hover { background: var(--cream); color: var(--green); }
-  .mob-actions { display: flex; gap: .75rem; padding: 1.2rem 1.5rem 0; }
-  .mob-actions .btn-shop, .mob-actions .btn-donate { flex: 1; text-align: center; font-size: .9rem; padding: .65rem 1rem; }
+.carousel__controls{position:absolute;top:50%;transform:translateY(-50%);width:100%;display:flex;justify-content:space-between;padding:0 1rem;pointer-events:none;z-index:5}
+.carousel__btn{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.92);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 16px rgba(0,0,0,.15);pointer-events:all;transition:background var(--ease),transform var(--ease);color:var(--green)}
+.carousel__btn:hover{background:var(--white);transform:scale(1.1)}
+.carousel__btn svg{width:18px;height:18px}
 
-  /* ═══════════════════════════════════════════════════════════════
-     HERO
-     ═══════════════════════════════════════════════════════════════ */
-  .hero { background: var(--cream); overflow: hidden; position: relative; }
-  .hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(25,83,1,.06) 0%, transparent 60%); pointer-events: none; }
-  .hero .container { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; padding-top: 5rem; padding-bottom: 5rem; }
-  .hero-eyebrow { font-size: .75rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); margin-bottom: 1rem; }
-  .hero h1 { font-family: var(--font-display); font-size: clamp(2.2rem, 4.5vw, 3.4rem); color: var(--green); line-height: 1.15; margin-bottom: 1.4rem; }
-  .hero h1 em { font-style: italic; color: var(--teal); }
-  .hero-desc  { font-size: 1.05rem; color: var(--charcoal); max-width: 500px; margin-bottom: 2rem; }
-  .hero-ctas  { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .hero-media { position: relative; }
-  .hero-media .img-placeholder { width: 100%; aspect-ratio: 4/3; background: linear-gradient(145deg, var(--green) 0%, var(--teal) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.35); font-family: var(--font-display); font-size: 1.1rem; overflow: hidden; position: relative; }
-  .badge-float { position: absolute; bottom: -1rem; left: -1rem; background: var(--white); border-radius: 10px; padding: 1rem 1.4rem; box-shadow: 0 4px 24px rgba(0,0,0,.12); display: flex; align-items: center; gap: .75rem; }
-  .badge-float .num { font-family: var(--font-display); font-size: 1.8rem; color: var(--green); font-weight: 700; line-height: 1; }
-  .badge-float .lbl { font-size: .78rem; color: var(--charcoal); line-height: 1.3; }
-  .hero-stats { display: flex; gap: 1.5rem; margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(25,83,1,.18); }
-  .hero-stat .val { font-family: var(--font-display); font-size: 1.6rem; color: var(--green); font-weight: 700; }
-  .hero-stat .key { font-size: .82rem; color: var(--charcoal); }
+.carousel__dots{display:flex;justify-content:center;gap:.5rem;padding:1.2rem 0 2.5rem}
+.carousel__dot{width:7px;height:7px;border-radius:50%;background:var(--silver);border:none;cursor:pointer;transition:background var(--ease),transform var(--ease);padding:0}
+.carousel__dot.is-active{background:var(--green);transform:scale(1.35)}
 
-  /* ═══════════════════════════════════════════════════════════════
-     TRUST STRIP
-     ═══════════════════════════════════════════════════════════════ */
-  .trust-strip { background: var(--green); color: var(--cream); padding: 1.2rem 0; }
-  .trust-strip .container { display: flex; align-items: center; gap: 3rem; overflow-x: auto; white-space: nowrap; }
-  .trust-item { display: flex; align-items: center; gap: .6rem; font-size: .82rem; font-weight: 500; opacity: .9; flex-shrink: 0; }
-
-  /* ═══════════════════════════════════════════════════════════════
-     IMPACT
-     ═══════════════════════════════════════════════════════════════ */
-  .impact { padding: 5rem 0; }
-  .impact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-top: 3rem; }
-  .impact-card { background: var(--cream); border-radius: 10px; padding: 2rem 1.5rem; text-align: center; border-top: 4px solid var(--green); transition: transform var(--ease), box-shadow var(--ease); }
-  .impact-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,.08); }
-  .impact-card .num   { font-family: var(--font-display); font-size: 2.8rem; color: var(--green); font-weight: 700; line-height: 1; margin-bottom: .5rem; }
-  .impact-card .label { font-size: .9rem; color: var(--charcoal); }
-
-  /* ═══════════════════════════════════════════════════════════════
-     PROJECTS
-     ═══════════════════════════════════════════════════════════════ */
-  .projects { padding: 5rem 0; background: var(--cream); }
-  .projects-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3rem; gap: 2rem; }
-  .projects-grid   { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .project-card    { background: var(--white); border-radius: 10px; overflow: hidden; transition: transform var(--ease), box-shadow var(--ease); }
-  .project-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(0,0,0,.1); }
-  .project-thumb   { height: 180px; background: linear-gradient(145deg, var(--green), var(--teal)); position: relative; }
-  .project-card:nth-child(2) .project-thumb { background: linear-gradient(145deg, var(--teal), #004d48); }
-  .project-card:nth-child(3) .project-thumb { background: linear-gradient(145deg, #2c7a01, var(--teal)); }
-  .project-card:nth-child(4) .project-thumb { background: linear-gradient(145deg, #005850, var(--green)); }
-  .project-card:nth-child(5) .project-thumb { background: linear-gradient(145deg, var(--teal), var(--green)); }
-  .project-card:nth-child(6) .project-thumb { background: linear-gradient(145deg, var(--green), #003d30); }
-  .project-thumb .tag { position: absolute; top: 1rem; left: 1rem; background: rgba(255,255,255,.92); color: var(--green); font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: .25rem .65rem; border-radius: 20px; }
-  .project-body     { padding: 1.4rem; }
-  .project-body h3  { font-family: var(--font-display); font-size: 1.1rem; color: var(--green); margin-bottom: .5rem; }
-  .project-body p   { font-size: .88rem; color: var(--charcoal); line-height: 1.55; margin-bottom: 1rem; }
-  .project-link     { font-size: .82rem; font-weight: 600; color: var(--teal); display: inline-flex; align-items: center; gap: .3rem; transition: gap var(--ease); }
-  .project-link:hover { gap: .6rem; }
-
-  /* ═══════════════════════════════════════════════════════════════
-     BLOG + SHOP
-     ═══════════════════════════════════════════════════════════════ */
-  .features-row { padding: 5rem 0; }
-  .features-row .container { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-  .feature-block { border-radius: 12px; overflow: hidden; position: relative; min-height: 320px; display: flex; flex-direction: column; justify-content: flex-end; padding: 2.5rem; }
-  .feature-block.blog { background: linear-gradient(160deg, var(--green) 0%, #1b4a00 100%); }
-  .feature-block.shop { background: linear-gradient(160deg, var(--teal) 0%, #003d38 100%); }
-  .feature-block .feat-label { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(238,235,217,.7); margin-bottom: .6rem; }
-  .feature-block h2  { font-family: var(--font-display); font-size: 1.8rem; color: var(--cream); line-height: 1.2; margin-bottom: .8rem; }
-  .feature-block p   { font-size: .9rem; color: rgba(238,235,217,.8); margin-bottom: 1.5rem; max-width: 380px; }
-
-  /* ═══════════════════════════════════════════════════════════════
-     VOLUNTEER BANNER
-     ═══════════════════════════════════════════════════════════════ */
-  .volunteer-banner { background: var(--cream); padding: 4.5rem 0; }
-  .volunteer-banner .container { display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
-  .volunteer-banner h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--green); margin-bottom: .75rem; }
-  .volunteer-banner p  { font-size: .95rem; color: var(--charcoal); max-width: 540px; }
-  .volunteer-ctas      { display: flex; gap: 1rem; flex-wrap: wrap; }
-
-  /* ═══════════════════════════════════════════════════════════════
-     DONATE SECTION
-     ═══════════════════════════════════════════════════════════════ */
-  .donate-section { background: var(--green); padding: 5rem 0; text-align: center; }
-  .donate-section .section-label { color: rgba(238,235,217,.7); }
-  .donate-section h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); color: var(--cream); margin-bottom: 1rem; }
-  .donate-section p  { color: rgba(238,235,217,.8); font-size: 1rem; max-width: 560px; margin: 0 auto 2.5rem; }
-  .donate-amounts    { display: flex; justify-content: center; gap: .75rem; flex-wrap: wrap; margin-bottom: 2rem; }
-  .amount-btn        { padding: .65rem 1.6rem; border: 2px solid rgba(238,235,217,.4); border-radius: var(--r); color: var(--cream); background: transparent; font-family: var(--font-body); font-size: 1rem; cursor: pointer; transition: all var(--ease); }
-  .amount-btn:hover, .amount-btn.is-active { background: var(--cream); color: var(--green); border-color: var(--cream); }
-  .donate-section .btn-cream { font-size: 1rem; padding: .9rem 2.4rem; }
-
-  /* ═══════════════════════════════════════════════════════════════
-     FOOTER
-     ═══════════════════════════════════════════════════════════════ */
-  footer { background: #111; color: var(--silver); padding: 4rem 0 2rem; }
-  .footer-grid    { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
-  .footer-brand h3 { font-family: var(--font-display); color: var(--cream); font-size: 1.15rem; margin-bottom: .75rem; }
-  .footer-brand p  { font-size: .85rem; line-height: 1.65; margin-bottom: 1.2rem; max-width: 280px; }
-  .footer-socials  { display: flex; gap: .75rem; }
-  .social-btn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; font-size: .8rem; color: var(--silver); transition: background var(--ease), border-color var(--ease); }
-  .social-btn:hover { background: var(--teal); border-color: var(--teal); color: #fff; }
-  .footer-col h4 { color: var(--cream); font-size: .82rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1.1rem; }
-  .footer-col li { margin-bottom: .5rem; }
-  .footer-col a  { font-size: .87rem; color: var(--silver); transition: color var(--ease); }
-  .footer-col a:hover { color: var(--cream); }
-  .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: .8rem; }
-  .footer-legal  { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-  .footer-legal a { color: var(--silver); transition: color var(--ease); }
-  .footer-legal a:hover { color: var(--cream); }
-
-  /* ═══════════════════════════════════════════════════════════════
-     RESPONSIVE
-     ═══════════════════════════════════════════════════════════════ */
-  @media (max-width: 900px) {
-    .nav__list { display: none; }
-    .nav__actions { display: none; }
-    .hamburger { display: flex; }
-    .hero .container { grid-template-columns: 1fr; }
-    .hero-media { display: none; }
-    .impact-grid { grid-template-columns: repeat(2, 1fr); }
-    .projects-grid { grid-template-columns: repeat(2, 1fr); }
-    .features-row .container { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr 1fr; }
-    .volunteer-banner .container { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 600px) {
-    .top-bar__info { display: none; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .footer-grid   { grid-template-columns: 1fr; }
-  }
-  /* ═══════════════════════════════════════════════════════════════
-     BREADCRUMB – IN GLOBAL.CSS
-     ═══════════════════════════════════════════════════════════════ */
-  
-    .breadcrumb {
-  padding: 0.85rem 0;
-}
-    
-    .breadcrumb .container {
-  width: fit-content;  /* Only as wide as content needs */
-  margin-left: 0;      /* Align to left */
-}
-
-  /* ═══════════════════════════════════════════════════════════════
-     PAGE HERO
-     Full-bleed, no button — let the photo and name do the work.
-     ═══════════════════════════════════════════════════════════════ */
-  .page-hero {
-    position: relative;
-    min-height: 72vh;
-    display: flex;
-    align-items: flex-end;
-    overflow: hidden;
-    background: var(--green);   /* fallback behind placeholder */
-  }
-
-  /* Photo placeholder — replace with a real <img> */
-  .page-hero__bg {
-    position: absolute;
-    inset: 0;
-    background:
-      /* dark gradient so text is always legible regardless of photo */
-      linear-gradient(
-        to top,
-        rgba(10, 30, 5, 0.88) 0%,
-        rgba(10, 30, 5, 0.42) 45%,
-        rgba(10, 30, 5, 0.15) 100%
-      ),
-      /* ↓ REPLACE this placeholder with your real image ↓ */
-      linear-gradient(135deg, #2a5c08 0%, #006C65 50%, #1a4a00 100%);
-    background-size: cover;
-    background-position: center;
-
-    /* ─── HOW TO ADD THE REAL PHOTO ───────────────────────
-       Replace the second gradient line above with:
-       url('../images/akka-hero.jpg')
-       Example:
-         background:
-           linear-gradient(to top, rgba(10,30,5,.88) 0%, ...),
-           url('../images/akka-hero.jpg');
-         background-size: cover;
-         background-position: center 30%;
-    ──────────────────────────────────────────────────────── */
-  }
-
-  /* Subtle texture overlay — adds warmth */
-  .page-hero__bg::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    pointer-events: none;
-  }
-
-  .page-hero__content {
-    position: relative;
-    z-index: 2;
-    padding: 4rem 0 4.5rem;
-    width: 100%;
-  }
-
-  /* The Malagasy name — the page's signature visual element */
-  .page-hero__malagasy {
-    display: inline-block;
-    font-family: var(--font-display);
-    font-size: clamp(1rem, 2vw, 1.15rem);
-    font-style: italic;
-    color: rgba(238,235,217,.55);
-    letter-spacing: .06em;
-    margin-bottom: .6rem;
-  }
-
-  .page-hero__title {
-    font-family: var(--font-display);
-    font-size: clamp(3.2rem, 7vw, 6rem);
-    color: var(--cream);
-    line-height: 1.0;
-    letter-spacing: -.01em;
-    margin-bottom: .8rem;
-  }
-
-  .page-hero__tagline {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(1.1rem, 2vw, 1.45rem);
-    color: rgba(238,235,217,.8);
-    margin-bottom: 2rem;
-    max-width: 560px;
-  }
-
-  /* Pill tags row */
-  .page-hero__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .6rem;
-  }
-  .hero-tag {
-    padding: .35rem .9rem;
-    border-radius: 20px;
-    font-size: .75rem;
-    font-weight: 600;
-    letter-spacing: .07em;
-    text-transform: uppercase;
-    border: 1px solid rgba(238,235,217,.3);
-    color: var(--cream);
-    backdrop-filter: blur(4px);
-    background: rgba(255,255,255,.08);
-  }
-  .hero-tag--accent { background: var(--accent); border-color: var(--accent); }
-
-  /* Scroll nudge */
-  .scroll-hint {
-    position: absolute;
-    bottom: 2rem;
-    right: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: .4rem;
-    font-size: .68rem;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: rgba(238,235,217,.45);
-    z-index: 2;
-  }
-  .scroll-hint__line {
-    width: 1px;
-    height: 40px;
-    background: linear-gradient(to bottom, transparent, rgba(238,235,217,.4));
-    animation: scrollline 1.6s ease-in-out infinite;
-  }
-  @keyframes scrollline {
-    0%, 100% { transform: scaleY(0); transform-origin: top; opacity: 0; }
-    40%       { transform: scaleY(1); transform-origin: top; opacity: 1; }
-    70%       { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
-    100%      { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
-  }
-
-
-  /* ═══════════════════════════════════════════════════════════════
-     INTRO — two-column: big stat left, mission text right
-     ═══════════════════════════════════════════════════════════════ */
-  .intro {
-    padding: 5.5rem 0;
-    background: var(--white);
-  }
-  .intro__grid {
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: 5rem;
-    align-items: start;
-  }
-
-  /* Left column: anchor stat + labels */
-  .intro__stat-block {
-    position: sticky;
-    top: calc(var(--nav-h) + 2rem);
-  }
-  .intro__big-number {
-    font-family: var(--font-display);
-    font-size: clamp(4rem, 7vw, 6rem);
-    color: var(--green);
-    line-height: 1;
-    margin-bottom: .3rem;
-  }
-  .intro__stat-label {
-    font-size: .82rem;
-    color: var(--charcoal);
-    line-height: 1.5;
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--silver);
-  }
-  /* Mini data pills */
-  .intro__pill-list { display: flex; flex-direction: column; gap: .7rem; }
-  .intro__pill {
-    display: flex;
-    align-items: center;
-    gap: .7rem;
-    font-size: .82rem;
-    color: var(--charcoal);
-  }
-  .intro__pill-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--accent);
-    flex-shrink: 0;
-  }
-  .intro__pill strong { color: var(--green); font-weight: 600; }
-
-  /* Right column: copy */
-  .intro__eyebrow {
-    display: block;
-    font-size: .72rem;
-    font-weight: 500;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--teal);
-    margin-bottom: .9rem;
-  }
-  .intro__heading {
-    font-family: var(--font-display);
-    font-size: clamp(1.8rem, 3vw, 2.4rem);
-    color: var(--green);
-    line-height: 1.2;
-    margin-bottom: 1.4rem;
-  }
-  .intro__body {
-    font-size: 1.05rem;
-    line-height: 1.8;
-    color: var(--charcoal);
-    max-width: 640px;
-  }
-  .intro__body p + p { margin-top: 1.2em; }
-  .intro__body strong { color: var(--green); }
-
-
-  /* ═══════════════════════════════════════════════════════════════
-     SIGNATURE PULLQUOTE — "Akanin'ny Kilonga" as visual art
-     This is the page's one memorable, bold element.
-     ═══════════════════════════════════════════════════════════════ */
-  .pullquote {
-    padding: 6rem 0;
-    background: var(--green);
-    overflow: hidden;
-    position: relative;
-  }
-  /* Faint giant word in background */
-  .pullquote::before {
-    content: 'AKKA';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: var(--font-display);
-    font-size: clamp(8rem, 20vw, 18rem);
-    font-weight: 700;
-    color: rgba(255,255,255,.04);
-    letter-spacing: .1em;
-    pointer-events: none;
-    white-space: nowrap;
-    user-select: none;
-  }
-
-  .pullquote__inner {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    max-width: 820px;
-    margin: 0 auto;
-  }
-
-  /* The Malagasy name — enormous, display, ivory */
-  .pullquote__malagasy {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(2.4rem, 5vw, 4.2rem);
-    color: var(--cream);
-    line-height: 1.1;
-    margin-bottom: .5rem;
-    opacity: .95;
-  }
-
-  .pullquote__translation {
-    font-size: .88rem;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    color: rgba(238,235,217,.5);
-    margin-bottom: 3rem;
-  }
-
-  /* The Montessori quote */
-  .pullquote__quote {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(1.15rem, 2.2vw, 1.55rem);
-    color: rgba(238,235,217,.9);
-    line-height: 1.65;
-    margin-bottom: 1.2rem;
-  }
-  .pullquote__quote::before { content: '\201C'; }
-  .pullquote__quote::after  { content: '\201D'; }
-
-  .pullquote__attribution {
-    font-size: .82rem;
-    color: rgba(238,235,217,.5);
-    letter-spacing: .08em;
-  }
+/* ════════════════════════════════════════
+   PULLQUOTE
+════════════════════════════════════════ */
+.pullquote{padding:6rem 0;background:var(--green);overflow:hidden;position:relative}
+.pullquote::before{content:'AKKA';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--font-display);font-size:clamp(8rem,20vw,18rem);font-weight:700;color:rgba(255,255,255,.04);letter-spacing:.1em;pointer-events:none;white-space:nowrap;user-select:none}
+.pullquote__inner{position:relative;z-index:1;text-align:center;max-width:820px;margin:0 auto}
+.pullquote__malagasy{font-family:var(--font-display);font-style:italic;font-size:clamp(2.4rem,5vw,4.2rem);color:var(--cream);line-height:1.1;margin-bottom:.5rem}
+.pullquote__translation{font-size:.88rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(238,235,217,.45);margin-bottom:3rem}
+.pullquote__quote{font-family:var(--font-display);font-style:italic;font-size:clamp(1.15rem,2.2vw,1.55rem);color:rgba(238,235,217,.9);line-height:1.65;margin-bottom:1.2rem}
+.pullquote__quote::before{content:'\201C'}.pullquote__quote::after{content:'\201D'}
+.pullquote__attribution{font-size:.82rem;color:rgba(238,235,217,.5);letter-spacing:.08em}
 
 
   /* ═══════════════════════════════════════════════════════════════
      PHOTO STRIP — 4 photos side by side
      ═══════════════════════════════════════════════════════════════ */
+     
   .photo-strip {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -682,409 +248,333 @@
   .photo-placeholder-label svg { opacity: .25; }
 
 
-  /* ═══════════════════════════════════════════════════════════════
-     HOW IT WORKS — 3 numbered cards
-     ═══════════════════════════════════════════════════════════════ */
-  .how-it-works {
-    padding: 5.5rem 0;
-    background: var(--cream);
-  }
-  .how-it-works__header {
-    margin-bottom: 3.5rem;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-  .section-eyebrow {
-    display: block;
-    font-size: .72rem;
-    font-weight: 500;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--teal);
-    margin-bottom: .75rem;
-  }
-  .section-heading {
-    font-family: var(--font-display);
-    font-size: clamp(1.8rem, 3vw, 2.4rem);
-    color: var(--green);
-    line-height: 1.2;
-  }
-  .how-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-  .how-card {
-    background: var(--white);
-    border-radius: var(--r-lg);
-    padding: 2rem 1.8rem;
-    position: relative;
-    border-top: 3px solid var(--accent);
-    transition: transform var(--ease), box-shadow var(--ease);
-  }
-  .how-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,.08); }
-  /* Accent number */
-  .how-card__num {
-    font-family: var(--font-display);
-    font-size: 3.5rem;
-    font-weight: 700;
-    color: var(--accent-lt);
-    line-height: 1;
-    margin-bottom: .5rem;
-    /* Stroke trick — the number sits behind the content */
-    -webkit-text-stroke: 1.5px var(--accent);
-    color: transparent;
-  }
-  .how-card__title {
-    font-family: var(--font-display);
-    font-size: 1.15rem;
-    color: var(--green);
-    margin-bottom: .7rem;
-  }
-  .how-card__body { font-size: .9rem; color: var(--charcoal); line-height: 1.7; }
 
+/* ════════════════════════════════════════
+   MARIA MONTESSORI — editorial, condensed
+════════════════════════════════════════ */
+.montessori-section{padding:6rem 0;background:var(--white);overflow:hidden}
+.montessori-section__inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;min-height:540px;
+}
+/* Left: dark panel with portrait */
+.montessori-left{
+  background:var(--ink);
+  position:relative;
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  padding:3rem;
+  min-height:540px;
+}
+.montessori-left__bg{
+  position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(13,43,1,.98) 0%, rgba(13,43,1,.5) 60%, rgba(13,43,1,.1) 100%);
+  z-index:1;
+}
+.montessori-left__photo{
+  position:absolute;inset:0;
+  object-fit:cover;object-position:center top;
+  width:100%;height:100%;
+  filter:grayscale(1);opacity:.45;
+}
+/* src: the live site portrait */
+.montessori-left__ph{
+  position:absolute;inset:0;
+  background:linear-gradient(145deg,#1a3510,#0d2b01);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(238,235,217,.1);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;
+}
+.montessori-left__content{position:relative;z-index:2}
+.montessori-left__dates{
+  font-family:var(--font-display);
+  font-size:clamp(3rem,5vw,5rem);
+  color:rgba(238,235,217,.12);
+  line-height:1;letter-spacing:-.02em;
+  font-weight:700;margin-bottom:.5rem;
+}
+.montessori-left__name{font-family:var(--font-display);font-size:1.4rem;color:var(--cream);margin-bottom:.3rem}
+.montessori-left__title{font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(238,235,217,.4)}
 
-  /* ═══════════════════════════════════════════════════════════════
-     FAST FACTS — horizontal data strip
-     ═══════════════════════════════════════════════════════════════ */
-  .fast-facts {
-    background: var(--white);
-    border-top: 1px solid var(--silver);
-    border-bottom: 1px solid var(--silver);
-  }
-  .fast-facts__grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-  }
-  .fact {
-    padding: 2.5rem 1.5rem;
-    border-right: 1px solid var(--silver);
-    text-align: center;
-    transition: background var(--ease);
-  }
-  .fact:hover { background: var(--cream); }
-  .fact:last-child { border-right: none; }
-  .fact__icon { font-size: 1.6rem; margin-bottom: .5rem; }
-  .fact__val  {
-    font-family: var(--font-display);
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--green);
-    line-height: 1;
-    margin-bottom: .35rem;
-  }
-  .fact__label { font-size: .8rem; color: var(--charcoal); line-height: 1.4; }
+/* Right: editorial bio */
+.montessori-right{
+  background:var(--cream);
+  padding:3rem 3.5rem;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.montessori-right__eyebrow{display:block;font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:1.2rem}
+.montessori-right__quote{
+  font-family:var(--font-display);font-style:italic;
+  font-size:clamp(1.1rem,2vw,1.4rem);
+  color:var(--green);line-height:1.45;
+  margin-bottom:2rem;
+  border-left:3px solid var(--accent);
+  padding-left:1.2rem;
+}
+/* Four key dates — timeline strip */
+.montessori-timeline{display:flex;flex-direction:column;gap:1.1rem;margin-bottom:2rem}
+.mtime{display:grid;grid-template-columns:56px 1fr;gap:.8rem;align-items:start}
+.mtime__year{font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--accent);line-height:1.3;flex-shrink:0}
+.mtime__fact{font-size:.85rem;color:var(--charcoal);line-height:1.55}
+.mtime__fact strong{color:var(--green);font-weight:600}
+.montessori-right__footer{font-size:.8rem;color:var(--charcoal);opacity:.55;font-style:italic;border-top:1px solid rgba(0,0,0,.1);padding-top:1rem}
 
+/* ════════════════════════════════════════
+   PATRICIA FONTENAY — honoured
+════════════════════════════════════════ */
+.fontenay-section{padding:6rem 0;background:var(--ink)}
+.fontenay-section__inner{
+  display:grid;grid-template-columns:320px 1fr;
+  gap:4rem;align-items:start;
+}
+.fontenay-portrait-col{display:flex;flex-direction:column;gap:1.2rem}
+/* Main portrait */
+.fontenay-portrait{
+  width:100%;aspect-ratio:3/4;
+  background:linear-gradient(145deg,#1a3510,#2c5020);
+  border-radius:var(--r-lg);
+  overflow:hidden;position:relative;
+}
+.fontenay-portrait img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.2)}
+.fontenay-portrait__ph{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.6rem;color:rgba(238,235,217,.2);
+  font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;
+}
+/* Caption */
+.fontenay-caption{
+  font-size:.78rem;color:rgba(238,235,217,.45);line-height:1.5;text-align:center;
+  font-style:italic;
+}
+/* Additional smaller portraits row */
+.fontenay-gallery{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.fontenay-gallery__slot{
+  aspect-ratio:1;
+  background:linear-gradient(145deg,#243d18,#1a2e10);
+  border-radius:var(--r);overflow:hidden;position:relative;
+}
+.fontenay-gallery__slot img{width:100%;height:100%;object-fit:cover;display:block}
+.fontenay-gallery__ph{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(238,235,217,.15);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;
+}
 
-  /* ═══════════════════════════════════════════════════════════════
-     PARTNERS — logo-strip style
-     ═══════════════════════════════════════════════════════════════ */
-  .partners {
-    padding: 4.5rem 0;
-    background: var(--cream);
-  }
-  .partners__header { text-align: center; margin-bottom: 2.5rem; }
-  .partners__grid {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-  }
-  .partner-pill {
-    display: flex;
-    align-items: center;
-    gap: .75rem;
-    padding: .9rem 1.8rem;
-    background: var(--white);
-    border-radius: 50px;
-    border: 1px solid var(--silver);
-    font-size: .88rem;
-    font-weight: 500;
-    color: var(--charcoal);
-    transition: border-color var(--ease), box-shadow var(--ease);
-  }
-  .partner-pill:hover {
-    border-color: var(--green);
-    box-shadow: 0 4px 16px rgba(25,83,1,.1);
-  }
-  .partner-pill__dot {
-    width: 10px; height: 10px; border-radius: 50%;
-    background: var(--green); flex-shrink: 0;
-  }
+/* Text col */
+.fontenay-text{}
+.fontenay-eyebrow{display:block;font-size:.7rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(238,235,217,.4);margin-bottom:.9rem}
+.fontenay-name{font-family:var(--font-display);font-size:clamp(2rem,3.5vw,3rem);color:var(--cream);line-height:1.05;letter-spacing:-.01em;margin-bottom:.4rem}
+.fontenay-title{font-size:.82rem;color:rgba(238,235,217,.45);letter-spacing:.06em;margin-bottom:2rem;font-style:italic}
+.fontenay-body{font-size:.98rem;color:rgba(238,235,217,.65);line-height:1.8;margin-bottom:2rem}
+.fontenay-body p+p{margin-top:.9em}
+/* Placeholder notice */
+.fontenay-notice{
+  font-size:.75rem;color:rgba(238,235,217,.3);
+  border:1px dashed rgba(238,235,217,.15);
+  padding:.7rem 1rem;border-radius:var(--r);
+  font-style:italic;margin-bottom:2rem;
+}
+/* Links */
+.fontenay-links{display:flex;flex-direction:column;gap:.6rem}
+.fontenay-links__label{font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(238,235,217,.35);margin-bottom:.3rem}
+.fontenay-link{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.85rem;color:rgba(238,235,217,.55);
+  border-bottom:1px solid rgba(238,235,217,.1);
+  padding-bottom:.3rem;
+  transition:color var(--ease),border-color var(--ease);
+}
+.fontenay-link:hover{color:var(--cream);border-color:rgba(238,235,217,.4)}
+.fontenay-link svg{width:13px;height:13px;opacity:.5;flex-shrink:0}
+/* Credentials pill row */
+.fontenay-creds{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.cred-pill{padding:.28rem .75rem;border-radius:20px;background:rgba(238,235,217,.07);border:1px solid rgba(238,235,217,.12);font-size:.72rem;color:rgba(238,235,217,.6);font-weight:500}
 
+/* ════════════════════════════════════════
+   HOW IT WORKS — refined icons, no numbers
+════════════════════════════════════════ */
+.how-it-works{padding:5.5rem 0;background:var(--cream)}
+.how-it-works__head{margin-bottom:3.5rem}
+.how-eyebrow{display:block;font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:.75rem}
+.how-heading{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.4rem);color:var(--green);line-height:1.2}
+.how-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.how-card{background:var(--white);border-radius:var(--r-lg);padding:2.2rem 2rem;border-top:2px solid var(--silver);transition:transform var(--ease),box-shadow var(--ease)}
+.how-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.08);border-top-color:var(--accent)}
+/* Icon: refined SVG glyph in a circle */
+.how-card__icon{
+  width:52px;height:52px;
+  border-radius:50%;
+  background:var(--cream);
+  border:1.5px solid rgba(25,83,1,.14);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.2rem;
+  color:var(--green);
+  transition:background var(--ease),border-color var(--ease);
+}
+.how-card:hover .how-card__icon{background:rgba(181,104,31,.08);border-color:var(--accent);color:var(--accent)}
+.how-card__icon svg{width:22px;height:22px}
+.how-card__title{font-family:var(--font-display);font-size:1.15rem;color:var(--green);margin-bottom:.7rem}
+.how-card__body{font-size:.9rem;color:var(--charcoal);line-height:1.7}
 
-  /* ═══════════════════════════════════════════════════════════════
-     IMPACT STORY — a single child's voice
-     ═══════════════════════════════════════════════════════════════ */
-  .impact-story {
-    padding: 6rem 0;
-    background: var(--white);
-  }
-  .impact-story__grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
-  }
-  .impact-story__photo {
-    aspect-ratio: 4/5;
-    background: linear-gradient(145deg, #b5681f 0%, #8a4c14 50%, var(--green) 100%);
-    border-radius: 12px;
-    overflow: hidden;
-    position: relative;
-  }
-  .impact-story__photo img { width: 100%; height: 100%; object-fit: cover; }
-  /* The pull-quote overlapping the photo */
-  .impact-story__float {
-    position: absolute;
-    bottom: -1.5rem;
-    right: -2rem;
-    background: var(--white);
-    border-radius: var(--r-lg);
-    padding: 1.4rem 1.6rem;
-    box-shadow: 0 8px 32px rgba(0,0,0,.12);
-    max-width: 240px;
-  }
-  .impact-story__float-quote {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 1rem;
-    color: var(--green);
-    line-height: 1.5;
-    margin-bottom: .5rem;
-  }
-  .impact-story__float-name {
-    font-size: .75rem;
-    font-weight: 600;
-    color: var(--teal);
-    letter-spacing: .06em;
-    text-transform: uppercase;
-  }
+/* ════════════════════════════════════════
+   GOALS — same content as live site, tabbed
+════════════════════════════════════════ */
+.goals-section{padding:5.5rem 0;background:var(--white)}
+.goals-section__head{margin-bottom:3rem}
+.goals-section__eyebrow{display:block;font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:.75rem}
+.goals-section__heading{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.4rem);color:var(--green);line-height:1.2;margin-bottom:.5rem}
+.goals-section__sub{font-size:.95rem;color:var(--charcoal);opacity:.65}
+/* Pillar tabs */
+.pillar-tabs{display:flex;gap:0;border:1px solid var(--silver);border-radius:var(--r-lg);overflow:hidden;margin-bottom:2.5rem;max-width:480px}
+.pillar-tab{flex:1;padding:.8rem 1rem;font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--charcoal);background:var(--white);cursor:pointer;border:none;border-right:1px solid var(--silver);transition:background var(--ease),color var(--ease);font-family:var(--font-body)}
+.pillar-tab:last-child{border-right:none}
+.pillar-tab.is-active{background:var(--green);color:var(--cream)}
+.pillar-panel{display:none}
+.pillar-panel.is-active{display:block}
+.pillar-panel__intro{font-size:1rem;color:var(--charcoal);line-height:1.75;font-style:italic;margin-bottom:2rem;padding-left:1.2rem;border-left:3px solid var(--accent)}
+.goals-list{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.goal-item{background:var(--cream);border-radius:var(--r-lg);padding:1.4rem;border-left:3px solid var(--accent)}
+.goal-item__num{font-size:.65rem;font-weight:700;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.4rem}
+.goal-item__title{font-size:.92rem;font-weight:600;color:var(--green);margin-bottom:.4rem}
+.goal-item__body{font-size:.82rem;color:var(--charcoal);line-height:1.6}
 
-  .impact-story__eyebrow {
-    display: block;
-    font-size: .72rem;
-    font-weight: 500;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: .9rem;
-  }
-  .impact-story__heading {
-    font-family: var(--font-display);
-    font-size: clamp(1.8rem, 2.8vw, 2.3rem);
-    color: var(--green);
-    line-height: 1.2;
-    margin-bottom: 1.2rem;
-  }
-  .impact-story__body {
-    font-size: 1rem;
-    line-height: 1.8;
-    color: var(--charcoal);
-    margin-bottom: 2rem;
-  }
-  .impact-story__body p + p { margin-top: 1em; }
+/* ════════════════════════════════════════
+   FAST FACTS
+════════════════════════════════════════ */
+.fast-facts{background:var(--cream);border-top:1px solid var(--silver);border-bottom:1px solid var(--silver)}
+.fast-facts__grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.fact{padding:2.5rem 1.5rem;border-right:1px solid var(--silver);text-align:center;transition:background var(--ease)}
+.fact:hover{background:var(--white)}.fact:last-child{border-right:none}
+.fact__icon{font-size:1.5rem;margin-bottom:.5rem}
+.fact__val{font-family:var(--font-display);font-size:1.8rem;font-weight:700;color:var(--green);line-height:1;margin-bottom:.35rem}
+.fact__label{font-size:.8rem;color:var(--charcoal);line-height:1.4}
 
+/* ════════════════════════════════════════
+   PARTNERS
+════════════════════════════════════════ */
+.partners{padding:4.5rem 0;background:var(--white)}
+.partners__header{margin-bottom:2.5rem}
+.partners__eyebrow{display:block;font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:.75rem}
+.partners__heading{font-family:var(--font-display);font-size:clamp(1.6rem,2.5vw,2rem);color:var(--green);line-height:1.2}
+.partners__grid{display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:1.2rem}
+.partner-pill{display:flex;align-items:center;gap:.75rem;padding:.9rem 1.8rem;background:var(--cream);border-radius:50px;border:1px solid var(--silver);font-size:.88rem;font-weight:500;color:var(--charcoal);transition:border-color var(--ease),box-shadow var(--ease)}
+.partner-pill:hover{border-color:var(--green);box-shadow:0 4px 16px rgba(25,83,1,.1)}
+.partner-pill__dot{width:10px;height:10px;border-radius:50%;background:var(--green);flex-shrink:0}
 
-  /* ═══════════════════════════════════════════════════════════════
-     DONATE CTA — full-width green band
-     ═══════════════════════════════════════════════════════════════ */
-  .project-cta {
-    background: var(--accent);
-    padding: 5rem 0;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .project-cta::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,.06) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  .project-cta__inner { position: relative; z-index: 1; }
-  .project-cta__label {
-    display: block;
-    font-size: .72rem;
-    font-weight: 500;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,.65);
-    margin-bottom: .75rem;
-  }
-  .project-cta h2 {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3rem);
-    color: var(--white);
-    line-height: 1.15;
-    margin-bottom: 1rem;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .project-cta p {
-    font-size: 1rem;
-    color: rgba(255,255,255,.8);
-    max-width: 520px;
-    margin: 0 auto 2.5rem;
-    line-height: 1.75;
-  }
-  .project-cta__buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-  .btn-white       { background: var(--white); color: var(--accent); font-weight: 600; }
-  .btn-white:hover { background: var(--cream); transform: translateY(-2px); }
-  .btn-outline-white { border: 2px solid rgba(255,255,255,.5); color: var(--white); }
-  .btn-outline-white:hover { border-color: var(--white); background: rgba(255,255,255,.1); }
+/* ════════════════════════════════════════
+   PROJECT CTA
+════════════════════════════════════════ */
+.project-cta{background:var(--accent);padding:5rem 0;text-align:center;position:relative;overflow:hidden}
+.project-cta::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.08) 0%,transparent 60%);pointer-events:none}
+.project-cta__inner{position:relative;z-index:1}
+.project-cta__label{display:block;font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.75rem}
+.project-cta h2{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);color:var(--white);line-height:1.15;margin-bottom:1rem;max-width:700px;margin-left:auto;margin-right:auto}
+.project-cta p{font-size:1rem;color:rgba(255,255,255,.8);max-width:520px;margin:0 auto 2.5rem;line-height:1.75}
+.project-cta__buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;padding:.75rem 1.75rem;border-radius:var(--r);font-weight:500;font-size:.95rem;cursor:pointer;transition:background var(--ease),color var(--ease),transform var(--ease)}
+.btn:hover{transform:translateY(-2px)}
+.btn-white{background:var(--white);color:var(--accent);font-weight:600}.btn-white:hover{background:var(--cream)}
+.btn-outline-white{border:2px solid rgba(255,255,255,.5);color:var(--white)}.btn-outline-white:hover{border-color:var(--white);background:rgba(255,255,255,.1)}
+.btn-primary{background:var(--green);color:var(--cream)}.btn-primary:hover{background:#1f6701}
+.btn-outline{border:2px solid var(--green);color:var(--green)}.btn-outline:hover{background:var(--green);color:var(--cream)}
 
+/* ════════════════════════════════════════
+   OTHER PROJECTS
+════════════════════════════════════════ */
+.other-projects{padding:5.5rem 0;background:var(--cream)}
+.other-projects__header{margin-bottom:2.5rem}
+.other-projects__eyebrow{display:block;font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:.75rem}
+.other-projects__heading{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.4rem);color:var(--green);line-height:1.2}
+.other-projects__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.proj-card{background:var(--white);border-radius:var(--r-lg);overflow:hidden;transition:transform var(--ease),box-shadow var(--ease);text-decoration:none;display:flex;flex-direction:column}
+.proj-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.09)}
+.proj-card__thumb{height:140px;position:relative}
+.proj-card:nth-child(1) .proj-card__thumb{background:linear-gradient(135deg,var(--teal),#004d48)}
+.proj-card:nth-child(2) .proj-card__thumb{background:linear-gradient(135deg,#2c7a01,var(--teal))}
+.proj-card:nth-child(3) .proj-card__thumb{background:linear-gradient(135deg,var(--accent),var(--green))}
+.proj-card__tag{position:absolute;top:.75rem;left:.75rem;background:rgba(255,255,255,.9);color:var(--green);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .6rem;border-radius:20px}
+.proj-card__body{padding:1.2rem;flex:1;display:flex;flex-direction:column}
+.proj-card__title{font-family:var(--font-display);font-size:1rem;color:var(--green);margin-bottom:.4rem}
+.proj-card__desc{font-size:.82rem;color:var(--charcoal);line-height:1.55;flex:1;margin-bottom:.9rem}
+.proj-card__link{font-size:.78rem;font-weight:600;color:var(--teal);display:inline-flex;align-items:center;gap:.3rem;transition:gap var(--ease)}
+.proj-card:hover .proj-card__link{gap:.6rem}
 
-  /* ═══════════════════════════════════════════════════════════════
-     OTHER PROJECTS — sticky sidebar-style cards
-     ═══════════════════════════════════════════════════════════════ */
-  .other-projects {
-    padding: 5.5rem 0;
-    background: var(--cream);
-  }
-  .other-projects__header { margin-bottom: 2.5rem; }
-  .other-projects__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
-  }
-  .proj-card {
-    background: var(--white);
-    border-radius: var(--r-lg);
-    overflow: hidden;
-    transition: transform var(--ease), box-shadow var(--ease);
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-  }
-  .proj-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,.09); }
-  .proj-card__thumb {
-    height: 140px;
-    position: relative;
-  }
-  .proj-card:nth-child(1) .proj-card__thumb { background: linear-gradient(135deg, var(--teal), #004d48); }
-  .proj-card:nth-child(2) .proj-card__thumb { background: linear-gradient(135deg, #2c7a01, var(--teal)); }
-  .proj-card:nth-child(3) .proj-card__thumb { background: linear-gradient(135deg, #b5681f, var(--green)); }
-  .proj-card__tag {
-    position: absolute;
-    top: .75rem; left: .75rem;
-    background: rgba(255,255,255,.9);
-    color: var(--green);
-    font-size: .65rem;
-    font-weight: 600;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    padding: .2rem .6rem;
-    border-radius: 20px;
-  }
-  .proj-card__body { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; }
-  .proj-card__title { font-family: var(--font-display); font-size: 1rem; color: var(--green); margin-bottom: .4rem; }
-  .proj-card__desc  { font-size: .82rem; color: var(--charcoal); line-height: 1.55; flex: 1; margin-bottom: .9rem; }
-  .proj-card__link  { font-size: .78rem; font-weight: 600; color: var(--teal); display: inline-flex; align-items: center; gap: .3rem; transition: gap var(--ease); }
-  .proj-card:hover .proj-card__link { gap: .6rem; }
+/* FOOTER */
+footer{background:#111;color:var(--silver);padding:4rem 0 2rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.footer-brand h3{font-family:var(--font-display);color:var(--cream);font-size:1.15rem;margin-bottom:.75rem}
+.footer-brand p{font-size:.85rem;line-height:1.65;margin-bottom:1.2rem;max-width:280px}
+.footer-socials{display:flex;gap:.75rem}
+.social-btn{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--silver);transition:background var(--ease),border-color var(--ease)}
+.social-btn:hover{background:var(--teal);border-color:var(--teal);color:#fff}
+.footer-col h4{color:var(--cream);font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.1rem}
+.footer-col li{margin-bottom:.5rem}
+.footer-col a{font-size:.87rem;color:var(--silver);transition:color var(--ease)}
+.footer-col a:hover{color:var(--cream)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.8rem}
+.footer-legal{display:flex;gap:1.5rem;flex-wrap:wrap}
+.footer-legal a{color:var(--silver)}.footer-legal a:hover{color:var(--cream)}
 
-
-  /* ═══════════════════════════════════════════════════════════════
-     FOOTER
-     ═══════════════════════════════════════════════════════════════ */
-  footer { background: #111; color: var(--silver); padding: 4rem 0 2rem; }
-  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
-  .footer-brand h3 { font-family: var(--font-display); color: var(--cream); font-size: 1.15rem; margin-bottom: .75rem; }
-  .footer-brand p  { font-size: .85rem; line-height: 1.65; margin-bottom: 1.2rem; max-width: 280px; }
-  .footer-socials  { display: flex; gap: .75rem; }
-  .social-btn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; font-size: .8rem; color: var(--silver); transition: background var(--ease), border-color var(--ease); }
-  .social-btn:hover { background: var(--teal); border-color: var(--teal); color: #fff; }
-  .footer-col h4 { color: var(--cream); font-size: .82rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1.1rem; }
-  .footer-col li { margin-bottom: .5rem; }
-  .footer-col a  { font-size: .87rem; color: var(--silver); transition: color var(--ease); }
-  .footer-col a:hover { color: var(--cream); }
-  .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: .8rem; }
-  .footer-legal  { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-  .footer-legal a { color: var(--silver); transition: color var(--ease); }
-  .footer-legal a:hover { color: var(--cream); }
-
-
-  /* ═══════════════════════════════════════════════════════════════
-     RESPONSIVE
-     ═══════════════════════════════════════════════════════════════ */
-  @media (max-width: 900px) {
-    .nav__list, .nav__actions { display: none; }
-    .hamburger { display: flex; }
-    .intro__grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .intro__stat-block { position: static; }
-    .how-cards { grid-template-columns: 1fr; }
-    .fast-facts__grid { grid-template-columns: repeat(2, 1fr); }
-    .fact:nth-child(2) { border-right: none; }
-    .fact:nth-child(3), .fact:nth-child(4) { border-top: 1px solid var(--silver); }
-    .impact-story__grid { grid-template-columns: 1fr; }
-    .impact-story__photo { max-width: 460px; }
-    .impact-story__float { right: 0; }
-    .other-projects__grid { grid-template-columns: repeat(2, 1fr); }
-    .footer-grid { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 640px) {
-    .page-hero { min-height: 60vh; }
-    .photo-strip { grid-template-columns: repeat(2, 1fr); }
-    .fast-facts__grid { grid-template-columns: repeat(2, 1fr); }
-    .other-projects__grid { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr; }
-    .top-bar__info { display: none; }
-    .project-cta__buttons { flex-direction: column; align-items: center; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .reveal, .scroll-hint__line { animation: none; transition: none; }
-    .reveal { opacity: 1; transform: none; }
-  }
-  </style>
+/* RESPONSIVE */
+@media(max-width:900px){
+  .nav__list,.nav__actions{display:none}.hamburger{display:flex}
+  .intro__grid{grid-template-columns:1fr;gap:2.5rem}.intro__stat-block{position:static}
+  .montessori-section__inner{grid-template-columns:1fr;min-height:auto}.montessori-left{min-height:360px}
+  .fontenay-section__inner{grid-template-columns:1fr;gap:2.5rem}
+  .how-cards{grid-template-columns:1fr}
+  .goals-list{grid-template-columns:1fr}
+  .fast-facts__grid{grid-template-columns:repeat(2,1fr)}
+  .other-projects__grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .carousel__slide{flex:0 0 50%}
+}
+@media(max-width:640px){
+  .top-bar__info{display:none}.page-hero{min-height:60vh}
+  .carousel__slide{flex:0 0 100%}
+  .fast-facts__grid{grid-template-columns:1fr 1fr}
+  .other-projects__grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .pillar-tabs{flex-direction:column;max-width:100%}
+  .pillar-tab{border-right:none;border-bottom:1px solid var(--silver)}
+  .fontenay-gallery{grid-template-columns:1fr 1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  .reveal,.scroll-hint__line{animation:none;transition:none;opacity:1;transform:none}
+}
+</style>
 </head>
-
 <body>
 
-<!-- ════ TOP BAR ════ -->
+<!-- TOP BAR -->
 <div class="top-bar">
   <div class="container">
     <div class="top-bar__info">
-      <span>UK Charity #1167115</span>
-      <span class="top-bar__dot">·</span>
-      <span>Malagasy NGO</span>
-      <span class="top-bar__dot">·</span>
-      <span>Association France SIREN 85242793900016</span>
-      <span class="top-bar__dot">·</span>
+      <span>UK Charity #1167115</span><span class="top-bar__dot">·</span>
+      <span>Malagasy NGO</span><span class="top-bar__dot">·</span>
+      <span>Association France SIREN 85242793900016</span><span class="top-bar__dot">·</span>
       <span>Association Suisse</span>
     </div>
     <nav class="lang-switch" aria-label="Language switcher">
-      <a href="index.html"    class="lang-switch__btn is-active" lang="en">EN</a>
-      <a href="index-fr.html" class="lang-switch__btn"           lang="fr">FR</a>
+      <a href="akka.html" class="lang-switch__btn is-active" lang="en">EN</a>
+      <a href="akka-fr.html" class="lang-switch__btn" lang="fr">FR</a>
     </nav>
   </div>
 </div>
 
-
-<!-- ════ NAVBAR ════ -->
+<!-- NAVBAR -->
 <header class="navbar" id="navbar" role="banner">
   <div class="container">
-<a href="../../index.html" class="navbar__logo" aria-label="Education for Madagascar — home">
-  <img src="../../images/logo_mini.jpeg"
-       alt="Education for Madagascar logo"
-       class="logo-image">
-  <span class="logo-text">
-    Education<br>for Madagascar
-  </span>
-</a>
+    <a href="../../index.html" class="navbar__logo" aria-label="Education for Madagascar — home">
+      <img src="../../images/logo_mini.jpeg" alt="Education for Madagascar logo" class="logo-image">
+      <span class="logo-text">Education<br>for Madagascar</span>
+    </a>
     <ul class="nav__list" role="list">
       <li class="nav__item" id="ni-who">
-        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-who')">
-          Who we are <span class="nav__chevron" aria-hidden="true"></span>
-        </button>
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-who')">Who we are <span class="nav__chevron"></span></button>
         <div class="dropdown">
           <a class="dropdown__link" href="../../who-we-are/our-story.html">Our story<span class="dropdown__sub">History &amp; founding vision</span></a>
-          <a class="dropdown__link" href="../../who-we-are/team.html">Team &amp; board<span class="dropdown__sub">The people behind E4M</span></a>
+          <a class="dropdown__link" href="../../who-we-are/team.html">Team &amp; board</a>
           <a class="dropdown__link" href="../../who-we-are/governance.html">Governance &amp; statutes</a>
           <div class="dropdown__separator"></div>
           <a class="dropdown__link" href="../../who-we-are/annual-reports.html">Annual reports</a>
@@ -1092,15 +582,11 @@
         </div>
       </li>
       <li class="nav__item" id="ni-proj">
-        <!-- "Our projects" is active since we're on a project page -->
-        <button class="nav__link is-active" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-proj')">
-          Our projects <span class="nav__chevron" aria-hidden="true"></span>
-        </button>
+        <button class="nav__link is-active" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-proj')">Our projects <span class="nav__chevron"></span></button>
         <div class="dropdown--mega">
           <div class="mega__col">
             <p class="mega__heading mega__heading--edu">Education</p>
-            <!-- AKKA has the active indicator below -->
-            <a class="mega__link" href="akka.html" style="color:var(--green);font-weight:600;">AKKA Montessori <span class="badge badge--age">3–6 yrs</span></a>
+            <a class="mega__link" href="akka.html" style="color:var(--green);font-weight:600">AKKA Montessori <span class="badge badge--age">3–6 yrs</span></a>
             <a class="mega__link" href="kanto.html">KANTO Culture <span class="badge badge--age">7–12 yrs</span></a>
             <a class="mega__link" href="care.html">CARE Coding &amp; Robotics</a>
             <a class="mega__link" href="scola.html">SCOLA Scholarship <span class="badge badge--age">18+</span></a>
@@ -1122,26 +608,22 @@
           </div>
           <div class="mega__col">
             <p class="mega__heading mega__heading--edu">Overview</p>
-            <p class="mega__summary">13 active projects across education, health, and the environment — serving children aged 3 to 18 and women in rural Madagascar.</p>
+            <p class="mega__summary">13 active projects across education, health, and the environment.</p>
             <a class="mega__all-link" href="../index.html">All projects →</a>
           </div>
         </div>
       </li>
       <li class="nav__item" id="ni-inv">
-        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-inv')">
-          Get involved <span class="nav__chevron" aria-hidden="true"></span>
-        </button>
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-inv')">Get involved <span class="nav__chevron"></span></button>
         <div class="dropdown">
           <a class="dropdown__link" href="../../get-involved/volunteer.html">Volunteer (VIM)<span class="dropdown__sub">Live &amp; work in Madagascar</span></a>
-          <a class="dropdown__link" href="../../get-involved/donate.html">Donate<span class="dropdown__sub">Fund our programmes directly</span></a>
+          <a class="dropdown__link" href="../../get-involved/donate.html">Donate</a>
           <div class="dropdown__separator"></div>
           <a class="dropdown__link" href="../../get-involved/partner.html">Become a partner</a>
         </div>
       </li>
       <li class="nav__item" id="ni-media">
-        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-media')">
-          Media <span class="nav__chevron" aria-hidden="true"></span>
-        </button>
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('ni-media')">Media <span class="nav__chevron"></span></button>
         <div class="dropdown">
           <a class="dropdown__link" href="../../media/blog.html">Blog</a>
           <a class="dropdown__link" href="../../media/newsletters.html">Newsletters</a>
@@ -1160,7 +642,7 @@
   </div>
 </header>
 
-<!-- ════ MOBILE DRAWER ════ -->
+<!-- MOBILE DRAWER -->
 <nav class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation">
   <div class="mob-section" id="mob-who">
     <button class="mob-section__toggle" onclick="toggleMobSection('mob-who')">Who we are <span class="nav__chevron"></span></button>
@@ -1176,14 +658,12 @@
     <button class="mob-section__toggle" onclick="toggleMobSection('mob-proj')">Our projects <span class="nav__chevron"></span></button>
     <div class="mob-section__content">
       <div class="mob-subheading">Education</div>
-      <a class="mob-link" href="akka.html" style="color:var(--green);font-weight:600;">AKKA Montessori</a>
+      <a class="mob-link" href="akka.html" style="color:var(--green);font-weight:600">AKKA Montessori</a>
       <a class="mob-link" href="kanto.html">KANTO Culture</a>
       <a class="mob-link" href="care.html">CARE Coding &amp; Robotics</a>
       <a class="mob-link" href="scola.html">SCOLA Scholarship</a>
       <a class="mob-link" href="tuto.html">TUTO</a>
       <a class="mob-link" href="vim.html">VIM — Volunteering</a>
-      <a class="mob-link" href="cad.html">Career Day Awareness</a>
-      <a class="mob-link" href="unesco.html">UNESCO Partnership</a>
       <div class="mob-subheading mob-subheading--health">Health</div>
       <a class="mob-link" href="../health/women.html">School for Women</a>
       <a class="mob-link" href="../health/fody.html">FODY</a>
@@ -1216,125 +696,140 @@
   </div>
 </nav>
 
-
-<!-- ════ BREADCRUMB ════ -->
-<nav class="breadcrumb breadcrumb--education" aria-label="Breadcrumb"> 
+<!-- BREADCRUMB -->
+<nav class="breadcrumb" aria-label="Breadcrumb">
   <div class="container">
     <ul class="breadcrumb__list">
       <li><a href="../../index.html">Home</a></li>
+      <li><span class="breadcrumb__sep">›</span></li>
       <li><a href="../index.html">Our Projects</a></li>
+      <li><span class="breadcrumb__sep">›</span></li>
       <li><span class="breadcrumb__current">Education</span></li>
+      <li><span class="breadcrumb__sep">›</span></li>
       <li><span class="breadcrumb__current">AKKA Montessori</span></li>
     </ul>
   </div>
 </nav>
 
-
-<!-- ════ PAGE HERO ════ -->
-<!--
-  UI TIP: This "silent hero" creates intrigue.
-  No button above the fold forces the eye to take in the imagery
-  and name first — then scroll naturally to learn more.
-  Replace .page-hero__bg gradient with a real full-bleed photo:
-    background: linear-gradient(...), url('../../images/akka-hero.jpg');
-    background-size: cover; background-position: center 30%;
--->
-<section class="page-hero" aria-label="AKKA project hero">
-  <div class="page-hero__bg" role="img" aria-label="Children working with Montessori materials at AKKA school, Madagascar"></div>
-
+<!-- ════ HERO ════ -->
+<section class="page-hero" aria-label="AKKA Montessori project">
+  <div class="page-hero__bg" role="img" aria-label="Children working with Montessori materials at AKKA school, Antananarivo">
+    <!--
+      ADD HERO PHOTO:
+      Add to .page-hero__bg: style="background-image:url('../../images/_PAR1348 copy.jpeg');background-size:cover;background-position:center 30%;"
+    -->
+  </div>
   <div class="page-hero__content">
     <div class="container">
       <span class="page-hero__malagasy">Akanin'ny Kilonga</span>
       <h1 class="page-hero__title">AKKA<br>Montessori</h1>
-      <p class="page-hero__tagline">Montessori school — the children's house.</p>
+      <p class="page-hero__tagline">The House of Children — where learning begins.</p>
       <div class="page-hero__tags">
-        <span class="hero-tag hero-tag--accent">Education</span>
+        <span class="hero-tag">Education</span>
         <span class="hero-tag">Ages 3–6</span>
         <span class="hero-tag">30 children</span>
         <span class="hero-tag">Antananarivo</span>
-        <span class="hero-tag">Association Montessori Internationale Certified</span>
+        <span class="hero-tag hero-tag--gold">✦ AMI Certified</span>
+        <span class="hero-tag">Bilingual FR · MG</span>
       </div>
     </div>
   </div>
-
   <div class="scroll-hint" aria-hidden="true">
     <span>Discover</span>
     <div class="scroll-hint__line"></div>
   </div>
 </section>
 
-
 <!-- ════ INTRO ════ -->
-<!--
-  UI TIP: The sticky left column (large number + quick facts)
-  gives mobile scrollers a constant anchor while the text changes.
-  On mobile it collapses to a standard block — no loss of info.
--->
 <section class="intro" aria-labelledby="intro-heading">
   <div class="container">
     <div class="intro__grid">
-
-      <!-- Left: anchor stat -->
       <div class="intro__stat-block reveal">
         <div class="intro__big-number">30</div>
-        <p class="intro__stat-label">children discovering the world<br>through Montessori every day</p>
-
+        <p class="intro__stat-label">children discovering the world through Montessori every day</p>
         <ul class="intro__pill-list">
-          <li class="intro__pill">
-            <span class="intro__pill-dot"></span>
-            <span><strong>Ages</strong> 3 to 6 years old</span>
-          </li>
-          <li class="intro__pill">
-            <span class="intro__pill-dot"></span>
-            <span><strong>Bilingual</strong> French &amp; Malagasy</span>
-          </li>
-          <li class="intro__pill">
-            <span class="intro__pill-dot"></span>
-            <span><strong>Full-time</strong> school programme</span>
-          </li>
-          <li class="intro__pill">
-            <span class="intro__pill-dot"></span>
-            <span><strong>AMI</strong> Association Montessori Internationale</span>
-          </li>
-          <li class="intro__pill">
-            <span class="intro__pill-dot"></span>
-            <span><strong>Mentor</strong> Patricia Peterson Fontenay</span>
-          </li>
+          <li class="intro__pill"><span class="intro__pill-dot"></span><span><strong>Ages</strong> 3 to 6 years old</span></li>
+          <li class="intro__pill"><span class="intro__pill-dot"></span><span><strong>Bilingual</strong> French &amp; Malagasy</span></li>
+          <li class="intro__pill"><span class="intro__pill-dot"></span><span><strong>Full-time</strong> school programme</span></li>
+          <li class="intro__pill"><span class="intro__pill-dot"></span><span><strong>AMI</strong> Association Montessori Internationale</span></li>
+          <li class="intro__pill"><span class="intro__pill-dot"></span><span><strong>Trilingual</strong> goal: FR · MG · EN</span></li>
+          <li class="intro__pill"><span class="intro__pill-dot"></span><span><strong>Free</strong> for low-income families</span></li>
         </ul>
       </div>
-
-      <!-- Right: narrative copy -->
-      <div class="reveal reveal-delay-1">
+      <div class="reveal d1">
         <span class="intro__eyebrow">About the project</span>
-        <h2 class="intro__heading" id="intro-heading">
-          The critical early years,<br>taken seriously.
-        </h2>
+        <h2 class="intro__heading" id="intro-heading">The critical early years, taken seriously.</h2>
         <div class="intro__body">
-          <p>
-            In Madagascar, fewer than one in three children reaches the end of primary school. The inequality starts at the very beginning — before age six, when the human brain develops faster than at any other point in a lifetime.
-          </p>
-          <p>
-            <strong>AKKA Montessori School</strong> — Akanin'ny Kilonga, "the House of Children" — was built on a simple conviction: every child, regardless of their family's income, deserves an environment designed for their development. In small classes, children learn independently through hands-on materials, in a calm and respectful space grounded in Malagasy culture.
-          </p>
-          <p>
-            Adhering to the standards of the <strong>AMI Association Montessori Internationale</strong>, AKKA provides a bilingual education combining Maria Montessori's proven child-centred pedagogy with the richness of Malagasy tradition. Children arrive curious. They leave with confidence, language, independence — and a love for learning that stays with them for life.
-          </p>
+          <p>In Madagascar, fewer than one in three children reaches the end of primary school. The inequality starts before age six — when the human brain develops faster than at any other point in a lifetime.</p>
+          <p><strong>AKKA Montessori School</strong> — Akanin'ny Kilonga, "the House of Children" — was built on a conviction: every child, regardless of their family's income, deserves an environment designed for their development. In small classes, children learn independently through hands-on materials, in a calm and respectful space grounded in Malagasy culture.</p>
+          <p>Adhering to the standards of the <strong>AMI Association Montessori Internationale</strong>, AKKA provides bilingual education combining Maria Montessori's proven child-centred pedagogy with the richness of Malagasy tradition. Children arrive curious. They leave with confidence, language, independence — and a love for learning that stays with them for life.</p>
+          <p>In 2023, Education For Madagascar created AKKA to make a greater impact — starting to care for children from an early age, all from underprivileged families. It is the first bilingual Montessori programme of its kind in the region.</p>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
+<!-- ════ CAROUSEL ════ -->
+<section class="carousel-section" aria-labelledby="carousel-heading">
+  <div class="container">
+    <div class="carousel-section__head reveal">
+      <span class="carousel-eyebrow">Prepared Environment</span>
+      <h2 class="carousel-title" id="carousel-heading">The school, in pictures.</h2>
+    </div>
+  </div>
+  <div class="carousel" id="carousel" aria-label="AKKA Montessori school photos">
+    <div class="carousel__track" id="carouselTrack">
+      <!-- All photos from live site — 35 _PAR images -->
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1735%20copy.jpeg" alt="AKKA classroom" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1348%20copy.jpeg" alt="AKKA — children learning" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1710%20copy.jpeg" alt="AKKA — prepared environment" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1347%20copy.jpeg" alt="AKKA — child working" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1706%20copy.jpeg" alt="AKKA — outdoor" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1244%20copy.jpeg" alt="AKKA — lunch" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1386%20copy.jpeg" alt="AKKA — sensorial" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1777%20copy.jpeg" alt="AKKA — practical life" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1284%20copy.jpeg" alt="AKKA — garden" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1721%20copy.jpeg" alt="AKKA — language" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1775%20copy.jpeg" alt="AKKA — maths materials" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1340%20copy.jpeg" alt="AKKA — class activity" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1438%20copy.jpeg" alt="AKKA — children" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1364%20copy.jpeg" alt="AKKA — classroom" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1603%20copy.jpeg" alt="AKKA — materials" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1388%20copy.jpeg" alt="AKKA — learning" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1512%20copy.jpeg" alt="AKKA — school" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1648%20copy.jpeg" alt="AKKA — children" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1333%20copy.jpeg" alt="AKKA — classroom" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1379%20copy.jpeg" alt="AKKA — activity" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1267%20copy.jpeg" alt="AKKA — materials" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1502%20copy.jpeg" alt="AKKA — learning" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1590%20copy.jpeg" alt="AKKA — school" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1414%20copy.jpeg" alt="AKKA — children" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1782%20copy.jpeg" alt="AKKA — classroom" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1298%20copy.jpeg" alt="AKKA — activity" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1425%20copy.jpeg" alt="AKKA — materials" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1281%20copy.jpeg" alt="AKKA — learning" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1758%20copy.jpeg" alt="AKKA — school day" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1311%20copy.jpeg" alt="AKKA — children" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1370%20copy.jpeg" alt="AKKA — classroom" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1506%20copy.jpeg" alt="AKKA — activity" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1315%20copy.jpeg" alt="AKKA — materials" loading="lazy"></div>
+      <div class="carousel__slide"><img src="https://www.educationformadagascar.com/education/ewExternalFiles/_PAR1639%20copy.jpeg" alt="AKKA — school" loading="lazy"></div>
+    </div>
+    <div class="carousel__controls" aria-hidden="true">
+      <button class="carousel__btn" id="carouselPrev" aria-label="Previous">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="carousel__btn" id="carouselNext" aria-label="Next">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+    <div class="carousel__dots" id="carouselDots" aria-hidden="true"></div>
+  </div>
+</section>
 
 <!-- ════ PULLQUOTE ════ -->
-<!--
-  UI TIP: This is the page's SIGNATURE section.
-  The oversized "AKKA" ghost text creates depth and visual memory.
-  The Malagasy name in display type signals respect for the culture
-  rather than a Western charity looking in from outside.
--->
-<section class="pullquote" aria-label="Project quote">
+<section class="pullquote" aria-label="Montessori philosophy">
   <div class="container">
     <div class="pullquote__inner reveal">
       <p class="pullquote__malagasy">Akanin'ny Kilonga</p>
@@ -1346,7 +841,6 @@
     </div>
   </div>
 </section>
-
 
 <!-- ════ PHOTO STRIP ════ -->
 <!--
@@ -1393,253 +887,348 @@
   </div>
 </div>
 
+<!-- ════ MARIA MONTESSORI — editorial split ════ -->
+<section class="montessori-section" aria-labelledby="montessori-heading">
+  <div class="montessori-section__inner">
 
-<!-- ════ HOW IT WORKS ════ -->
-<!--
-  UI TIP: 3 cards, not 5. Never more than 3 in a "how it works"
-  section or visitors skim-read the headings and skip the body.
-  The stroke-only number is subtle enough not to compete with the
-  card content but creates visual rhythm down the row.
--->
-<section class="how-it-works" aria-labelledby="how-heading">
-  <div class="container">
-    <div class="how-it-works__header">
-      <div class="reveal">
-        <span class="section-eyebrow">Our approach</span>
-        <h2 class="section-heading" id="how-heading">How AKKA works</h2>
+    <!-- Left: dark editorial portrait panel -->
+    <div class="montessori-left reveal">
+      <!-- Live site portrait -->
+      <img
+        src="https://www.educationformadagascar.com/education/images/akka-montessori-school/Maria%20Montessori%20photo.png"
+        alt="Dr Maria Montessori" class="montessori-left__photo"
+        onerror="this.style.display='none'">
+      <div class="montessori-left__bg"></div>
+      <div class="montessori-left__ph" aria-hidden="true">Maria Montessori photo</div>
+      <div class="montessori-left__content">
+        <div class="montessori-left__dates">1870–<br>1952</div>
+        <div class="montessori-left__name">Dr Maria Montessori</div>
+        <div class="montessori-left__title">Founder · Montessori Method</div>
       </div>
     </div>
-    <div class="how-cards">
-      <div class="how-card reveal">
-        <div class="how-card__num">01</div>
-        <h3 class="how-card__title">The prepared environment</h3>
-        <p class="how-card__body">
-          Each classroom is intentionally designed — low shelves, natural materials, child-sized furniture. The space itself teaches order, care, and independence before a single lesson begins. Children choose their work freely, building intrinsic motivation from day one.
-        </p>
+
+    <!-- Right: condensed editorial bio -->
+    <div class="montessori-right reveal d1">
+      <span class="montessori-right__eyebrow">She dedicated her life to the human being</span>
+      <blockquote class="montessori-right__quote">
+        "As a proud Montessorian parent, <em>la casa dei Bambini</em> was the most evident inspiration for the launch of Akanin'ny Kilonga in Antananarivo, Madagascar."
+      </blockquote>
+      <div class="montessori-timeline">
+        <div class="mtime">
+          <span class="mtime__year">1870</span>
+          <span class="mtime__fact">Born in Chiaravalle, Italy. One of the first women to graduate from the Faculty of Medicine and Surgery in Rome — at a time when women faced immense institutional barriers.</span>
+        </div>
+        <div class="mtime">
+          <span class="mtime__year">1907</span>
+          <span class="mtime__fact">Opens <strong>la casa dei Bambini</strong> in San Lorenzo, Rome — the first Children's House. Develops hands-on educational materials that children can experience directly.</span>
+        </div>
+        <div class="mtime">
+          <span class="mtime__year">1931</span>
+          <span class="mtime__fact">Meets Mahatma Gandhi. Travels the world training educators. Her method spreads to thousands of schools across every continent.</span>
+        </div>
+        <div class="mtime">
+          <span class="mtime__year">1949</span>
+          <span class="mtime__fact">Publishes <strong>The Absorbent Mind</strong> — her spiritual and philosophical approach to the child. Nominated for the Nobel Peace Prize three times. Dies in 1952 in Noordwijk, Netherlands.</span>
+        </div>
       </div>
-      <div class="how-card reveal reveal-delay-1">
-        <div class="how-card__num">02</div>
-        <h3 class="how-card__title">Learning through doing</h3>
-        <p class="how-card__body">
-          There are no rote lessons, no sitting still. A child learning to count handles physical objects — beads, blocks, spindles. A child learning letters traces their shapes in sand. Abstract concepts become concrete, tangible, and memorable through the hands.
-        </p>
+      <p class="montessori-right__footer">Montessori pedagogy has inspired thousands of schools worldwide. AKKA is proud to carry this tradition into Madagascar.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════ PATRICIA FONTENAY ════ -->
+<section class="fontenay-section" aria-labelledby="fontenay-heading">
+  <div class="container">
+    <div class="fontenay-section__inner">
+
+      <!-- Portrait column -->
+      <div class="fontenay-portrait-col reveal">
+        <div class="fontenay-portrait">
+          <!--
+            ADD PORTRAIT: <img src="../../images/patricia-fontenay.jpg" alt="Patricia Peterson Fontenay">
+          -->
+          <div class="fontenay-portrait__ph">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="40" height="40"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            <span>Portrait photo</span>
+          </div>
+        </div>
+        <p class="fontenay-caption">Patricia Peterson Fontenay<br>AMI Mentor · AKKA Montessori School</p>
+        <!-- Additional smaller photos -->
+        <div class="fontenay-gallery">
+          <div class="fontenay-gallery__slot">
+            <!-- <img src="../../images/fontenay-2.jpg" alt="Patricia Fontenay at AKKA"> -->
+            <div class="fontenay-gallery__ph">Photo 2</div>
+          </div>
+          <div class="fontenay-gallery__slot">
+            <!-- <img src="../../images/fontenay-3.jpg" alt="Patricia Fontenay with children"> -->
+            <div class="fontenay-gallery__ph">Photo 3</div>
+          </div>
+        </div>
       </div>
-      <div class="how-card reveal reveal-delay-2">
-        <div class="how-card__num">03</div>
-        <h3 class="how-card__title">Rooted in Malagasy culture</h3>
-        <p class="how-card__body">
-          Language, stories, music, and rhythm are drawn from Malagasy tradition. Children become bilingual in Malagasy and French — not by abandoning who they are, but by grounding their world-view in the richness of where they come from.
-        </p>
+
+      <!-- Text column -->
+      <div class="reveal d1">
+        <span class="fontenay-eyebrow">Our Mentor</span>
+        <h2 class="fontenay-name" id="fontenay-heading">Patricia Peterson<br>Fontenay</h2>
+        <p class="fontenay-title">AMI-Certified Montessori Educator · Founding Mentor, AKKA</p>
+
+        <div class="fontenay-creds">
+          <span class="cred-pill">AMI Certified</span>
+          <span class="cred-pill">International Educator</span>
+          <span class="cred-pill">Founding Mentor, AKKA</span>
+          <!-- Team: add further credentials here -->
+        </div>
+
+        <div class="fontenay-body">
+          <p>Patricia Peterson Fontenay is the founding mentor of AKKA Montessori School. An AMI-certified educator with decades of international Montessori experience, she has guided the creation of AKKA from its earliest stages — advising on the prepared environment, educator training, and the school's pedagogical framework.</p>
+          <p>Her belief that every child, regardless of background or geography, deserves access to quality Montessori education made her partnership with Education for Madagascar a natural one. Under her guidance, AKKA meets the standards of the Association Montessori Internationale.</p>
+        </div>
+
+        <!-- Placeholder notice for team -->
+        <div class="fontenay-notice">
+          ⚑ Team note — biography, publications and external links to be confirmed and completed by the board before publishing.
+        </div>
+
+        <!-- Links — to be filled by team -->
+        <div class="fontenay-links">
+          <div class="fontenay-links__label">Works &amp; references</div>
+          <a href="#" class="fontenay-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Publication or article — to be confirmed by team
+          </a>
+          <a href="#" class="fontenay-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            AMI profile or reference — to be confirmed by team
+          </a>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
 
+<!-- ════ HOW IT WORKS — refined SVG icons ════ -->
+<section class="how-it-works" aria-labelledby="how-heading">
+  <div class="container">
+    <div class="how-it-works__head reveal">
+      <span class="how-eyebrow">Our approach</span>
+      <h2 class="how-heading" id="how-heading">How AKKA works</h2>
+    </div>
+    <div class="how-cards">
+
+      <div class="how-card reveal">
+        <div class="how-card__icon" aria-hidden="true">
+          <!-- Icon: arrangement / prepared space -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/>
+            <rect x="14" y="14" width="7" height="7" rx="1"/>
+          </svg>
+        </div>
+        <h3 class="how-card__title">The prepared environment</h3>
+        <p class="how-card__body">Each classroom is intentionally designed — low shelves, natural materials, child-sized furniture. The space itself teaches order, care and independence before a single lesson begins. Children choose their work freely.</p>
+      </div>
+
+      <div class="how-card reveal d1">
+        <div class="how-card__icon" aria-hidden="true">
+          <!-- Icon: hand / doing -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M18 11V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2"/>
+            <path d="M14 10V4a2 2 0 0 0-2-2 2 2 0 0 0-2 2v2"/>
+            <path d="M10 10.5V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2v8"/>
+            <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>
+          </svg>
+        </div>
+        <h3 class="how-card__title">Learning through doing</h3>
+        <p class="how-card__body">There are no rote lessons, no sitting still. A child learning to count handles physical objects — beads, blocks, spindles. Abstract concepts become concrete, tangible and memorable through the hands and the body.</p>
+      </div>
+
+      <div class="how-card reveal d2">
+        <div class="how-card__icon" aria-hidden="true">
+          <!-- Icon: language / leaf / culture -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+        </div>
+        <h3 class="how-card__title">Rooted in Malagasy culture</h3>
+        <p class="how-card__body">Language, stories, music and rhythm are drawn from Malagasy tradition. Children become bilingual in Malagasy and French — grounding their world-view in where they come from. Trilingualism (with English) is a goal.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ GOALS — from live site, tabbed ════ -->
+<section class="goals-section" aria-labelledby="goals-heading">
+  <div class="container">
+    <div class="goals-section__head reveal">
+      <span class="goals-section__eyebrow">Strategic plan</span>
+      <h2 class="goals-section__heading" id="goals-heading">Goals &amp; strategic actions</h2>
+      <p class="goals-section__sub">The execution of the strategic plan is carried out through three core pillars.</p>
+    </div>
+    <div class="pillar-tabs" role="tablist">
+      <button class="pillar-tab is-active" role="tab" aria-selected="true" onclick="switchTab('quality')">Quality</button>
+      <button class="pillar-tab" role="tab" aria-selected="false" onclick="switchTab('ethics')">Ethics</button>
+      <button class="pillar-tab" role="tab" aria-selected="false" onclick="switchTab('sharing')">Sharing</button>
+    </div>
+
+    <div class="pillar-panel is-active" id="tab-quality">
+      <p class="pillar-panel__intro">To ensure inclusive holistic education and promote lifelong learning — Montessori as an Aid to Life.</p>
+      <div class="goals-list">
+        <div class="goal-item">
+          <div class="goal-item__num">Goal 1 — Quality Montessori programmes</div>
+          <div class="goal-item__title">AMI-certified educators &amp; standards</div>
+          <div class="goal-item__body">One AMI-certified educator per age group. Class size of 25–30 children aged 3–6. Minimum 4 consecutive school days per week. Full Montessori materials as aids to the development and exploration of the child.</div>
+        </div>
+        <div class="goal-item">
+          <div class="goal-item__num">Goal 2 — Prepared Environment</div>
+          <div class="goal-item__title">Inside and outside</div>
+          <div class="goal-item__body">Child-sized furniture throughout. Outdoor practical activities — gardening, care of plants and animals. Water saving through dry toilets and rain tanks. Solar energy. Biodiversity through tree and mangrove planting.</div>
+        </div>
+        <div class="goal-item">
+          <div class="goal-item__num">Goal 3 — Children's languages</div>
+          <div class="goal-item__title">Trilingualism: Malagasy, French, English</div>
+          <div class="goal-item__body">An environment supporting movement, language, independence and self-discipline. Trilingualism through native-speaker guides and international partnerships. Cultural and linguistic exchange projects.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-panel" id="tab-ethics">
+      <p class="pillar-panel__intro">For a school worthy of trust — upholding child rights, transparency, and good governance.</p>
+      <div class="goals-list">
+        <div class="goal-item">
+          <div class="goal-item__num">Goal 4 — Child &amp; Human Rights</div>
+          <div class="goal-item__title">Zero tolerance for abuse</div>
+          <div class="goal-item__body">Montessori Observation methodology applied at all times. Clear and strong plea against child labour and abuse of any kind. Equal registration opportunities for girls and boys.</div>
+        </div>
+        <div class="goal-item">
+          <div class="goal-item__num">Goal 5 — Good Governance</div>
+          <div class="goal-item__title">Accountable to families and donors</div>
+          <div class="goal-item__body">Full compliance with local health and safety law. Written procedures for continuous quality management. Financial statements audited and certified by an external auditor. Support for parents and the community.</div>
+        </div>
+        <div class="goal-item">
+          <div class="goal-item__num">Goal 6 — Transparency</div>
+          <div class="goal-item__title">Open and straightforward</div>
+          <div class="goal-item__body">All operations published openly. Annual reports available in French since 2017. English summaries available on request. The elected Board commits to full compliance and continuous quality improvement.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-panel" id="tab-sharing">
+      <p class="pillar-panel__intro">Accessible to all, thanks to the generosity at each level — free for families in need.</p>
+      <div class="goals-list">
+        <div class="goal-item">
+          <div class="goal-item__num">Goal 7 — Awareness</div>
+          <div class="goal-item__title">Children teaching children</div>
+          <div class="goal-item__body">Older children spontaneously teach younger ones. SCOLA scholarship students are hired as volunteers. Regular personal development and team-building events organised for the whole community.</div>
+        </div>
+        <div class="goal-item">
+          <div class="goal-item__num">Goal 8 — Public Interest</div>
+          <div class="goal-item__title">Free for families in need</div>
+          <div class="goal-item__body">Free education for children in need, with priority given to low-income but motivated families. No child should be excluded from quality early education because of their family's financial situation.</div>
+        </div>
+        <div class="goal-item">
+          <div class="goal-item__num">Goal 9 — National Inclusion</div>
+          <div class="goal-item__title">Advocacy for systemic change</div>
+          <div class="goal-item__body">Advocating for a massive change in national education policy through partnership with the Ministry of Education of Madagascar.</div>
+        </div>
+        <div class="goal-item">
+          <div class="goal-item__num">Goal 10 — International Outlook</div>
+          <div class="goal-item__title">Global partnerships</div>
+          <div class="goal-item__body">Partnerships with UN ECOSOCC, Réseau UNESCO, AMF Association Montessori de France, and AMI Association Montessori Internationale. E4M is registered with the United Nations as a Civil Society Organisation (Profile Code 686912).</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <!-- ════ FAST FACTS ════ -->
-<!--
-  UI TIP: This horizontal strip answers the "bottom line" question
-  that donors and grant-makers always ask: who, how many, how long,
-  with whom? Four cells, scannable in under 10 seconds.
-  Icons are emoji here for zero-dependency simplicity —
-  swap for SVG icons if you prefer a more polished look.
--->
 <div class="fast-facts" aria-label="AKKA key facts">
   <div class="container">
     <div class="fast-facts__grid">
-      <div class="fact reveal">
-        <div class="fact__icon">🧒</div>
-        <div class="fact__val">30</div>
-        <div class="fact__label">children enrolled<br>ages 3 to 6</div>
-      </div>
-      <div class="fact reveal reveal-delay-1">
-        <div class="fact__icon">🌍</div>
-        <div class="fact__val">2</div>
-        <div class="fact__label">languages<br>French &amp; Malagasy</div>
-      </div>
-      <div class="fact reveal reveal-delay-2">
-        <div class="fact__icon">🏅</div>
-        <div class="fact__val">AMI</div>
-        <div class="fact__label">Association Montessori<br>Internationale certified</div>
-      </div>
-      <div class="fact reveal reveal-delay-3">
-        <div class="fact__icon">🤝</div>
-        <div class="fact__val">2</div>
-        <div class="fact__label">partner organisations<br>France &amp; Madagascar</div>
-      </div>
+      <div class="fact reveal"><div class="fact__icon">🧒</div><div class="fact__val">30</div><div class="fact__label">children enrolled<br>ages 3 to 6</div></div>
+      <div class="fact reveal d1"><div class="fact__icon">🌍</div><div class="fact__val">2</div><div class="fact__label">languages<br>French &amp; Malagasy</div></div>
+      <div class="fact reveal d2"><div class="fact__icon">🏅</div><div class="fact__val">AMI</div><div class="fact__label">Association Montessori<br>Internationale certified</div></div>
+      <div class="fact reveal d3"><div class="fact__icon">🤝</div><div class="fact__val">4</div><div class="fact__label">partner organisations<br>FR, MG &amp; International</div></div>
     </div>
   </div>
 </div>
-
 
 <!-- ════ PARTNERS ════ -->
 <section class="partners" aria-labelledby="partners-heading">
   <div class="container">
     <div class="partners__header reveal">
-      <span class="section-eyebrow">Built together</span>
-      <h2 class="section-heading" id="partners-heading">Our partners</h2>
+      <span class="partners__eyebrow">Built together</span>
+      <h2 class="partners__heading" id="partners-heading">Our partners</h2>
     </div>
-    <div class="partners__grid reveal reveal-delay-1">
-      <div class="partner-pill">
-        <span class="partner-pill__dot"></span>
-        Montessori Consulting France
-      </div>
-      <div class="partner-pill">
-        <span class="partner-pill__dot"></span>
-        Éducateurs Sans Frontières (ESF)
-      </div>
-      <div class="partner-pill">
-        <span class="partner-pill__dot"></span>
-        AMI — Association Montessori Internationale
-      </div>
+    <div class="partners__grid reveal d1">
+      <div class="partner-pill"><span class="partner-pill__dot"></span>Montessori Consulting France</div>
+      <div class="partner-pill"><span class="partner-pill__dot"></span>Éducateurs Sans Frontières (ESF)</div>
+      <div class="partner-pill"><span class="partner-pill__dot"></span>AMI — Association Montessori Internationale</div>
+      <div class="partner-pill"><span class="partner-pill__dot"></span>AMF — Association Montessori de France</div>
     </div>
   </div>
 </section>
 
-
-<!-- ════ IMPACT STORY ════ -->
-<!--
-  UI TIP: A single child's story converts better than 30 statistics.
-  The floating card overlapping the photo creates a layered, magazine-
-  quality feel without any complex library. On mobile the float card
-  repositions gracefully.
-  → Replace the placeholder photo and swap in a real testimonial
-    once the team provides one.
--->
-<section class="impact-story" aria-labelledby="story-heading">
-  <div class="container">
-    <div class="impact-story__grid">
-
-      <!-- Photo with floating pull-quote -->
-      <div class="reveal">
-        <div class="impact-story__photo">
-          <!-- <img src="../../images/akka-child-portrait.jpg" alt="AKKA student, Antananarivo" loading="lazy"> -->
-          <div class="photo-placeholder-label">
-            <svg width="40" height="40" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            Child portrait photo
-          </div>
-          <div class="impact-story__float">
-            <p class="impact-story__float-quote">
-              "He asks me questions now — about everything. He was so quiet before."
-            </p>
-            <span class="impact-story__float-name">Parent of an AKKA student</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Story text -->
-      <div class="reveal reveal-delay-1">
-        <span class="impact-story__eyebrow">A child's story</span>
-        <h2 class="impact-story__heading" id="story-heading">
-          What changes when a child is truly seen
-        </h2>
-        <div class="impact-story__body">
-          <p>
-            At AKKA, every child is met exactly where they are. Not ranked, not hurried, not compared. The Montessori method trusts that curiosity is the natural state of a child — the classroom's job is simply not to extinguish it.
-          </p>
-          <p>
-            For many of our families in Antananarivo, AKKA is the first time their child has access to a stable, nurturing learning environment. Parents notice changes quickly: their child starts asking questions, choosing activities, organising their things. These are not small things. They are the foundations of a life.
-          </p>
-          <p>
-            Beyond academics, children at AKKA learn practical life skills — caring for their environment, preparing snacks, resolving conflict through words. Skills that serve them far beyond the classroom walls.
-          </p>
-        </div>
-        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-          <a href="../../get-involved/donate.html" class="btn btn-primary">Support AKKA</a>
-          <a href="../../get-involved/volunteer.html" class="btn btn-outline">Volunteer with us</a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ════ PROJECT CTA ════ -->
-<!--
-  UI TIP: The CTA uses the amber --accent colour, not green.
-  This creates a visual break from the rest of the page and signals
-  "action zone" — the eye reads it differently from informational sections.
-  The colour change alone increases perceived click urgency.
--->
+<!-- ════ CTA ════ -->
 <section class="project-cta" aria-labelledby="cta-heading">
   <div class="container">
     <div class="project-cta__inner reveal">
       <span class="project-cta__label">Make a difference today</span>
-      <h2 id="cta-heading">Give a child in Madagascar<br>their best start in life</h2>
-      <p>
-        £25 covers a week of Montessori materials for one child. £100 funds a month of nutritious daily meals. Every contribution, large or small, reaches a real child at AKKA.
-      </p>
+      <h2 id="cta-heading">Give a child in Madagascar their best start in life</h2>
+      <p>100% of your donation goes directly to the children and to the training of educators. Every contribution reaches a real child at AKKA.</p>
       <div class="project-cta__buttons">
-        <a href="https://buy.stripe.com/cN2eWi7dYdnK9XifZ6" class="btn btn-white" target="_blank" rel="noopener">
-          Donate now
-        </a>
-        <a href="../../get-involved/volunteer.html" class="btn btn-outline-white">
-          Volunteer with AKKA
-        </a>
+        <a href="https://donate.stripe.com/fZe3dA7dY3Na7PaaEK" class="btn btn-white" target="_blank" rel="noopener">Donate now</a>
+        <a href="../../get-involved/volunteer.html" class="btn btn-outline-white">Volunteer with AKKA</a>
       </div>
     </div>
   </div>
 </section>
 
-
-<!-- ════ OTHER EDUCATION PROJECTS ════ -->
-<!--
-  UI TIP: Always end a project page with 3 related projects.
-  It keeps engaged visitors on the site. "See all" link sends
-  people who want the full picture to the index.
--->
+<!-- ════ OTHER PROJECTS ════ -->
 <section class="other-projects" aria-labelledby="other-heading">
   <div class="container">
     <div class="other-projects__header reveal">
-      <span class="section-eyebrow">Keep exploring</span>
-      <h2 class="section-heading" id="other-heading">Other Education projects</h2>
+      <span class="other-projects__eyebrow">Keep exploring</span>
+      <h2 class="other-projects__heading" id="other-heading">Other Education projects</h2>
     </div>
     <div class="other-projects__grid">
-
       <a class="proj-card reveal" href="kanto.html">
-        <div class="proj-card__thumb">
-          <span class="proj-card__tag">Ages 9–22</span>
-        </div>
+        <div class="proj-card__thumb"><span class="proj-card__tag">Ages 9–22</span></div>
         <div class="proj-card__body">
           <h3 class="proj-card__title">KANTO — Culture Programme</h3>
-          <p class="proj-card__desc">Piano, guitar, violin, chess and civic education. Art, mind, empowerment — every Saturday.</p>
+          <p class="proj-card__desc">Piano, violin, chess and civic education. Art, mind, empowerment — every Saturday.</p>
           <span class="proj-card__link">Learn more →</span>
         </div>
       </a>
-
-      <a class="proj-card reveal reveal-delay-1" href="scola.html">
-        <div class="proj-card__thumb">
-          <span class="proj-card__tag">Ages 17–25</span>
-        </div>
+      <a class="proj-card reveal d1" href="scola.html">
+        <div class="proj-card__thumb"><span class="proj-card__tag">Ages 17–25</span></div>
         <div class="proj-card__body">
           <h3 class="proj-card__title">SCOLA Scholarship</h3>
-          <p class="proj-card__desc">Post-baccalaureate scholarships covering school fees, meals and medical care for 109 sponsored children.</p>
+          <p class="proj-card__desc">Post-baccalaureate scholarships in exchange for a volunteer commitment at AKKA and other programmes.</p>
           <span class="proj-card__link">Learn more →</span>
         </div>
       </a>
-
-      <a class="proj-card reveal reveal-delay-2" href="care.html">
-        <div class="proj-card__thumb">
-          <span class="proj-card__tag">Ages 12+</span>
-        </div>
+      <a class="proj-card reveal d2" href="care.html">
+        <div class="proj-card__thumb"><span class="proj-card__tag">Ages 12+</span></div>
         <div class="proj-card__body">
           <h3 class="proj-card__title">CARE — Coding &amp; Robotics</h3>
           <p class="proj-card__desc">Swift, Xcode and app development. Empowering youth to become creators, not just consumers of technology.</p>
           <span class="proj-card__link">Learn more →</span>
         </div>
       </a>
-
     </div>
-
-    <div style="text-align:center;margin-top:2.5rem;" class="reveal">
+    <div style="text-align:center;margin-top:2.5rem" class="reveal">
       <a href="../index.html" class="btn btn-outline">See all 13 projects</a>
     </div>
   </div>
 </section>
 
-
-<!-- ════ FOOTER ════ -->
+<!-- FOOTER -->
 <footer>
   <div class="container">
     <div class="footer-grid">
@@ -1647,8 +1236,8 @@
         <h3>Education for Madagascar</h3>
         <p>Committed to UN SDG 4 — Quality Education for all children, from early childhood to economic independence.</p>
         <div class="footer-socials">
-          <a href="https://www.facebook.com/educationformadagascar"        class="social-btn" aria-label="Facebook"  target="_blank" rel="noopener">f</a>
-          <a href="https://www.instagram.com/educationformadagascar/"      class="social-btn" aria-label="Instagram" target="_blank" rel="noopener">ig</a>
+          <a href="https://www.facebook.com/educationformadagascar" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener">f</a>
+          <a href="https://www.instagram.com/educationformadagascar/" class="social-btn" aria-label="Instagram" target="_blank" rel="noopener">ig</a>
           <a href="https://www.linkedin.com/company/educationformadagascar/" class="social-btn" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
         </div>
       </div>
@@ -1667,11 +1256,10 @@
         <h4>Explore</h4>
         <ul>
           <li><a href="../../media/blog.html">Blog</a></li>
-          <li><a href="#">Artisan Shop</a></li>
           <li><a href="../../who-we-are/annual-reports.html">Annual Reports</a></li>
           <li><a href="../../media/newsletters.html">Newsletter</a></li>
-          <li><a href="../health/tomady.html">TOMADY Health</a></li>
-          <li><a href="../environment/silva.html">SILVA Environment</a></li>
+          <li><a href="../../who-we-are/partners.html">Our Partners</a></li>
+          <li><a href="../index.html">All 13 projects →</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1679,27 +1267,153 @@
         <ul>
           <li><a href="mailto:contact@educationformadagascar.org">contact@educationformadagascar.org</a></li>
           <li style="font-size:.85rem;margin-top:.3rem;">23 Milner Drive, Cobham<br>KT11 2EZ, United Kingdom</li>
-          <li style="margin-top:.8rem;font-size:.75rem;opacity:.55;line-height:1.8;">
-            UK Charity #1167115<br>FR SIREN 85242793900016<br>MG NIF 4002796057
-          </li>
+          <li style="margin-top:.8rem;font-size:.75rem;opacity:.55;line-height:1.8;">UK Charity #1167115<br>FR SIREN 85242793900016<br>MG NIF 4002796057</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© 2026 Education for Madagascar. All rights reserved.</span>
       <div class="footer-legal">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Legal Notice</a>
-        <a href="#">Safeguarding</a>
+        <a href="#">Privacy Policy</a><a href="#">Legal Notice</a><a href="#">Safeguarding</a>
       </div>
     </div>
   </div>
 </footer>
 
+<script src="../../js/global.js"></script>
+<script>
+/* Nav */
+const nb=document.getElementById('navbar');
+window.addEventListener('scroll',()=>nb.classList.toggle('is-scrolled',scrollY>10),{passive:true});
+function toggleNav(id){const el=document.getElementById(id),was=el.classList.contains('is-open');document.querySelectorAll('.nav__item.is-open').forEach(n=>{n.classList.remove('is-open');n.querySelector('[aria-expanded]').setAttribute('aria-expanded','false')});if(!was){el.classList.add('is-open');el.querySelector('[aria-expanded]').setAttribute('aria-expanded','true')}}
+document.addEventListener('click',e=>{if(!e.target.closest('.nav__item'))document.querySelectorAll('.nav__item.is-open').forEach(n=>{n.classList.remove('is-open');n.querySelector('[aria-expanded]').setAttribute('aria-expanded','false')})});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.nav__item.is-open').forEach(n=>{n.classList.remove('is-open');n.querySelector('[aria-expanded]').setAttribute('aria-expanded','false')})});
+const hbg=document.getElementById('hamburger'),drw=document.getElementById('mobile-drawer');
+function toggleMobile(){const o=drw.classList.toggle('is-open');hbg.classList.toggle('is-open',o);hbg.setAttribute('aria-expanded',String(o));document.body.style.overflow=o?'hidden':''}
+function toggleMobSection(id){document.getElementById(id).classList.toggle('is-open')}
 
-<!-- ════ JAVASCRIPT ════ -->
-<script src="../../js/global.js"></script>  
+/* Reveal */
+const revObs=new IntersectionObserver((entries,obs)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}})},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+/* Goals tabs */
+function switchTab(id){
+  const tabs=['quality','ethics','sharing'];
+  document.querySelectorAll('.pillar-tab').forEach((t,i)=>{const a=tabs[i]===id;t.classList.toggle('is-active',a);t.setAttribute('aria-selected',String(a))});
+  document.querySelectorAll('.pillar-panel').forEach(p=>p.classList.remove('is-active'));
+  document.getElementById('tab-'+id).classList.add('is-active');
+}
+
+/* Carousel — infinite loop by cloning */
+(function(){
+  const track=document.getElementById('carouselTrack');
+  if(!track) return;
+  const orig=Array.from(track.querySelectorAll('.carousel__slide'));
+  const dotsWrap=document.getElementById('carouselDots');
+  const prevBtn=document.getElementById('carouselPrev');
+  const nextBtn=document.getElementById('carouselNext');
+  let perView=3, current=0, startX=0, dragging=false, dragDelta=0, autoTimer;
+
+  function getPerView(){return window.innerWidth<640?1:window.innerWidth<900?2:3}
+
+  // Clone slides for infinite loop
+  function buildClones(){
+    // Remove any existing clones
+    track.querySelectorAll('.carousel__clone').forEach(c=>c.remove());
+    const pv=getPerView();
+    // Clone last pv slides before first
+    const last=orig.slice(-pv);
+    last.forEach(s=>{const c=s.cloneNode(true);c.classList.add('carousel__clone');track.prepend(c)});
+    // Clone first pv slides after last
+    const first=orig.slice(0,pv);
+    first.forEach(s=>{const c=s.cloneNode(true);c.classList.add('carousel__clone');track.append(c)});
+  }
+
+  function buildDots(){
+    dotsWrap.innerHTML='';
+    const total=orig.length;
+    const count=Math.ceil(total/perView);
+    for(let i=0;i<count;i++){
+      const d=document.createElement('button');
+      d.className='carousel__dot'+(i===0?' is-active':'');
+      d.onclick=()=>goTo(i);
+      dotsWrap.appendChild(d);
+    }
+  }
+
+  function updateDots(){
+    const dots=dotsWrap.querySelectorAll('.carousel__dot');
+    const idx=Math.floor(current/perView)%Math.ceil(orig.length/perView);
+    dots.forEach((d,i)=>d.classList.toggle('is-active',i===idx));
+  }
+
+  function getOffset(){
+    // clones prepended = perView extra slides at start
+    const allSlides=track.querySelectorAll('.carousel__slide,.carousel__clone');
+    const slideW=100/perView;
+    return (perView+current)*slideW;
+  }
+
+  function setPos(animate){
+    if(!animate) track.classList.add('no-transition');
+    track.style.transform=`translateX(-${getOffset()}%)`;
+    if(!animate) requestAnimationFrame(()=>requestAnimationFrame(()=>track.classList.remove('no-transition')));
+    updateDots();
+  }
+
+  function goTo(i,animate=true){
+    current=i;
+    setPos(animate);
+  }
+
+  function next(){
+    current++;
+    setPos(true);
+    // If past last, jump to first silently after transition
+    if(current>=orig.length){
+      setTimeout(()=>{ current=0; setPos(false); }, 560);
+    }
+  }
+  function prev(){
+    current--;
+    setPos(true);
+    if(current<0){
+      current=orig.length-perView;
+      setTimeout(()=>{ setPos(false); }, 560);
+    }
+  }
+
+  prevBtn.onclick=()=>{ clearInterval(autoTimer); prev(); startAuto(); };
+  nextBtn.onclick=()=>{ clearInterval(autoTimer); next(); startAuto(); };
+
+  // Drag
+  track.addEventListener('mousedown',e=>{dragging=true;startX=e.clientX;track.classList.add('is-dragging');clearInterval(autoTimer)});
+  window.addEventListener('mousemove',e=>{if(!dragging)return;dragDelta=e.clientX-startX});
+  window.addEventListener('mouseup',()=>{
+    if(!dragging)return;dragging=false;track.classList.remove('is-dragging');
+    if(dragDelta<-60)next();else if(dragDelta>60)prev();
+    dragDelta=0;startAuto();
+  });
+  track.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;clearInterval(autoTimer)},{passive:true});
+  track.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-startX;
+    if(dx<-50)next();else if(dx>50)prev();
+    startAuto();
+  });
+
+  function startAuto(){autoTimer=setInterval(next,3800)}
+
+  function init(){
+    perView=getPerView();
+    buildClones();
+    buildDots();
+    setPos(false);
+    startAuto();
+  }
+
+  window.addEventListener('resize',()=>{clearInterval(autoTimer);current=0;init()});
+  init();
+})();
 </script>
-
 </body>
 </html>
