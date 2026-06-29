@@ -309,6 +309,26 @@ button{font-family:var(--font-body);cursor:pointer;border:none;background:none}
   border-left:3px solid var(--accent);
   padding-left:1.2rem;
 }
+
+  .montessori-right__logos {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(0,0,0,.08);
+}
+.montessori-logo {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+  opacity: .85;
+  transition: opacity .2s ease;
+  filter: grayscale(.2);
+}
+  
+.montessori-logo:hover { opacity: 1; filter: none; }
+  
 /* Four key dates — timeline strip */
 .montessori-timeline{display:flex;flex-direction:column;gap:1.1rem;margin-bottom:2rem}
 .mtime{display:grid;grid-template-columns:56px 1fr;gap:.8rem;align-items:start}
@@ -848,12 +868,14 @@ footer{background:#111;color:var(--silver);padding:4rem 0 2rem}
 -->
 <div class="photo-strip" role="list" aria-label="AKKA school photos">
   <div class="photo-strip__item" role="listitem">
-    <!-- <img src="../../images/akka-garden.jpg" alt="Child tending the school garden" loading="lazy"> -->
+  <img src="../../images/logo-akka.jpeg" alt="The AKKA Montessori official logo" loading="lazy"> -->  
     <div class="photo-placeholder-label">
       <svg width="32" height="32" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 9h18M9 21V9" stroke="currentColor" stroke-width="1.5"/></svg>
       akka-garden.jpg
     </div>
     <div class="photo-strip__caption">Learning through nature in the school garden</div>
+    <!-- <img src="../../images/xxxx" alt="Learning in the garden" loading="lazy"> -->  
+
   </div>
   <div class="photo-strip__item" role="listitem">
     <!-- <img src="../../images/akka-materials.jpg" alt="Child using Montessori pink tower materials" loading="lazy"> -->
@@ -926,6 +948,10 @@ footer{background:#111;color:var(--silver);padding:4rem 0 2rem}
         </div>
       </div>
       <p class="montessori-right__footer">Montessori pedagogy has inspired thousands of schools worldwide. AKKA is proud to carry this tradition into Madagascar.</p>
+           <div class="montessori-right__logos">
+          <img src="../../images/logo_AMF.jpg" alt="Association Montessori de France" class="montessori-logo">
+          <img src="../../images/logo-AMI.png" alt="Association Montessori Internationale (AMI)" class="montessori-logo">
+        </div>
     </div>
 
   </div>
