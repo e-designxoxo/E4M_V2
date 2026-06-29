@@ -246,14 +246,11 @@ button{font-family:var(--font-body);cursor:pointer;border:none;background:none}
     padding: 1rem;
   }
   .photo-placeholder-label svg { opacity: .25; }
-  /* EMPTY SPACE => coloring region: montessori-section. White otherwise */
-  .montessori-section {
-    background-color: var(--cream);
-  }
+  
 /* ════════════════════════════════════════
    MARIA MONTESSORI — editorial, condensed
 ════════════════════════════════════════ */
-.montessori-section{padding:6rem 0;background:var(--white);overflow:hidden}
+.montessori-section{padding:6rem 0;background:var(--cream);overflow:hidden}   /* EMPTY SPACE => coloring region: montessori-section. White otherwise */
 .montessori-section__inner{
   display:grid;grid-template-columns:1fr 1fr;
   gap:0;min-height:540px;
@@ -845,13 +842,9 @@ footer{background:#111;color:var(--silver);padding:4rem 0 2rem}
 
 <!-- ════ PHOTO STRIP ════ -->
 <!--
-  UI TIP: 4-column photo strip at full-bleed width creates impact
-  with minimal code. Replace the gradient blocks with real photos:
+  UI TIP: 4-column photo strip, full-bleed width.
+  To replace the gradient blocks with real photos:
     <img src="../../images/akka-01.jpg" alt="Child working with pink tower blocks" loading="lazy">
-  Keep aspect-ratio: 3/4 — portrait framing works better for
-  photos of children (vertical lines = focus, intimacy).
-  The hover zoom + caption reveal rewards curious users without
-  overwhelming the default view.
 -->
 <div class="photo-strip" role="list" aria-label="AKKA school photos">
   <div class="photo-strip__item" role="listitem">
