@@ -188,69 +188,10 @@ button{font-family:var(--font-body);cursor:pointer;border:none;background:none}
 .pullquote__quote::before{content:'\201C'}.pullquote__quote::after{content:'\201D'}
 .pullquote__attribution{font-size:.82rem;color:rgba(238,235,217,.5);letter-spacing:.08em}
 
-
-  /* ═══════════════════════════════════════════════════════════════
-     PHOTO STRIP — 4 photos side by side
-     ═══════════════════════════════════════════════════════════════ */
-     
-  .photo-strip {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-  }
-  .photo-strip__item {
-    aspect-ratio: 3/4;
-    background: var(--accent-lt);
-    overflow: hidden;
-    position: relative;
-  }
-  .photo-strip__item:nth-child(1) { background: linear-gradient(145deg, #b5681f, #8a4c14); }
-  .photo-strip__item:nth-child(2) { background: linear-gradient(145deg, var(--green), #0f3600); }
-  .photo-strip__item:nth-child(3) { background: linear-gradient(145deg, var(--teal), #003d38); }
-  .photo-strip__item:nth-child(4) { background: linear-gradient(145deg, #2c7a01, var(--teal)); }
-  /* Hover zoom */
-  .photo-strip__item img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    transition: transform .6s var(--ease2);
-  }
-  .photo-strip__item:hover img { transform: scale(1.04); }
-
-  /* Caption overlay on hover */
-  .photo-strip__caption {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    padding: 1rem;
-    background: linear-gradient(to top, rgba(0,0,0,.65), transparent);
-    color: rgba(255,255,255,.9);
-    font-size: .78rem;
-    transform: translateY(100%);
-    transition: transform .3s var(--ease2);
-  }
-  .photo-strip__item:hover .photo-strip__caption { transform: translateY(0); }
-
-  /* Photo placeholder label */
-  .photo-placeholder-label {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255,255,255,.3);
-    font-size: .78rem;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    gap: .5rem;
-    text-align: center;
-    padding: 1rem;
-  }
-  .photo-placeholder-label svg { opacity: .25; }
-  
 /* ════════════════════════════════════════
    MARIA MONTESSORI — editorial, condensed
 ════════════════════════════════════════ */
-.montessori-section{padding:6rem 0;background:var(--cream);overflow:hidden}   /* EMPTY SPACE => coloring region: montessori-section. White otherwise */
+.montessori-section{padding:6rem 0;background:var(--white);overflow:hidden}
 .montessori-section__inner{
   display:grid;grid-template-columns:1fr 1fr;
   gap:0;min-height:540px;
@@ -294,6 +235,22 @@ button{font-family:var(--font-body);cursor:pointer;border:none;background:none}
 .montessori-left__name{font-family:var(--font-display);font-size:1.4rem;color:var(--cream);margin-bottom:.3rem}
 .montessori-left__title{font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(238,235,217,.4)}
 
+/* Logos — top-right corner of the dark portrait panel */
+.montessori-left__logos{
+  position:absolute;
+  top:1.5rem;right:1.5rem;
+  z-index:3;
+  display:flex;gap:1rem;align-items:center;
+}
+.montessori-left__logo{
+  height:44px;width:auto;
+  object-fit:contain;
+  filter:brightness(0) invert(1);
+  opacity:.55;
+  transition:opacity var(--ease);
+}
+.montessori-left__logo:hover{opacity:.85}
+
 /* Right: editorial bio */
 .montessori-right{
   background:var(--cream);
@@ -309,26 +266,6 @@ button{font-family:var(--font-body);cursor:pointer;border:none;background:none}
   border-left:3px solid var(--accent);
   padding-left:1.2rem;
 }
-
-  .montessori-right__logos {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  margin-top: 1.5rem;
-  padding-top: 1.2rem;
-  border-top: 1px solid rgba(0,0,0,.08);
-}
-.montessori-logo {
-  height: 56px;
-  width: auto;
-  object-fit: contain;
-  opacity: .85;
-  transition: opacity .2s ease;
-  filter: grayscale(.2);
-}
-  
-.montessori-logo:hover { opacity: 1; filter: none; }
-  
 /* Four key dates — timeline strip */
 .montessori-timeline{display:flex;flex-direction:column;gap:1.1rem;margin-bottom:2rem}
 .mtime{display:grid;grid-template-columns:56px 1fr;gap:.8rem;align-items:start}
@@ -779,7 +716,7 @@ footer{background:#111;color:var(--silver);padding:4rem 0 2rem}
         <h2 class="intro__heading" id="intro-heading">The critical early years, taken seriously.</h2>
         <div class="intro__body">
           <p>In Madagascar, fewer than one in three children reaches the end of primary school. The inequality starts before age six — when the human brain develops faster than at any other point in a lifetime.</p>
-          <p><strong>AKKA Montessori School</strong> — Akanin'ny Kilonga, "the House of Children" — was built on a conviction: every child, regardless of their family's income, deserves an environment designed for their development. In small classes, children learn independently through hands-on materials, in a calm and respectful space grounded in Malagasy culture.</p>
+          <p><strong>AKKA Montessori School</strong> was built on a conviction: every child, regardless of their family's income, deserves an environment designed for their development. In small classes, children learn independently through hands-on materials, in a calm and respectful space grounded in Malagasy culture.</p>
           <p>Adhering to the standards of the <strong>AMI Association Montessori Internationale</strong>, AKKA provides bilingual education combining Maria Montessori's proven child-centred pedagogy with the richness of Malagasy tradition. Children arrive curious. They leave with confidence, language, independence — and a love for learning that stays with them for life.</p>
           <p>In 2023, Education For Madagascar created AKKA to make a greater impact — starting to care for children from an early age, all from underprivileged families. It is the first bilingual Montessori programme of its kind in the region.</p>
         </div>
@@ -860,49 +797,6 @@ footer{background:#111;color:var(--silver);padding:4rem 0 2rem}
   </div>
 </section>
 
-<!-- ════ PHOTO STRIP ════ -->
-<!--
-  UI TIP: 4-column photo strip, full-bleed width.
-  To replace the gradient blocks with real photos:
-    <img src="../../images/akka-01.jpg" alt="Child working with pink tower blocks" loading="lazy">
--->
-<div class="photo-strip" role="list" aria-label="AKKA school photos">
-  <div class="photo-strip__item" role="listitem">
-  <img src="../../images/logo-akka.jpeg" alt="The AKKA Montessori official logo" loading="lazy"> -->  
-    <div class="photo-placeholder-label">
-      <svg width="32" height="32" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 9h18M9 21V9" stroke="currentColor" stroke-width="1.5"/></svg>
-      akka-garden.jpg
-    </div>
-    <div class="photo-strip__caption">Learning through nature in the school garden</div>
-    <!-- <img src="../../images/xxxx" alt="Learning in the garden" loading="lazy"> -->  
-
-  </div>
-  <div class="photo-strip__item" role="listitem">
-    <!-- <img src="../../images/akka-materials.jpg" alt="Child using Montessori pink tower materials" loading="lazy"> -->
-    <div class="photo-placeholder-label">
-      <svg width="32" height="32" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 9h18M9 21V9" stroke="currentColor" stroke-width="1.5"/></svg>
-      akka-materials.jpg
-    </div>
-    <div class="photo-strip__caption">Hands-on Montessori sensorial materials</div>
-  </div>
-  <div class="photo-strip__item" role="listitem">
-    <!-- <img src="../../images/akka-classroom.jpg" alt="Children sitting at low tables in a prepared environment" loading="lazy"> -->
-    <div class="photo-placeholder-label">
-      <svg width="32" height="32" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 9h18M9 21V9" stroke="currentColor" stroke-width="1.5"/></svg>
-      akka-classroom.jpg
-    </div>
-    <div class="photo-strip__caption">A prepared environment designed for independence</div>
-  </div>
-  <div class="photo-strip__item" role="listitem">
-    <!-- <img src="../../images/akka-lunch.jpg" alt="Children at lunch in the AKKA school" loading="lazy"> -->
-    <div class="photo-placeholder-label">
-      <svg width="32" height="32" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 9h18M9 21V9" stroke="currentColor" stroke-width="1.5"/></svg>
-      akka-lunch.jpg
-    </div>
-    <div class="photo-strip__caption">Community, care and daily rhythm</div>
-  </div>
-</div>
-
 <!-- ════ MARIA MONTESSORI — editorial split ════ -->
 <section class="montessori-section" aria-labelledby="montessori-heading">
   <div class="montessori-section__inner">
@@ -916,6 +810,11 @@ footer{background:#111;color:var(--silver);padding:4rem 0 2rem}
         onerror="this.style.display='none'">
       <div class="montessori-left__bg"></div>
       <div class="montessori-left__ph" aria-hidden="true">Maria Montessori photo</div>
+      <!-- Logos — top right of portrait, floating over the dark panel -->
+      <div class="montessori-left__logos">
+        <img src="../../images/logo-amf.png" alt="Association Montessori de France" class="montessori-left__logo">
+        <img src="../../images/logo-ami.png" alt="Association Montessori Internationale" class="montessori-left__logo">
+      </div>
       <div class="montessori-left__content">
         <div class="montessori-left__dates">1870–<br>1952</div>
         <div class="montessori-left__name">Dr Maria Montessori</div>
@@ -948,10 +847,6 @@ footer{background:#111;color:var(--silver);padding:4rem 0 2rem}
         </div>
       </div>
       <p class="montessori-right__footer">Montessori pedagogy has inspired thousands of schools worldwide. AKKA is proud to carry this tradition into Madagascar.</p>
-           <div class="montessori-right__logos">
-          <img src="../../images/logo_AMF.jpg" alt="Association Montessori de France" class="montessori-logo">
-          <img src="../../images/logo-AMI.png" alt="Association Montessori Internationale (AMI)" class="montessori-logo">
-        </div>
     </div>
 
   </div>
@@ -1324,115 +1219,114 @@ function switchTab(id){
   document.getElementById('tab-'+id).classList.add('is-active');
 }
 
-/* Carousel — infinite loop by cloning */
+/* Carousel — pixel-based, bulletproof infinite loop */
 (function(){
+  const wrap=document.getElementById('carousel');
   const track=document.getElementById('carouselTrack');
-  if(!track) return;
-  const orig=Array.from(track.querySelectorAll('.carousel__slide'));
+  if(!track||!wrap) return;
   const dotsWrap=document.getElementById('carouselDots');
   const prevBtn=document.getElementById('carouselPrev');
   const nextBtn=document.getElementById('carouselNext');
-  let perView=3, current=0, startX=0, dragging=false, dragDelta=0, autoTimer;
+
+  let slides=[], slideW=0, perView=3, current=0;
+  let startX=0, dragging=false, dragDelta=0, autoTimer, jumping=false;
 
   function getPerView(){return window.innerWidth<640?1:window.innerWidth<900?2:3}
 
-  // Clone slides for infinite loop
-  function buildClones(){
-    // Remove any existing clones
+  function rebuild(){
+    // Remove old clones
     track.querySelectorAll('.carousel__clone').forEach(c=>c.remove());
-    const pv=getPerView();
-    // Clone last pv slides before first
-    const last=orig.slice(-pv);
-    last.forEach(s=>{const c=s.cloneNode(true);c.classList.add('carousel__clone');track.prepend(c)});
-    // Clone first pv slides after last
-    const first=orig.slice(0,pv);
-    first.forEach(s=>{const c=s.cloneNode(true);c.classList.add('carousel__clone');track.append(c)});
-  }
+    perView=getPerView();
+    const orig=Array.from(track.querySelectorAll('.carousel__slide'));
+    if(!orig.length) return;
 
-  function buildDots(){
+    // Clone enough at each end for seamless loop (at least perView clones)
+    const cloneCount=perView*2;
+    for(let i=0;i<cloneCount;i++){
+      const c=orig[i%orig.length].cloneNode(true);
+      c.classList.add('carousel__clone'); track.appendChild(c);
+    }
+    for(let i=0;i<cloneCount;i++){
+      const c=orig[orig.length-1-(i%orig.length)].cloneNode(true);
+      c.classList.add('carousel__clone'); track.prepend(c);
+    }
+
+    slides=Array.from(track.children);
+    slideW=wrap.offsetWidth/perView;
+    slides.forEach(s=>{ s.style.flex=`0 0 ${slideW}px`; });
+
+    // Build dots based on original count
     dotsWrap.innerHTML='';
-    const total=orig.length;
-    const count=Math.ceil(total/perView);
-    for(let i=0;i<count;i++){
+    const dotCount=Math.ceil(orig.length/perView);
+    for(let i=0;i<dotCount;i++){
       const d=document.createElement('button');
       d.className='carousel__dot'+(i===0?' is-active':'');
-      d.onclick=()=>goTo(i);
+      const idx=i; d.onclick=()=>jumpTo(cloneCount+idx*perView);
       dotsWrap.appendChild(d);
     }
-  }
 
-  function updateDots(){
-    const dots=dotsWrap.querySelectorAll('.carousel__dot');
-    const idx=Math.floor(current/perView)%Math.ceil(orig.length/perView);
-    dots.forEach((d,i)=>d.classList.toggle('is-active',i===idx));
-  }
-
-  function getOffset(){
-    // clones prepended = perView extra slides at start
-    const allSlides=track.querySelectorAll('.carousel__slide,.carousel__clone');
-    const slideW=100/perView;
-    return (perView+current)*slideW;
+    // Start at first real slide (after prepended clones)
+    current=cloneCount;
+    setPos(false);
   }
 
   function setPos(animate){
-    if(!animate) track.classList.add('no-transition');
-    track.style.transform=`translateX(-${getOffset()}%)`;
-    if(!animate) requestAnimationFrame(()=>requestAnimationFrame(()=>track.classList.remove('no-transition')));
+    track.style.transition=animate?'transform .55s cubic-bezier(.25,.46,.45,.94)':'none';
+    track.style.transform=`translateX(${-current*slideW}px)`;
     updateDots();
   }
 
-  function goTo(i,animate=true){
-    current=i;
-    setPos(animate);
+  function updateDots(){
+    const orig=track.querySelectorAll('.carousel__slide:not(.carousel__clone)');
+    const cloneCount=track.querySelectorAll('.carousel__clone').length/2;
+    const realIdx=Math.max(0,(current-cloneCount))%orig.length;
+    const dotIdx=Math.floor(realIdx/perView);
+    dotsWrap.querySelectorAll('.carousel__dot').forEach((d,i)=>d.classList.toggle('is-active',i===dotIdx));
   }
 
-  function next(){
-    current++;
-    setPos(true);
-    // If past last, jump to first silently after transition
-    if(current>=orig.length){
-      setTimeout(()=>{ current=0; setPos(false); }, 560);
+  function jumpTo(i){ current=i; setPos(false); }
+
+  function checkBounds(){
+    if(jumping) return; // already handling
+    const orig=track.querySelectorAll('.carousel__slide:not(.carousel__clone)');
+    const cloneCount=track.querySelectorAll('.carousel__clone').length/2;
+    const total=slides.length;
+    if(current>=total-cloneCount){
+      jumping=true;
+      setTimeout(()=>{ current=cloneCount+(current-(total-cloneCount)); setPos(false); jumping=false; },560);
+    } else if(current<cloneCount){
+      jumping=true;
+      setTimeout(()=>{ current=total-cloneCount*2+current; setPos(false); jumping=false; },560);
     }
   }
-  function prev(){
-    current--;
-    setPos(true);
-    if(current<0){
-      current=orig.length-perView;
-      setTimeout(()=>{ setPos(false); }, 560);
-    }
-  }
 
-  prevBtn.onclick=()=>{ clearInterval(autoTimer); prev(); startAuto(); };
-  nextBtn.onclick=()=>{ clearInterval(autoTimer); next(); startAuto(); };
+  function next(){ current++; setPos(true); checkBounds(); }
+  function prev(){ current--; setPos(true); checkBounds(); }
 
-  // Drag
-  track.addEventListener('mousedown',e=>{dragging=true;startX=e.clientX;track.classList.add('is-dragging');clearInterval(autoTimer)});
-  window.addEventListener('mousemove',e=>{if(!dragging)return;dragDelta=e.clientX-startX});
+  prevBtn.onclick=()=>{ clearAuto(); prev(); startAuto(); };
+  nextBtn.onclick=()=>{ clearAuto(); next(); startAuto(); };
+
+  track.addEventListener('mousedown',e=>{dragging=true;startX=e.clientX;track.style.transition='none';clearAuto()});
+  window.addEventListener('mousemove',e=>{if(!dragging)return;dragDelta=e.clientX-startX;track.style.transform=`translateX(${-current*slideW+dragDelta}px)`});
   window.addEventListener('mouseup',()=>{
-    if(!dragging)return;dragging=false;track.classList.remove('is-dragging');
-    if(dragDelta<-60)next();else if(dragDelta>60)prev();
-    dragDelta=0;startAuto();
+    if(!dragging)return; dragging=false;
+    if(dragDelta<-60)next();else if(dragDelta>60)prev();else setPos(true);
+    dragDelta=0; startAuto();
   });
-  track.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;clearInterval(autoTimer)},{passive:true});
+  track.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;clearAuto()},{passive:true});
   track.addEventListener('touchend',e=>{
     const dx=e.changedTouches[0].clientX-startX;
     if(dx<-50)next();else if(dx>50)prev();
     startAuto();
   });
 
-  function startAuto(){autoTimer=setInterval(next,3800)}
+  function clearAuto(){ clearInterval(autoTimer); }
+  function startAuto(){ autoTimer=setInterval(next,3800); }
 
-  function init(){
-    perView=getPerView();
-    buildClones();
-    buildDots();
-    setPos(false);
-    startAuto();
-  }
+  window.addEventListener('resize',()=>{ clearAuto(); rebuild(); startAuto(); });
 
-  window.addEventListener('resize',()=>{clearInterval(autoTimer);current=0;init()});
-  init();
+  rebuild();
+  startAuto();
 })();
 </script>
 </body>
